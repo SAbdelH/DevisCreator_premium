@@ -297,7 +297,7 @@ QRadioButton::indicator:checked:pressed
 #_f_info_company QGroupBox QLineEdit, #_f_right_user_management QLineEdit, 
 #_f_right_user_management QComboBox, #_p_factures * QLineEdit, #_p_factures * QDoubleSpinBox,
 #_p_factures * QSpinBox, #_p_factures QTreeWidget, #_p_factures * QComboBox,
-#_p_clients * QListWidget {
+#_p_clients * QListWidget, #_p_restore QLineEdit, #_p_restore QComboBox {
 	color: rgba(0, 0, 0, 1);
 	border-radius: 5px;
 	border: 1px solid rgba(174, 182, 191, 1);
@@ -433,7 +433,8 @@ QRadioButton::indicator:checked:pressed
 	border:none;
 }
 /*CLIENT MANAGEMENT*/
-#_l_clients_mail, #_l_clients_num, #_l_invoice_nom, #_l_invoice_marque, #_l_invoice_price, #_l_invoice_qauntity,#_l_invoice_type_remise, #_l_invoice_remise, #_l_invoice_client, #_l_invoice_nomclient, #_l_invoice_numclient, #_le_invoice_mailclient, #_l_invoice_objet {
+#_l_clients_mail, #_l_clients_num, #_l_invoice_nom, #_l_invoice_marque, #_l_invoice_price, #_l_invoice_qauntity,#_l_invoice_type_remise, #_l_invoice_remise, #_l_invoice_client, #_l_invoice_nomclient, #_l_invoice_numclient, #_le_invoice_mailclient, #_l_invoice_objet,
+#_p_restore QLabel {
 	color: rgba(164, 164, 164, 1);
 }
 #_b_clients_show_info {
@@ -448,9 +449,21 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 7px;
 	padding: 5px
 }
-#_b_clients_info_export {
+#_b_clients_info_export, #_b_clients_add_client {
 	color: rgba(62, 136, 46, 1);
 	border: 1px solid rgba(62, 136, 46, 1);
+	border-radius: 7px;
+	padding: 5px
+}
+#_b_clients_save_client {
+	color: rgba(69, 95, 119, 1);
+	border: 1px solid rgba(69, 95, 119, 1);
+	border-radius: 7px;
+	padding: 5px
+}
+#_b_clients_delete_client {
+	color: rgba(227, 77, 49, 1);
+	border: 1px solid rgba(227, 77, 49, 1);
 	border-radius: 7px;
 	padding: 5px
 }
@@ -459,10 +472,17 @@ QRadioButton::indicator:checked:pressed
 	color: rgba(164, 164, 164, 1);
 	border: none;
 	border-bottom : 1px solid rgba(164, 164, 164, 1);
+	height: 40px;
 }
 #_tw_clients_table_info::item {
 	border: none;
 	border-bottom : 1px solid rgba(164, 164, 164, 1);
+}
+/*RESTORE MANAGEMENT*/
+#_p_restore QPushButton, #_p_restore QToolButton {
+	border: 1px solid rgba(164, 164, 164, 1);
+	border-radius: 7px;
+	background-color: rgba(255, 255, 255, 1);
 }
 /* CALENDAR WIDGET */
 QCalendarWidget QWidget {
@@ -1039,7 +1059,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>7</number>
+       <number>8</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -1102,7 +1122,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="_p_signin">
               <layout class="QGridLayout" name="_g_signin">
@@ -5418,6 +5438,16 @@ QCalendarWidget QAbstractItemView:enabled {
                </font>
               </property>
              </column>
+             <column>
+              <property name="text">
+               <string>validé</string>
+              </property>
+              <property name="font">
+               <font>
+                <bold>true</bold>
+               </font>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
@@ -5814,6 +5844,26 @@ QCalendarWidget QAbstractItemView:enabled {
               </spacer>
              </item>
              <item>
+              <widget class="QPushButton" name="_b_clients_add_client">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>28</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Créer</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/addclient.png</normaloff>:/icon/icons/addclient.png</iconset>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="_b_clients_show_info">
                <property name="maximumSize">
                 <size>
@@ -5891,13 +5941,13 @@ QCalendarWidget QAbstractItemView:enabled {
          <widget class="QFrame" name="_f_clients_info_box">
           <property name="minimumSize">
            <size>
-            <width>421</width>
+            <width>490</width>
             <height>0</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>425</width>
+            <width>490</width>
             <height>16777215</height>
            </size>
           </property>
@@ -5948,11 +5998,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="_l_clients_profil_name">
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
+              <widget class="QLineEdit" name="_le_clients_profil_name"/>
              </item>
             </layout>
            </item>
@@ -6017,23 +6063,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="_l_clients_mail_value">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
+              <widget class="QLineEdit" name="_le_clients_mail_value"/>
              </item>
              <item>
               <widget class="QPushButton" name="_b_clients_clipbord_mail">
@@ -6113,23 +6143,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="_l_clients_num_value">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>25</height>
-                </size>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
+              <widget class="QLineEdit" name="_le_clients_num_value"/>
              </item>
              <item>
               <widget class="QPushButton" name="_b_clients_clipbord_num">
@@ -6233,7 +6247,35 @@ QCalendarWidget QAbstractItemView:enabled {
               </spacer>
              </item>
              <item>
+              <widget class="QPushButton" name="_b_clients_delete_client">
+               <property name="text">
+                <string>supprimer</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/effacer.png</normaloff>:/icon/icons/effacer.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="_b_clients_save_client">
+               <property name="text">
+                <string>Enregistrer</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/disquette.png</normaloff>:/icon/icons/disquette.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="_b_clients_info_export">
+               <property name="minimumSize">
+                <size>
+                 <width>110</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Exporter la fiche</string>
                </property>
@@ -6253,7 +6295,426 @@ QCalendarWidget QAbstractItemView:enabled {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page"/>
+      <widget class="QWidget" name="_p_restore">
+       <layout class="QGridLayout" name="_g_restore">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>12</number>
+        </property>
+        <item row="0" column="0">
+         <spacer name="_hs_restore_left_one">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <layout class="QVBoxLayout" name="_v_restore_combobox">
+          <item>
+           <widget class="QLabel" name="_l_restore_backup">
+            <property name="text">
+             <string>Point de sauvegarde</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="_cbx_restore_backup_list">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="1">
+         <layout class="QHBoxLayout" name="_h_restore_bottom_btn">
+          <item>
+           <widget class="QPushButton" name="_b_restore_backup">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Sauvegarde</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/disquette.png</normaloff>:/icon/icons/disquette.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_restore_restore">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Restaurer</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/RESTORE.png</normaloff>:/icon/icons/RESTORE.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_restore_delete">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Supprimer</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/effacer.png</normaloff>:/icon/icons/effacer.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="1">
+         <spacer name="_vs_restore_one">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="2">
+         <spacer name="_hs_restore_right_four">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="1">
+         <layout class="QVBoxLayout" name="_v_restore_import">
+          <item>
+           <widget class="QLabel" name="_l_restore_import_file">
+            <property name="text">
+             <string>Importer sauvegarde</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="_h_restore_lineedit">
+            <item>
+             <widget class="QLineEdit" name="_le_restore_path_file">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="_tb_restore_select_file">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="2">
+         <spacer name="_hs_restore_right_two">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="0">
+         <spacer name="_hs_restore_left_three">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="2">
+         <spacer name="_hs_restore_right_one">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="0">
+         <spacer name="_hs_restore_left_four">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="3" column="2">
+         <spacer name="_hs_restore_right_three">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1" alignment="">
+         <widget class="QLabel" name="_l_restore_icon">
+          <property name="maximumSize">
+           <size>
+            <width>512</width>
+            <height>512</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="resources.qrc">:/icon/icons/nuage.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <spacer name="_hs_restore_left_two">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="1">
+         <spacer name="_vs_restore_two">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page">
+       <widget class="QTreeWidget" name="treeWidget">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>70</y>
+          <width>381</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTreeWidget {
+    background-color: #f8f8f8;
+    border: none;
+    font-size: 14px;
+}
+
+QTreeWidget::item {
+    padding: 4px 8px;
+    border: none;
+}
+
+QTreeWidget::item:hover {
+    background-color: #e6f7ff;
+    border-radius: 4px;
+}
+
+QTreeWidget::branch:open:has-children {
+    image: url(:/icon/icons/openfolder.png);
+}
+
+QTreeWidget::branch:closed:has-children {
+    image: url(:/icon/icons/emptyfolder.png);
+}
+
+/* Ligne verticale pour les branches qui ont des frères et sœurs */
+QTreeWidget::branch:has-siblings:!adjoins-item {
+    border-left-image: url(:/icon/icons/vertical_line.png) 0 0 0 0 stretch stretch;
+    border-left-width: 16px;  /* Ajuster la largeur si nécessaire */
+}
+
+/* Courbe pour connecter les éléments */
+QTreeWidget::branch:has-siblings:adjoins-item {
+    border-left-image: url(:/icon/icons/curve_line.png) 0 0 0 0 stretch stretch;
+    border-left-width: 16px;  /* Ajuster la largeur si nécessaire */
+}
+
+/* Ligne de fin pour les éléments sans enfants */
+QTreeWidget::branch:!has-children:!has-siblings:adjoins-item {
+    border-left-image: url(:/icon/icons/end_line.png) 0 0 0 0 stretch stretch;
+    border-left-width: 16px;  /* Ajuster la largeur si nécessaire */
+}
+
+QTreeWidget::item:selected {
+    background-color: #d1eaff;
+    border-radius: 4px;
+}
+</string>
+        </property>
+        <property name="animated">
+         <bool>true</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="headerHidden">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </column>
+        <item>
+         <property name="text">
+          <string>Nouvel élément</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Nouveau sous-élément</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Nouveau sous-élément</string>
+           </property>
+          </item>
+         </item>
+        </item>
+       </widget>
+       <widget class="QTreeWidget" name="treeWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>535</x>
+          <y>81</y>
+          <width>391</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <column>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </column>
+        <item>
+         <property name="text">
+          <string>Nouvel élément</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Nouveau sous-élément</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>Nouveau sous-élément</string>
+           </property>
+          </item>
+         </item>
+        </item>
+       </widget>
+      </widget>
      </widget>
     </item>
     <item row="2" column="1">

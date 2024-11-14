@@ -1,5 +1,14 @@
 <RCC>
   <qresource prefix="icon">
+    <file>icons/curve_line.png</file>
+    <file>icons/end_line.png</file>
+    <file>icons/vertical_line.png</file>
+    <file>icons/emptyfolder.png</file>
+    <file>icons/openfolder.png</file>
+    <file>icons/effacer.png</file>
+    <file>icons/addclient.png</file>
+    <file>icons/RESTORE.png</file>
+    <file>icons/nuage.png</file>
     <file>icons/profilClient.png</file>
     <file>icons/copier.png</file>
     <file>icons/appel.png</file>
