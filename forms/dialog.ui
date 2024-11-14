@@ -29,9 +29,6 @@
   <property name="windowOpacity">
    <double>100.000000000000000</double>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
   </property>
@@ -124,6 +121,12 @@
 #_f_btn_header QPushButton:hover {
 	background: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(208, 236, 231, 1), stop:0.5 rgba(255, 255, 255, 1), stop:1 rgba(208, 236, 231, 1));
 }
+#_b_logout {
+	border-radius: 20px;
+	background-color: rgba(121, 119, 125, 0.3);
+	text-align: center;
+}
+
 
 /* ICONE ENTREPRISE */
 #_l_icon_company, #_l_icon_company_info_company {
@@ -166,14 +169,15 @@
 	color: rgba(0, 0, 0, 1);
 }
 #_f_calendar, #_f_right_info_company, #_f_info_company, #_f_invoice_box_export_invoice,
-#_f_invoice_input_card, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview {
+#_f_invoice_input_card, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview,
+#_f_clients_info_box, #_f_clients_table {
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 15px;
 	border: 1px solid rgba(234, 237, 237, 1);
 }
 #_f_calendar QLineEdit, #_f_calendar QTextEdit, #_f_calendar QListWidget,
 #_f_calendar QDateEdit, #_f_calendar QTimeEdit, #_f_left_user_management  QListWidget,
-#_f_valid_facture_list QListWidget
+#_f_valid_facture_list QListWidget, #_p_clients QTableWidget
 {
 	border-radius: 5px;
 	border: 1px solid rgba(214, 219, 223, 1);
@@ -190,6 +194,12 @@
 	border: 1px solid rgba(181, 212, 241, 1);
 	border-top: 5px solid rgba(247, 220, 111, 1);
 	color: rgba(0, 0, 0, 1);
+}
+#_lw_agenda {
+	background-image: url(:/background/background/ToDo.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
 }
 
 /* FINANCES FRAME */
@@ -213,6 +223,42 @@
 	color: rgba(255, 255, 255, 1);
 	border: 0.5px solid rgba(234, 237, 237, 1);
 	padding: 2px;
+}
+#_gv_histogram {
+	background-image: url(:/background/background/histogram.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-origin: content;
+}
+#_tw_activity {
+	background-image: url(:/background/background/table.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-origin: content;
+}
+#_lw_activity {
+	background-image: url(:/background/background/listActivity.png);
+	background-repeat: no-repeat;
+    	background-position: center center;
+	background-origin: content;
+}
+#_gv_camembert {
+	background-image: url(:/background/background/camembert.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
+}
+#_gv_evolution  {
+	background-image: url(:/background/background/evolution.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
+}
+#_gv_production {
+	background-image: url(:/background/background/analyse.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
 }
 QRadioButton::indicator
 {
@@ -250,7 +296,8 @@ QRadioButton::indicator:checked:pressed
 
 #_f_info_company QGroupBox QLineEdit, #_f_right_user_management QLineEdit, 
 #_f_right_user_management QComboBox, #_p_factures * QLineEdit, #_p_factures * QDoubleSpinBox,
-#_p_factures * QSpinBox, #_p_factures QTreeWidget, #_p_factures * QComboBox{
+#_p_factures * QSpinBox, #_p_factures QTreeWidget, #_p_factures * QComboBox,
+#_p_clients * QListWidget {
 	color: rgba(0, 0, 0, 1);
 	border-radius: 5px;
 	border: 1px solid rgba(174, 182, 191, 1);
@@ -290,6 +337,12 @@ QRadioButton::indicator:checked:pressed
 	border: 1px solid rgba(234, 237, 237, 1);
 }
 /*FACTURE CREATION*/
+#_lw_um_usrList {
+	background-image: url(:/background/background/teams.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
+}
 #_b_invoice_export, #_b_invoice_add_card {
 	background-color : rgba(19, 83, 255, 1);
 	color: rgba(255, 255, 255, 1);
@@ -354,6 +407,10 @@ QRadioButton::indicator:checked:pressed
 	border: none;
 	border-bottom: 2px solid rgba(0, 130, 12, 1);
 }
+#_f_preview_state_invoice {
+	border-radius: 5px;
+	background-color: rgba(241, 148, 138, 1)
+}
 #_f_valid_facture_preview QPushButton {
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
@@ -371,6 +428,38 @@ QRadioButton::indicator:checked:pressed
 	background-color: rgb(247, 248, 250);
 	color: rgba(136, 142, 158, 1);
 	border:none;
+}
+/*CLIENT MANAGEMENT*/
+#_l_clients_mail, #_l_clients_num {
+	color: rgba(164, 164, 164, 1);
+}
+#_b_clients_show_info {
+	color: rgba(80, 172, 175, 1);
+	border: 1px solid rgba(80, 172, 175, 1);
+	border-radius: 7px;
+	padding: 5px
+}
+#_b_clients_hide_info {
+	color: rgba(144, 219, 249, 1);
+	border: 1px solid rgba(144, 219, 249, 1);
+	border-radius: 7px;
+	padding: 5px
+}
+#_b_clients_info_export {
+	color: rgba(62, 136, 46, 1);
+	border: 1px solid rgba(62, 136, 46, 1);
+	border-radius: 7px;
+	padding: 5px
+}
+#_tw_clients_table_info QHeaderView::section:horizonta {
+	background-color: rgba(255, 255, 255, 1);
+	color: rgba(164, 164, 164, 1);
+	border: none;
+	border-bottom : 1px solid rgba(164, 164, 164, 1);
+}
+#_tw_clients_table_info::item {
+	border: none;
+	border-bottom : 1px solid rgba(164, 164, 164, 1);
 }
 /* CALENDAR WIDGET */
 QCalendarWidget QWidget {
@@ -474,9 +563,6 @@ QCalendarWidget QAbstractItemView:enabled {
     </property>
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
       <property name="currentIndex">
        <number>6</number>
       </property>
@@ -513,9 +599,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <height>500</height>
            </size>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
           <layout class="QGridLayout" name="_g_login_dialog">
            <property name="leftMargin">
             <number>10</number>
@@ -543,11 +626,8 @@ QCalendarWidget QAbstractItemView:enabled {
                <height>16777215</height>
               </size>
              </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="_p_signin">
               <layout class="QGridLayout" name="_g_signin">
@@ -578,9 +658,6 @@ QCalendarWidget QAbstractItemView:enabled {
                      <pointsize>26</pointsize>
                      <bold>true</bold>
                     </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="text">
                     <string>Connexion</string>
@@ -664,9 +741,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="2" column="0">
                 <widget class="QLineEdit" name="_le_identifiant">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="inputMask">
                   <string/>
                  </property>
@@ -683,9 +757,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="3" column="0">
                 <widget class="QLineEdit" name="_le_password">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="echoMode">
                   <enum>QLineEdit::EchoMode::Password</enum>
                  </property>
@@ -715,9 +786,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="5" column="0">
                 <widget class="QPushButton" name="_b_signin">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="text">
                   <string>Connexion</string>
                  </property>
@@ -741,9 +809,6 @@ QCalendarWidget QAbstractItemView:enabled {
                  <property name="autoFillBackground">
                   <bool>false</bool>
                  </property>
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="text">
                   <string>Configurer une connexion</string>
                  </property>
@@ -761,9 +826,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="7" column="0">
                 <widget class="QPushButton" name="_b_guess_connexion">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="text">
                   <string>Invité</string>
                  </property>
@@ -813,9 +875,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="9" column="0" colspan="2">
                 <widget class="QPushButton" name="_b_back_connexion">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="text">
                   <string>Retour à l'écran de connexion</string>
                  </property>
@@ -895,9 +954,6 @@ QCalendarWidget QAbstractItemView:enabled {
                      <bold>true</bold>
                     </font>
                    </property>
-                   <property name="styleSheet">
-                    <string notr="true">color: rgb(0, 0, 0);</string>
-                   </property>
                    <property name="text">
                     <string>Configuration d'une connexion</string>
                    </property>
@@ -926,9 +982,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="3" column="0" colspan="2">
                 <widget class="QLineEdit" name="_le_host">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="alignment">
                   <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
@@ -942,9 +995,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="4" column="0" colspan="2">
                 <widget class="QLineEdit" name="_le_db_name">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="alignment">
                   <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
@@ -958,9 +1008,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="5" column="0" colspan="2">
                 <widget class="QSpinBox" name="_sb_port">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="alignment">
                   <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
@@ -977,9 +1024,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
                <item row="8" column="0" colspan="2">
                 <widget class="QPushButton" name="_b_save_config_db">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
                  <property name="text">
                   <string>Sauvegarde</string>
                  </property>
@@ -1026,9 +1070,6 @@ QCalendarWidget QAbstractItemView:enabled {
         </property>
         <item row="0" column="0">
          <widget class="QFrame" name="_f_graphic_finances">
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
           </property>
@@ -1090,9 +1131,6 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
                <property name="layoutDirection">
                 <enum>Qt::LayoutDirection::LeftToRight</enum>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"/>
                </property>
                <property name="text">
                 <string>Semaine</string>
@@ -1205,54 +1243,18 @@ QCalendarWidget QAbstractItemView:enabled {
               <number>2</number>
              </property>
              <item>
-              <widget class="QGraphicsView" name="_gv_camembert">
-               <property name="styleSheet">
-                <string notr="true"> QGraphicsView {
-	background-image: url(:/background/background/camembert.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-               </property>
-              </widget>
+              <widget class="QGraphicsView" name="_gv_camembert"/>
              </item>
              <item>
-              <widget class="QGraphicsView" name="_gv_production">
-               <property name="styleSheet">
-                <string notr="true"> QGraphicsView {
-	background-image: url(:/background/background/analyse.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-               </property>
-              </widget>
+              <widget class="QGraphicsView" name="_gv_production"/>
              </item>
              <item>
-              <widget class="QGraphicsView" name="_gv_evolution">
-               <property name="styleSheet">
-                <string notr="true"> QGraphicsView {
-	background-image: url(:/background/background/evolution.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-               </property>
-              </widget>
+              <widget class="QGraphicsView" name="_gv_evolution"/>
              </item>
             </layout>
            </item>
            <item row="2" column="0">
-            <widget class="QGraphicsView" name="_gv_histogram">
-             <property name="styleSheet">
-              <string notr="true"> QGraphicsView {
-	background-image: url(:/background/background/histogram.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-             </property>
-            </widget>
+            <widget class="QGraphicsView" name="_gv_histogram"/>
            </item>
            <item row="3" column="0">
             <layout class="QHBoxLayout" name="_h_activity_info">
@@ -1266,14 +1268,6 @@ QCalendarWidget QAbstractItemView:enabled {
                  <width>600</width>
                  <height>0</height>
                 </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"> QTableWidget {
-	background-image: url(:/background/background/table.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
                </property>
                <attribute name="horizontalHeaderCascadingSectionResizes">
                 <bool>true</bool>
@@ -1355,14 +1349,6 @@ QCalendarWidget QAbstractItemView:enabled {
                    <height>16777215</height>
                   </size>
                  </property>
-                 <property name="styleSheet">
-                  <string notr="true"> QListWidget {
-	background-image: url(:/background/background/listActivity.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-                 </property>
                 </widget>
                </item>
                <item>
@@ -1424,11 +1410,7 @@ QCalendarWidget QAbstractItemView:enabled {
             <number>7</number>
            </property>
            <item>
-            <widget class="QCalendarWidget" name="_cw_agenda">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-            </widget>
+            <widget class="QCalendarWidget" name="_cw_agenda"/>
            </item>
            <item>
             <widget class="QLabel" name="_l_parametres">
@@ -1621,16 +1603,7 @@ QCalendarWidget QAbstractItemView:enabled {
             </widget>
            </item>
            <item>
-            <widget class="QListWidget" name="_lw_agenda">
-             <property name="styleSheet">
-              <string notr="true"> QListWidget {
-	background-image: url(:/background/background/ToDo.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-             </property>
-            </widget>
+            <widget class="QListWidget" name="_lw_agenda"/>
            </item>
           </layout>
          </widget>
@@ -1693,9 +1666,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <width>450</width>
             <height>16777215</height>
            </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
@@ -1762,9 +1732,6 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <widget class="QPushButton" name="_b_save_info_company">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
              <property name="text">
               <string>Enregistrer</string>
              </property>
@@ -1788,9 +1755,6 @@ QCalendarWidget QAbstractItemView:enabled {
         </item>
         <item row="0" column="1">
          <widget class="QFrame" name="_f_info_company">
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
           <property name="frameShape">
            <enum>QFrame::Shape::Box</enum>
           </property>
@@ -1823,9 +1787,6 @@ QCalendarWidget QAbstractItemView:enabled {
                <pointsize>13</pointsize>
                <bold>true</bold>
               </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
              </property>
              <property name="title">
               <string>Entreprise</string>
@@ -1865,9 +1826,6 @@ QCalendarWidget QAbstractItemView:enabled {
                   <width>25</width>
                   <height>25</height>
                  </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
                 </property>
                 <property name="text">
                  <string/>
@@ -3180,9 +3138,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <height>16777215</height>
            </size>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
           </property>
@@ -3192,14 +3147,6 @@ QCalendarWidget QAbstractItemView:enabled {
           <layout class="QVBoxLayout" name="_v_right_user_management">
            <item>
             <widget class="QListWidget" name="_lw_um_usrList">
-             <property name="styleSheet">
-              <string notr="true"> QListWidget {
-	background-image: url(:/background/background/teams.png);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-origin: content;
-    }</string>
-             </property>
              <property name="viewMode">
               <enum>QListView::ViewMode::IconMode</enum>
              </property>
@@ -3218,9 +3165,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <width>604</width>
             <height>0</height>
            </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
@@ -3719,9 +3663,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <height>16777215</height>
            </size>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
           </property>
@@ -3746,9 +3687,6 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <widget class="QFrame" name="_f_invoice_preview_card">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
              <property name="frameShape">
               <enum>QFrame::Shape::StyledPanel</enum>
              </property>
@@ -3778,9 +3716,6 @@ QCalendarWidget QAbstractItemView:enabled {
                   <width>16777215</width>
                   <height>330</height>
                  </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
                 </property>
                 <property name="frameShape">
                  <enum>QFrame::Shape::StyledPanel</enum>
@@ -3832,9 +3767,6 @@ QCalendarWidget QAbstractItemView:enabled {
                      <width>0</width>
                      <height>250</height>
                     </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true"/>
                    </property>
                    <property name="text">
                     <string/>
@@ -3944,9 +3876,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <width>450</width>
             <height>0</height>
            </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
@@ -4256,9 +4185,6 @@ QCalendarWidget QAbstractItemView:enabled {
             <width>400</width>
             <height>16777215</height>
            </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
           </property>
           <property name="frameShape">
            <enum>QFrame::Shape::StyledPanel</enum>
@@ -4799,12 +4725,6 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>25</height>
                 </size>
                </property>
-               <property name="styleSheet">
-                <string notr="true">#_f_preview_state_invoice {
-	border-radius: 5px;
-	background-color: rgba(241, 148, 138, 1)
-}</string>
-               </property>
                <property name="frameShape">
                 <enum>QFrame::Shape::StyledPanel</enum>
                </property>
@@ -4826,9 +4746,6 @@ QCalendarWidget QAbstractItemView:enabled {
                 </property>
                 <item>
                  <widget class="QLabel" name="_l_preview_state_invoice">
-                  <property name="styleSheet">
-                   <string notr="true"/>
-                  </property>
                   <property name="text">
                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'Segoe UI Symbol','sans-serif'; color:rgba(253, 237, 236, 1);&quot;&gt;◉ Non payé&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                   </property>
@@ -4844,9 +4761,6 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <widget class="QFrame" name="_f_state_invoice_bar">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
              <property name="frameShape">
               <enum>QFrame::Shape::StyledPanel</enum>
              </property>
@@ -5347,10 +5261,41 @@ QCalendarWidget QAbstractItemView:enabled {
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="_v_clients_table">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item>
             <layout class="QHBoxLayout" name="_h_clients_table_top">
+             <property name="leftMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>5</number>
+             </property>
              <item>
-              <widget class="QLineEdit" name="_le_clients_filter"/>
+              <widget class="QLineEdit" name="_le_clients_filter">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>28</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+               </property>
+               <property name="placeholderText">
+                <string>Chercher un client</string>
+               </property>
+              </widget>
              </item>
              <item>
               <spacer name="_hs_separator_clients_table_top">
@@ -5367,8 +5312,17 @@ QCalendarWidget QAbstractItemView:enabled {
              </item>
              <item>
               <widget class="QPushButton" name="_b_clients_show_info">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>28</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Afficher les infos</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -5380,6 +5334,9 @@ QCalendarWidget QAbstractItemView:enabled {
               <bool>false</bool>
              </attribute>
              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
               <bool>true</bool>
              </attribute>
              <column>
@@ -5490,7 +5447,7 @@ QCalendarWidget QAbstractItemView:enabled {
              <item>
               <widget class="QLabel" name="_l_clients_profil_name">
                <property name="text">
-                <string>TextLabel</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -5667,7 +5624,7 @@ QCalendarWidget QAbstractItemView:enabled {
                 </size>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -5726,7 +5683,17 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="_ds_clients_dette"/>
+              <widget class="QDoubleSpinBox" name="_ds_clients_dette">
+               <property name="prefix">
+                <string/>
+               </property>
+               <property name="suffix">
+                <string> €</string>
+               </property>
+               <property name="maximum">
+                <double>9999999999999999635896294965248.000000000000000</double>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -5850,9 +5817,6 @@ QCalendarWidget QAbstractItemView:enabled {
         <height>16777215</height>
        </size>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
       </property>
@@ -5903,9 +5867,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="toolTip">
             <string>Créer un environnement de travail</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -5943,9 +5904,6 @@ QCalendarWidget QAbstractItemView:enabled {
            </property>
            <property name="toolTip">
             <string>Informations sur l'entreprise</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string/>
@@ -5991,9 +5949,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="toolTip">
             <string>Gérer les utilisateurs</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -6031,9 +5986,6 @@ QCalendarWidget QAbstractItemView:enabled {
            </property>
            <property name="toolTip">
             <string>Créer un devis</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string/>
@@ -6073,9 +6025,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="toolTip">
             <string>Créer une facture</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -6114,9 +6063,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="toolTip">
             <string>Valider les factures</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -6139,7 +6085,7 @@ QCalendarWidget QAbstractItemView:enabled {
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="_b_mclient">
            <property name="minimumSize">
             <size>
              <width>36</width>
@@ -6190,9 +6136,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="toolTip">
             <string>Gérer les sauvegardes</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -6231,9 +6174,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="toolTip">
             <string>Visualisation des tables</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="text">
             <string/>
            </property>
@@ -6267,9 +6207,6 @@ QCalendarWidget QAbstractItemView:enabled {
         <width>16777215</width>
         <height>60</height>
        </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
       </property>
       <property name="frameShape">
        <enum>QFrame::Shape::StyledPanel</enum>
@@ -6306,9 +6243,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <width>65</width>
            <height>45</height>
           </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
          </property>
          <property name="text">
           <string/>
@@ -6347,9 +6281,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <width>16777215</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
          </property>
          <property name="frameShape">
           <enum>QFrame::Shape::StyledPanel</enum>
@@ -6399,9 +6330,6 @@ QCalendarWidget QAbstractItemView:enabled {
               <bold>true</bold>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
             <property name="text">
              <string>Tableau de bord</string>
             </property>
@@ -6448,9 +6376,6 @@ QCalendarWidget QAbstractItemView:enabled {
               <pointsize>12</pointsize>
               <bold>true</bold>
              </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
             </property>
             <property name="text">
              <string>Environnement de travail</string>
@@ -6499,9 +6424,6 @@ QCalendarWidget QAbstractItemView:enabled {
               <bold>true</bold>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
             <property name="text">
              <string>Gestion des factures</string>
             </property>
@@ -6549,9 +6471,6 @@ QCalendarWidget QAbstractItemView:enabled {
               <bold>true</bold>
              </font>
             </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
             <property name="text">
              <string>Gestion des Inventraires</string>
             </property>
@@ -6598,9 +6517,6 @@ QCalendarWidget QAbstractItemView:enabled {
               <pointsize>12</pointsize>
               <bold>true</bold>
              </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
             </property>
             <property name="text">
              <string>Gestion de base de données</string>
@@ -6668,9 +6584,6 @@ QCalendarWidget QAbstractItemView:enabled {
          </item>
          <item>
           <widget class="QFrame" name="_g_profil">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
            <property name="frameShape">
             <enum>QFrame::Shape::StyledPanel</enum>
            </property>
@@ -6698,9 +6611,6 @@ QCalendarWidget QAbstractItemView:enabled {
             </property>
             <item row="3" column="1">
              <widget class="QLabel" name="_l_pposte">
-              <property name="styleSheet">
-               <string notr="true">border-radius: 20px;</string>
-              </property>
               <property name="text">
                <string>Chef de Bureau</string>
               </property>
@@ -6741,14 +6651,6 @@ QCalendarWidget QAbstractItemView:enabled {
              <width>40</width>
              <height>40</height>
             </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">#_b_logout {
-border-radius: 20px;
-background-color: rgba(121, 119, 125, 0.3);
-text-align: center;
-}
-</string>
            </property>
            <property name="text">
             <string/>
