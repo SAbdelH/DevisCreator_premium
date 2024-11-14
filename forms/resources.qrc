@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icon">
+    <file>icons/euro.png</file>
+    <file>icons/pour-cent.png</file>
     <file>icons/exceln.png</file>
     <file>icons/pdfn.png</file>
     <file>icons/download.png</file>

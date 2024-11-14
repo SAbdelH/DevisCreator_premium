@@ -336,6 +336,14 @@ QRadioButton::indicator:checked:pressed
 	margin: 0px;
 	margin-bottom : 20px;
 }
+#_f_invoice_warning_client {
+	background-color: rgba(255, 249, 241, 1);
+	border: 1px solid rgba(253, 229, 192, 1);
+	border-radius: 5px;
+}
+#_l_invoice_warning_message {
+	color: rgba(134, 134, 132, 1);
+}
 /*VALIDATION FACTURE*/
 #_l_valid_facture_fait_le, #_l_valid_facture_objet, #_l_valid_facture_to {
 	color: rgba(136, 142, 158, 1);
@@ -470,7 +478,7 @@ QCalendarWidget QAbstractItemView:enabled {
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -4105,12 +4113,20 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
                <item>
                 <property name="text">
-                 <string>En devise (€)</string>
+                 <string>En devise</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icon/icons/euro.png</normaloff>:/icon/icons/euro.png</iconset>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>En pourcentage (%)</string>
+                 <string>En pourcentage</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
                 </property>
                </item>
               </widget>
@@ -4265,6 +4281,12 @@ QCalendarWidget QAbstractItemView:enabled {
            </property>
            <item row="0" column="0" colspan="2">
             <layout class="QVBoxLayout" name="_v_incoice_client_combo">
+             <property name="spacing">
+              <number>-1</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
              <item>
               <widget class="QLabel" name="_l_invoice_client">
                <property name="maximumSize">
@@ -4286,6 +4308,37 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="_f_invoice_warning_client">
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <property name="leftMargin">
+                 <number>5</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>5</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>5</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="_l_invoice_warning_message">
+                  <property name="text">
+                   <string>! Client avec des factures impayées</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
@@ -4603,6 +4656,9 @@ QCalendarWidget QAbstractItemView:enabled {
                 <width>400</width>
                 <height>16777215</height>
                </size>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
               </property>
               <item>
                <property name="text">
@@ -5265,6 +5321,7 @@ QCalendarWidget QAbstractItemView:enabled {
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="_p_clients"/>
      </widget>
     </item>
     <item row="2" column="0">
