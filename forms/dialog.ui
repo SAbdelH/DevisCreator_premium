@@ -5353,7 +5353,7 @@ QCalendarWidget QAbstractItemView:enabled {
               <widget class="QLineEdit" name="_le_clients_filter"/>
              </item>
              <item>
-              <spacer name="_hs_separator_clients_top">
+              <spacer name="_hs_separator_clients_table_top">
                <property name="orientation">
                 <enum>Qt::Orientation::Horizontal</enum>
                </property>
@@ -5497,23 +5497,23 @@ QCalendarWidget QAbstractItemView:enabled {
             </layout>
            </item>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="_l_clients_client_info">
              <property name="text">
               <string>Client infos</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="Line" name="line">
+            <widget class="Line" name="_hl_separator_client_info">
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <layout class="QHBoxLayout" name="_h_clients_info_mail">
              <item>
-              <widget class="QLabel" name="label_10">
+              <widget class="QLabel" name="_l_clients_icon_mail">
                <property name="minimumSize">
                 <size>
                  <width>25</width>
@@ -5538,7 +5538,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_4">
+              <widget class="QLabel" name="_l_clients_mail">
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -5557,7 +5557,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_5">
+              <widget class="QLabel" name="_l_clients_mail_value">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -5571,12 +5571,12 @@ QCalendarWidget QAbstractItemView:enabled {
                 </size>
                </property>
                <property name="text">
-                <string>TextLabel</string>
+                <string/>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="_b_clients_clipbord_mail">
                <property name="minimumSize">
                 <size>
                  <width>25</width>
@@ -5607,9 +5607,9 @@ QCalendarWidget QAbstractItemView:enabled {
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <layout class="QHBoxLayout" name="_h_clients_info_num">
              <item>
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="_l_clients_icon_num">
                <property name="minimumSize">
                 <size>
                  <width>25</width>
@@ -5634,7 +5634,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_7">
+              <widget class="QLabel" name="_l_clients_num">
                <property name="minimumSize">
                 <size>
                  <width>70</width>
@@ -5653,7 +5653,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="label_6">
+              <widget class="QLabel" name="_l_clients_num_value">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -5672,7 +5672,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_4">
+              <widget class="QPushButton" name="_b_clients_clipbord_num">
                <property name="minimumSize">
                 <size>
                  <width>25</width>
@@ -5703,38 +5703,38 @@ QCalendarWidget QAbstractItemView:enabled {
             </layout>
            </item>
            <item>
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="_l_clients_factures_impayees">
              <property name="text">
               <string>Factures impayées</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="Line" name="line_2">
+            <widget class="Line" name="_hl_separator_factures_impayees">
              <property name="orientation">
               <enum>Qt::Orientation::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_6">
+            <layout class="QHBoxLayout" name="_h_clients_dette">
              <item>
-              <widget class="QLabel" name="label_9">
+              <widget class="QLabel" name="_l_client_dette">
                <property name="text">
                 <string>Dette de : </string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+              <widget class="QDoubleSpinBox" name="_ds_clients_dette"/>
              </item>
             </layout>
            </item>
            <item>
-            <widget class="QListWidget" name="listWidget"/>
+            <widget class="QListWidget" name="_lw_clients_dettes_factures"/>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <layout class="QHBoxLayout" name="_h_clients_info_box_bottom">
              <item>
               <widget class="QPushButton" name="_b_clients_hide_info">
                <property name="text">
@@ -5750,7 +5750,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_2">
+              <spacer name="_hs_separator_clients_info_bottom">
                <property name="orientation">
                 <enum>Qt::Orientation::Horizontal</enum>
                </property>
@@ -5763,7 +5763,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </spacer>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_5">
+              <widget class="QPushButton" name="_b_clients_info_export">
                <property name="text">
                 <string>Exporter la fiche</string>
                </property>
