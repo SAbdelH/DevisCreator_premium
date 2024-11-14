@@ -453,7 +453,7 @@ QCalendarWidget QAbstractItemView:enabled {
      <number>0</number>
     </property>
     <property name="rightMargin">
-     <number>9</number>
+     <number>0</number>
     </property>
     <property name="bottomMargin">
      <number>0</number>
@@ -470,7 +470,7 @@ QCalendarWidget QAbstractItemView:enabled {
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -479,6 +479,18 @@ QCalendarWidget QAbstractItemView:enabled {
 }</string>
        </property>
        <layout class="QGridLayout" name="_g_login">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item row="0" column="0" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
          <widget class="QWidget" name="_w_login_dialog" native="true">
           <property name="minimumSize">
@@ -987,13 +999,13 @@ QCalendarWidget QAbstractItemView:enabled {
       <widget class="QWidget" name="_p_dashboard">
        <layout class="QGridLayout" name="_g_dashboard">
         <property name="leftMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="topMargin">
          <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>8</number>
         </property>
         <property name="bottomMargin">
          <number>0</number>
@@ -1652,7 +1664,7 @@ QCalendarWidget QAbstractItemView:enabled {
          <number>5</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>8</number>
         </property>
         <property name="bottomMargin">
          <number>10</number>
@@ -1699,7 +1711,7 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="bottomMargin">
             <number>5</number>
            </property>
-           <item>
+           <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
             <widget class="QLabel" name="_l_icon_company_info_company">
              <property name="minimumSize">
               <size>
@@ -1709,7 +1721,7 @@ QCalendarWidget QAbstractItemView:enabled {
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>16777215</width>
                <height>200</height>
               </size>
              </property>
@@ -1728,6 +1740,9 @@ QCalendarWidget QAbstractItemView:enabled {
             <widget class="QProgressBar" name="_cpb_step_bar">
              <property name="value">
               <number>24</number>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
              </property>
              <property name="textVisible">
               <bool>false</bool>
@@ -3137,6 +3152,18 @@ QCalendarWidget QAbstractItemView:enabled {
       </widget>
       <widget class="QWidget" name="_p_user_management">
        <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>8</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item row="0" column="0">
          <widget class="QFrame" name="_f_left_user_management">
           <property name="maximumSize">
@@ -3662,7 +3689,7 @@ QCalendarWidget QAbstractItemView:enabled {
          <number>5</number>
         </property>
         <property name="rightMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="bottomMargin">
          <number>10</number>
@@ -4620,6 +4647,18 @@ QCalendarWidget QAbstractItemView:enabled {
       </widget>
       <widget class="QWidget" name="_p_valid_factures">
        <layout class="QHBoxLayout" name="_h_valid_factures">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>8</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item>
          <widget class="QFrame" name="_f_valid_facture_list">
           <property name="maximumSize">
@@ -5003,92 +5042,150 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <layout class="QGridLayout" name="_g_valid_facture_preview_three">
-             <item row="0" column="1">
-              <widget class="QLabel" name="_l_valid_facture_attachment_excel">
-               <property name="text">
-                <string>Pièce jointe Excel</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
+             <item row="0" column="0" colspan="2">
               <widget class="QLabel" name="_l_valid_facture_attachment_pdf">
                <property name="text">
                 <string>Pièce jointe PDF</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="_b_valid_facture_attachment_pdf">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>45</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>45</height>
-                </size>
-               </property>
-               <property name="layoutDirection">
-                <enum>Qt::LayoutDirection::RightToLeft</enum>
-               </property>
-               <property name="autoFillBackground">
-                <bool>false</bool>
-               </property>
+             <item row="0" column="3" colspan="2">
+              <widget class="QLabel" name="_l_valid_facture_attachment_excel">
                <property name="text">
-                <string>Facture_1120240001.pdf</string>
-               </property>
-               <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/icon/icons/download.png</normaloff>:/icon/icons/download.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
+                <string>Pièce jointe Excel</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QPushButton" name="_b_valid_facture_attachment_excel">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>45</height>
-                </size>
+             <item row="1" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="_h_valid_facture_attachment_pdf">
+               <property name="spacing">
+                <number>3</number>
                </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>45</height>
-                </size>
+               <item>
+                <widget class="QLabel" name="_l_valid_facture_pdf_icon">
+                 <property name="maximumSize">
+                  <size>
+                   <width>25</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap resource="resources.qrc">:/icon/icons/pdfn.png</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="_b_valid_facture_attachment_pdf">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LayoutDirection::RightToLeft</enum>
+                 </property>
+                 <property name="autoFillBackground">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Facture_1120240001.pdf</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icon/icons/download.png</normaloff>:/icon/icons/download.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="flat">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="3" colspan="2">
+              <layout class="QHBoxLayout" name="_h_valid_facture_attachment_excel">
+               <property name="spacing">
+                <number>3</number>
                </property>
-               <property name="layoutDirection">
-                <enum>Qt::LayoutDirection::RightToLeft</enum>
-               </property>
-               <property name="text">
-                <string>Facture_1120240001.xlsx</string>
-               </property>
-               <property name="icon">
-                <iconset resource="resources.qrc">
-                 <normaloff>:/icon/icons/download.png</normaloff>:/icon/icons/download.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
+               <item>
+                <widget class="QLabel" name="_l_valid_facture_excel_icon">
+                 <property name="maximumSize">
+                  <size>
+                   <width>25</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap resource="resources.qrc">:/icon/icons/exceln.png</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="_b_valid_facture_attachment_excel">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>45</height>
+                  </size>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LayoutDirection::RightToLeft</enum>
+                 </property>
+                 <property name="text">
+                  <string>Facture_1120240001.xlsx</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icon/icons/download.png</normaloff>:/icon/icons/download.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="flat">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
