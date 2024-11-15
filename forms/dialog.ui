@@ -170,14 +170,14 @@
 }
 #_f_calendar, #_f_right_info_company, #_f_info_company, #_f_invoice_box_export_invoice,
 #_f_invoice_input_card, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview,
-#_f_clients_info_box, #_f_clients_table {
+#_f_clients_info_box, #_f_clients_table, #_f_inventory_box_edit {
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 15px;
 	border: 1px solid rgba(234, 237, 237, 1);
 }
 #_f_calendar QLineEdit, #_f_calendar QTextEdit, #_f_calendar QListWidget,
 #_f_calendar QDateEdit, #_f_calendar QTimeEdit, #_f_left_user_management  QListWidget,
-#_f_valid_facture_list QListWidget, #_p_clients QTableWidget
+#_f_valid_facture_list QListWidget, #_p_clients QTableWidget, #_p_factures QComboBox
 {
 	border-radius: 5px;
 	border: 1px solid rgba(214, 219, 223, 1);
@@ -210,14 +210,14 @@
 	font: italic 11pt &quot;Arial&quot;;
 	color: rgba(72, 166, 255, 1);
 }
-#_f_graphic_finances QTableWidget, #_f_graphic_finances QListWidget, #_f_graphic_finances QGraphicsView {
+#_f_graphic_finances QTableWidget, #_f_graphic_finances QListWidget, #_f_graphic_finances QGraphicsView, #_tw_select_table {
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 1);
 	color: rgba(0, 0, 0, 1);
 	box-shadow: 20px rgba(238, 238, 238, 1);
 	border: 1px solid rgba(234, 237, 237, 1);
 }
-#_f_graphic_finances QTableWidget QHeaderView::section:horizontal {
+#_f_graphic_finances QTableWidget QHeaderView::section:horizontal, #_tw_select_table QHeaderView::section:horizontal {
 	background-color: rgba(0, 48, 73, 1);
 	border-radius: 4px;
 	color: rgba(255, 255, 255, 1);
@@ -230,7 +230,7 @@
     background-position: center center;
     background-origin: content;
 }
-#_tw_activity {
+#_tw_activity, #_tw_select_table {
 	background-image: url(:/background/background/table.png);
     background-repeat: no-repeat;
     background-position: center center;
@@ -297,7 +297,10 @@ QRadioButton::indicator:checked:pressed
 #_f_info_company QGroupBox QLineEdit, #_f_right_user_management QLineEdit, 
 #_f_right_user_management QComboBox, #_p_factures * QLineEdit, #_p_factures * QDoubleSpinBox,
 #_p_factures * QSpinBox, #_p_factures QTreeWidget, #_p_factures * QComboBox,
-#_p_clients * QListWidget, #_p_restore QLineEdit, #_p_restore QComboBox {
+#_p_clients * QListWidget, #_p_restore QLineEdit, #_p_restore QComboBox, 
+#_p_clients * QDoubleSpinBox, #_p_clients * QLineEdit, #_p_manage_db QTreeWidget,
+#_p_inventory QLineEdit, #_p_inventory QComboBox, #_p_inventory QSpinBox, #_p_inventory QDoubleSpinBox
+{
 	color: rgba(0, 0, 0, 1);
 	border-radius: 5px;
 	border: 1px solid rgba(174, 182, 191, 1);
@@ -310,7 +313,7 @@ QRadioButton::indicator:checked:pressed
 }
 
 #_f_dirigeant_label, #_f_contact_label, #_f_informations_legales_label, #_f_informations_bancaires_label, 
-#_f_title_inputGeneral, #_f_title_inputConnexion, #_f_invoice_informations_article_label{
+#_f_title_inputGeneral, #_f_title_inputConnexion, #_f_invoice_informations_article_label, #_f_inventory_informations_label {
 	/*border: 1px solid rgba(171, 178, 185, 1);*/
 	border-radius: 5px;
 	background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(129, 155, 208, 1), stop:1 rgba(255, 255, 255, 1));
@@ -344,7 +347,7 @@ QRadioButton::indicator:checked:pressed
 	background-origin: content;
 }
 #_b_invoice_export, #_b_invoice_add_card {
-	background-color : rgba(19, 83, 255, 1);
+	background-color : rgba(97, 117, 125, 1);
 	color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
 }
@@ -434,7 +437,7 @@ QRadioButton::indicator:checked:pressed
 }
 /*CLIENT MANAGEMENT*/
 #_l_clients_mail, #_l_clients_num, #_l_invoice_nom, #_l_invoice_marque, #_l_invoice_price, #_l_invoice_qauntity,#_l_invoice_type_remise, #_l_invoice_remise, #_l_invoice_client, #_l_invoice_nomclient, #_l_invoice_numclient, #_le_invoice_mailclient, #_l_invoice_objet,
-#_p_restore QLabel {
+#_p_restore QLabel, #_cb_invoice_quantifiable {
 	color: rgba(164, 164, 164, 1);
 }
 #_b_clients_show_info {
@@ -449,7 +452,7 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 7px;
 	padding: 5px
 }
-#_b_clients_info_export, #_b_clients_add_client {
+#_b_clients_info_export, #_b_clients_add_client, #_b_manage_db_export_table {
 	color: rgba(62, 136, 46, 1);
 	border: 1px solid rgba(62, 136, 46, 1);
 	border-radius: 7px;
@@ -467,7 +470,7 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 7px;
 	padding: 5px
 }
-#_tw_clients_table_info QHeaderView::section:horizonta {
+#_tw_clients_table_info QHeaderView::section:horizontal {
 	background-color: rgba(255, 255, 255, 1);
 	color: rgba(164, 164, 164, 1);
 	border: none;
@@ -484,6 +487,35 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 7px;
 	background-color: rgba(255, 255, 255, 1);
 }
+/*INVENTORY WIDGET*/
+
+/*TREE WIDGET*/
+QTreeWidget {
+    background-color: rgba(255, 255, 255, 1);
+	color : rgba(0, 0, 0, 1);
+    	border: none;
+    	font-size: 14px;
+}
+QTreeWidget::item {
+    padding: 4px 8px;
+    border: none;
+}
+QTreeWidget::item:hover {
+    background-color: #e6f7ff;
+	color : rgba(0, 0, 0, 1);
+    border-radius: 4px;
+}
+QTreeWidget::branch:open:has-children {
+    image: url(:/icon/icons/openfolder.png);
+}
+QTreeWidget::branch:closed:has-children {
+    image: url(:/icon/icons/emptyfolder.png);
+}
+QTreeWidget::item:selected {
+    background-color: #d1eaff;
+    border-radius: 4px;
+}
+
 /* CALENDAR WIDGET */
 QCalendarWidget QWidget {
 	alternate-background-color: rgba(255, 255, 255, 1); 
@@ -1059,7 +1091,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>8</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -2134,7 +2166,7 @@ QCalendarWidget QAbstractItemView:enabled {
       <widget class="QWidget" name="_p_info_company">
        <layout class="QGridLayout" name="_g_info_company">
         <property name="leftMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="topMargin">
          <number>5</number>
@@ -3614,7 +3646,7 @@ QCalendarWidget QAbstractItemView:enabled {
       <widget class="QWidget" name="_p_user_management">
        <layout class="QGridLayout" name="gridLayout">
         <property name="leftMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="topMargin">
          <number>5</number>
@@ -4130,7 +4162,7 @@ QCalendarWidget QAbstractItemView:enabled {
       <widget class="QWidget" name="_p_factures">
        <layout class="QGridLayout" name="_g_factures">
         <property name="leftMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="topMargin">
          <number>0</number>
@@ -4148,13 +4180,32 @@ QCalendarWidget QAbstractItemView:enabled {
          <layout class="QHBoxLayout" name="_h_invoice_search_invoice">
           <item>
            <widget class="QLabel" name="_l_invoice_search_invoice">
+            <property name="maximumSize">
+             <size>
+              <width>130</width>
+              <height>16777215</height>
+             </size>
+            </property>
             <property name="text">
              <string>Rechercher un devis</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="_le_invoice_search_invoice"/>
+           <widget class="QComboBox" name="_cbx_invoice_search_invoice">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -4173,6 +4224,18 @@ QCalendarWidget QAbstractItemView:enabled {
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="_v_input_card">
+           <property name="leftMargin">
+            <number>10</number>
+           </property>
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <property name="rightMargin">
+            <number>10</number>
+           </property>
+           <property name="bottomMargin">
+            <number>10</number>
+           </property>
            <item>
             <widget class="QFrame" name="_f_invoice_informations_article_label">
              <property name="minimumSize">
@@ -4226,52 +4289,6 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <layout class="QGridLayout" name="_g_invoice_input_card">
-             <item row="1" column="0">
-              <widget class="QLineEdit" name="_le_invoice_name">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="_l_invoice_price">
-               <property name="text">
-                <string>Prix</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="_l_invoice_marque">
-               <property name="text">
-                <string>Marque</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="7" column="0">
               <widget class="QSpinBox" name="_s_invoice_quantity">
                <property name="minimumSize">
@@ -4285,7 +4302,20 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="12" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
               <widget class="QLabel" name="_l_invoice_type_remise">
                <property name="text">
                 <string>Type de remise</string>
@@ -4295,7 +4325,7 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="11" column="0">
               <widget class="QLabel" name="_l_invoice_remise">
                <property name="text">
                 <string>Remise</string>
@@ -4305,17 +4335,7 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="_l_invoice_qauntity">
-               <property name="text">
-                <string>Quantité</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
+             <item row="10" column="0">
               <widget class="QComboBox" name="_cbx_invoice_type_remise">
                <property name="minimumSize">
                 <size>
@@ -4359,33 +4379,17 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_price">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
+             <item row="6" column="0">
+              <widget class="QLabel" name="_l_invoice_qauntity">
+               <property name="text">
+                <string>Quantité</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLineEdit" name="_le_invoice_marque">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
+             <item row="13" column="0">
               <layout class="QHBoxLayout" name="_h_btn_invoice_input">
                <item>
                 <widget class="QPushButton" name="_b_invoice_cancel_card">
@@ -4458,6 +4462,72 @@ QCalendarWidget QAbstractItemView:enabled {
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="5" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_price">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLineEdit" name="_le_invoice_marque">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLineEdit" name="_le_invoice_name">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="_l_invoice_price">
+               <property name="text">
+                <string>Prix</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="_l_invoice_marque">
+               <property name="text">
+                <string>Marque</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="_cb_invoice_quantifiable">
+               <property name="text">
+                <string>Élément quantifiable</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -4903,9 +4973,21 @@ QCalendarWidget QAbstractItemView:enabled {
                 <height>16777215</height>
                </size>
               </property>
+              <property name="indentation">
+               <number>15</number>
+              </property>
+              <property name="animated">
+               <bool>true</bool>
+              </property>
+              <property name="headerHidden">
+               <bool>true</bool>
+              </property>
+              <attribute name="headerVisible">
+               <bool>false</bool>
+              </attribute>
               <column>
                <property name="text">
-                <string>Exports</string>
+                <string notr="true">1</string>
                </property>
               </column>
              </widget>
@@ -4956,6 +5038,12 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <widget class="QLineEdit" name="_le_invoice_inventory_filter">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
              <property name="placeholderText">
               <string>Chercher un inventaire</string>
              </property>
@@ -5153,7 +5241,7 @@ QCalendarWidget QAbstractItemView:enabled {
       <widget class="QWidget" name="_p_valid_factures">
        <layout class="QHBoxLayout" name="_h_valid_factures">
         <property name="leftMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="topMargin">
          <number>5</number>
@@ -5440,7 +5528,7 @@ QCalendarWidget QAbstractItemView:enabled {
              </column>
              <column>
               <property name="text">
-               <string>validé</string>
+               <string>Payé</string>
               </property>
               <property name="font">
                <font>
@@ -5774,7 +5862,7 @@ QCalendarWidget QAbstractItemView:enabled {
          <number>5</number>
         </property>
         <property name="leftMargin">
-         <number>5</number>
+         <number>8</number>
         </property>
         <property name="topMargin">
          <number>5</number>
@@ -5816,6 +5904,12 @@ QCalendarWidget QAbstractItemView:enabled {
              </property>
              <item>
               <widget class="QLineEdit" name="_le_clients_filter">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -5998,7 +6092,14 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="_le_clients_profil_name"/>
+              <widget class="QLineEdit" name="_le_clients_profil_name">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -6063,7 +6164,14 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="_le_clients_mail_value"/>
+              <widget class="QLineEdit" name="_le_clients_mail_value">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="_b_clients_clipbord_mail">
@@ -6143,7 +6251,14 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="_le_clients_num_value"/>
+              <widget class="QLineEdit" name="_le_clients_num_value">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QPushButton" name="_b_clients_clipbord_num">
@@ -6201,6 +6316,18 @@ QCalendarWidget QAbstractItemView:enabled {
              </item>
              <item>
               <widget class="QDoubleSpinBox" name="_ds_clients_dette">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+               <property name="buttonSymbols">
+                <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+               </property>
                <property name="prefix">
                 <string/>
                </property>
@@ -6289,6 +6416,630 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
             </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="_p_inventory">
+       <layout class="QGridLayout" name="_g_inventory">
+        <item row="2" column="0">
+         <widget class="QFrame" name="_f_inventory_most_sale">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Shape::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="_g_inventory_most_sale">
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>- Unités</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Total ventes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" rowspan="2">
+            <widget class="QLabel" name="label">
+             <property name="minimumSize">
+              <size>
+               <width>45</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>45</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/icon/icons/most_sell.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <layout class="QHBoxLayout" name="_h_inventory_top">
+          <item>
+           <widget class="QFrame" name="_f_inventory_sum_product">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Shadow::Raised</enum>
+            </property>
+            <layout class="QHBoxLayout" name="_h_inventory_sum_product">
+             <property name="spacing">
+              <number>1</number>
+             </property>
+             <property name="leftMargin">
+              <number>2</number>
+             </property>
+             <property name="topMargin">
+              <number>2</number>
+             </property>
+             <property name="rightMargin">
+              <number>2</number>
+             </property>
+             <property name="bottomMargin">
+              <number>2</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="_l_inventory_sum_value">
+               <property name="font">
+                <font>
+                 <pointsize>14</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>1000</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_sum">
+               <property name="text">
+                <string>Produits au total</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="_le_inventory_search_product">
+            <property name="placeholderText">
+             <string>Chercher un produit</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_inventory_add_product">
+            <property name="text">
+             <string>Ajouter un inventaire</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/plus.png</normaloff>:/icon/icons/plus.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QListWidget" name="_lw_inventory_list_inventory"/>
+        </item>
+        <item row="1" column="3" rowspan="2" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <widget class="QFrame" name="_f_inventory_box_edit">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Shape::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="_v_inventory_box_edit">
+           <property name="sizeConstraint">
+            <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+           </property>
+           <property name="leftMargin">
+            <number>5</number>
+           </property>
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>5</number>
+           </property>
+           <item>
+            <widget class="QFrame" name="_f_inventory_informations_label">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="_h_inventory_informations_label">
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="_l_inventory_informations_product">
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Informations du produit</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="_v_inventory_input">
+             <property name="spacing">
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="_l_inventory_name">
+               <property name="text">
+                <string>Nom</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="_le_inventory_name">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l__inventory_marque">
+               <property name="text">
+                <string>Marque</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="_le_inventory_marque">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_price">
+               <property name="text">
+                <string>Prix</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="_ds_inventory_price">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_quantity">
+               <property name="text">
+                <string>Quantité</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QSpinBox" name="_s_inventory_quantity">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="_cb_inventory_quantifiable">
+               <property name="text">
+                <string>Élément quantifiable</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_type_remise">
+               <property name="text">
+                <string>Type remise</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="_cbx_inventory_type_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_date_fabric">
+               <property name="text">
+                <string>Date de fabrication</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="_de_inventory_fabric">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_illustration_path">
+               <property name="text">
+                <string>Illustration</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="_h_inventory_illustration">
+               <item>
+                <widget class="QLineEdit" name="_le_inventory_illustration_path">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="_tb_inventory_illustration_path">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_import_path">
+               <property name="text">
+                <string>Importer depuis une liste</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="_h_inventory_import_path">
+               <item>
+                <widget class="QLineEdit" name="_le_inventory_import_path">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="_tb_inventory_import_path">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="_h_inventory_box_bottom">
+             <item>
+              <widget class="QPushButton" name="_b_inventory_add">
+               <property name="text">
+                <string>Ajouter</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/plus.png</normaloff>:/icon/icons/plus.png</iconset>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="_b_inventory_update">
+               <property name="text">
+                <string>Mettre-à-jour</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/maj.png</normaloff>:/icon/icons/maj.png</iconset>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="_b_inventory_delete">
+               <property name="text">
+                <string>Supprimer</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/effacer.png</normaloff>:/icon/icons/effacer.png</iconset>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QFrame" name="_f_inventory_sum_sold">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Shape::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="_g_inventory_sum_sold">
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_8">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>- €</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>Total produit</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" rowspan="2">
+            <widget class="QLabel" name="label_7">
+             <property name="minimumSize">
+              <size>
+               <width>45</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>45</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/icon/icons/sum_sell.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QFrame" name="_f_inventory_low_sale">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>70</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Shape::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="_g_inventory_low_sale">
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_5">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>- Unités</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Total ventes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" rowspan="2">
+            <widget class="QLabel" name="label_4">
+             <property name="minimumSize">
+              <size>
+               <width>45</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>45</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="resources.qrc">:/icon/icons/low_sell.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -6548,7 +7299,7 @@ QCalendarWidget QAbstractItemView:enabled {
           </property>
          </spacer>
         </item>
-        <item row="0" column="1" alignment="">
+        <item row="0" column="1">
          <widget class="QLabel" name="_l_restore_icon">
           <property name="maximumSize">
            <size>
@@ -6595,125 +7346,64 @@ QCalendarWidget QAbstractItemView:enabled {
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page">
-       <widget class="QTreeWidget" name="treeWidget">
-        <property name="geometry">
-         <rect>
-          <x>130</x>
-          <y>70</y>
-          <width>381</width>
-          <height>421</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QTreeWidget {
-    background-color: #f8f8f8;
-    border: none;
-    font-size: 14px;
-}
-
-QTreeWidget::item {
-    padding: 4px 8px;
-    border: none;
-}
-
-QTreeWidget::item:hover {
-    background-color: #e6f7ff;
-    border-radius: 4px;
-}
-
-QTreeWidget::branch:open:has-children {
-    image: url(:/icon/icons/openfolder.png);
-}
-
-QTreeWidget::branch:closed:has-children {
-    image: url(:/icon/icons/emptyfolder.png);
-}
-
-/* Ligne verticale pour les branches qui ont des frères et sœurs */
-QTreeWidget::branch:has-siblings:!adjoins-item {
-    border-left-image: url(:/icon/icons/vertical_line.png) 0 0 0 0 stretch stretch;
-    border-left-width: 16px;  /* Ajuster la largeur si nécessaire */
-}
-
-/* Courbe pour connecter les éléments */
-QTreeWidget::branch:has-siblings:adjoins-item {
-    border-left-image: url(:/icon/icons/curve_line.png) 0 0 0 0 stretch stretch;
-    border-left-width: 16px;  /* Ajuster la largeur si nécessaire */
-}
-
-/* Ligne de fin pour les éléments sans enfants */
-QTreeWidget::branch:!has-children:!has-siblings:adjoins-item {
-    border-left-image: url(:/icon/icons/end_line.png) 0 0 0 0 stretch stretch;
-    border-left-width: 16px;  /* Ajuster la largeur si nécessaire */
-}
-
-QTreeWidget::item:selected {
-    background-color: #d1eaff;
-    border-radius: 4px;
-}
-</string>
-        </property>
-        <property name="animated">
-         <bool>true</bool>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-        <property name="headerHidden">
-         <bool>true</bool>
-        </property>
-        <column>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </column>
-        <item>
-         <property name="text">
-          <string>Nouvel élément</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>Nouveau sous-élément</string>
+      <widget class="QWidget" name="_p_manage_db">
+       <layout class="QGridLayout" name="_g_manage_db">
+        <item row="0" column="0" rowspan="2">
+         <widget class="QTreeWidget" name="_trw_db_structure">
+          <property name="maximumSize">
+           <size>
+            <width>200</width>
+            <height>16777215</height>
+           </size>
           </property>
-          <item>
-           <property name="text">
-            <string>Nouveau sous-élément</string>
-           </property>
-          </item>
-         </item>
-        </item>
-       </widget>
-       <widget class="QTreeWidget" name="treeWidget_2">
-        <property name="geometry">
-         <rect>
-          <x>535</x>
-          <y>81</y>
-          <width>391</width>
-          <height>421</height>
-         </rect>
-        </property>
-        <column>
-         <property name="text">
-          <string>1</string>
-         </property>
-        </column>
-        <item>
-         <property name="text">
-          <string>Nouvel élément</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>Nouveau sous-élément</string>
+          <property name="animated">
+           <bool>true</bool>
           </property>
-          <item>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="headerHidden">
+           <bool>true</bool>
+          </property>
+          <column>
            <property name="text">
-            <string>Nouveau sous-élément</string>
+            <string notr="true">1</string>
            </property>
-          </item>
-         </item>
+          </column>
+         </widget>
         </item>
-       </widget>
+        <item row="0" column="1" colspan="2">
+         <widget class="QTableWidget" name="_tw_select_table">
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <spacer name="_hs_separator_manage_db_bottom">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>876</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="_b_manage_db_export_table">
+          <property name="text">
+           <string>Exporter la table</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icon/icons/exceller.png</normaloff>:/icon/icons/exceller.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
