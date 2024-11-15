@@ -164,10 +164,25 @@ class Icons:
     def excel_icon(self) -> QIcon:
         return self.__QIcon("exceller")
 
+    @property
     def pdf_icon(self) -> QIcon:
         return self.__QIcon("pdf")
 
+    @property
+    def pdf_file_icon(self) -> QIcon:
+        return self.__QIcon("pdfn")
 
+    @property
+    def excel_file_icon(self) -> QIcon:
+        return self.__QIcon("exceln")
+
+    @property
+    def telecharger_icon(self) -> QIcon:
+        return self.__QIcon("download")
+
+    @property
+    def ajouter_utilisateur_icon(self):
+        return self.__QIcon("addclient")
 
     @property
     def uncheckbox_icon(self) -> str:
