@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'dialogSROvGm.ui'
+## Form generated from reading UI file 'dialogxHTOdu.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.0
 ##
@@ -25,6 +25,7 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCalendarWidget, 
     QTableWidget, QTableWidgetItem, QTextEdit, QTimeEdit,
     QToolButton, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
     QWidget)
+import resources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

@@ -185,6 +185,85 @@ class Icons:
         return self.__QIcon("addclient")
 
     @property
+    def profil_client_icon(self) -> QIcon:
+        return self.__QIcon("profilClient")
+
+    @property
+    def mail_client_icon(self) -> QIcon:
+        return self.__QIcon("e-mail")
+
+    @property
+    def copier_icon(self) -> QIcon:
+        return self.__QIcon("copier")
+
+    @property
+    def telephone(self) -> QIcon:
+        return self.__QIcon("appel")
+
+    @property
+    def cacher_widget_icon(self) -> QIcon:
+        return self.__QIcon("cacher")
+
+    @property
+    def corbeil_icon(self) -> QIcon:
+        return self.__QIcon("effacer")
+
+    @property
+    def plus_vendu_icon(self) -> QIcon:
+        return self.__QIcon("most_sell")
+
+    @property
+    def total_vente(self) -> QIcon:
+        return self.__QIcon("sum_sell")
+
+    @property
+    def moins_vendu_icon(self) -> QIcon:
+        return self.__QIcon("low_sell")
+
+    def restore_icon(self) -> QIcon:
+        return self.__QIcon("RESTORE")
+
+    @property
+    def logo_backup_icon(self) -> QIcon:
+        return self.__QIcon("nuage")
+
+    @property
+    def create_ws_icon(self) -> QIcon:
+        return self.__QIcon("workspace")
+
+    @property
+    def create_users_icon(self) -> QIcon:
+        return self.__QIcon("adduser")
+
+    @property
+    def informations_entreprise_icon(self) -> QIcon:
+        return self.__QIcon("entreprise")
+
+    @property
+    def create_devis_icon(self) -> QIcon:
+        return self.__QIcon("devis")
+
+    @property
+    def create_facture_icon(self) -> QIcon:
+        return self.__QIcon("facture")
+
+    @property
+    def create_client_icon(self) -> QIcon:
+        return self.__QIcon("client")
+
+    @property
+    def create_backup_icon(self) -> QIcon:
+        return self.__QIcon("sauvegarde")
+
+    @property
+    def valid_facture_icon(self) -> QIcon:
+        return self.__QIcon("validFacture")
+
+    @property
+    def manage_db_icon(self) -> QIcon:
+        return self.__QIcon("manageBD")
+
+    @property
     def uncheckbox_icon(self) -> str:
         return self.images.get("uncheckedb")
 
