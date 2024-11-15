@@ -347,7 +347,7 @@ QRadioButton::indicator:checked:pressed
 	background-origin: content;
 }
 #_b_invoice_export, #_b_invoice_add_card {
-	background-color : rgba(97, 117, 125, 1);
+	background-color : rgba(82, 121, 111, 1);
 	color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
 }
@@ -482,12 +482,56 @@ QRadioButton::indicator:checked:pressed
 	border-bottom : 1px solid rgba(164, 164, 164, 1);
 }
 /*RESTORE MANAGEMENT*/
-#_p_restore QPushButton, #_p_restore QToolButton {
+#_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton{
 	border: 1px solid rgba(164, 164, 164, 1);
 	border-radius: 7px;
 	background-color: rgba(255, 255, 255, 1);
 }
 /*INVENTORY WIDGET*/
+#_f_inventory_sum_product {
+	border: 1px solid rgba(164, 164, 164, 1);
+	border-radius: 5px;
+	padding: 5px;
+}
+#_b_inventory_add_product {
+	color: rgba(0, 174, 161, 1);
+	border: 1px solid rgba(0, 174, 161, 1);
+	border-radius: 7px;
+	padding: 5px
+}
+#_lw_inventory_list_inventory {
+	background-color: transparent;
+	background: transparent;
+}
+#_f_inventory_low_sale, #_f_inventory_most_sale, #_f_inventory_sum_sold {
+	border-radius: 10px;
+}
+#_l_inventory_icon_low_sale, #_l_inventory_icon_most_sale, #_l_inventory_icon_sum_sold {
+	border-radius: 20px;
+	padding: 5px;
+}
+#_f_inventory_low_sale QLabel {
+	color: rgba(255, 255, 255, 1);
+	
+}
+#_f_inventory_low_sale {
+	background-color: rgba(20, 123, 255, 1);
+}
+#_l_inventory_icon_low_sale {
+	background-color: rgba(65, 149, 255, 1);
+}
+#_f_inventory_most_sale {
+	background-color: rgba(215, 254, 98, 1);
+}
+#_l_inventory_icon_most_sale {
+	background-color: rgba(173, 203, 78, 1);
+}
+#_f_inventory_sum_sold {
+	background-color: rgba(7, 255, 153, 1);
+}
+#_l_inventory_icon_sum_sold {
+	background-color: rgba(0, 230, 138, 1);
+}
 
 /*TREE WIDGET*/
 QTreeWidget {
@@ -1091,7 +1135,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -1726,6 +1770,9 @@ QCalendarWidget QAbstractItemView:enabled {
                  <width>100</width>
                  <height>16777215</height>
                 </size>
+               </property>
+               <property name="toolTip">
+                <string>Exporter des analyses</string>
                </property>
                <property name="text">
                 <string>Export</string>
@@ -4343,6 +4390,9 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+               <property name="editable">
+                <bool>false</bool>
+               </property>
                <property name="currentIndex">
                 <number>-1</number>
                </property>
@@ -4434,7 +4484,7 @@ QCalendarWidget QAbstractItemView:enabled {
                 <widget class="QPushButton" name="_b_invoice_add_card">
                  <property name="minimumSize">
                   <size>
-                   <width>0</width>
+                   <width>180</width>
                    <height>40</height>
                   </size>
                  </property>
@@ -6424,6 +6474,18 @@ QCalendarWidget QAbstractItemView:enabled {
       </widget>
       <widget class="QWidget" name="_p_inventory">
        <layout class="QGridLayout" name="_g_inventory">
+        <property name="leftMargin">
+         <number>8</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item row="2" column="0">
          <widget class="QFrame" name="_f_inventory_most_sale">
           <property name="minimumSize">
@@ -6446,7 +6508,7 @@ QCalendarWidget QAbstractItemView:enabled {
           </property>
           <layout class="QGridLayout" name="_g_inventory_most_sale">
            <item row="0" column="1">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="_l_inventory_most_sale_value">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
@@ -6459,14 +6521,14 @@ QCalendarWidget QAbstractItemView:enabled {
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="_l_inventory_most_sale">
              <property name="text">
-              <string>Total ventes</string>
+              <string>Le plus vendu</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0" rowspan="2">
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="_l_inventory_icon_most_sale">
              <property name="minimumSize">
               <size>
                <width>45</width>
@@ -6495,6 +6557,12 @@ QCalendarWidget QAbstractItemView:enabled {
         </item>
         <item row="0" column="0" colspan="4">
          <layout class="QHBoxLayout" name="_h_inventory_top">
+          <property name="leftMargin">
+           <number>5</number>
+          </property>
+          <property name="rightMargin">
+           <number>5</number>
+          </property>
           <item>
            <widget class="QFrame" name="_f_inventory_sum_product">
             <property name="frameShape">
@@ -6544,6 +6612,12 @@ QCalendarWidget QAbstractItemView:enabled {
           </item>
           <item>
            <widget class="QLineEdit" name="_le_inventory_search_product">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="placeholderText">
              <string>Chercher un produit</string>
             </property>
@@ -6551,6 +6625,12 @@ QCalendarWidget QAbstractItemView:enabled {
           </item>
           <item>
            <widget class="QPushButton" name="_b_inventory_add_product">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
             <property name="text">
              <string>Ajouter un inventaire</string>
             </property>
@@ -6759,6 +6839,27 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+               <property name="placeholderText">
+                <string>-- Séléctionnez un type seulement s'il y'a remise</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>En devise</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icon/icons/euro.png</normaloff>:/icon/icons/euro.png</iconset>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>En pourcentage</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
+                </property>
+               </item>
               </widget>
              </item>
              <item>
@@ -6928,7 +7029,7 @@ QCalendarWidget QAbstractItemView:enabled {
           </property>
           <layout class="QGridLayout" name="_g_inventory_sum_sold">
            <item row="0" column="1">
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="_l_inventory_sum_sold_value">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
@@ -6941,14 +7042,14 @@ QCalendarWidget QAbstractItemView:enabled {
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="_l_inventory_sum_sold">
              <property name="text">
-              <string>Total produit</string>
+              <string>Total vente</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0" rowspan="2">
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="_l_inventory_icon_sum_sold">
              <property name="minimumSize">
               <size>
                <width>45</width>
@@ -6997,7 +7098,7 @@ QCalendarWidget QAbstractItemView:enabled {
           </property>
           <layout class="QGridLayout" name="_g_inventory_low_sale">
            <item row="0" column="1">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="_l_inventory_low_sale_value">
              <property name="font">
               <font>
                <pointsize>15</pointsize>
@@ -7010,14 +7111,14 @@ QCalendarWidget QAbstractItemView:enabled {
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="_l_inventory_low_sale">
              <property name="text">
-              <string>Total ventes</string>
+              <string>Le moins bien vendu</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0" rowspan="2">
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="_l_inventory_icon_low_sale">
              <property name="minimumSize">
               <size>
                <width>45</width>
@@ -7352,7 +7453,7 @@ QCalendarWidget QAbstractItemView:enabled {
          <widget class="QTreeWidget" name="_trw_db_structure">
           <property name="maximumSize">
            <size>
-            <width>200</width>
+            <width>250</width>
             <height>16777215</height>
            </size>
           </property>
