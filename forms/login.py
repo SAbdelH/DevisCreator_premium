@@ -35,9 +35,9 @@ class LoginPage:
         # CREATION D'UN DIALOG DE CONFIGURATION CONNEXION
         self.__initDialogSignup()
         # AJOUT DU GRID MINI PAGE A WIDGET BLANC
-        self._g_login_dialog.addWidget(self._sw_login_dialog, 0, 0, 1, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._g_login_dialog.addWidget(self._sw_login_dialog, 0, 0, 1, 1, Qt.AlignVCenter)
         # AJOUT DU GRID WIDGET BLANC A PAGE LOGIN
-        self._g_login.addWidget(self._w_login_dialog, 0, 0, 1, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._g_login.addWidget(self._w_login_dialog, 0, 0, 1, 1, Qt.AlignVCenter)
         # AJOUT DE LA PAGE A STACKED WIDGET
         self._sw_main_dialog.addWidget(self._p_login)
 
@@ -144,10 +144,10 @@ class LoginPage:
         self._l_icon_config_db.setObjectName(u"_l_icon_config_db")
         self._l_icon_config_db.setMinimumSize(QSize(133, 133))
         self._l_icon_config_db.setMaximumSize(QSize(133, 133))
-        self._l_icon_config_db.setPixmap(self.config_db_icon)
+        self._l_icon_config_db.setPixmap(self.logo_config_db_pixmap)
         self._l_icon_config_db.setScaledContents(True)
         self._l_icon_config_db.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._g_icon_signup.addWidget(self._l_icon_config_db, 0, 1, 1, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignTop)
+        self._g_icon_signup.addWidget(self._l_icon_config_db, 0, 1, 1, 1, Qt.AlignTop)
         # TEXTE CONFIG DB
         self._l_config_db = QLabel(self._p_signup)
         self._l_config_db.setObjectName(u"_l_config_db")

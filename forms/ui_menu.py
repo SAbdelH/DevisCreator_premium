@@ -21,7 +21,6 @@ class Menu:
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self._b_mcreate_user.sizePolicy().hasHeightForWidth())
         # CONFIGURATION MENU ENTETE
         self._f_header = QFrame(self.centralwidget)
         self._f_header.setObjectName(u"_f_header")
@@ -132,7 +131,7 @@ class Menu:
         self._l_icon_profil = QLabel(self._f_header)
         self._l_icon_profil.setObjectName(u"_l_icon_profil")
         self._l_icon_profil.setMaximumSize(QSize(40, 40))
-        self._l_icon_profil.setPixmap(self.profil_pixmap)
+        self._l_icon_profil.setPixmap(self.profil_pixmap())
         self._l_icon_profil.setScaledContents(True)
         self._l_icon_profil.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._h_profil.addWidget(self._l_icon_profil)
@@ -160,7 +159,7 @@ class Menu:
         self._l_pposte.setObjectName(u"_l_pposte")
         self._g_profil.addWidget(self._l_pposte, 3, 1, 1, 1)
         # AJOUT GRID PROFIL DANS FRAME PROFIL
-        self._h_profil.addWidget(self._g_profil)
+        self._h_profil.addWidget(self._f_profil)
         # INSERTION BOUTON DECONNEXION
         self._b_logout = QPushButton(self._f_header)
         self._b_logout.setObjectName(u"_b_logout")
@@ -212,7 +211,7 @@ class Menu:
         self._b_minfo_company.setIconSize(QSize(25, 25))
         self._b_minfo_company.setCheckable(True)
         self._b_minfo_company.setFlat(True)
-        self._v_side_menu_two.addWidget(self._b_minfo_company, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._v_side_menu_two.addWidget(self._b_minfo_company, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON CREATION UTILISATEUR
         self._b_mcreate_user = QPushButton(self._f_side_menu)
         self._b_mcreate_user.setObjectName(u"_b_mcreate_user")
@@ -224,7 +223,7 @@ class Menu:
         self._b_mcreate_user.setIconSize(QSize(25, 25))
         self._b_mcreate_user.setCheckable(True)
         self._b_mcreate_user.setFlat(True)
-        self._v_side_menu_two.addWidget(self._b_mcreate_user, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._v_side_menu_two.addWidget(self._b_mcreate_user, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION DEVIS
         self._b_mcreate_devis = QPushButton(self._f_side_menu)
         self._b_mcreate_devis.setObjectName(u"_b_mcreate_devis")
@@ -244,7 +243,7 @@ class Menu:
         self._b_mcreate_facture.setIconSize(QSize(25, 25))
         self._b_mcreate_facture.setCheckable(True)
         self._b_mcreate_facture.setFlat(True)
-        self._v_side_menu_two.addWidget(self._b_mcreate_facture, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._v_side_menu_two.addWidget(self._b_mcreate_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON VALIDE FACTURE
         self._b_mvalid_facture = QPushButton(self._f_side_menu)
         self._b_mvalid_facture.setObjectName(u"_b_mvalid_facture")
@@ -254,7 +253,7 @@ class Menu:
         self._b_mvalid_facture.setIconSize(QSize(25, 25))
         self._b_mvalid_facture.setCheckable(True)
         self._b_mvalid_facture.setFlat(True)
-        self._v_side_menu_two.addWidget(self._b_mvalid_facture, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._v_side_menu_two.addWidget(self._b_mvalid_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION CLIENT
         self._b_mclient = QPushButton(self._f_side_menu)
         self._b_mclient.setObjectName(u"_b_mclient")
@@ -273,7 +272,7 @@ class Menu:
         self._b_mcreate_backup.setIconSize(QSize(25, 25))
         self._b_mcreate_backup.setCheckable(True)
         self._b_mcreate_backup.setFlat(True)
-        self._v_side_menu_two.addWidget(self._b_mcreate_backup, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._v_side_menu_two.addWidget(self._b_mcreate_backup, 0, Qt.AlignVCenter)
         # AJOUT BOUTON MANAGE DB
         self._b_mmanage_db = QPushButton(self._f_side_menu)
         self._b_mmanage_db.setObjectName(u"_b_mmanage_db")
@@ -283,7 +282,7 @@ class Menu:
         self._b_mmanage_db.setIconSize(QSize(25, 25))
         self._b_mmanage_db.setCheckable(True)
         self._b_mmanage_db.setFlat(True)
-        self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON VERTICAL LAYOUT DANS SIDE MENU
         self._v_side_menu.addLayout(self._v_side_menu_two)
         # AJOUT DU VERTICAL SPACE  A GAUCHE DE LA FENETRE

@@ -31,9 +31,10 @@ from forms.ui_icons import Icons
 from forms.ui_background_image import BackgroundImage
 from forms.login import LoginPage
 
-class Ui_MainWindow(object, Icons, BackgroundImage, Menu, LoginPage):
+class Ui_MainWindow(QMainWindow, Icons, BackgroundImage, Menu, LoginPage):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -1080,7 +1081,7 @@ class Ui_MainWindow(object, Icons, BackgroundImage, Menu, LoginPage):
         self._l_icon_company_info_company.setPixmap(QPixmap(u":/icon/icons/MsCles.png"))
         self._l_icon_company_info_company.setScaledContents(True)
 
-        self.verticalLayout_4.addWidget(self._l_icon_company_info_company, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignTop)
+        self.verticalLayout_4.addWidget(self._l_icon_company_info_company, 0,Qt.AlignTop)
 
         self._cpb_step_bar = QProgressBar(self._f_right_info_company)
         self._cpb_step_bar.setObjectName(u"_cpb_step_bar")
@@ -3281,7 +3282,7 @@ class Ui_MainWindow(object, Icons, BackgroundImage, Menu, LoginPage):
         self._v_inventory_box_edit.addLayout(self._h_inventory_box_bottom)
 
 
-        self._g_inventory.addWidget(self._f_inventory_box_edit, 1, 3, 2, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
+        self._g_inventory.addWidget(self._f_inventory_box_edit, 1, 3, 2, 1, Qt.AlignVCenter)
 
         self._f_inventory_sum_sold = QFrame(self._p_inventory)
         self._f_inventory_sum_sold.setObjectName(u"_f_inventory_sum_sold")

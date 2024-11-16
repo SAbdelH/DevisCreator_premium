@@ -1050,7 +1050,7 @@ QCalendarWidget QAbstractItemView:enabled {
            <property name="frameShadow">
             <enum>QFrame::Shadow::Raised</enum>
            </property>
-           <layout class="QGridLayout" name="_g_profil_2">
+           <layout class="QGridLayout" name="_g_profil">
             <property name="leftMargin">
              <number>12</number>
             </property>

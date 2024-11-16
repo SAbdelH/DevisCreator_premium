@@ -1,8 +1,7 @@
 from pathlib import Path
 
-from PyQt6.QtGui import QPixmap
 from PySide6.QtCore import QSize
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QPixmap
 
 
 class Icons:
@@ -29,6 +28,7 @@ class Icons:
         :param img: Nom de l'image
         :return: un QPixmap
         """
+        print(self.images.get(img))
         return QPixmap(self.images.get(img))
 
     @property
@@ -149,7 +149,7 @@ class Icons:
         Un pixmap de l'icon logo config db
         :return: un QPixmap
         """
-        return self.__QPixmap("configDB")
+        return self.__QPixmap("configBD")
 
     @property
     def disquette_icon(self) -> QIcon:
