@@ -6,22 +6,27 @@ from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QSpacerItem, QSizePo
 class Menu:
     def initUi_Menu(self):
         # CONFIG UNE POLICE
-        font = QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font1 = QFont()
-        font1.setItalic(True)
+        self.font = QFont()
+        self.font.setPointSize(12)
+        self.font.setBold(True)
+        self.font1 = QFont()
+        self.font1.setItalic(True)
         #CONFIG SIZEPOLICY
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
+        self.sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        self.sizePolicy.setHorizontalStretch(0)
+        self.sizePolicy.setVerticalStretch(0)
+        self.sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        self.sizePolicy1.setHorizontalStretch(0)
+        self.sizePolicy1.setVerticalStretch(0)
+        self.sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self.sizePolicy2.setHorizontalStretch(0)
+        self.sizePolicy2.setVerticalStretch(0)
         # CONFIGURATION MENU ENTETE
+        self.headerMenu()
+        # CONFIGURATION MENU SIDE BAR
+        self.sideMenu()
+
+    def headerMenu(self):
         self._f_header = QFrame(self.centralwidget)
         self._f_header.setObjectName(u"_f_header")
         self._f_header.setMaximumSize(QSize(16777215, 60))
@@ -56,11 +61,11 @@ class Menu:
         # AJOUT BOUTON DASHBORD DANS FRAME ENTETE
         self._b_dashboard = QPushButton(self._f_btn_header)
         self._b_dashboard.setObjectName(u"_b_dashboard")
-        sizePolicy.setHeightForWidth(self._b_dashboard.sizePolicy().hasHeightForWidth())
-        self._b_dashboard.setSizePolicy(sizePolicy)
+        self.sizePolicy.setHeightForWidth(self._b_dashboard.sizePolicy().hasHeightForWidth())
+        self._b_dashboard.setSizePolicy(self.sizePolicy)
         self._b_dashboard.setMinimumSize(QSize(130, 45))
         self._b_dashboard.setMaximumSize(QSize(16777215, 45))
-        self._b_dashboard.setFont(font)
+        self._b_dashboard.setFont(self.font)
         self._b_dashboard.setIcon(self.tableau_de_bord_icon)
         self._b_dashboard.setIconSize(QSize(20, 20))
         self._b_dashboard.setCheckable(True)
@@ -69,11 +74,11 @@ class Menu:
         # AJOUT BOUTON WORKSPACE DANS FRAME ENTETE
         self._b_workspace = QPushButton(self._f_btn_header)
         self._b_workspace.setObjectName(u"_b_workspace")
-        sizePolicy.setHeightForWidth(self._b_workspace.sizePolicy().hasHeightForWidth())
-        self._b_workspace.setSizePolicy(sizePolicy)
+        self.sizePolicy.setHeightForWidth(self._b_workspace.sizePolicy().hasHeightForWidth())
+        self._b_workspace.setSizePolicy(self.sizePolicy)
         self._b_workspace.setMinimumSize(QSize(200, 45))
         self._b_workspace.setMaximumSize(QSize(16777215, 45))
-        self._b_workspace.setFont(font)
+        self._b_workspace.setFont(self.font)
         self._b_workspace.setIcon(self.espace_de_travail_icon)
         self._b_workspace.setIconSize(QSize(25, 25))
         self._b_workspace.setCheckable(True)
@@ -82,11 +87,11 @@ class Menu:
         # AJOUT BOUTON FACTURE DANS FRAME ENTETE
         self._b_factures = QPushButton(self._f_btn_header)
         self._b_factures.setObjectName(u"_b_factures")
-        sizePolicy.setHeightForWidth(self._b_factures.sizePolicy().hasHeightForWidth())
-        self._b_factures.setSizePolicy(sizePolicy)
+        self.sizePolicy.setHeightForWidth(self._b_factures.sizePolicy().hasHeightForWidth())
+        self._b_factures.setSizePolicy(self.sizePolicy)
         self._b_factures.setMinimumSize(QSize(170, 45))
         self._b_factures.setMaximumSize(QSize(16777215, 50))
-        self._b_factures.setFont(font)
+        self._b_factures.setFont(self.font)
         self._b_factures.setIcon(self.gestion_facture_icon)
         self._b_factures.setIconSize(QSize(25, 25))
         self._b_factures.setCheckable(True)
@@ -95,11 +100,11 @@ class Menu:
         # AJOUT BOUTON GESTION INVENTAIRE DANS FRAME ENTETE
         self._b_inventory = QPushButton(self._f_btn_header)
         self._b_inventory.setObjectName(u"_b_inventory")
-        sizePolicy.setHeightForWidth(self._b_inventory.sizePolicy().hasHeightForWidth())
-        self._b_inventory.setSizePolicy(sizePolicy)
+        self.sizePolicy.setHeightForWidth(self._b_inventory.sizePolicy().hasHeightForWidth())
+        self._b_inventory.setSizePolicy(self.sizePolicy)
         self._b_inventory.setMinimumSize(QSize(180, 45))
         self._b_inventory.setMaximumSize(QSize(16777215, 45))
-        self._b_inventory.setFont(font)
+        self._b_inventory.setFont(self.font)
         self._b_inventory.setIcon(self.gestion_inventaire_icon)
         self._b_inventory.setIconSize(QSize(25, 25))
         self._b_inventory.setCheckable(True)
@@ -108,17 +113,17 @@ class Menu:
         # AJOUT BOUTON GESTION BASE DE DONNÉES DANS FRAME ENTETE
         self._b_manage_db = QPushButton(self._f_btn_header)
         self._b_manage_db.setObjectName(u"_b_manage_db")
-        sizePolicy.setHeightForWidth(self._b_manage_db.sizePolicy().hasHeightForWidth())
-        self._b_manage_db.setSizePolicy(sizePolicy)
+        self.sizePolicy.setHeightForWidth(self._b_manage_db.sizePolicy().hasHeightForWidth())
+        self._b_manage_db.setSizePolicy(self.sizePolicy)
         self._b_manage_db.setMinimumSize(QSize(215, 45))
         self._b_manage_db.setMaximumSize(QSize(16777215, 45))
-        self._b_manage_db.setFont(font)
+        self._b_manage_db.setFont(self.font)
         self._b_manage_db.setIcon(self.gestion_base_de_donnees_icon)
         self._b_manage_db.setIconSize(QSize(25, 25))
         self._b_manage_db.setCheckable(True)
         self._b_manage_db.setFlat(True)
         self._h_btn_header.addWidget(self._b_manage_db)
-        #AJOUT DU FRAME ENTETE DANS LAYOUT ENTETE
+        # AJOUT DU FRAME ENTETE DANS LAYOUT ENTETE
         self._h_header.addWidget(self._f_btn_header)
         # INSERT UN ESPACE
         self._hs_header_two = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -144,11 +149,11 @@ class Menu:
         self._g_profil.setObjectName(u"_g_profil")
         self._g_profil.setHorizontalSpacing(-1)
         self._g_profil.setVerticalSpacing(0)
-        self._g_profil.setContentsMargins(12, 0, 5, 2)
+        self._g_profil.setContentsMargins(2, 0, 5, 2)
         # INSERTION ID PROFIL
         self._l_id_profil = QLabel(self._f_profil)
         self._l_id_profil.setObjectName(u"_l_id_profil")
-        self._l_id_profil.setFont(font1)
+        self._l_id_profil.setFont(self.font1)
         self._g_profil.addWidget(self._l_id_profil, 0, 1, 1, 1)
         # INSERTION NOM COMPLET PROFIL
         self._l_name_profil = QLabel(self._f_profil)
@@ -173,11 +178,11 @@ class Menu:
         # AJOUR LAYOUT ENTETE DANS CENTRAL WIDGET
         self._g_centralwidget.addWidget(self._f_header, 0, 0, 1, 3)
 
-        # CONFIGURATION MENU SIDE BAR
+    def sideMenu(self):
         self._f_side_menu = QFrame(self.centralwidget)
         self._f_side_menu.setObjectName(u"_f_side_menu")
-        sizePolicy1.setHeightForWidth(self._f_side_menu.sizePolicy().hasHeightForWidth())
-        self._f_side_menu.setSizePolicy(sizePolicy1)
+        self.sizePolicy1.setHeightForWidth(self._f_side_menu.sizePolicy().hasHeightForWidth())
+        self._f_side_menu.setSizePolicy(self.sizePolicy1)
         self._f_side_menu.setMinimumSize(QSize(40, 0))
         self._f_side_menu.setMaximumSize(QSize(40, 16777215))
         self._f_side_menu.setFrameShape(QFrame.Shape.StyledPanel)
@@ -215,8 +220,8 @@ class Menu:
         # AJOUT DU BOUTON CREATION UTILISATEUR
         self._b_mcreate_user = QPushButton(self._f_side_menu)
         self._b_mcreate_user.setObjectName(u"_b_mcreate_user")
-        sizePolicy2.setHeightForWidth(self._b_mcreate_user.sizePolicy().hasHeightForWidth())
-        self._b_mcreate_user.setSizePolicy(sizePolicy2)
+        self.sizePolicy2.setHeightForWidth(self._b_mcreate_user.sizePolicy().hasHeightForWidth())
+        self._b_mcreate_user.setSizePolicy(self.sizePolicy2)
         self._b_mcreate_user.setMinimumSize(QSize(36, 36))
         self._b_mcreate_user.setMaximumSize(QSize(36, 36))
         self._b_mcreate_user.setIcon(self.create_users_icon)
@@ -285,14 +290,43 @@ class Menu:
         self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON VERTICAL LAYOUT DANS SIDE MENU
         self._v_side_menu.addLayout(self._v_side_menu_two)
+        # AJOUT DU SIDE MENU A GAUCHE DE LA FENETRE
+        self._g_centralwidget.addWidget(self._f_side_menu, 2, 1, 1, 1)
+        self.__addSpacerSideMenu()
+
+    def __addSpacerSideMenu(self):
         # AJOUT DU VERTICAL SPACE  A GAUCHE DE LA FENETRE
         self._vs_side_menu_one = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         self._g_centralwidget.addItem(self._vs_side_menu_one, 1, 1, 1, 1)
         # AJOUT D'UN SPACER POUR DECALER LE SIDE MENU
         self._hs_window_side_menu = QSpacerItem(4, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
         self._g_centralwidget.addItem(self._hs_window_side_menu, 2, 0, 1, 1)
-        # AJOUT DU SIDE MENU A GAUCHE DE LA FENETRE
-        self._g_centralwidget.addWidget(self._f_side_menu, 2, 1, 1, 1)
         # AJOUT DU VERTICAL SPACE  A GAUCHE DE LA FENETRE
         self._vs_side_menu_two = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self._g_centralwidget.addItem(self._vs_side_menu_two, 3, 1, 1, 1)
+
+    def hideSideMenu(self):
+        self._f_side_menu.hide()
+        if hasattr(self, "_hs_window_side_menu") :
+            self._g_centralwidget.removeItem(self._hs_window_side_menu)
+            self._hs_window_side_menu = None
+        if hasattr(self, "_vs_side_menu_one"):
+            self._g_centralwidget.removeItem(self._vs_side_menu_one)
+            self._vs_side_menu_one = None
+        if hasattr(self, "_vs_side_menu_two"):
+            self._g_centralwidget.removeItem(self._vs_side_menu_two)
+            self._vs_side_menu_two = None
+        self._g_centralwidget.setHorizontalSpacing(0)
+
+    def showSideMenu(self):
+        self._f_side_menu.show()
+        self.__ajouterSpacerSideMenu()
+        self._g_centralwidget.setHorizontalSpacing(1)
+
+    def showHeaderMenu(self):
+        self._f_header.show()
+        self._g_centralwidget.setVerticalSpacing(8)
+
+    def hideHeaderMenu(self):
+        self._f_header.hide()
+        self._g_centralwidget.setVerticalSpacing(0)

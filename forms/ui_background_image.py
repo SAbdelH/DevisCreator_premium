@@ -9,14 +9,14 @@ class BackgroundImage:
         self.arrierePlan = {
             img.stem: img.as_posix()
             for img in Path(Path(__file__).parent).rglob("*")
-            if img.suffix in (".png", ".jpeg", ".jpg") and img.parent.stem == 'arriere_plan'
+            if img.suffix in (".png", ".jpeg", ".jpg") and img.parent.stem == 'background'
         }
 
     def RandomBackground(self):
         arrierePlan = {k: v for k, v in self.arrierePlan.items() if k not in self.IGNORE_BACKGROUND_IMAGES}
         randomImg = random.choice(list(arrierePlan))
         self._p_login.setStyleSheet(
-            f"border-image: url({arrierePlan[randomImg]}) 0 0 0 0 stretch stretch;"
+            f"#_p_login {{ border-image: url({arrierePlan[randomImg]}) 0 0 0 0 stretch stretch; }}"
         )
 
     @property

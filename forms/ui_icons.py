@@ -28,7 +28,6 @@ class Icons:
         :param img: Nom de l'image
         :return: un QPixmap
         """
-        print(self.images.get(img))
         return QPixmap(self.images.get(img))
 
     @property

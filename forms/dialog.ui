@@ -126,7 +126,9 @@
 	background-color: rgba(121, 119, 125, 0.3);
 	text-align: center;
 }
-
+#_f_profil {
+	border:none;
+}
 
 /* ICONE ENTREPRISE */
 #_l_icon_company, #_l_icon_company_info_company {
@@ -1052,7 +1054,7 @@ QCalendarWidget QAbstractItemView:enabled {
            </property>
            <layout class="QGridLayout" name="_g_profil">
             <property name="leftMargin">
-             <number>12</number>
+             <number>2</number>
             </property>
             <property name="topMargin">
              <number>0</number>

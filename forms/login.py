@@ -15,7 +15,7 @@ class LoginPage:
         # CREATION D'UN GRID POUR LA PAGE LOGIN
         self._g_login = QGridLayout(self._p_login)
         self._g_login.setObjectName(u"_g_login")
-        self._g_login.setContentsMargins(0, 0, 0, 0)
+        self._g_login.setContentsMargins(0, 0, 0, 2)
         # CREATION D'UN WIDGET BLANC TRANSPARENT
         self._w_login_dialog = QWidget(self._p_login)
         self._w_login_dialog.setObjectName(u"_w_login_dialog")
