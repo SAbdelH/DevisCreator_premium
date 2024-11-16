@@ -702,7 +702,6 @@ class Ui_MainWindow(object, Icons, BackgroundImage, Menu, LoginPage):
         icon11.addFile(u":/icon/icons/disquette.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
 
 
-
         self._p_dashboard = QWidget()
         self._p_dashboard.setObjectName(u"_p_dashboard")
         self._g_dashboard = QGridLayout(self._p_dashboard)
