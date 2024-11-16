@@ -2,7 +2,9 @@ import random
 from pathlib import Path
 
 
-class backgroundImage:
+class BackgroundImage:
+    IGNORE_BACKGROUND_IMAGES = ['analyse', 'camembert', 'evolution', 'histogram',
+                                'listActivity', 'table', 'teams', 'ToDo']
     def __init__(self):
         self.arrierePlan = {
             img.stem: img.as_posix()
@@ -11,9 +13,10 @@ class backgroundImage:
         }
 
     def RandomBackground(self):
-        randomImg = random.choice(list(self.arrierePlan.keys()))
+        arrierePlan = {k: v for k, v in self.arrierePlan.items() if k not in self.IGNORE_BACKGROUND_IMAGES}
+        randomImg = random.choice(list(arrierePlan))
         self._p_login.setStyleSheet(
-            f"border-image: url({self.arrierePlan[randomImg]}) 0 0 0 0 stretch stretch;"
+            f"border-image: url({arrierePlan[randomImg]}) 0 0 0 0 stretch stretch;"
         )
 
     @property

@@ -1043,7 +1043,7 @@ QCalendarWidget QAbstractItemView:enabled {
           </widget>
          </item>
          <item>
-          <widget class="QFrame" name="_g_profil">
+          <widget class="QFrame" name="_f_profil">
            <property name="frameShape">
             <enum>QFrame::Shape::StyledPanel</enum>
            </property>

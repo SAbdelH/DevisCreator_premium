@@ -25,9 +25,16 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QCalendarWidget, 
     QTableWidget, QTableWidgetItem, QTextEdit, QTimeEdit,
     QToolButton, QTreeWidget, QTreeWidgetItem, QVBoxLayout,
     QWidget)
-import resources_rc
 
-class Ui_MainWindow(object):
+from forms.ui_menu import Menu
+from forms.ui_icons import Icons
+from forms.ui_background_image import BackgroundImage
+from forms.login import LoginPage
+
+class Ui_MainWindow(object, Icons, BackgroundImage, Menu, LoginPage):
+    def __init__(self):
+        super().__init__()
+
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -662,403 +669,40 @@ class Ui_MainWindow(object):
         self._g_centralwidget.setHorizontalSpacing(1)
         self._g_centralwidget.setVerticalSpacing(8)
         self._g_centralwidget.setContentsMargins(0, 0, 0, 0)
-        self._f_header = QFrame(self.centralwidget)
-        self._f_header.setObjectName(u"_f_header")
-        self._f_header.setMaximumSize(QSize(16777215, 60))
-        self._f_header.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_header.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_header = QHBoxLayout(self._f_header)
-#ifndef Q_OS_MAC
-        self._h_header.setSpacing(-1)
-#endif
-        self._h_header.setObjectName(u"_h_header")
-        self._h_header.setContentsMargins(5, 0, 5, 0)
-        self._l_icon_company = QLabel(self._f_header)
-        self._l_icon_company.setObjectName(u"_l_icon_company")
-        self._l_icon_company.setMinimumSize(QSize(65, 45))
-        self._l_icon_company.setMaximumSize(QSize(65, 45))
-        self._l_icon_company.setPixmap(QPixmap(u":/icon/icons/MsCles.png"))
-        self._l_icon_company.setScaledContents(True)
-
-        self._h_header.addWidget(self._l_icon_company)
-
-        self._hs_header_one = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._h_header.addItem(self._hs_header_one)
-
-        self._f_btn_header = QFrame(self._f_header)
-        self._f_btn_header.setObjectName(u"_f_btn_header")
-        self._f_btn_header.setMinimumSize(QSize(0, 50))
-        self._f_btn_header.setMaximumSize(QSize(16777215, 50))
-        self._f_btn_header.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_btn_header.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_btn_header = QHBoxLayout(self._f_btn_header)
-#ifndef Q_OS_MAC
-        self._h_btn_header.setSpacing(-1)
-#endif
-        self._h_btn_header.setObjectName(u"_h_btn_header")
-        self._h_btn_header.setContentsMargins(0, 0, 0, 0)
-        self._b_dashboard = QPushButton(self._f_btn_header)
-        self._b_dashboard.setObjectName(u"_b_dashboard")
-        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self._b_dashboard.sizePolicy().hasHeightForWidth())
-        self._b_dashboard.setSizePolicy(sizePolicy)
-        self._b_dashboard.setMinimumSize(QSize(130, 45))
-        self._b_dashboard.setMaximumSize(QSize(16777215, 45))
-        font = QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        self._b_dashboard.setFont(font)
-        icon1 = QIcon()
-        icon1.addFile(u":/icon/icons/tableau-de-bord.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_dashboard.setIcon(icon1)
-        self._b_dashboard.setIconSize(QSize(20, 20))
-        self._b_dashboard.setCheckable(True)
-        self._b_dashboard.setFlat(True)
-
-        self._h_btn_header.addWidget(self._b_dashboard)
-
-        self._b_workspace = QPushButton(self._f_btn_header)
-        self._b_workspace.setObjectName(u"_b_workspace")
-        sizePolicy.setHeightForWidth(self._b_workspace.sizePolicy().hasHeightForWidth())
-        self._b_workspace.setSizePolicy(sizePolicy)
-        self._b_workspace.setMinimumSize(QSize(200, 45))
-        self._b_workspace.setMaximumSize(QSize(16777215, 45))
-        self._b_workspace.setFont(font)
-        icon2 = QIcon()
-        icon2.addFile(u":/icon/icons/les-conditions-de-travail.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_workspace.setIcon(icon2)
-        self._b_workspace.setIconSize(QSize(25, 25))
-        self._b_workspace.setCheckable(True)
-        self._b_workspace.setFlat(True)
-
-        self._h_btn_header.addWidget(self._b_workspace)
-
-        self._b_factures = QPushButton(self._f_btn_header)
-        self._b_factures.setObjectName(u"_b_factures")
-        sizePolicy.setHeightForWidth(self._b_factures.sizePolicy().hasHeightForWidth())
-        self._b_factures.setSizePolicy(sizePolicy)
-        self._b_factures.setMinimumSize(QSize(170, 45))
-        self._b_factures.setMaximumSize(QSize(16777215, 50))
-        self._b_factures.setFont(font)
-        icon3 = QIcon()
-        icon3.addFile(u":/icon/icons/facture-dachat.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_factures.setIcon(icon3)
-        self._b_factures.setIconSize(QSize(25, 25))
-        self._b_factures.setCheckable(True)
-        self._b_factures.setFlat(True)
-
-        self._h_btn_header.addWidget(self._b_factures)
-
-        self._b_inventory = QPushButton(self._f_btn_header)
-        self._b_inventory.setObjectName(u"_b_inventory")
-        sizePolicy.setHeightForWidth(self._b_inventory.sizePolicy().hasHeightForWidth())
-        self._b_inventory.setSizePolicy(sizePolicy)
-        self._b_inventory.setMinimumSize(QSize(180, 45))
-        self._b_inventory.setMaximumSize(QSize(16777215, 45))
-        self._b_inventory.setFont(font)
-        icon4 = QIcon()
-        icon4.addFile(u":/icon/icons/inventaire.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_inventory.setIcon(icon4)
-        self._b_inventory.setIconSize(QSize(25, 25))
-        self._b_inventory.setCheckable(True)
-        self._b_inventory.setFlat(True)
-
-        self._h_btn_header.addWidget(self._b_inventory)
-
-        self._b_manage_db = QPushButton(self._f_btn_header)
-        self._b_manage_db.setObjectName(u"_b_manage_db")
-        sizePolicy.setHeightForWidth(self._b_manage_db.sizePolicy().hasHeightForWidth())
-        self._b_manage_db.setSizePolicy(sizePolicy)
-        self._b_manage_db.setMinimumSize(QSize(215, 45))
-        self._b_manage_db.setMaximumSize(QSize(16777215, 45))
-        self._b_manage_db.setFont(font)
-        icon5 = QIcon()
-        icon5.addFile(u":/icon/icons/bases-de-donnees.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_manage_db.setIcon(icon5)
-        self._b_manage_db.setIconSize(QSize(25, 25))
-        self._b_manage_db.setCheckable(True)
-        self._b_manage_db.setFlat(True)
-
-        self._h_btn_header.addWidget(self._b_manage_db)
-
-
-        self._h_header.addWidget(self._f_btn_header)
-
-        self._hs_header_two = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._h_header.addItem(self._hs_header_two)
-
-        self._h_profil = QHBoxLayout()
-        self._h_profil.setSpacing(2)
-        self._h_profil.setObjectName(u"_h_profil")
-        self._l_icon_profil = QLabel(self._f_header)
-        self._l_icon_profil.setObjectName(u"_l_icon_profil")
-        self._l_icon_profil.setMaximumSize(QSize(40, 40))
-        self._l_icon_profil.setPixmap(QPixmap(u":/icon/icons/patron.png"))
-        self._l_icon_profil.setScaledContents(True)
-        self._l_icon_profil.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self._h_profil.addWidget(self._l_icon_profil)
-
-        self._g_profil = QFrame(self._f_header)
-        self._g_profil.setObjectName(u"_g_profil")
-        self._g_profil.setFrameShape(QFrame.Shape.StyledPanel)
-        self._g_profil.setFrameShadow(QFrame.Shadow.Raised)
-        self._g_profil_2 = QGridLayout(self._g_profil)
-        self._g_profil_2.setObjectName(u"_g_profil_2")
-        self._g_profil_2.setHorizontalSpacing(-1)
-        self._g_profil_2.setVerticalSpacing(0)
-        self._g_profil_2.setContentsMargins(12, 0, 5, 2)
-        self._l_pposte = QLabel(self._g_profil)
-        self._l_pposte.setObjectName(u"_l_pposte")
-
-        self._g_profil_2.addWidget(self._l_pposte, 3, 1, 1, 1)
-
-        self._l_name_profil = QLabel(self._g_profil)
-        self._l_name_profil.setObjectName(u"_l_name_profil")
-
-        self._g_profil_2.addWidget(self._l_name_profil, 1, 1, 1, 1)
-
-        self._l_id_profil = QLabel(self._g_profil)
-        self._l_id_profil.setObjectName(u"_l_id_profil")
-        font1 = QFont()
-        font1.setItalic(True)
-        self._l_id_profil.setFont(font1)
-
-        self._g_profil_2.addWidget(self._l_id_profil, 0, 1, 1, 1)
-
-
-        self._h_profil.addWidget(self._g_profil)
-
-        self._b_logout = QPushButton(self._f_header)
-        self._b_logout.setObjectName(u"_b_logout")
-        self._b_logout.setMinimumSize(QSize(40, 40))
-        self._b_logout.setMaximumSize(QSize(40, 40))
-        icon6 = QIcon()
-        icon6.addFile(u":/icon/icons/sortir.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_logout.setIcon(icon6)
-        self._b_logout.setIconSize(QSize(25, 25))
-
-        self._h_profil.addWidget(self._b_logout)
-
-
-        self._h_header.addLayout(self._h_profil)
-
-
-        self._g_centralwidget.addWidget(self._f_header, 0, 0, 1, 3)
-
+        # CREATION DES MENU FENETRE PRINCIALE
+        self.initUi_Menu()
+        # CREATION DES DIFFERENTES PAGES
         self._sw_main_dialog = QStackedWidget(self.centralwidget)
         self._sw_main_dialog.setObjectName(u"_sw_main_dialog")
-        self._p_login = QWidget()
-        self._p_login.setObjectName(u"_p_login")
-        self._p_login.setStyleSheet(u"#_p_login {\n"
-"	border-image: url(:/background/background/sada_mont_choungui.png) 0 0 0 0 stretch stretch;\n"
-"}")
-        self._g_login = QGridLayout(self._p_login)
-        self._g_login.setObjectName(u"_g_login")
-        self._g_login.setContentsMargins(0, 0, 0, 0)
-        self._w_login_dialog = QWidget(self._p_login)
-        self._w_login_dialog.setObjectName(u"_w_login_dialog")
-        self._w_login_dialog.setMinimumSize(QSize(380, 500))
-        self._w_login_dialog.setMaximumSize(QSize(380, 500))
-        self._g_login_dialog = QGridLayout(self._w_login_dialog)
-        self._g_login_dialog.setObjectName(u"_g_login_dialog")
-        self._g_login_dialog.setContentsMargins(10, 10, 10, 10)
-        self._sw_login_dialog = QStackedWidget(self._w_login_dialog)
-        self._sw_login_dialog.setObjectName(u"_sw_login_dialog")
-        self._sw_login_dialog.setMinimumSize(QSize(360, 480))
-        self._sw_login_dialog.setMaximumSize(QSize(16777215, 16777215))
-        self._p_signin = QWidget()
-        self._p_signin.setObjectName(u"_p_signin")
-        self._g_signin = QGridLayout(self._p_signin)
-        self._g_signin.setObjectName(u"_g_signin")
-        self._g_signin.setVerticalSpacing(22)
-        self._g_signin.setContentsMargins(5, 5, 5, 8)
-        self._g_icon_signin = QGridLayout()
-        self._g_icon_signin.setObjectName(u"_g_icon_signin")
-        self._g_icon_signin.setHorizontalSpacing(0)
-        self._l_connexion = QLabel(self._p_signin)
-        self._l_connexion.setObjectName(u"_l_connexion")
-        font2 = QFont()
-        font2.setPointSize(26)
-        font2.setBold(True)
-        self._l_connexion.setFont(font2)
-        self._l_connexion.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._l_connexion.setWordWrap(True)
-
-        self._g_icon_signin.addWidget(self._l_connexion, 1, 1, 1, 1)
-
-        self._hs_icon_signin_one = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_icon_signin.addItem(self._hs_icon_signin_one, 0, 0, 1, 1)
-
-        self._l_icon_connexion = QLabel(self._p_signin)
-        self._l_icon_connexion.setObjectName(u"_l_icon_connexion")
-        self._l_icon_connexion.setMinimumSize(QSize(133, 133))
-        self._l_icon_connexion.setMaximumSize(QSize(133, 133))
-        self._l_icon_connexion.setPixmap(QPixmap(u":/icon/icons/connexion.png"))
-        self._l_icon_connexion.setScaledContents(True)
-        self._l_icon_connexion.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self._g_icon_signin.addWidget(self._l_icon_connexion, 0, 1, 1, 1)
-
-        self._hs_icon_signin_two = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_icon_signin.addItem(self._hs_icon_signin_two, 0, 2, 1, 1)
+        # CREATION PAGE DE LOGIN
+        self.initUi_LoginForm()
 
 
-        self._g_signin.addLayout(self._g_icon_signin, 0, 0, 1, 1)
-
-        self._vs_signin_one = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self._g_signin.addItem(self._vs_signin_one, 1, 0, 1, 1)
-
-        self._le_identifiant = QLineEdit(self._p_signin)
-        self._le_identifiant.setObjectName(u"_le_identifiant")
-        self._le_identifiant.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_identifiant.setClearButtonEnabled(True)
-
-        self._g_signin.addWidget(self._le_identifiant, 2, 0, 1, 1)
-
-        self._le_password = QLineEdit(self._p_signin)
-        self._le_password.setObjectName(u"_le_password")
-        self._le_password.setEchoMode(QLineEdit.EchoMode.Password)
-        self._le_password.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_password.setClearButtonEnabled(True)
-
-        self._g_signin.addWidget(self._le_password, 3, 0, 1, 1)
-
-        self._vs_signin_two = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self._g_signin.addItem(self._vs_signin_two, 4, 0, 1, 1)
-
-        self._b_signin = QPushButton(self._p_signin)
-        self._b_signin.setObjectName(u"_b_signin")
+        icon1 = QIcon()
+        icon1.addFile(u":/icon/icons/tableau-de-bord.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon2 = QIcon()
+        icon2.addFile(u":/icon/icons/les-conditions-de-travail.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon3 = QIcon()
+        icon3.addFile(u":/icon/icons/facture-dachat.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon4 = QIcon()
+        icon4.addFile(u":/icon/icons/inventaire.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon5 = QIcon()
+        icon5.addFile(u":/icon/icons/bases-de-donnees.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon6 = QIcon()
+        icon6.addFile(u":/icon/icons/sortir.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         icon7 = QIcon()
         icon7.addFile(u":/icon/icons/login.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_signin.setIcon(icon7)
-        self._b_signin.setIconSize(QSize(20, 20))
-
-        self._g_signin.addWidget(self._b_signin, 5, 0, 1, 1)
-
-        self._b_config_db = QPushButton(self._p_signin)
-        self._b_config_db.setObjectName(u"_b_config_db")
-        self._b_config_db.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
-        self._b_config_db.setAutoFillBackground(False)
         icon8 = QIcon()
         icon8.addFile(u":/icon/icons/configBD.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_config_db.setIcon(icon8)
-        self._b_config_db.setIconSize(QSize(20, 20))
-
-        self._g_signin.addWidget(self._b_config_db, 6, 0, 1, 1)
-
-        self._b_guess_connexion = QPushButton(self._p_signin)
-        self._b_guess_connexion.setObjectName(u"_b_guess_connexion")
         icon9 = QIcon()
         icon9.addFile(u":/icon/icons/invite.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_guess_connexion.setIcon(icon9)
-        self._b_guess_connexion.setIconSize(QSize(20, 20))
-
-        self._g_signin.addWidget(self._b_guess_connexion, 7, 0, 1, 1)
-
-        self._sw_login_dialog.addWidget(self._p_signin)
-        self._p_signup = QWidget()
-        self._p_signup.setObjectName(u"_p_signup")
-        self._g_signup = QGridLayout(self._p_signup)
-        self._g_signup.setObjectName(u"_g_signup")
-        self._g_signup.setVerticalSpacing(20)
-        self._g_signup.setContentsMargins(5, 5, 5, 8)
-        self._vs_signup_one = QSpacerItem(20, 48, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self._g_signup.addItem(self._vs_signup_one, 2, 0, 1, 1)
-
-        self._b_back_connexion = QPushButton(self._p_signup)
-        self._b_back_connexion.setObjectName(u"_b_back_connexion")
         icon10 = QIcon()
         icon10.addFile(u":/icon/icons/back.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_back_connexion.setIcon(icon10)
-        self._b_back_connexion.setIconSize(QSize(20, 20))
-
-        self._g_signup.addWidget(self._b_back_connexion, 9, 0, 1, 2)
-
-        self._g_icon_signup = QGridLayout()
-        self._g_icon_signup.setObjectName(u"_g_icon_signup")
-        self._l_icon_config_db = QLabel(self._p_signup)
-        self._l_icon_config_db.setObjectName(u"_l_icon_config_db")
-        self._l_icon_config_db.setMinimumSize(QSize(133, 133))
-        self._l_icon_config_db.setMaximumSize(QSize(133, 133))
-        self._l_icon_config_db.setPixmap(QPixmap(u":/icon/icons/configBD.png"))
-        self._l_icon_config_db.setScaledContents(True)
-        self._l_icon_config_db.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self._g_icon_signup.addWidget(self._l_icon_config_db, 0, 1, 1, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignTop)
-
-        self._hs_icon_signip_one = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_icon_signup.addItem(self._hs_icon_signip_one, 0, 0, 1, 1)
-
-        self._hs_icon_signup_two = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_icon_signup.addItem(self._hs_icon_signup_two, 0, 2, 1, 1)
-
-        self._l_config_db = QLabel(self._p_signup)
-        self._l_config_db.setObjectName(u"_l_config_db")
-        self._l_config_db.setFont(font2)
-        self._l_config_db.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._l_config_db.setWordWrap(True)
-
-        self._g_icon_signup.addWidget(self._l_config_db, 1, 0, 1, 3)
-
-
-        self._g_signup.addLayout(self._g_icon_signup, 0, 0, 1, 2)
-
-        self._vs_signup_two = QSpacerItem(20, 48, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self._g_signup.addItem(self._vs_signup_two, 6, 0, 1, 1)
-
-        self._le_host = QLineEdit(self._p_signup)
-        self._le_host.setObjectName(u"_le_host")
-        self._le_host.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_host.setClearButtonEnabled(True)
-
-        self._g_signup.addWidget(self._le_host, 3, 0, 1, 2)
-
-        self._le_db_name = QLineEdit(self._p_signup)
-        self._le_db_name.setObjectName(u"_le_db_name")
-        self._le_db_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_db_name.setClearButtonEnabled(True)
-
-        self._g_signup.addWidget(self._le_db_name, 4, 0, 1, 2)
-
-        self._sb_port = QSpinBox(self._p_signup)
-        self._sb_port.setObjectName(u"_sb_port")
-        self._sb_port.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._sb_port.setProperty(u"showGroupSeparator", True)
-        self._sb_port.setMaximum(9999)
-        self._sb_port.setValue(5432)
-
-        self._g_signup.addWidget(self._sb_port, 5, 0, 1, 2)
-
-        self._b_save_config_db = QPushButton(self._p_signup)
-        self._b_save_config_db.setObjectName(u"_b_save_config_db")
         icon11 = QIcon()
         icon11.addFile(u":/icon/icons/disquette.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_save_config_db.setIcon(icon11)
-        self._b_save_config_db.setIconSize(QSize(20, 20))
-
-        self._g_signup.addWidget(self._b_save_config_db, 8, 0, 1, 2)
-
-        self._sw_login_dialog.addWidget(self._p_signup)
-
-        self._g_login_dialog.addWidget(self._sw_login_dialog, 0, 0, 1, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
 
 
-        self._g_login.addWidget(self._w_login_dialog, 0, 0, 1, 1, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
 
-        self._sw_main_dialog.addWidget(self._p_login)
         self._p_dashboard = QWidget()
         self._p_dashboard.setObjectName(u"_p_dashboard")
         self._g_dashboard = QGridLayout(self._p_dashboard)
@@ -3870,163 +3514,24 @@ class Ui_MainWindow(object):
 
         self._g_centralwidget.addWidget(self._sw_main_dialog, 1, 2, 4, 1)
 
-        self._f_side_menu = QFrame(self.centralwidget)
-        self._f_side_menu.setObjectName(u"_f_side_menu")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self._f_side_menu.sizePolicy().hasHeightForWidth())
-        self._f_side_menu.setSizePolicy(sizePolicy1)
-        self._f_side_menu.setMinimumSize(QSize(40, 0))
-        self._f_side_menu.setMaximumSize(QSize(40, 16777215))
-        self._f_side_menu.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_side_menu.setFrameShadow(QFrame.Shadow.Raised)
-        self._v_side_menu = QVBoxLayout(self._f_side_menu)
-        self._v_side_menu.setSpacing(0)
-        self._v_side_menu.setObjectName(u"_v_side_menu")
-        self._v_side_menu.setContentsMargins(0, 10, 0, 10)
-        self._v_side_menu_two = QVBoxLayout()
-        self._v_side_menu_two.setSpacing(20)
-        self._v_side_menu_two.setObjectName(u"_v_side_menu_two")
-        self._v_side_menu_two.setContentsMargins(-1, 10, -1, 10)
-        self._b_mcreate_ws = QPushButton(self._f_side_menu)
-        self._b_mcreate_ws.setObjectName(u"_b_mcreate_ws")
-        self._b_mcreate_ws.setMinimumSize(QSize(36, 36))
-        self._b_mcreate_ws.setMaximumSize(QSize(36, 36))
         icon39 = QIcon()
         icon39.addFile(u":/icon/icons/workspace.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mcreate_ws.setIcon(icon39)
-        self._b_mcreate_ws.setIconSize(QSize(25, 25))
-        self._b_mcreate_ws.setCheckable(True)
-        self._b_mcreate_ws.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mcreate_ws)
-
-        self._b_minfo_company = QPushButton(self._f_side_menu)
-        self._b_minfo_company.setObjectName(u"_b_minfo_company")
-        self._b_minfo_company.setMinimumSize(QSize(0, 0))
-        self._b_minfo_company.setMaximumSize(QSize(36, 36))
         icon40 = QIcon()
         icon40.addFile(u":/icon/icons/entreprise.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_minfo_company.setIcon(icon40)
-        self._b_minfo_company.setIconSize(QSize(25, 25))
-        self._b_minfo_company.setCheckable(True)
-        self._b_minfo_company.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_minfo_company, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
-
-        self._b_mcreate_user = QPushButton(self._f_side_menu)
-        self._b_mcreate_user.setObjectName(u"_b_mcreate_user")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self._b_mcreate_user.sizePolicy().hasHeightForWidth())
-        self._b_mcreate_user.setSizePolicy(sizePolicy2)
-        self._b_mcreate_user.setMinimumSize(QSize(36, 36))
-        self._b_mcreate_user.setMaximumSize(QSize(36, 36))
         icon41 = QIcon()
         icon41.addFile(u":/icon/icons/adduser.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mcreate_user.setIcon(icon41)
-        self._b_mcreate_user.setIconSize(QSize(25, 25))
-        self._b_mcreate_user.setCheckable(True)
-        self._b_mcreate_user.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mcreate_user, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
-
-        self._b_mcreate_devis = QPushButton(self._f_side_menu)
-        self._b_mcreate_devis.setObjectName(u"_b_mcreate_devis")
-        self._b_mcreate_devis.setMinimumSize(QSize(36, 36))
-        self._b_mcreate_devis.setMaximumSize(QSize(36, 36))
         icon42 = QIcon()
         icon42.addFile(u":/icon/icons/devis.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mcreate_devis.setIcon(icon42)
-        self._b_mcreate_devis.setIconSize(QSize(25, 25))
-        self._b_mcreate_devis.setCheckable(True)
-        self._b_mcreate_devis.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mcreate_devis)
-
-        self._b_mcreate_facture = QPushButton(self._f_side_menu)
-        self._b_mcreate_facture.setObjectName(u"_b_mcreate_facture")
-        self._b_mcreate_facture.setMinimumSize(QSize(36, 36))
-        self._b_mcreate_facture.setMaximumSize(QSize(36, 36))
         icon43 = QIcon()
         icon43.addFile(u":/icon/icons/facture.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mcreate_facture.setIcon(icon43)
-        self._b_mcreate_facture.setIconSize(QSize(25, 25))
-        self._b_mcreate_facture.setCheckable(True)
-        self._b_mcreate_facture.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mcreate_facture, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
-
-        self._b_mvalid_facture = QPushButton(self._f_side_menu)
-        self._b_mvalid_facture.setObjectName(u"_b_mvalid_facture")
-        self._b_mvalid_facture.setMinimumSize(QSize(36, 36))
-        self._b_mvalid_facture.setMaximumSize(QSize(36, 36))
         icon44 = QIcon()
         icon44.addFile(u":/icon/icons/validFacture.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mvalid_facture.setIcon(icon44)
-        self._b_mvalid_facture.setIconSize(QSize(25, 25))
-        self._b_mvalid_facture.setCheckable(True)
-        self._b_mvalid_facture.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mvalid_facture, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
-
-        self._b_mclient = QPushButton(self._f_side_menu)
-        self._b_mclient.setObjectName(u"_b_mclient")
-        self._b_mclient.setMinimumSize(QSize(36, 36))
-        self._b_mclient.setMaximumSize(QSize(36, 36))
         icon45 = QIcon()
         icon45.addFile(u":/icon/icons/client.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mclient.setIcon(icon45)
-        self._b_mclient.setIconSize(QSize(25, 25))
-        self._b_mclient.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mclient)
-
-        self._b_mcreate_backup = QPushButton(self._f_side_menu)
-        self._b_mcreate_backup.setObjectName(u"_b_mcreate_backup")
-        self._b_mcreate_backup.setMinimumSize(QSize(36, 36))
-        self._b_mcreate_backup.setMaximumSize(QSize(36, 36))
         icon46 = QIcon()
         icon46.addFile(u":/icon/icons/sauvegarde.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mcreate_backup.setIcon(icon46)
-        self._b_mcreate_backup.setIconSize(QSize(25, 25))
-        self._b_mcreate_backup.setCheckable(True)
-        self._b_mcreate_backup.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mcreate_backup, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
-
-        self._b_mmanage_db = QPushButton(self._f_side_menu)
-        self._b_mmanage_db.setObjectName(u"_b_mmanage_db")
-        self._b_mmanage_db.setMinimumSize(QSize(36, 36))
-        self._b_mmanage_db.setMaximumSize(QSize(36, 36))
         icon47 = QIcon()
         icon47.addFile(u":/icon/icons/manageBD.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_mmanage_db.setIcon(icon47)
-        self._b_mmanage_db.setIconSize(QSize(25, 25))
-        self._b_mmanage_db.setCheckable(True)
-        self._b_mmanage_db.setFlat(True)
-
-        self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignmentFlag.Qt.AlignmentFlag.AlignVCenter)
-
-
-        self._v_side_menu.addLayout(self._v_side_menu_two)
-
-
-        self._g_centralwidget.addWidget(self._f_side_menu, 2, 1, 1, 1)
-
-        self._vs_side_menu_two = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self._g_centralwidget.addItem(self._vs_side_menu_two, 3, 1, 1, 1)
-
-        self._hs_window_side_menu = QSpacerItem(4, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self._g_centralwidget.addItem(self._hs_window_side_menu, 2, 0, 1, 1)
-
-        self._vs_side_menu_one = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self._g_centralwidget.addItem(self._vs_side_menu_one, 1, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
