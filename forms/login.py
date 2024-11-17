@@ -5,11 +5,12 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QStackedWidget, QLabel, QSp
 
 
 class LoginPage:
-    def initUi_LoginForm(self):
+    def __init__(self):
         self.font2 = QFont()
         self.font2.setPointSize(26)
         self.font2.setBold(True)
 
+    def initUi_LoginForm(self):
         self._p_login = QWidget()
         self._p_login.setObjectName(u"_p_login")
         # CREATION D'UN GRID POUR LA PAGE LOGIN
@@ -84,6 +85,8 @@ class LoginPage:
         # AJOUT D'UN LINEEDIT POUR LES IDENTIFIANTS DE CONNEXIONS
         self._le_identifiant = QLineEdit(self._p_signin)
         self._le_identifiant.setObjectName(u"_le_identifiant")
+        self._le_identifiant.setMinimumSize(QSize(0, 25))
+        self._le_identifiant.setMaximumSize(QSize(16777215, 25))
         self._le_identifiant.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._le_identifiant.setClearButtonEnabled(True)
         self._le_identifiant.findChildren(QAction)[0].setIcon(QIcon(self.images.get('supprimer')))
@@ -92,6 +95,8 @@ class LoginPage:
         # AJOUT D'UN LINEEDIT POUR LES MOTS DE PASSE DE CONNEXIONS
         self._le_password = QLineEdit(self._p_signin)
         self._le_password.setObjectName(u"_le_password")
+        self._le_password.setMinimumSize(QSize(0, 25))
+        self._le_password.setMaximumSize(QSize(16777215, 25))
         self._le_password.setEchoMode(QLineEdit.EchoMode.Password)
         self._le_password.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._le_password.setClearButtonEnabled(True)
@@ -104,6 +109,7 @@ class LoginPage:
         # AJOUT D'UN BOUTON CONNEXION
         self._b_signin = QPushButton(self._p_signin)
         self._b_signin.setObjectName(u"_b_signin")
+        #self._b_signin.setMinimumSize(QSize(0, 25))
         self._b_signin.setIcon(self.connexion_icon)
         self._b_signin.setIconSize(QSize(20, 20))
         self._g_signin.addWidget(self._b_signin, 5, 0, 1, 1)

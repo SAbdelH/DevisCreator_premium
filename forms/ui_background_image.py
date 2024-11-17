@@ -46,3 +46,7 @@ class BackgroundImage:
     @property
     def user_bg(self) -> str:
         return self.arrierePlan.get("teams")
+
+    @property
+    def analyse_bg(self) -> str:
+        return self.arrierePlan.get("analyse")

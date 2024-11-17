@@ -31,8 +31,9 @@ from forms.ui_icons import Icons
 from forms.ui_background_image import BackgroundImage
 from forms.login import LoginPage
 from forms.ui_theme import theme
+from forms.dashboard import DashboardPage
 
-class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage):
+class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage, DashboardPage):
     def __init__(self):
         QMainWindow.__init__(self)
         Icons.__init__(self)
@@ -40,12 +41,10 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         Menu.__init__(self)
         LoginPage.__init__(self)
         theme.__init__(self)
+        DashboardPage.__init__(self)
         self.setupUi(self)
         self.RandomBackground()
         self.light_theme()
-        self.hideSideMenu()
-        self.hideHeaderMenu()
-
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -76,6 +75,8 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._sw_main_dialog.setObjectName(u"_sw_main_dialog")
         # CREATION PAGE DE LOGIN
         self.initUi_LoginForm()
+        # CREATION PAGE TABLEAU DE BORD
+        self.initUi_DashboardForm()
 
 
         icon1 = QIcon()
@@ -100,361 +101,16 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         icon10.addFile(u":/icon/icons/back.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         icon11 = QIcon()
         icon11.addFile(u":/icon/icons/disquette.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
-
-        self._p_dashboard = QWidget()
-        self._p_dashboard.setObjectName(u"_p_dashboard")
-        self._g_dashboard = QGridLayout(self._p_dashboard)
-        self._g_dashboard.setObjectName(u"_g_dashboard")
-        self._g_dashboard.setHorizontalSpacing(3)
-        self._g_dashboard.setVerticalSpacing(0)
-        self._g_dashboard.setContentsMargins(8, 0, 8, 0)
-        self._f_graphic_finances = QFrame(self._p_dashboard)
-        self._f_graphic_finances.setObjectName(u"_f_graphic_finances")
-        self._f_graphic_finances.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_graphic_finances.setFrameShadow(QFrame.Shadow.Raised)
-        self._g_graphic_finances = QGridLayout(self._f_graphic_finances)
-        self._g_graphic_finances.setObjectName(u"_g_graphic_finances")
-        self._g_graphic_finances.setHorizontalSpacing(-1)
-        self._g_graphic_finances.setContentsMargins(5, 5, 5, 5)
-        self._g_daily_stats = QGridLayout()
-        self._g_daily_stats.setObjectName(u"_g_daily_stats")
-        self._r_mois = QRadioButton(self._f_graphic_finances)
-        self._r_mois.setObjectName(u"_r_mois")
-        font3 = QFont()
-        font3.setBold(True)
-        self._r_mois.setFont(font3)
-        self._r_mois.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
-
-        self._g_daily_stats.addWidget(self._r_mois, 0, 2, 1, 1)
-
-        self._hs_cb_factures_one = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_daily_stats.addItem(self._hs_cb_factures_one, 1, 0, 1, 1)
-
-        self._r_semaine = QRadioButton(self._f_graphic_finances)
-        self._r_semaine.setObjectName(u"_r_semaine")
-        self._r_semaine.setFont(font3)
-        self._r_semaine.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
-
-        self._g_daily_stats.addWidget(self._r_semaine, 0, 1, 1, 1)
-
-        self._h_checkbox_graph = QHBoxLayout()
-        self._h_checkbox_graph.setObjectName(u"_h_checkbox_graph")
-        self._cb_devis = QCheckBox(self._f_graphic_finances)
-        self._cb_devis.setObjectName(u"_cb_devis")
-        self._cb_devis.setFont(font3)
-        self._cb_devis.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
-        self._cb_devis.setChecked(True)
-
-        self._h_checkbox_graph.addWidget(self._cb_devis)
-
-        self._cb_factures = QCheckBox(self._f_graphic_finances)
-        self._cb_factures.setObjectName(u"_cb_factures")
-        self._cb_factures.setFont(font3)
-        self._cb_factures.setChecked(True)
-
-        self._h_checkbox_graph.addWidget(self._cb_factures)
-
-
-        self._g_daily_stats.addLayout(self._h_checkbox_graph, 1, 1, 1, 3)
-
-        self._r_annee = QRadioButton(self._f_graphic_finances)
-        self._r_annee.setObjectName(u"_r_annee")
-        self._r_annee.setFont(font3)
-        self._r_annee.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
-        self._r_annee.setChecked(True)
-
-        self._g_daily_stats.addWidget(self._r_annee, 0, 3, 1, 1)
-
-        self._b_export_stats = QPushButton(self._f_graphic_finances)
-        self._b_export_stats.setObjectName(u"_b_export_stats")
-        self._b_export_stats.setMaximumSize(QSize(100, 16777215))
         icon12 = QIcon()
         icon12.addFile(u":/icon/icons/partager.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_export_stats.setIcon(icon12)
-
-        self._g_daily_stats.addWidget(self._b_export_stats, 1, 5, 1, 1)
-
-        self._hs_cb_factures_three = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_daily_stats.addItem(self._hs_cb_factures_three, 1, 4, 1, 1)
-
-        self._hs_cb_factures_two = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self._g_daily_stats.addItem(self._hs_cb_factures_two, 0, 4, 1, 2)
-
-
-        self._g_graphic_finances.addLayout(self._g_daily_stats, 0, 0, 1, 1)
-
-        self._h_others_graph = QHBoxLayout()
-        self._h_others_graph.setSpacing(2)
-        self._h_others_graph.setObjectName(u"_h_others_graph")
-        self._gv_camembert = QGraphicsView(self._f_graphic_finances)
-        self._gv_camembert.setObjectName(u"_gv_camembert")
-
-        self._h_others_graph.addWidget(self._gv_camembert)
-
-        self._gv_production = QGraphicsView(self._f_graphic_finances)
-        self._gv_production.setObjectName(u"_gv_production")
-
-        self._h_others_graph.addWidget(self._gv_production)
-
-        self._gv_evolution = QGraphicsView(self._f_graphic_finances)
-        self._gv_evolution.setObjectName(u"_gv_evolution")
-
-        self._h_others_graph.addWidget(self._gv_evolution)
-
-
-        self._g_graphic_finances.addLayout(self._h_others_graph, 1, 0, 1, 1)
-
-        self._gv_histogram = QGraphicsView(self._f_graphic_finances)
-        self._gv_histogram.setObjectName(u"_gv_histogram")
-
-        self._g_graphic_finances.addWidget(self._gv_histogram, 2, 0, 1, 1)
-
-        self._h_activity_info = QHBoxLayout()
-        self._h_activity_info.setSpacing(2)
-        self._h_activity_info.setObjectName(u"_h_activity_info")
-        self._tw_activity = QTableWidget(self._f_graphic_finances)
-        if (self._tw_activity.columnCount() < 4):
-            self._tw_activity.setColumnCount(4)
-        icon13 = QIcon()
-        icon13.addFile(u":/icon/icons/calendrier.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        __qtablewidgetitem = QTableWidgetItem()
-        __qtablewidgetitem.setFont(font3);
-        __qtablewidgetitem.setIcon(icon13);
-        self._tw_activity.setHorizontalHeaderItem(0, __qtablewidgetitem)
-        icon14 = QIcon()
-        icon14.addFile(u":/icon/icons/besoins.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        __qtablewidgetitem1 = QTableWidgetItem()
-        __qtablewidgetitem1.setFont(font3);
-        __qtablewidgetitem1.setIcon(icon14);
-        self._tw_activity.setHorizontalHeaderItem(1, __qtablewidgetitem1)
-        icon15 = QIcon()
-        icon15.addFile(u":/icon/icons/lecriture.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        __qtablewidgetitem2 = QTableWidgetItem()
-        __qtablewidgetitem2.setFont(font3);
-        __qtablewidgetitem2.setIcon(icon15);
-        self._tw_activity.setHorizontalHeaderItem(2, __qtablewidgetitem2)
-        icon16 = QIcon()
-        icon16.addFile(u":/icon/icons/croissance.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        __qtablewidgetitem3 = QTableWidgetItem()
-        __qtablewidgetitem3.setFont(font3);
-        __qtablewidgetitem3.setIcon(icon16);
-        self._tw_activity.setHorizontalHeaderItem(3, __qtablewidgetitem3)
-        self._tw_activity.setObjectName(u"_tw_activity")
-        self._tw_activity.setMinimumSize(QSize(600, 0))
-        self._tw_activity.horizontalHeader().setCascadingSectionResizes(True)
-        self._tw_activity.horizontalHeader().setDefaultSectionSize(120)
-        self._tw_activity.horizontalHeader().setStretchLastSection(True)
-
-        self._h_activity_info.addWidget(self._tw_activity)
-
-        self._v_activityList = QVBoxLayout()
-        self._v_activityList.setSpacing(1)
-        self._v_activityList.setObjectName(u"_v_activityList")
-        self._lw_activity = QListWidget(self._f_graphic_finances)
-        self._lw_activity.setObjectName(u"_lw_activity")
-        self._lw_activity.setMaximumSize(QSize(350, 16777215))
-
-        self._v_activityList.addWidget(self._lw_activity)
-
-        self._b_more_activity = QPushButton(self._f_graphic_finances)
-        self._b_more_activity.setObjectName(u"_b_more_activity")
-        self._b_more_activity.setMaximumSize(QSize(16777215, 20))
-        font4 = QFont()
-        font4.setFamilies([u"Arial"])
-        font4.setPointSize(11)
-        font4.setBold(False)
-        font4.setItalic(True)
-        self._b_more_activity.setFont(font4)
-        self._b_more_activity.setFlat(True)
-
-        self._v_activityList.addWidget(self._b_more_activity)
-
-
-        self._h_activity_info.addLayout(self._v_activityList)
-
-
-        self._g_graphic_finances.addLayout(self._h_activity_info, 3, 0, 1, 1)
-
-
-        self._g_dashboard.addWidget(self._f_graphic_finances, 0, 0, 1, 1)
-
-        self._f_calendar = QFrame(self._p_dashboard)
-        self._f_calendar.setObjectName(u"_f_calendar")
-        self._f_calendar.setMaximumSize(QSize(375, 16777215))
-        self._f_calendar.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_calendar.setFrameShadow(QFrame.Shadow.Raised)
-        self._v_calendar = QVBoxLayout(self._f_calendar)
-        self._v_calendar.setObjectName(u"_v_calendar")
-        self._v_calendar.setContentsMargins(5, 7, 5, 7)
-        self._cw_agenda = QCalendarWidget(self._f_calendar)
-        self._cw_agenda.setObjectName(u"_cw_agenda")
-
-        self._v_calendar.addWidget(self._cw_agenda)
-
-        self._l_parametres = QLabel(self._f_calendar)
-        self._l_parametres.setObjectName(u"_l_parametres")
-        font5 = QFont()
-        font5.setBold(True)
-        font5.setUnderline(True)
-        self._l_parametres.setFont(font5)
-
-        self._v_calendar.addWidget(self._l_parametres)
-
-        self._hl_separator_agenda_one = QFrame(self._f_calendar)
-        self._hl_separator_agenda_one.setObjectName(u"_hl_separator_agenda_one")
-        self._hl_separator_agenda_one.setFrameShape(QFrame.Shape.HLine)
-        self._hl_separator_agenda_one.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self._v_calendar.addWidget(self._hl_separator_agenda_one)
-
-        self._h_title_agenda = QHBoxLayout()
-        self._h_title_agenda.setObjectName(u"_h_title_agenda")
-        self._l_titre_agenda = QLabel(self._f_calendar)
-        self._l_titre_agenda.setObjectName(u"_l_titre_agenda")
-        self._l_titre_agenda.setFont(font3)
-
-        self._h_title_agenda.addWidget(self._l_titre_agenda)
-
-        self._le_titre_agenda = QLineEdit(self._f_calendar)
-        self._le_titre_agenda.setObjectName(u"_le_titre_agenda")
-        self._le_titre_agenda.setClearButtonEnabled(True)
-
-        self._h_title_agenda.addWidget(self._le_titre_agenda)
-
-
-        self._v_calendar.addLayout(self._h_title_agenda)
-
-        self._v_description = QVBoxLayout()
-        self._v_description.setObjectName(u"_v_description")
-        self._l_description = QLabel(self._f_calendar)
-        self._l_description.setObjectName(u"_l_description")
-        self._l_description.setMaximumSize(QSize(16777215, 16))
-        self._l_description.setFont(font3)
-
-        self._v_description.addWidget(self._l_description)
-
-        self._te_description = QTextEdit(self._f_calendar)
-        self._te_description.setObjectName(u"_te_description")
-        self._te_description.setMaximumSize(QSize(16777215, 100))
-
-        self._v_description.addWidget(self._te_description)
-
-
-        self._v_calendar.addLayout(self._v_description)
-
-        self._h_dateedit_agenda = QHBoxLayout()
-        self._h_dateedit_agenda.setObjectName(u"_h_dateedit_agenda")
-        self._l_jour_agenda = QLabel(self._f_calendar)
-        self._l_jour_agenda.setObjectName(u"_l_jour_agenda")
-        self._l_jour_agenda.setFont(font3)
-
-        self._h_dateedit_agenda.addWidget(self._l_jour_agenda)
-
-        self._de_jour_agenda = QDateEdit(self._f_calendar)
-        self._de_jour_agenda.setObjectName(u"_de_jour_agenda")
-
-        self._h_dateedit_agenda.addWidget(self._de_jour_agenda)
-
-        self._l_debut_agenda = QLabel(self._f_calendar)
-        self._l_debut_agenda.setObjectName(u"_l_debut_agenda")
-        self._l_debut_agenda.setFont(font3)
-
-        self._h_dateedit_agenda.addWidget(self._l_debut_agenda)
-
-        self._te_debut_agenda = QTimeEdit(self._f_calendar)
-        self._te_debut_agenda.setObjectName(u"_te_debut_agenda")
-
-        self._h_dateedit_agenda.addWidget(self._te_debut_agenda)
-
-        self._l_fin_agenda = QLabel(self._f_calendar)
-        self._l_fin_agenda.setObjectName(u"_l_fin_agenda")
-        self._l_fin_agenda.setFont(font3)
-
-        self._h_dateedit_agenda.addWidget(self._l_fin_agenda)
-
-        self._te_fin_agenda = QTimeEdit(self._f_calendar)
-        self._te_fin_agenda.setObjectName(u"_te_fin_agenda")
-
-        self._h_dateedit_agenda.addWidget(self._te_fin_agenda)
-
-
-        self._v_calendar.addLayout(self._h_dateedit_agenda)
-
-        self._h_btn_agenda = QHBoxLayout()
-        self._h_btn_agenda.setObjectName(u"_h_btn_agenda")
-        self._b_add_agenda = QPushButton(self._f_calendar)
-        self._b_add_agenda.setObjectName(u"_b_add_agenda")
         icon17 = QIcon()
         icon17.addFile(u":/icon/icons/plus.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_add_agenda.setIcon(icon17)
-        self._b_add_agenda.setFlat(True)
-
-        self._h_btn_agenda.addWidget(self._b_add_agenda)
-
-        self._b_update_agenda = QPushButton(self._f_calendar)
-        self._b_update_agenda.setObjectName(u"_b_update_agenda")
         icon18 = QIcon()
         icon18.addFile(u":/icon/icons/maj.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_update_agenda.setIcon(icon18)
-        self._b_update_agenda.setFlat(True)
-
-        self._h_btn_agenda.addWidget(self._b_update_agenda)
-
-        self._b_delete_agenda = QPushButton(self._f_calendar)
-        self._b_delete_agenda.setObjectName(u"_b_delete_agenda")
         icon19 = QIcon()
         icon19.addFile(u":/icon/icons/moins.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self._b_delete_agenda.setIcon(icon19)
-        self._b_delete_agenda.setFlat(True)
-
-        self._h_btn_agenda.addWidget(self._b_delete_agenda)
 
 
-        self._v_calendar.addLayout(self._h_btn_agenda)
-
-        self._l_agenda = QLabel(self._f_calendar)
-        self._l_agenda.setObjectName(u"_l_agenda")
-        self._l_agenda.setFont(font5)
-
-        self._v_calendar.addWidget(self._l_agenda)
-
-        self._hl_separator_agenda_two = QFrame(self._f_calendar)
-        self._hl_separator_agenda_two.setObjectName(u"_hl_separator_agenda_two")
-        self._hl_separator_agenda_two.setFrameShape(QFrame.Shape.HLine)
-        self._hl_separator_agenda_two.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self._v_calendar.addWidget(self._hl_separator_agenda_two)
-
-        self._lw_agenda = QListWidget(self._f_calendar)
-        self._lw_agenda.setObjectName(u"_lw_agenda")
-
-        self._v_calendar.addWidget(self._lw_agenda)
-
-
-        self._g_dashboard.addWidget(self._f_calendar, 0, 1, 1, 1)
-
-        self._h_footer_evolution = QHBoxLayout()
-        self._h_footer_evolution.setObjectName(u"_h_footer_evolution")
-        self._l_evolution = QLabel(self._p_dashboard)
-        self._l_evolution.setObjectName(u"_l_evolution")
-        self._l_evolution.setFont(font3)
-        self._l_evolution.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
-
-        self._h_footer_evolution.addWidget(self._l_evolution)
-
-        self._l_evolution_stats = QLabel(self._p_dashboard)
-        self._l_evolution_stats.setObjectName(u"_l_evolution_stats")
-
-        self._h_footer_evolution.addWidget(self._l_evolution_stats)
-
-
-        self._g_dashboard.addLayout(self._h_footer_evolution, 1, 0, 1, 2)
-
-        self._sw_main_dialog.addWidget(self._p_dashboard)
         self._p_info_company = QWidget()
         self._p_info_company.setObjectName(u"_p_info_company")
         self._g_info_company = QGridLayout(self._p_info_company)
@@ -1067,7 +723,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._h_title_inputConnexion.setContentsMargins(0, 0, 0, 0)
         self._l_informations_connexion = QLabel(self._f_title_inputConnexion)
         self._l_informations_connexion.setObjectName(u"_l_informations_connexion")
-        self._l_informations_connexion.setFont(font3)
+        self._l_informations_connexion.setFont(self.font3)
         self._l_informations_connexion.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self._h_title_inputConnexion.addWidget(self._l_informations_connexion)
@@ -1128,7 +784,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._h_title_inputGeneral.setContentsMargins(0, 0, 0, 0)
         self._l_General = QLabel(self._f_title_inputGeneral)
         self._l_General.setObjectName(u"_l_General")
-        self._l_General.setFont(font3)
+        self._l_General.setFont(self.font3)
         self._l_General.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self._h_title_inputGeneral.addWidget(self._l_General)
@@ -1249,7 +905,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._l_um_expire_account = QLabel(self._f_right_user_management)
         self._l_um_expire_account.setObjectName(u"_l_um_expire_account")
         self._l_um_expire_account.setMaximumSize(QSize(16777215, 20))
-        self._l_um_expire_account.setFont(font3)
+        self._l_um_expire_account.setFont(self.font3)
         self._l_um_expire_account.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self._v_um_calendar.addWidget(self._l_um_expire_account)
@@ -1346,7 +1002,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._h_invoice_informations_article_label.setContentsMargins(5, 0, 5, 0)
         self._l_invoice_informations_article = QLabel(self._f_invoice_informations_article_label)
         self._l_invoice_informations_article.setObjectName(u"_l_invoice_informations_article")
-        self._l_invoice_informations_article.setFont(font3)
+        self._l_invoice_informations_article.setFont(self.font3)
         self._l_invoice_informations_article.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self._h_invoice_informations_article_label.addWidget(self._l_invoice_informations_article)
@@ -1427,7 +1083,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._b_invoice_add_card = QPushButton(self._f_invoice_input_card)
         self._b_invoice_add_card.setObjectName(u"_b_invoice_add_card")
         self._b_invoice_add_card.setMinimumSize(QSize(180, 40))
-        self._b_invoice_add_card.setFont(font3)
+        self._b_invoice_add_card.setFont(self.font3)
         icon29 = QIcon()
         icon29.addFile(u":/icon/icons/commande-en-ligne.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self._b_invoice_add_card.setIcon(icon29)
@@ -1534,7 +1190,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
 
         self._gb_invoice_info_client = QGroupBox(self._f_invoice_box_export_invoice)
         self._gb_invoice_info_client.setObjectName(u"_gb_invoice_info_client")
-        self._gb_invoice_info_client.setFont(font3)
+        self._gb_invoice_info_client.setFont(self.font3)
         self._gb_invoice_info_client.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._gb_invoice_info_client.setFlat(True)
         self._v_invoice_info_client = QVBoxLayout(self._gb_invoice_info_client)
@@ -1589,7 +1245,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._b_invoice_export = QPushButton(self._f_invoice_box_export_invoice)
         self._b_invoice_export.setObjectName(u"_b_invoice_export")
         self._b_invoice_export.setMinimumSize(QSize(0, 25))
-        self._b_invoice_export.setFont(font3)
+        self._b_invoice_export.setFont(self.font3)
 
         self._g_box_export_invoice.addWidget(self._b_invoice_export, 9, 1, 1, 1)
 
@@ -1608,7 +1264,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._ds_invoice_total = QDoubleSpinBox(self._f_invoice_box_export_invoice)
         self._ds_invoice_total.setObjectName(u"_ds_invoice_total")
         self._ds_invoice_total.setMinimumSize(QSize(0, 25))
-        self._ds_invoice_total.setFont(font3)
+        self._ds_invoice_total.setFont(self.font3)
         self._ds_invoice_total.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self._ds_invoice_total.setReadOnly(True)
         self._ds_invoice_total.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
@@ -1642,7 +1298,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
 
         self._gb_invoice_title = QGroupBox(self._f_invoice_box_export_invoice)
         self._gb_invoice_title.setObjectName(u"_gb_invoice_title")
-        self._gb_invoice_title.setFont(font3)
+        self._gb_invoice_title.setFont(self.font3)
         self._gb_invoice_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._gb_invoice_title.setFlat(True)
         self._v_invoice_title = QVBoxLayout(self._gb_invoice_title)
@@ -1758,7 +1414,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._l_invoice_preview_label_marque = QLabel(self._f_invoice_preview_inventory)
         self._l_invoice_preview_label_marque.setObjectName(u"_l_invoice_preview_label_marque")
         self._l_invoice_preview_label_marque.setMinimumSize(QSize(0, 20))
-        self._l_invoice_preview_label_marque.setFont(font3)
+        self._l_invoice_preview_label_marque.setFont(self.font3)
         self._l_invoice_preview_label_marque.setAlignment(Qt.AlignmentFlag.AlignJustify|Qt.AlignmentFlag.AlignVCenter)
 
         self._g_invoice_preview_inventory.addWidget(self._l_invoice_preview_label_marque, 4, 0, 1, 1)
@@ -1772,7 +1428,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._l_invoice_preview_label_name = QLabel(self._f_invoice_preview_inventory)
         self._l_invoice_preview_label_name.setObjectName(u"_l_invoice_preview_label_name")
         self._l_invoice_preview_label_name.setMinimumSize(QSize(0, 20))
-        self._l_invoice_preview_label_name.setFont(font3)
+        self._l_invoice_preview_label_name.setFont(self.font3)
         self._l_invoice_preview_label_name.setAlignment(Qt.AlignmentFlag.AlignJustify|Qt.AlignmentFlag.AlignVCenter)
 
         self._g_invoice_preview_inventory.addWidget(self._l_invoice_preview_label_name, 3, 0, 1, 1)
@@ -1780,7 +1436,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._l_invoice_preview_label_quantity = QLabel(self._f_invoice_preview_inventory)
         self._l_invoice_preview_label_quantity.setObjectName(u"_l_invoice_preview_label_quantity")
         self._l_invoice_preview_label_quantity.setMinimumSize(QSize(0, 20))
-        self._l_invoice_preview_label_quantity.setFont(font3)
+        self._l_invoice_preview_label_quantity.setFont(self.font3)
         self._l_invoice_preview_label_quantity.setAlignment(Qt.AlignmentFlag.AlignJustify|Qt.AlignmentFlag.AlignVCenter)
 
         self._g_invoice_preview_inventory.addWidget(self._l_invoice_preview_label_quantity, 5, 0, 1, 1)
@@ -1808,7 +1464,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
 
         self._l_invoice_select_inventory = QLabel(self._f_invoice_preview_card)
         self._l_invoice_select_inventory.setObjectName(u"_l_invoice_select_inventory")
-        self._l_invoice_select_inventory.setFont(font3)
+        self._l_invoice_select_inventory.setFont(self.font3)
         self._l_invoice_select_inventory.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self._g_invoice_preview_card.addWidget(self._l_invoice_select_inventory, 1, 0, 1, 1)
@@ -1966,22 +1622,22 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         __qtablewidgetitem4 = QTableWidgetItem()
         self._tw_valid_facture_elements.setHorizontalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
-        __qtablewidgetitem5.setFont(font3);
+        __qtablewidgetitem5.setFont(self.font3);
         self._tw_valid_facture_elements.setHorizontalHeaderItem(1, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
-        __qtablewidgetitem6.setFont(font3);
+        __qtablewidgetitem6.setFont(self.font3);
         self._tw_valid_facture_elements.setHorizontalHeaderItem(2, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
-        __qtablewidgetitem7.setFont(font3);
+        __qtablewidgetitem7.setFont(self.font3);
         self._tw_valid_facture_elements.setHorizontalHeaderItem(3, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
-        __qtablewidgetitem8.setFont(font3);
+        __qtablewidgetitem8.setFont(self.font3);
         self._tw_valid_facture_elements.setHorizontalHeaderItem(4, __qtablewidgetitem8)
         __qtablewidgetitem9 = QTableWidgetItem()
-        __qtablewidgetitem9.setFont(font3);
+        __qtablewidgetitem9.setFont(self.font3);
         self._tw_valid_facture_elements.setHorizontalHeaderItem(5, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
-        __qtablewidgetitem10.setFont(font3);
+        __qtablewidgetitem10.setFont(self.font3);
         self._tw_valid_facture_elements.setHorizontalHeaderItem(6, __qtablewidgetitem10)
         self._tw_valid_facture_elements.setObjectName(u"_tw_valid_facture_elements")
         self._tw_valid_facture_elements.setShowGrid(False)
@@ -2014,14 +1670,14 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._l_valid_facture_montant_ht = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_montant_ht.setObjectName(u"_l_valid_facture_montant_ht")
         self._l_valid_facture_montant_ht.setMinimumSize(QSize(90, 50))
-        self._l_valid_facture_montant_ht.setFont(font3)
+        self._l_valid_facture_montant_ht.setFont(self.font3)
 
         self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ht, 0, 1, 1, 1)
 
         self._l_valid_facture_montant_ttc = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_montant_ttc.setObjectName(u"_l_valid_facture_montant_ttc")
         self._l_valid_facture_montant_ttc.setMinimumSize(QSize(90, 50))
-        self._l_valid_facture_montant_ttc.setFont(font3)
+        self._l_valid_facture_montant_ttc.setFont(self.font3)
 
         self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ttc, 1, 1, 1, 1)
 
@@ -2119,7 +1775,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._b_valid_facture_unpaid.setObjectName(u"_b_valid_facture_unpaid")
         self._b_valid_facture_unpaid.setMinimumSize(QSize(190, 40))
         self._b_valid_facture_unpaid.setMaximumSize(QSize(16777215, 40))
-        self._b_valid_facture_unpaid.setFont(font3)
+        self._b_valid_facture_unpaid.setFont(self.font3)
         self._b_valid_facture_unpaid.setFlat(True)
 
         self._h_valid_facture_preview_three.addWidget(self._b_valid_facture_unpaid)
@@ -2128,7 +1784,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._b_valid_facture_paid.setObjectName(u"_b_valid_facture_paid")
         self._b_valid_facture_paid.setMinimumSize(QSize(170, 40))
         self._b_valid_facture_paid.setMaximumSize(QSize(16777215, 40))
-        self._b_valid_facture_paid.setFont(font3)
+        self._b_valid_facture_paid.setFont(self.font3)
         self._b_valid_facture_paid.setFlat(True)
 
         self._h_valid_facture_preview_three.addWidget(self._b_valid_facture_paid)
@@ -2514,7 +2170,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
         self._h_inventory_informations_label.setContentsMargins(5, 0, 0, 0)
         self._l_inventory_informations_product = QLabel(self._f_inventory_informations_label)
         self._l_inventory_informations_product.setObjectName(u"_l_inventory_informations_product")
-        self._l_inventory_informations_product.setFont(font3)
+        self._l_inventory_informations_product.setFont(self.font3)
         self._l_inventory_informations_product.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._l_inventory_informations_product.setWordWrap(True)
 
@@ -2936,7 +2592,7 @@ class Ui_MainWindow(QMainWindow, theme, Icons, BackgroundImage, Menu, LoginPage)
 
         self.retranslateUi(MainWindow)
 
-        self._sw_main_dialog.setCurrentIndex(0)
+        self._sw_main_dialog.setCurrentIndex(1)
         self._sw_login_dialog.setCurrentIndex(0)
         self._cbx_um_sexe.setCurrentIndex(-1)
         self._cbx_um_role.setCurrentIndex(-1)

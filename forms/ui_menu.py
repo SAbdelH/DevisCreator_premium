@@ -4,14 +4,14 @@ from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QSpacerItem, QSizePo
 
 
 class Menu:
-    def initUi_Menu(self):
+    def __init__(self):
         # CONFIG UNE POLICE
         self.font = QFont()
         self.font.setPointSize(12)
         self.font.setBold(True)
         self.font1 = QFont()
         self.font1.setItalic(True)
-        #CONFIG SIZEPOLICY
+        # CONFIG SIZEPOLICY
         self.sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.sizePolicy.setHorizontalStretch(0)
         self.sizePolicy.setVerticalStretch(0)
@@ -21,6 +21,8 @@ class Menu:
         self.sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         self.sizePolicy2.setHorizontalStretch(0)
         self.sizePolicy2.setVerticalStretch(0)
+
+    def initUi_Menu(self):
         # CONFIGURATION MENU ENTETE
         self.headerMenu()
         # CONFIGURATION MENU SIDE BAR
