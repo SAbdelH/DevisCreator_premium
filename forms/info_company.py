@@ -13,6 +13,9 @@ class CompanyPage:
         self.font7 = QFont()
         self.font7.setBold(False)
 
+        self.orderGroup = ['_gb_info_entreprise', '_gb_dirigeant', '_gb_adresse_entreprise', '_gb_contact',
+                            '_gb_informations_legales', '_gb_informations_bancaires']
+
     def init_CompanyForm(self):
         # PAGE D'ENREGISTREMENT DES INFORMATIONS DE L'ENTREPRISE
         self._p_info_company = QWidget()
@@ -28,6 +31,10 @@ class CompanyPage:
         self.__inputInfoForm()
         # AJOUT DE LA PAGE A STACKED WIDGET
         self._sw_main_dialog.addWidget(self._p_info_company)
+
+        self.current_step = 0
+        self._cpb_step_bar.setCurrentStep(self.current_step)
+        self.reset_step()
 
     def __info_companyForm(self):
         # FRAME A GAUCHE
@@ -54,8 +61,8 @@ class CompanyPage:
         labels = ["Entreprise", "Informations du dirigeant", "Adresse de l'entreprise", "Informations de contact",
                     "Informations légales (SIREN)", "Informations bancaires"]
         icons = [self.icompany_pixmap, self.idirigeant_pixmap, self.iadresse_pixmap,
-        self.icontact_pixmap, self.isiren_pixmap, self.ibank_pixmap]
-        self._cpb_step_bar = VerticalProgressBar(steps=6, labels=labels, icons=icons)
+                    self.icontact_pixmap, self.isiren_pixmap, self.ibank_pixmap]
+        self._cpb_step_bar = VerticalProgressBar(steps=len(self.orderGroup), labels=labels, icons=icons)
         self._v_right_info_company.addWidget(self._cpb_step_bar)
         # BOUTON ENREGISTRER
         self._b_save_info_company = QPushButton(self._f_right_info_company)
@@ -131,6 +138,7 @@ class CompanyPage:
         self._b_valid_nom_entreprise.setIcon(self.valid_icon)
         self._b_valid_nom_entreprise.setIconSize(QSize(20, 20))
         self._b_valid_nom_entreprise.setFlat(True)
+        self._b_valid_nom_entreprise.clicked.connect(self.next_step)
         self._g_info_entreprise.addWidget(self._b_valid_nom_entreprise, 2, 2, 1, 1)
         # AJOUT DE VERTICAL DANS GRID A GAUCHE
         self._v_info_company.addWidget(self._gb_info_entreprise)
@@ -214,6 +222,7 @@ class CompanyPage:
         self._b_valid_dirigeant.setIcon(self.valid_icon)
         self._b_valid_dirigeant.setIconSize(QSize(20, 20))
         self._b_valid_dirigeant.setFlat(True)
+        self._b_valid_dirigeant.clicked.connect(self.next_step)
         self._g_dirgeant.addWidget(self._b_valid_dirigeant, 4, 1, 1, 1)
         # AJOUT DE VERTICAL DANS GRID A GAUCHE
         self._v_info_company.addWidget(self._gb_dirigeant)
@@ -235,6 +244,7 @@ class CompanyPage:
         self._b_valid_adresse_entreprise.setIcon(self.valid_icon)
         self._b_valid_adresse_entreprise.setIconSize(QSize(20, 20))
         self._b_valid_adresse_entreprise.setFlat(True)
+        self._b_valid_adresse_entreprise.clicked.connect(self.next_step)
         self._g_adresse_entreprise.addWidget(self._b_valid_adresse_entreprise, 7, 4, 1, 1)
         self._l_cp = QLabel(self._gb_adresse_entreprise)
         self._l_cp.setObjectName(u"_l_cp")
@@ -304,6 +314,7 @@ class CompanyPage:
         self._b_valid_contact.setIcon(self.valid_icon)
         self._b_valid_contact.setIconSize(QSize(20, 20))
         self._b_valid_contact.setFlat(True)
+        self._b_valid_contact.clicked.connect(self.next_step)
         self._g_contact.addWidget(self._b_valid_contact, 3, 1, 1, 1)
         self._f_contact_label = QFrame(self._gb_contact)
         self._f_contact_label.setObjectName(u"_f_contact_label")
@@ -426,6 +437,7 @@ class CompanyPage:
         self._b_valid_informations_legales.setIcon(self.valid_icon)
         self._b_valid_informations_legales.setIconSize(QSize(20, 20))
         self._b_valid_informations_legales.setFlat(True)
+        self._b_valid_informations_legales.clicked.connect(self.next_step)
         self._g_informations_legales.addWidget(self._b_valid_informations_legales, 3, 1, 1, 1)
         self._vs_informations_legales = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         self._g_informations_legales.addItem(self._vs_informations_legales, 0, 1, 1, 1)
@@ -450,6 +462,7 @@ class CompanyPage:
         self._b_valid_informations_bancaires.setIcon(self.valid_icon)
         self._b_valid_informations_bancaires.setIconSize(QSize(20, 20))
         self._b_valid_informations_bancaires.setFlat(True)
+        self._b_valid_informations_bancaires.clicked.connect(self.next_step)
         self._g_informations_bancaires.addWidget(self._b_valid_informations_bancaires, 3, 1, 1, 1)
         self._f_informations_bancaires_label = QFrame(self._gb_informations_bancaires)
         self._f_informations_bancaires_label.setObjectName(u"_f_informations_bancaires_label")
@@ -501,3 +514,33 @@ class CompanyPage:
         self._g_informations_bancaires.addItem(self._vs_marge_informations_bancaires, 0, 1, 1, 1)
         self._v_info_company.addWidget(self._gb_informations_bancaires)
         self._g_info_company.addWidget(self._f_info_company, 0, 1, 1, 1)
+
+    def next_step(self):
+        sender = self.sender().objectName()
+        orderBoutton = ['_b_valid_nom_entreprise', '_b_valid_dirigeant', '_b_valid_adresse_entreprise',
+                        '_b_valid_contact', '_b_valid_informations_legales', '_b_valid_informations_bancaires']
+
+        # Trouver l'index du bouton qui a été cliqué
+        index = orderBoutton.index(sender)
+        # Désactiver les boutons et masquer les groupes après l'étape actuelle
+        for i in range(len(orderBoutton)):
+            group = getattr(self, self.orderGroup[i])
+            group.setEnabled(i <= index+1)
+
+        # Mettre à jour l'étape actuelle
+        self.current_step = index
+
+        # Passer à l'étape suivante si possible
+        if self.current_step < len(orderBoutton) - 1:
+            self.current_step += 1
+
+        # Mettre à jour la barre de progression
+        self._cpb_step_bar.setCurrentStep(self.current_step)
+        self._b_save_info_company.setEnabled(sender == orderBoutton[len(self.orderGroup) - 1])
+
+    def reset_step(self):
+        self.current_step = 0
+        self._b_save_info_company.setEnabled(False)
+        for i in range(6):
+            group = getattr(self, self.orderGroup[i])
+            group.setEnabled(i < self.current_step + 1)

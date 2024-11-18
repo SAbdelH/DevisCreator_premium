@@ -277,7 +277,10 @@ QRadioButton::indicator:checked:pressed
 	color: rgba(0, 0, 0, 1);
 
 }}
-
+#_f_dirigeant_label:disabled, #_f_contact_label:disabled, #_f_informations_legales_label:disabled, 
+#_f_informations_bancaires_label:disabled {{
+    background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(178, 186, 187, 1), stop:1 rgba(255, 255, 255, 1));
+}}
 #_f_dirigeant_lineedit, #_f_contact_lineedit, #_f_informations_legales_lineedit, #_f_informations_bancaires_lineedit {{
 	border: none;
 }}

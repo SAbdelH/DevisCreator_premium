@@ -48,7 +48,7 @@ class VerticalProgressBar(QWidget):
         line_x = self.circle_radius * 2 + 10  # Position de la ligne déplacée pour faire place aux labels
 
         # Draw lines
-        painter.setPen(QPen(self.inactive_color, 2))
+        painter.setPen(QPen(self.inactive_color, 5))
         for i in range(self.steps - 1):
             start_y = i * step_height + self.margin
             end_y = (i + 1) * step_height + self.margin
