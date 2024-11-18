@@ -388,3 +388,32 @@ class Icons:
     @property
     def closetoolbox_icon(self) -> str:
         return self.images.get("emptyfolder")
+
+    @property
+    def ientreprise_pixmap(self) -> QPixmap:
+        return self.__QPixmap("ientreprise")
+
+    @property
+    def iadresse_pixmap(self) -> QPixmap:
+        return self.__QPixmap("iadresse")
+
+    @property
+    def ibank_pixmap(self) -> QPixmap:
+        return self.__QPixmap("ibank")
+
+    @property
+    def icompany_pixmap(self) -> QPixmap:
+        return self.__QPixmap("icompany")
+
+    @property
+    def icontact_pixmap(self) -> QPixmap:
+        return self.__QPixmap("icontact")
+
+    @property
+    def isiren_pixmap(self) -> QPixmap:
+        return self.__QPixmap("isiren")
+
+    @property
+    def idirigeant_pixmap(self) -> QPixmap:
+        return self.__QPixmap("idirigeant")
+

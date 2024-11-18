@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -2249,7 +2249,7 @@ QCalendarWidget QAbstractItemView:enabled {
           <property name="frameShadow">
            <enum>QFrame::Shadow::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
+          <layout class="QVBoxLayout" name="_v_right_info_company">
            <property name="spacing">
             <number>-1</number>
            </property>
@@ -6977,6 +6977,13 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="pushButton">
+               <property name="text">
+                <string>Achat</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QPushButton" name="_b_inventory_update">
                <property name="text">
                 <string>Mettre-à-jour</string>
@@ -7826,6 +7833,9 @@ QCalendarWidget QAbstractItemView:enabled {
              <width>25</width>
              <height>25</height>
             </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
            </property>
            <property name="flat">
             <bool>true</bool>
