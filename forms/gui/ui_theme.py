@@ -256,7 +256,8 @@ QRadioButton::indicator:checked:pressed
 #_p_factures * QSpinBox, #_p_factures QTreeWidget, #_p_factures * QComboBox,
 #_p_clients * QListWidget, #_p_restore QLineEdit, #_p_restore QComboBox, 
 #_p_clients * QDoubleSpinBox, #_p_clients * QLineEdit, #_p_manage_db QTreeWidget,
-#_p_inventory QLineEdit, #_p_inventory QComboBox, #_p_inventory QSpinBox, #_p_inventory QDoubleSpinBox
+#_p_inventory QLineEdit, #_p_inventory QComboBox, #_p_inventory QSpinBox, #_p_inventory QDoubleSpinBox,
+#_p_valid_factures * QComboBox
 {{
 	color: rgba(0, 0, 0, 1);
 	border-radius: 5px;
@@ -397,7 +398,7 @@ QRadioButton::indicator:checked:pressed
 }}
 /*CLIENT MANAGEMENT*/
 #_l_clients_mail, #_l_clients_num, #_l_invoice_nom, #_l_invoice_marque, #_l_invoice_price, #_l_invoice_qauntity,#_l_invoice_type_remise, #_l_invoice_remise, #_l_invoice_client, #_l_invoice_nomclient, #_l_invoice_numclient, #_le_invoice_mailclient, #_l_invoice_objet,
-#_p_restore QLabel, #_cb_invoice_quantifiable {{
+#_p_restore QLabel, #_cb_invoice_quantifiable, #_cb_invoice_location {{
 	color: rgba(164, 164, 164, 1);
 }}
 #_b_clients_show_info {{

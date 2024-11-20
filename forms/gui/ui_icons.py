@@ -8,7 +8,7 @@ class Icons:
     def __init__(self):
         self.images: dict[str, str] = {
             img.stem: img.as_posix()
-            for img in Path(Path(__file__).parent).rglob("*")
+            for img in Path(Path(__file__).parents[1]).rglob("*")
             if img.suffix in (".png", ".jpeg", ".jpg") and img.parent.stem == 'icons'
         }
 
@@ -259,7 +259,7 @@ class Icons:
         return self.__QIcon("euro")
 
     @property
-    def pourcentage(self) -> QIcon:
+    def pourcentage_icon(self) -> QIcon:
         return self.__QIcon("pour-cent")
 
     @property
@@ -279,12 +279,12 @@ class Icons:
         return self.__QIcon("pdf")
 
     @property
-    def pdf_file_icon(self) -> QIcon:
-        return self.__QIcon("pdfn")
+    def pdf_file_pixmap(self) -> QPixmap:
+        return self.__QPixmap("pdfn")
 
     @property
-    def excel_file_icon(self) -> QIcon:
-        return self.__QIcon("exceln")
+    def excel_file_pixmap(self) -> QPixmap:
+        return self.__QPixmap("exceln")
 
     @property
     def telecharger_icon(self) -> QIcon:
@@ -374,6 +374,14 @@ class Icons:
         return self.__QIcon("manageBD")
 
     @property
+    def combo_facture_icon(self) -> QIcon:
+        return self.__QIcon("facturen")
+
+    @property
+    def combo_bon_livraison_icon(self) -> QIcon:
+        return self.__QIcon("bon-de-livraison")
+
+    @property
     def uncheckbox_icon(self) -> str:
         return self.images.get("uncheckedb")
 
@@ -416,4 +424,3 @@ class Icons:
     @property
     def idirigeant_pixmap(self) -> QPixmap:
         return self.__QPixmap("idirigeant")
-

@@ -133,21 +133,21 @@ class DashboardPage:
         self._tw_activity = QTableWidget(self._f_graphic_finances)
         if (self._tw_activity.columnCount() < 4):
             self._tw_activity.setColumnCount(4)
+        self._tw_activity.setObjectName(u"_tw_activity")
+        self._tw_activity.setMinimumSize(QSize(600, 0))
+        self._tw_activity.horizontalHeader().setCascadingSectionResizes(True)
+        self._tw_activity.horizontalHeader().setDefaultSectionSize(120)
+        self._tw_activity.horizontalHeader().setStretchLastSection(True)
         info_columns = {self.calendrier_icon, self.activites_icon, self.action_icon, self.budget_icon}
         for col, picture in enumerate(info_columns):
             __qtablewidgetitem = QTableWidgetItem()
             __qtablewidgetitem.setFont(self.font3)
             __qtablewidgetitem.setIcon(picture)
             self._tw_activity.setHorizontalHeaderItem(col, __qtablewidgetitem)
-        self._tw_activity.setObjectName(u"_tw_activity")
-        self._tw_activity.setMinimumSize(QSize(600, 0))
-        self._tw_activity.horizontalHeader().setCascadingSectionResizes(True)
-        self._tw_activity.horizontalHeader().setDefaultSectionSize(120)
-        self._tw_activity.horizontalHeader().setStretchLastSection(True)
-        for col in range(5):
             self._tw_activity.horizontalHeader().setSectionResizeMode(
                 col, QHeaderView.Stretch
             )
+
         self._h_activity_info.addWidget(self._tw_activity)
         # VERTICAL LAYOUT POUR LA LIST DES ACTIVITES ET UN BOUTON
         self._v_activityList = QVBoxLayout()

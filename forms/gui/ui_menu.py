@@ -21,6 +21,12 @@ class Menu:
         self.sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
         self.sizePolicy2.setHorizontalStretch(0)
         self.sizePolicy2.setVerticalStretch(0)
+        # BOUTONS HEADER MENU
+        self.headerMenuButton = ["_b_dashboard", "_b_workspace", "_b_factures", "_b_inventory", "_b_manage_db"]
+        # BOUTON SIDE MENU
+        self.sideMenuButton = ["_b_mcreate_ws", "_b_minfo_company", "_b_mcreate_user", "_b_mcreate_devis",
+                                "_b_mcreate_facture", "_b_mvalid_facture", "_b_mclient", "_b_mcreate_backup",
+                                "_b_mmanage_db"]
 
     def initUi_Menu(self):
         # CONFIGURATION MENU ENTETE
@@ -72,6 +78,8 @@ class Menu:
         self._b_dashboard.setIconSize(QSize(20, 20))
         self._b_dashboard.setCheckable(True)
         self._b_dashboard.setFlat(True)
+        self._b_dashboard.clicked.connect(self.toggleButton)
+        self._b_dashboard.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_dashboard)
         # AJOUT BOUTON WORKSPACE DANS FRAME ENTETE
         self._b_workspace = QPushButton(self._f_btn_header)
@@ -85,6 +93,8 @@ class Menu:
         self._b_workspace.setIconSize(QSize(25, 25))
         self._b_workspace.setCheckable(True)
         self._b_workspace.setFlat(True)
+        self._b_workspace.clicked.connect(self.toggleButton)
+        self._b_workspace.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_workspace)
         # AJOUT BOUTON FACTURE DANS FRAME ENTETE
         self._b_factures = QPushButton(self._f_btn_header)
@@ -98,6 +108,8 @@ class Menu:
         self._b_factures.setIconSize(QSize(25, 25))
         self._b_factures.setCheckable(True)
         self._b_factures.setFlat(True)
+        self._b_factures.clicked.connect(self.toggleButton)
+        self._b_factures.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_factures)
         # AJOUT BOUTON GESTION INVENTAIRE DANS FRAME ENTETE
         self._b_inventory = QPushButton(self._f_btn_header)
@@ -111,6 +123,8 @@ class Menu:
         self._b_inventory.setIconSize(QSize(25, 25))
         self._b_inventory.setCheckable(True)
         self._b_inventory.setFlat(True)
+        self._b_inventory.clicked.connect(self.toggleButton)
+        self._b_inventory.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_inventory)
         # AJOUT BOUTON GESTION BASE DE DONNÉES DANS FRAME ENTETE
         self._b_manage_db = QPushButton(self._f_btn_header)
@@ -124,6 +138,8 @@ class Menu:
         self._b_manage_db.setIconSize(QSize(25, 25))
         self._b_manage_db.setCheckable(True)
         self._b_manage_db.setFlat(True)
+        self._b_manage_db.clicked.connect(self.toggleButton)
+        self._b_manage_db.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_manage_db)
         # AJOUT DU FRAME ENTETE DANS LAYOUT ENTETE
         self._h_header.addWidget(self._f_btn_header)
@@ -208,6 +224,8 @@ class Menu:
         self._b_mcreate_ws.setIconSize(QSize(25, 25))
         self._b_mcreate_ws.setCheckable(True)
         self._b_mcreate_ws.setFlat(True)
+        self._b_mcreate_ws.clicked.connect(self.toggleButton)
+        self._b_mcreate_ws.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_ws)
         # AJOUT DU BOUTON INFORMATION ENTREPRISE
         self._b_minfo_company = QPushButton(self._f_side_menu)
@@ -218,6 +236,8 @@ class Menu:
         self._b_minfo_company.setIconSize(QSize(25, 25))
         self._b_minfo_company.setCheckable(True)
         self._b_minfo_company.setFlat(True)
+        self._b_minfo_company.clicked.connect(self.toggleButton)
+        self._b_minfo_company.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_minfo_company, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON CREATION UTILISATEUR
         self._b_mcreate_user = QPushButton(self._f_side_menu)
@@ -230,6 +250,8 @@ class Menu:
         self._b_mcreate_user.setIconSize(QSize(25, 25))
         self._b_mcreate_user.setCheckable(True)
         self._b_mcreate_user.setFlat(True)
+        self._b_mcreate_user.clicked.connect(self.toggleButton)
+        self._b_mcreate_user.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_user, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION DEVIS
         self._b_mcreate_devis = QPushButton(self._f_side_menu)
@@ -240,6 +262,8 @@ class Menu:
         self._b_mcreate_devis.setIconSize(QSize(25, 25))
         self._b_mcreate_devis.setCheckable(True)
         self._b_mcreate_devis.setFlat(True)
+        self._b_mcreate_devis.clicked.connect(self.toggleButton)
+        self._b_mcreate_devis.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_devis)
         # AJOUT BOUTON CREATION FACTURE
         self._b_mcreate_facture = QPushButton(self._f_side_menu)
@@ -250,6 +274,8 @@ class Menu:
         self._b_mcreate_facture.setIconSize(QSize(25, 25))
         self._b_mcreate_facture.setCheckable(True)
         self._b_mcreate_facture.setFlat(True)
+        self._b_mcreate_facture.clicked.connect(self.toggleButton)
+        self._b_mcreate_facture.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON VALIDE FACTURE
         self._b_mvalid_facture = QPushButton(self._f_side_menu)
@@ -260,6 +286,8 @@ class Menu:
         self._b_mvalid_facture.setIconSize(QSize(25, 25))
         self._b_mvalid_facture.setCheckable(True)
         self._b_mvalid_facture.setFlat(True)
+        self._b_mvalid_facture.clicked.connect(self.toggleButton)
+        self._b_mvalid_facture.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mvalid_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION CLIENT
         self._b_mclient = QPushButton(self._f_side_menu)
@@ -268,6 +296,9 @@ class Menu:
         self._b_mclient.setMaximumSize(QSize(36, 36))
         self._b_mclient.setIcon(self.create_client_icon)
         self._b_mclient.setIconSize(QSize(25, 25))
+        self._b_mclient.clicked.connect(self.toggleButton)
+        self._b_mclient.toggled.connect(self.resetToggleSideMenu)
+        self._b_mclient.setCheckable(True)
         self._b_mclient.setFlat(True)
         self._v_side_menu_two.addWidget(self._b_mclient)
         # AJOUT BOUTON CREATION SAUVEGARDE
@@ -279,6 +310,8 @@ class Menu:
         self._b_mcreate_backup.setIconSize(QSize(25, 25))
         self._b_mcreate_backup.setCheckable(True)
         self._b_mcreate_backup.setFlat(True)
+        self._b_mcreate_backup.clicked.connect(self.toggleButton)
+        self._b_mcreate_backup.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_backup, 0, Qt.AlignVCenter)
         # AJOUT BOUTON MANAGE DB
         self._b_mmanage_db = QPushButton(self._f_side_menu)
@@ -289,6 +322,8 @@ class Menu:
         self._b_mmanage_db.setIconSize(QSize(25, 25))
         self._b_mmanage_db.setCheckable(True)
         self._b_mmanage_db.setFlat(True)
+        self._b_mmanage_db.clicked.connect(self.toggleButton)
+        self._b_mmanage_db.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON VERTICAL LAYOUT DANS SIDE MENU
         self._v_side_menu.addLayout(self._v_side_menu_two)
@@ -332,3 +367,20 @@ class Menu:
     def hideHeaderMenu(self):
         self._f_header.hide()
         self._g_centralwidget.setVerticalSpacing(0)
+
+    def toggleButton(self):
+        sender = self.sender().setChecked(True)
+
+    def resetToggleHeaderMenu(self):
+        sender = self.sender().objectName()
+        for btnName in self.headerMenuButton:
+            if btnName != sender:
+                button = getattr(self, btnName)
+                button.setChecked(False)
+
+    def resetToggleSideMenu(self):
+        sender = self.sender().objectName()
+        for btnName in self.sideMenuButton:
+            if btnName != sender:
+                button = getattr(self, btnName)
+                button.setChecked(False)

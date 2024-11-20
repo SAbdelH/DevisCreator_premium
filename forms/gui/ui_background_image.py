@@ -8,7 +8,7 @@ class BackgroundImage:
     def __init__(self):
         self.arrierePlan = {
             img.stem: img.as_posix()
-            for img in Path(Path(__file__).parent).rglob("*")
+            for img in Path(Path(__file__).parents[1]).rglob("*")
             if img.suffix in (".png", ".jpeg", ".jpg") and img.parent.stem == 'background'
         }
 

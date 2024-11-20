@@ -1,8 +1,10 @@
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QWidget, QGridLayout, QFrame, QVBoxLayout, QLabel, QProgressBar, QPushButton, QGroupBox, \
-    QSpacerItem, QSizePolicy, QLineEdit, QHBoxLayout
-from forms.ui_vertical_progressbar import VerticalProgressBar
+from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QLabel,QPushButton, QGroupBox,
+                                QSpacerItem, QSizePolicy, QLineEdit, QHBoxLayout)
+from forms.gui import VerticalProgressBar
+import phonenumbers
+from validate_email_address import validate_email
 
 
 class CompanyPage:
@@ -140,8 +142,10 @@ class CompanyPage:
         self._b_valid_nom_entreprise.setFlat(True)
         self._b_valid_nom_entreprise.clicked.connect(self.next_step)
         self._g_info_entreprise.addWidget(self._b_valid_nom_entreprise, 2, 2, 1, 1)
-        # AJOUT DE VERTICAL DANS GRID A GAUCHE
+        # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_info_entreprise)
+
+        self._le_nom_entreprise.textEdited.connect(self.active_valid_entrepise)
 
     def __groupbox_dirigeant(self):
         # GROUPBOX DES INFORMATIONS DU DIRIGEANT
@@ -224,8 +228,11 @@ class CompanyPage:
         self._b_valid_dirigeant.setFlat(True)
         self._b_valid_dirigeant.clicked.connect(self.next_step)
         self._g_dirgeant.addWidget(self._b_valid_dirigeant, 4, 1, 1, 1)
-        # AJOUT DE VERTICAL DANS GRID A GAUCHE
+        self._b_valid_dirigeant.setEnabled(False)
+        # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_dirigeant)
+        self._le_nom_dirigeant.textEdited.connect(self.active_valid_dirigeant)
+        self._le_prenom_dirigeant.textEdited.connect(self.active_valid_dirigeant)
 
     def __groupbox_adresse(self):
         # GROUPBOX DE L'ADRESSE DE L'ENTREPRISE
@@ -233,10 +240,70 @@ class CompanyPage:
         self._gb_adresse_entreprise.setObjectName(u"_gb_adresse_entreprise")
         self._gb_adresse_entreprise.setFont(self.font6)
         self._gb_adresse_entreprise.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # GRID POUR LE GROUPE
         self._g_adresse_entreprise = QGridLayout(self._gb_adresse_entreprise)
         self._g_adresse_entreprise.setObjectName(u"_g_adresse_entreprise")
         self._g_adresse_entreprise.setVerticalSpacing(-1)
         self._g_adresse_entreprise.setContentsMargins(5, 5, 5, 5)
+        # VERTICAL SPACER ENTETE
+        self._vs_marge_adresse = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self._g_adresse_entreprise.addItem(self._vs_marge_adresse, 0, 4, 1, 1)
+        # LABEL NOM DE RUE
+        self._l_nom_rue = QLabel(self._gb_adresse_entreprise)
+        self._l_nom_rue.setObjectName(u"_l_nom_rue")
+        self._l_nom_rue.setMinimumSize(QSize(118, 0))
+        self._l_nom_rue.setMaximumSize(QSize(118, 16777215))
+        self._l_nom_rue.setFont(self.font7)
+        self._g_adresse_entreprise.addWidget(self._l_nom_rue, 2, 0, 1, 1)
+        # LINEEDIT NOM DE RUE
+        self._le_nom_rue = QLineEdit(self._gb_adresse_entreprise)
+        self._le_nom_rue.setObjectName(u"_le_nom_rue")
+        self._le_nom_rue.setMinimumSize(QSize(0, 25))
+        self._le_nom_rue.setClearButtonEnabled(True)
+        self._g_adresse_entreprise.addWidget(self._le_nom_rue, 2, 1, 1, 4)
+        # LABEL VILLE
+        self._l_ville = QLabel(self._gb_adresse_entreprise)
+        self._l_ville.setObjectName(u"_l_ville")
+        self._l_ville.setMinimumSize(QSize(118, 0))
+        self._l_ville.setMaximumSize(QSize(118, 16777215))
+        self._l_ville.setFont(self.font7)
+        self._g_adresse_entreprise.addWidget(self._l_ville, 3, 0, 1, 1)
+        # LINEEDIT VILLE
+        self._le_ville = QLineEdit(self._gb_adresse_entreprise)
+        self._le_ville.setObjectName(u"_le_ville")
+        self._le_ville.setMinimumSize(QSize(0, 25))
+        self._le_ville.setClearButtonEnabled(True)
+        self._g_adresse_entreprise.addWidget(self._le_ville, 3, 1, 1, 4)
+        # LABEL COMMUNE
+        self._l_commune = QLabel(self._gb_adresse_entreprise)
+        self._l_commune.setObjectName(u"_l_commune")
+        self._l_commune.setMinimumSize(QSize(118, 0))
+        self._l_commune.setMaximumSize(QSize(118, 16777215))
+        self._l_commune.setFont(self.font7)
+        self._g_adresse_entreprise.addWidget(self._l_commune, 4, 0, 1, 1)
+        # LINEEDIT COMMUNE
+        self._le_commune = QLineEdit(self._gb_adresse_entreprise)
+        self._le_commune.setObjectName(u"_le_commune")
+        self._le_commune.setMinimumSize(QSize(0, 25))
+        self._le_commune.setClearButtonEnabled(True)
+        self._g_adresse_entreprise.addWidget(self._le_commune, 4, 1, 1, 4)
+        # LABEL CODE POSTAL
+        self._l_cp = QLabel(self._gb_adresse_entreprise)
+        self._l_cp.setObjectName(u"_l_cp")
+        self._l_cp.setMinimumSize(QSize(118, 0))
+        self._l_cp.setMaximumSize(QSize(118, 16777215))
+        self._l_cp.setFont(self.font7)
+        self._g_adresse_entreprise.addWidget(self._l_cp, 6, 0, 1, 1)
+        # LINEEDIT CODE POSTAL
+        self._le_cp = QLineEdit(self._gb_adresse_entreprise)
+        self._le_cp.setObjectName(u"_le_cp")
+        self._le_cp.setMinimumSize(QSize(0, 25))
+        self._le_cp.setClearButtonEnabled(True)
+        self._g_adresse_entreprise.addWidget(self._le_cp, 6, 1, 1, 4)
+        # SPACER POUR EXCENTRER LE BOUTON VALIDER
+        self._hs_valid_adresse_entreprise = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self._g_adresse_entreprise.addItem(self._hs_valid_adresse_entreprise, 7, 0, 1, 4)
+        # BOUTON VALIDER
         self._b_valid_adresse_entreprise = QPushButton(self._gb_adresse_entreprise)
         self._b_valid_adresse_entreprise.setObjectName(u"_b_valid_adresse_entreprise")
         self._b_valid_adresse_entreprise.setMinimumSize(QSize(0, 0))
@@ -245,56 +312,14 @@ class CompanyPage:
         self._b_valid_adresse_entreprise.setIconSize(QSize(20, 20))
         self._b_valid_adresse_entreprise.setFlat(True)
         self._b_valid_adresse_entreprise.clicked.connect(self.next_step)
+        self._b_valid_adresse_entreprise.setEnabled(False)
         self._g_adresse_entreprise.addWidget(self._b_valid_adresse_entreprise, 7, 4, 1, 1)
-        self._l_cp = QLabel(self._gb_adresse_entreprise)
-        self._l_cp.setObjectName(u"_l_cp")
-        self._l_cp.setMinimumSize(QSize(118, 0))
-        self._l_cp.setMaximumSize(QSize(118, 16777215))
-        self._l_cp.setFont(self.font7)
-        self._g_adresse_entreprise.addWidget(self._l_cp, 6, 0, 1, 1)
-        self._l_commune = QLabel(self._gb_adresse_entreprise)
-        self._l_commune.setObjectName(u"_l_commune")
-        self._l_commune.setMinimumSize(QSize(118, 0))
-        self._l_commune.setMaximumSize(QSize(118, 16777215))
-        self._l_commune.setFont(self.font7)
-        self._g_adresse_entreprise.addWidget(self._l_commune, 4, 0, 1, 1)
-        self._l_ville = QLabel(self._gb_adresse_entreprise)
-        self._l_ville.setObjectName(u"_l_ville")
-        self._l_ville.setMinimumSize(QSize(118, 0))
-        self._l_ville.setMaximumSize(QSize(118, 16777215))
-        self._l_ville.setFont(self.font7)
-        self._g_adresse_entreprise.addWidget(self._l_ville, 3, 0, 1, 1)
-        self._l_nom_rue = QLabel(self._gb_adresse_entreprise)
-        self._l_nom_rue.setObjectName(u"_l_nom_rue")
-        self._l_nom_rue.setMinimumSize(QSize(118, 0))
-        self._l_nom_rue.setMaximumSize(QSize(118, 16777215))
-        self._l_nom_rue.setFont(self.font7)
-        self._g_adresse_entreprise.addWidget(self._l_nom_rue, 2, 0, 1, 1)
-        self._le_cp = QLineEdit(self._gb_adresse_entreprise)
-        self._le_cp.setObjectName(u"_le_cp")
-        self._le_cp.setMinimumSize(QSize(0, 25))
-        self._le_cp.setClearButtonEnabled(True)
-        self._g_adresse_entreprise.addWidget(self._le_cp, 6, 1, 1, 4)
-        self._le_commune = QLineEdit(self._gb_adresse_entreprise)
-        self._le_commune.setObjectName(u"_le_commune")
-        self._le_commune.setMinimumSize(QSize(0, 25))
-        self._le_commune.setClearButtonEnabled(True)
-        self._g_adresse_entreprise.addWidget(self._le_commune, 4, 1, 1, 4)
-        self._le_ville = QLineEdit(self._gb_adresse_entreprise)
-        self._le_ville.setObjectName(u"_le_ville")
-        self._le_ville.setMinimumSize(QSize(0, 25))
-        self._le_ville.setClearButtonEnabled(True)
-        self._g_adresse_entreprise.addWidget(self._le_ville, 3, 1, 1, 4)
-        self._le_nom_rue = QLineEdit(self._gb_adresse_entreprise)
-        self._le_nom_rue.setObjectName(u"_le_nom_rue")
-        self._le_nom_rue.setMinimumSize(QSize(0, 25))
-        self._le_nom_rue.setClearButtonEnabled(True)
-        self._g_adresse_entreprise.addWidget(self._le_nom_rue, 2, 1, 1, 4)
-        self._vs_marge_adresse = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        self._g_adresse_entreprise.addItem(self._vs_marge_adresse, 0, 4, 1, 1)
-        self._hs_valid_adresse_entreprise = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        self._g_adresse_entreprise.addItem(self._hs_valid_adresse_entreprise, 7, 0, 1, 4)
+        # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_adresse_entreprise)
+        self._le_commune.textEdited.connect(self.active_valid_adresse)
+        self._le_cp.textEdited.connect(self.active_valid_adresse)
+        self._le_ville.textEdited.connect(self.active_valid_adresse)
+        self._le_nom_rue.textEdited.connect(self.active_valid_adresse)
 
     def __groupbox_contact(self):
         # GROUPBOX DES INFORMATIONS DE CONTACTS
@@ -303,10 +328,78 @@ class CompanyPage:
         self._gb_contact.setMaximumSize(QSize(16777215, 135))
         self._gb_contact.setFont(self.font6)
         self._gb_contact.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # GRID GROUPE
         self._g_contact = QGridLayout(self._gb_contact)
         self._g_contact.setObjectName(u"_g_contact")
         self._g_contact.setVerticalSpacing(2)
         self._g_contact.setContentsMargins(5, 5, 5, 5)
+        # VERTICAL SPACER ENTETE
+        self._vs_marge_contact = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self._g_contact.addItem(self._vs_marge_contact, 0, 1, 1, 1)
+        # FRAME BLEU
+        self._f_contact_label = QFrame(self._gb_contact)
+        self._f_contact_label.setObjectName(u"_f_contact_label")
+        self._f_contact_label.setMinimumSize(QSize(0, 20))
+        self._f_contact_label.setMaximumSize(QSize(16777215, 20))
+        self._f_contact_label.setFrameShape(QFrame.Shape.StyledPanel)
+        self._f_contact_label.setFrameShadow(QFrame.Shadow.Raised)
+        # HORIZONATAL LAYOUT FRAME
+        self._h_contact_label = QHBoxLayout(self._f_contact_label)
+        self._h_contact_label.setSpacing(-1)
+        self._h_contact_label.setObjectName(u"_h_contact_label")
+        self._h_contact_label.setContentsMargins(2, 0, 0, 0)
+        # LABEL NUMERO FIXE
+        self._l_num_fixe = QLabel(self._f_contact_label)
+        self._l_num_fixe.setObjectName(u"_l_num_fixe")
+        self._l_num_fixe.setFont(self.font7)
+        self._l_num_fixe.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self._h_contact_label.addWidget(self._l_num_fixe)
+        # LABEL NUMERO PORTABLE
+        self._l_num_portable = QLabel(self._f_contact_label)
+        self._l_num_portable.setObjectName(u"_l_num_portable")
+        self._l_num_portable.setFont(self.font7)
+        self._l_num_portable.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self._h_contact_label.addWidget(self._l_num_portable)
+        # LABEL EMAIL
+        self._l_mail = QLabel(self._f_contact_label)
+        self._l_mail.setObjectName(u"_l_mail")
+        self._l_mail.setFont(self.font7)
+        self._l_mail.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self._h_contact_label.addWidget(self._l_mail)
+        # AJOUT DU FRAME BLEU DANS LE GRID GROUP
+        self._g_contact.addWidget(self._f_contact_label, 1, 0, 1, 2)
+        # LINEEDIT FRAME
+        self._f_contact_lineedit = QFrame(self._gb_contact)
+        self._f_contact_lineedit.setObjectName(u"_f_contact_lineedit")
+        self._f_contact_lineedit.setFrameShape(QFrame.Shape.StyledPanel)
+        self._f_contact_lineedit.setFrameShadow(QFrame.Shadow.Raised)
+        # HORIZONTAL LAYOUT FRAME
+        self._h_contact_lineedit = QHBoxLayout(self._f_contact_lineedit)
+        self._h_contact_lineedit.setObjectName(u"_h_contact_lineedit")
+        self._h_contact_lineedit.setContentsMargins(0, 0, 0, 0)
+        # LINEEDIT NUMERO FIXE
+        self._le_num_fixe = QLineEdit(self._f_contact_lineedit)
+        self._le_num_fixe.setObjectName(u"_le_num_fixe")
+        self._le_num_fixe.setMinimumSize(QSize(0, 25))
+        self._le_num_fixe.setClearButtonEnabled(True)
+        self._h_contact_lineedit.addWidget(self._le_num_fixe)
+        # LINEEDIT NUMERO PORTABLE
+        self._le_num_portable = QLineEdit(self._f_contact_lineedit)
+        self._le_num_portable.setObjectName(u"_le_num_portable")
+        self._le_num_portable.setMinimumSize(QSize(0, 25))
+        self._le_num_portable.setClearButtonEnabled(True)
+        self._h_contact_lineedit.addWidget(self._le_num_portable)
+        self._le_mail = QLineEdit(self._f_contact_lineedit)
+        # LINEEDIT MAIL
+        self._le_mail.setObjectName(u"_le_mail")
+        self._le_mail.setMinimumSize(QSize(0, 25))
+        self._le_mail.setClearButtonEnabled(True)
+        self._h_contact_lineedit.addWidget(self._le_mail)
+        self._g_contact.addWidget(self._f_contact_lineedit, 2, 0, 1, 2)
+        # SPACER POUR EXCENTRER LE BOUTON VALIDER
+        self._hs_valid_contact = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self._g_contact.addItem(self._hs_valid_contact, 3, 0, 1, 1)
+        # BOUTON VALIDER
         self._b_valid_contact = QPushButton(self._gb_contact)
         self._b_valid_contact.setObjectName(u"_b_valid_contact")
         self._b_valid_contact.setMinimumSize(QSize(0, 0))
@@ -315,61 +408,13 @@ class CompanyPage:
         self._b_valid_contact.setIconSize(QSize(20, 20))
         self._b_valid_contact.setFlat(True)
         self._b_valid_contact.clicked.connect(self.next_step)
+        self._b_valid_contact.setEnabled(False)
         self._g_contact.addWidget(self._b_valid_contact, 3, 1, 1, 1)
-        self._f_contact_label = QFrame(self._gb_contact)
-        self._f_contact_label.setObjectName(u"_f_contact_label")
-        self._f_contact_label.setMinimumSize(QSize(0, 20))
-        self._f_contact_label.setMaximumSize(QSize(16777215, 20))
-        self._f_contact_label.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_contact_label.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_contact_label = QHBoxLayout(self._f_contact_label)
-        self._h_contact_label.setSpacing(-1)
-        self._h_contact_label.setObjectName(u"_h_contact_label")
-        self._h_contact_label.setContentsMargins(2, 0, 0, 0)
-        self._l_num_fixe = QLabel(self._f_contact_label)
-        self._l_num_fixe.setObjectName(u"_l_num_fixe")
-        self._l_num_fixe.setFont(self.font7)
-        self._l_num_fixe.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
-        self._h_contact_label.addWidget(self._l_num_fixe)
-        self._l_num_portable = QLabel(self._f_contact_label)
-        self._l_num_portable.setObjectName(u"_l_num_portable")
-        self._l_num_portable.setFont(self.font7)
-        self._l_num_portable.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
-        self._h_contact_label.addWidget(self._l_num_portable)
-        self._l_mail = QLabel(self._f_contact_label)
-        self._l_mail.setObjectName(u"_l_mail")
-        self._l_mail.setFont(self.font7)
-        self._l_mail.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
-        self._h_contact_label.addWidget(self._l_mail)
-        self._g_contact.addWidget(self._f_contact_label, 1, 0, 1, 2)
-        self._f_contact_lineedit = QFrame(self._gb_contact)
-        self._f_contact_lineedit.setObjectName(u"_f_contact_lineedit")
-        self._f_contact_lineedit.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_contact_lineedit.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_contact_lineedit = QHBoxLayout(self._f_contact_lineedit)
-        self._h_contact_lineedit.setObjectName(u"_h_contact_lineedit")
-        self._h_contact_lineedit.setContentsMargins(0, 0, 0, 0)
-        self._le_num_fixe = QLineEdit(self._f_contact_lineedit)
-        self._le_num_fixe.setObjectName(u"_le_num_fixe")
-        self._le_num_fixe.setMinimumSize(QSize(0, 25))
-        self._le_num_fixe.setClearButtonEnabled(True)
-        self._h_contact_lineedit.addWidget(self._le_num_fixe)
-        self._le_num_portable = QLineEdit(self._f_contact_lineedit)
-        self._le_num_portable.setObjectName(u"_le_num_portable")
-        self._le_num_portable.setMinimumSize(QSize(0, 25))
-        self._le_num_portable.setClearButtonEnabled(True)
-        self._h_contact_lineedit.addWidget(self._le_num_portable)
-        self._le_mail = QLineEdit(self._f_contact_lineedit)
-        self._le_mail.setObjectName(u"_le_mail")
-        self._le_mail.setMinimumSize(QSize(0, 25))
-        self._le_mail.setClearButtonEnabled(True)
-        self._h_contact_lineedit.addWidget(self._le_mail)
-        self._g_contact.addWidget(self._f_contact_lineedit, 2, 0, 1, 2)
-        self._hs_valid_contact = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        self._g_contact.addItem(self._hs_valid_contact, 3, 0, 1, 1)
-        self._vs_marge_contact = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        self._g_contact.addItem(self._vs_marge_contact, 0, 1, 1, 1)
+        # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_contact)
+        self._le_num_portable.textEdited.connect(self.active_valid_contact)
+        self._le_num_fixe.textEdited.connect(self.active_valid_contact)
+        self._le_mail.textEdited.connect(self.active_valid_contact)
 
     def __groupbox_insee(self):
         # GROUPBOX DES INFORMATIONS LEGALES
@@ -378,58 +423,76 @@ class CompanyPage:
         self._gb_informations_legales.setMaximumSize(QSize(16777215, 135))
         self._gb_informations_legales.setFont(self.font6)
         self._gb_informations_legales.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # GRID GROUP
         self._g_informations_legales = QGridLayout(self._gb_informations_legales)
         self._g_informations_legales.setObjectName(u"_g_informations_legales")
         self._g_informations_legales.setVerticalSpacing(2)
         self._g_informations_legales.setContentsMargins(5, 5, 5, 5)
-        self._hs_valid_informations_legales = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        self._g_informations_legales.addItem(self._hs_valid_informations_legales, 3, 0, 1, 1)
-        self._f_informations_legales_lineedit = QFrame(self._gb_informations_legales)
-        self._f_informations_legales_lineedit.setObjectName(u"_f_informations_legales_lineedit")
-        self._f_informations_legales_lineedit.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_informations_legales_lineedit.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_informations_legales_lineedit = QHBoxLayout(self._f_informations_legales_lineedit)
-        self._h_informations_legales_lineedit.setObjectName(u"_h_informations_legales_lineedit")
-        self._h_informations_legales_lineedit.setContentsMargins(0, 0, 0, 0)
-        self._le_siret = QLineEdit(self._f_informations_legales_lineedit)
-        self._le_siret.setObjectName(u"_le_siret")
-        self._le_siret.setMinimumSize(QSize(0, 25))
-        self._le_siret.setClearButtonEnabled(True)
-        self._h_informations_legales_lineedit.addWidget(self._le_siret)
-        self._le_siren = QLineEdit(self._f_informations_legales_lineedit)
-        self._le_siren.setObjectName(u"_le_siren")
-        self._le_siren.setMinimumSize(QSize(0, 25))
-        self._le_siren.setClearButtonEnabled(True)
-        self._h_informations_legales_lineedit.addWidget(self._le_siren)
-        self._le_ape = QLineEdit(self._f_informations_legales_lineedit)
-        self._le_ape.setObjectName(u"_le_ape")
-        self._le_ape.setMinimumSize(QSize(0, 25))
-        self._le_ape.setClearButtonEnabled(True)
-        self._h_informations_legales_lineedit.addWidget(self._le_ape)
-        self._g_informations_legales.addWidget(self._f_informations_legales_lineedit, 2, 0, 1, 2)
+        # VERTICAL SPACER ENTETE
+        self._vs_informations_legales = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self._g_informations_legales.addItem(self._vs_informations_legales, 0, 1, 1, 1)
+        # FRAME BLEU
         self._f_informations_legales_label = QFrame(self._gb_informations_legales)
         self._f_informations_legales_label.setObjectName(u"_f_informations_legales_label")
         self._f_informations_legales_label.setMinimumSize(QSize(0, 20))
         self._f_informations_legales_label.setMaximumSize(QSize(16777215, 20))
         self._f_informations_legales_label.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_informations_legales_label.setFrameShadow(QFrame.Shadow.Raised)
+        # HORIZONTAL LAYOUT FRAME BLEU
         self._h_informations_legales_label = QHBoxLayout(self._f_informations_legales_label)
         self._h_informations_legales_label.setSpacing(0)
         self._h_informations_legales_label.setObjectName(u"_h_informations_legales_label")
         self._h_informations_legales_label.setContentsMargins(2, 0, 0, 0)
+        # LABEL SIRET
         self._l_siret = QLabel(self._f_informations_legales_label)
         self._l_siret.setObjectName(u"_l_siret")
         self._l_siret.setFont(self.font7)
         self._h_informations_legales_label.addWidget(self._l_siret)
+        # LABEL SIREN
         self._l_siren = QLabel(self._f_informations_legales_label)
         self._l_siren.setObjectName(u"_l_siren")
         self._l_siren.setFont(self.font7)
         self._h_informations_legales_label.addWidget(self._l_siren)
+        # LABEL APE
         self._l_ape = QLabel(self._f_informations_legales_label)
         self._l_ape.setObjectName(u"_l_ape")
         self._l_ape.setFont(self.font7)
         self._h_informations_legales_label.addWidget(self._l_ape)
+        # AJOUT DU FRAME BLEU DANS GRID GROUP
         self._g_informations_legales.addWidget(self._f_informations_legales_label, 1, 0, 1, 2)
+        # FRAME LINEEDIT
+        self._f_informations_legales_lineedit = QFrame(self._gb_informations_legales)
+        self._f_informations_legales_lineedit.setObjectName(u"_f_informations_legales_lineedit")
+        self._f_informations_legales_lineedit.setFrameShape(QFrame.Shape.StyledPanel)
+        self._f_informations_legales_lineedit.setFrameShadow(QFrame.Shadow.Raised)
+        # HORIZONTAL LAYOUT FRAME LINEEDIT
+        self._h_informations_legales_lineedit = QHBoxLayout(self._f_informations_legales_lineedit)
+        self._h_informations_legales_lineedit.setObjectName(u"_h_informations_legales_lineedit")
+        self._h_informations_legales_lineedit.setContentsMargins(0, 0, 0, 0)
+        # LINEEDIT SIRET
+        self._le_siret = QLineEdit(self._f_informations_legales_lineedit)
+        self._le_siret.setObjectName(u"_le_siret")
+        self._le_siret.setMinimumSize(QSize(0, 25))
+        self._le_siret.setClearButtonEnabled(True)
+        self._h_informations_legales_lineedit.addWidget(self._le_siret)
+        # LINEEDIT SIREN
+        self._le_siren = QLineEdit(self._f_informations_legales_lineedit)
+        self._le_siren.setObjectName(u"_le_siren")
+        self._le_siren.setMinimumSize(QSize(0, 25))
+        self._le_siren.setClearButtonEnabled(True)
+        self._h_informations_legales_lineedit.addWidget(self._le_siren)
+        # LINEEDIT APE
+        self._le_ape = QLineEdit(self._f_informations_legales_lineedit)
+        self._le_ape.setObjectName(u"_le_ape")
+        self._le_ape.setMinimumSize(QSize(0, 25))
+        self._le_ape.setClearButtonEnabled(True)
+        self._h_informations_legales_lineedit.addWidget(self._le_ape)
+        # AJOUT FRAME LINEEDIT DANS GRID GROUPE
+        self._g_informations_legales.addWidget(self._f_informations_legales_lineedit, 2, 0, 1, 2)
+        # SPACER POUR EXCENTRER LE BOUTON VALIDER
+        self._hs_valid_informations_legales = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self._g_informations_legales.addItem(self._hs_valid_informations_legales, 3, 0, 1, 1)
+        # BOUTON VALIDER
         self._b_valid_informations_legales = QPushButton(self._gb_informations_legales)
         self._b_valid_informations_legales.setObjectName(u"_b_valid_informations_legales")
         self._b_valid_informations_legales.setMinimumSize(QSize(0, 0))
@@ -439,22 +502,84 @@ class CompanyPage:
         self._b_valid_informations_legales.setFlat(True)
         self._b_valid_informations_legales.clicked.connect(self.next_step)
         self._g_informations_legales.addWidget(self._b_valid_informations_legales, 3, 1, 1, 1)
-        self._vs_informations_legales = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        self._g_informations_legales.addItem(self._vs_informations_legales, 0, 1, 1, 1)
+        # AJOUT DU GROUPBOX DANS LE VERTICAL LE VERTICAL DU FRAME A DROITE
         self._v_info_company.addWidget(self._gb_informations_legales)
 
     def __groupbox_bank(self):
+        # GROUPBOX INFORMATIONS BANCAIRES
         self._gb_informations_bancaires = QGroupBox(self._f_info_company)
         self._gb_informations_bancaires.setObjectName(u"_gb_informations_bancaires")
         self._gb_informations_bancaires.setMaximumSize(QSize(16777215, 135))
         self._gb_informations_bancaires.setFont(self.font6)
         self._gb_informations_bancaires.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        # GRID GROUPE
         self._g_informations_bancaires = QGridLayout(self._gb_informations_bancaires)
         self._g_informations_bancaires.setObjectName(u"_g_informations_bancaires")
         self._g_informations_bancaires.setVerticalSpacing(2)
         self._g_informations_bancaires.setContentsMargins(5, 5, 5, 5)
+        # VERTICAL SPACER ENTETE
+        self._vs_marge_informations_bancaires = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        self._g_informations_bancaires.addItem(self._vs_marge_informations_bancaires, 0, 1, 1, 1)
+        # FRAME BLEU
+        self._f_informations_bancaires_label = QFrame(self._gb_informations_bancaires)
+        self._f_informations_bancaires_label.setObjectName(u"_f_informations_bancaires_label")
+        self._f_informations_bancaires_label.setMinimumSize(QSize(0, 20))
+        self._f_informations_bancaires_label.setMaximumSize(QSize(16777215, 20))
+        self._f_informations_bancaires_label.setFrameShape(QFrame.Shape.StyledPanel)
+        self._f_informations_bancaires_label.setFrameShadow(QFrame.Shadow.Raised)
+        self._h_informations_bancaires_label = QHBoxLayout(self._f_informations_bancaires_label)
+        # HORIZONTAL LAYOUT FRAME
+        self._h_informations_bancaires_label.setSpacing(0)
+        self._h_informations_bancaires_label.setObjectName(u"_h_informations_bancaires_label")
+        self._h_informations_bancaires_label.setContentsMargins(2, 0, 0, 0)
+        # LABEL IBAN
+        self._l_iban = QLabel(self._f_informations_bancaires_label)
+        self._l_iban.setObjectName(u"_l_iban")
+        self._l_iban.setFont(self.font7)
+        self._h_informations_bancaires_label.addWidget(self._l_iban)
+        # LABEL BIC
+        self._l_bic = QLabel(self._f_informations_bancaires_label)
+        self._l_bic.setObjectName(u"_l_bic")
+        self._l_bic.setFont(self.font7)
+        self._h_informations_bancaires_label.addWidget(self._l_bic)
+        # LABEL CAPITAL
+        self._l_capital = QLabel(self._f_informations_bancaires_label)
+        self._l_capital.setObjectName(u"_l_capital")
+        self._l_capital.setFont(self.font7)
+        self._h_informations_bancaires_label.addWidget(self._l_capital)
+        # AJOUT DU FRAME DANS GRID
+        self._g_informations_bancaires.addWidget(self._f_informations_bancaires_label, 1, 0, 1, 2)
+        # FRAME LINEEDIT
+        self._f_informations_bancaires_lineedit = QFrame(self._gb_informations_bancaires)
+        self._f_informations_bancaires_lineedit.setObjectName(u"_f_informations_bancaires_lineedit")
+        self._f_informations_bancaires_lineedit.setFrameShape(QFrame.Shape.StyledPanel)
+        self._f_informations_bancaires_lineedit.setFrameShadow(QFrame.Shadow.Raised)
+        # HORIZONTAL LAYOUT FRAME LINEEDIT
+        self._h_informations_bancaires_lineedit = QHBoxLayout(self._f_informations_bancaires_lineedit)
+        self._h_informations_bancaires_lineedit.setObjectName(u"_h_informations_bancaires_lineedit")
+        self._h_informations_bancaires_lineedit.setContentsMargins(0, 0, 0, 0)
+        # LINEEDIT IBAN
+        self._le_iban = QLineEdit(self._f_informations_bancaires_lineedit)
+        self._le_iban.setObjectName(u"_le_iban")
+        self._le_iban.setMinimumSize(QSize(0, 25))
+        self._le_iban.setClearButtonEnabled(True)
+        self._h_informations_bancaires_lineedit.addWidget(self._le_iban)
+        # LINEEDIT BIC
+        self._le_bic = QLineEdit(self._f_informations_bancaires_lineedit)
+        self._le_bic.setObjectName(u"_le_bic")
+        self._le_bic.setMinimumSize(QSize(0, 25))
+        self._le_bic.setClearButtonEnabled(True)
+        self._h_informations_bancaires_lineedit.addWidget(self._le_bic)
+        # LINEEDIT CAPITAL
+        self._le_capital = QLineEdit(self._f_informations_bancaires_lineedit)
+        self._le_capital.setObjectName(u"_le_capital")
+        self._le_capital.setMinimumSize(QSize(0, 25))
+        self._le_capital.setClearButtonEnabled(True)
+        self._h_informations_bancaires_lineedit.addWidget(self._le_capital)
+        # SPACER POUR EXCENTRER LE BOUTON VALIDER
         self._hs_valid_informations_bancaires = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._g_informations_bancaires.addItem(self._hs_valid_informations_bancaires, 3, 0, 1, 1)
+        # BOUTON VALIDER
         self._b_valid_informations_bancaires = QPushButton(self._gb_informations_bancaires)
         self._b_valid_informations_bancaires.setObjectName(u"_b_valid_informations_bancaires")
         self._b_valid_informations_bancaires.setMinimumSize(QSize(0, 0))
@@ -463,57 +588,14 @@ class CompanyPage:
         self._b_valid_informations_bancaires.setIconSize(QSize(20, 20))
         self._b_valid_informations_bancaires.setFlat(True)
         self._b_valid_informations_bancaires.clicked.connect(self.next_step)
+        self._b_valid_informations_bancaires.setEnabled(False)
         self._g_informations_bancaires.addWidget(self._b_valid_informations_bancaires, 3, 1, 1, 1)
-        self._f_informations_bancaires_label = QFrame(self._gb_informations_bancaires)
-        self._f_informations_bancaires_label.setObjectName(u"_f_informations_bancaires_label")
-        self._f_informations_bancaires_label.setMinimumSize(QSize(0, 20))
-        self._f_informations_bancaires_label.setMaximumSize(QSize(16777215, 20))
-        self._f_informations_bancaires_label.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_informations_bancaires_label.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_informations_bancaires_label = QHBoxLayout(self._f_informations_bancaires_label)
-        self._h_informations_bancaires_label.setSpacing(0)
-        self._h_informations_bancaires_label.setObjectName(u"_h_informations_bancaires_label")
-        self._h_informations_bancaires_label.setContentsMargins(2, 0, 0, 0)
-        self._l_iban = QLabel(self._f_informations_bancaires_label)
-        self._l_iban.setObjectName(u"_l_iban")
-        self._l_iban.setFont(self.font7)
-        self._h_informations_bancaires_label.addWidget(self._l_iban)
-        self._l_bic = QLabel(self._f_informations_bancaires_label)
-        self._l_bic.setObjectName(u"_l_bic")
-        self._l_bic.setFont(self.font7)
-        self._h_informations_bancaires_label.addWidget(self._l_bic)
-        self._l_capital = QLabel(self._f_informations_bancaires_label)
-        self._l_capital.setObjectName(u"_l_capital")
-        self._l_capital.setFont(self.font7)
-        self._h_informations_bancaires_label.addWidget(self._l_capital)
-        self._g_informations_bancaires.addWidget(self._f_informations_bancaires_label, 1, 0, 1, 2)
-        self._f_informations_bancaires_lineedit = QFrame(self._gb_informations_bancaires)
-        self._f_informations_bancaires_lineedit.setObjectName(u"_f_informations_bancaires_lineedit")
-        self._f_informations_bancaires_lineedit.setFrameShape(QFrame.Shape.StyledPanel)
-        self._f_informations_bancaires_lineedit.setFrameShadow(QFrame.Shadow.Raised)
-        self._h_informations_bancaires_lineedit = QHBoxLayout(self._f_informations_bancaires_lineedit)
-        self._h_informations_bancaires_lineedit.setObjectName(u"_h_informations_bancaires_lineedit")
-        self._h_informations_bancaires_lineedit.setContentsMargins(0, 0, 0, 0)
-        self._le_iban = QLineEdit(self._f_informations_bancaires_lineedit)
-        self._le_iban.setObjectName(u"_le_iban")
-        self._le_iban.setMinimumSize(QSize(0, 25))
-        self._le_iban.setClearButtonEnabled(True)
-        self._h_informations_bancaires_lineedit.addWidget(self._le_iban)
-        self._le_bic = QLineEdit(self._f_informations_bancaires_lineedit)
-        self._le_bic.setObjectName(u"_le_bic")
-        self._le_bic.setMinimumSize(QSize(0, 25))
-        self._le_bic.setClearButtonEnabled(True)
-        self._h_informations_bancaires_lineedit.addWidget(self._le_bic)
-        self._le_capital = QLineEdit(self._f_informations_bancaires_lineedit)
-        self._le_capital.setObjectName(u"_le_capital")
-        self._le_capital.setMinimumSize(QSize(0, 25))
-        self._le_capital.setClearButtonEnabled(True)
-        self._h_informations_bancaires_lineedit.addWidget(self._le_capital)
+        # AJOUT FRAME LINEEDIT DANS GRID GROUP
         self._g_informations_bancaires.addWidget(self._f_informations_bancaires_lineedit, 2, 0, 1, 2)
-        self._vs_marge_informations_bancaires = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-        self._g_informations_bancaires.addItem(self._vs_marge_informations_bancaires, 0, 1, 1, 1)
+        # AJOUT DU GROUPBOX DANS LE VERTICAL LE VERTICAL DU FRAME A DROITE
         self._v_info_company.addWidget(self._gb_informations_bancaires)
-        self._g_info_company.addWidget(self._f_info_company, 0, 1, 1, 1)
+        self._le_iban.textEdited.connect(self.active_valid_bank)
+        self._le_bic.textEdited.connect(self.active_valid_bank)
 
     def next_step(self):
         sender = self.sender().objectName()
@@ -544,3 +626,44 @@ class CompanyPage:
         for i in range(6):
             group = getattr(self, self.orderGroup[i])
             group.setEnabled(i < self.current_step + 1)
+        self._b_valid_nom_entreprise.setEnabled(False)
+
+    def active_valid_entrepise(self):
+        active = (self._le_nom_entreprise.text()).strip() != ""
+        self._b_valid_nom_entreprise.setEnabled(active)
+
+    def active_valid_dirigeant(self):
+        nom_active = (self._le_nom_dirigeant.text()).strip() != ""
+        prenom_active = (self._le_prenom_dirigeant.text()).strip() != ""
+        self._b_valid_dirigeant.setEnabled(nom_active and prenom_active)
+
+    def active_valid_adresse(self):
+        nr = (self._le_nom_rue.text()).strip() != ""
+        cp = (self._le_cp.text()).strip() != "" and (self._le_cp.text()).isdigit and len(self._le_cp.text()) == 5
+        vl = (self._le_ville.text()).strip() != ""
+        cm = (self._le_commune.text()).strip() != ""
+        self._b_valid_adresse_entreprise.setEnabled(nr and cp and vl and cm)
+
+    def active_valid_contact(self):
+        def ValidNum(num: str) -> bool:
+            try :
+                n = phonenumbers.parse(num, "FR")
+                p = phonenumbers.is_possible_number(n)
+            except phonenumbers.phonenumberutil.NumberParseException:
+                p = False
+            return p
+        p = self._le_num_portable.text().strip()
+        f = self._le_num_fixe.text().strip()
+        m = self._le_mail.text().strip()
+        pv = ValidNum(p)
+        fv = ValidNum(f)
+        ep = False if p != '' and pv is False else True
+        ef = False if f != '' and fv is False else True
+        em = validate_email(m) if m != '' else True
+        active = (pv or fv) and ef and ep and em
+        self._b_valid_contact.setEnabled(active)
+
+    def active_valid_bank(self):
+        iban = (self._le_iban.text()).strip() != ""
+        bic = (self._le_bic.text()).strip() != ""
+        self._b_valid_informations_bancaires.setEnabled(iban and bic)

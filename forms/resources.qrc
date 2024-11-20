@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="icon">
+    <file>icons/bon-de-livraison.png</file>
+    <file>icons/facturen.png</file>
     <file>icons/emptyfolder.png</file>
     <file>icons/low_sell.png</file>
     <file>icons/most_sell.png</file>

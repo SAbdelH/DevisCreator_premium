@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>7</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -3693,7 +3693,7 @@ QCalendarWidget QAbstractItemView:enabled {
        </layout>
       </widget>
       <widget class="QWidget" name="_p_user_management">
-       <layout class="QGridLayout" name="gridLayout">
+       <layout class="QGridLayout" name="_g_user_management">
         <property name="leftMargin">
          <number>8</number>
         </property>
@@ -3720,7 +3720,7 @@ QCalendarWidget QAbstractItemView:enabled {
           <property name="frameShadow">
            <enum>QFrame::Shadow::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="_v_right_user_management">
+          <layout class="QVBoxLayout" name="_v_left_user_management">
            <item>
             <widget class="QListWidget" name="_lw_um_usrList">
              <property name="viewMode">
@@ -3748,7 +3748,7 @@ QCalendarWidget QAbstractItemView:enabled {
           <property name="frameShadow">
            <enum>QFrame::Shadow::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="_v_left_user_management">
+          <layout class="QVBoxLayout" name="_v_right_user_management">
            <property name="spacing">
             <number>-1</number>
            </property>
@@ -4140,7 +4140,7 @@ QCalendarWidget QAbstractItemView:enabled {
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="_b_um_update">
+            <layout class="QHBoxLayout" name="_h_um_update">
              <item>
               <widget class="QPushButton" name="_b_um_add_usr">
                <property name="text">
@@ -4338,46 +4338,10 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <layout class="QGridLayout" name="_g_invoice_input_card">
-             <item row="7" column="0">
-              <widget class="QSpinBox" name="_s_invoice_quantity">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="_l_invoice_type_remise">
+             <item row="2" column="0">
+              <widget class="QLabel" name="_l_invoice_marque">
                <property name="text">
-                <string>Type de remise</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="_l_invoice_remise">
-               <property name="text">
-                <string>Remise</string>
+                <string>Marque</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -4421,10 +4385,39 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="_l_invoice_nom">
-               <property name="text">
-                <string>Nom</string>
+             <item row="1" column="0">
+              <widget class="QLineEdit" name="_le_invoice_name">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QSpinBox" name="_s_invoice_quantity">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLineEdit" name="_le_invoice_marque">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -4435,6 +4428,46 @@ QCalendarWidget QAbstractItemView:enabled {
               <widget class="QLabel" name="_l_invoice_qauntity">
                <property name="text">
                 <string>Quantité</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="_l_invoice_nom">
+               <property name="text">
+                <string>Nom</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="_l_invoice_price">
+               <property name="text">
+                <string>Prix</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="9" column="0">
+              <widget class="QLabel" name="_l_invoice_type_remise">
+               <property name="text">
+                <string>Type de remise</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="_l_invoice_remise">
+               <property name="text">
+                <string>Remise</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -4528,46 +4561,13 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QLineEdit" name="_le_invoice_marque">
+             <item row="12" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
                  <height>30</height>
                 </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLineEdit" name="_le_invoice_name">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="_l_invoice_price">
-               <property name="text">
-                <string>Prix</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="_l_invoice_marque">
-               <property name="text">
-                <string>Marque</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -4575,11 +4575,22 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item row="8" column="0">
-              <widget class="QCheckBox" name="_cb_invoice_quantifiable">
-               <property name="text">
-                <string>Élément quantifiable</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="_h_invoice_info_qty">
+               <item>
+                <widget class="QCheckBox" name="_cb_invoice_quantifiable">
+                 <property name="text">
+                  <string>Élément quantifiable</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="_cb_invoice_location">
+                 <property name="text">
+                  <string>Location</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -5346,7 +5357,7 @@ QCalendarWidget QAbstractItemView:enabled {
           <property name="frameShadow">
            <enum>QFrame::Shadow::Raised</enum>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_7">
+          <layout class="QVBoxLayout" name="_v_valid_facture_preview">
            <item>
             <layout class="QHBoxLayout" name="_h_valid_facture_preview_one">
              <item>
@@ -5430,7 +5441,7 @@ QCalendarWidget QAbstractItemView:enabled {
              <property name="frameShadow">
               <enum>QFrame::Shadow::Raised</enum>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout">
+             <layout class="QVBoxLayout" name="_v_state_invoice_bar">
               <item>
                <widget class="QLabel" name="_l_state_invoice_message">
                 <property name="text">
@@ -5452,6 +5463,18 @@ QCalendarWidget QAbstractItemView:enabled {
              </item>
              <item row="0" column="0">
               <widget class="QLabel" name="_l_valid_facture_fait_le">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Fait le</string>
                </property>
@@ -5459,8 +5482,20 @@ QCalendarWidget QAbstractItemView:enabled {
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="_l_valid_facture_fait_le_value">
+               <property name="minimumSize">
+                <size>
+                 <width>150</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>150</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
-                <string/>
+                <string>19 Décembre 2024</string>
                </property>
               </widget>
              </item>
@@ -5684,22 +5719,42 @@ QCalendarWidget QAbstractItemView:enabled {
             </widget>
            </item>
            <item>
+            <widget class="QComboBox" name="_cbx_valid_facture_type_export">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>35</height>
+              </size>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>Facture</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/icon/icons/facturen.png</normaloff>:/icon/icons/facturen.png</iconset>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Bon de Livraison</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/icon/icons/bon-de-livraison.png</normaloff>:/icon/icons/bon-de-livraison.png</iconset>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
             <layout class="QGridLayout" name="_g_valid_facture_preview_three">
-             <item row="0" column="0" colspan="2">
-              <widget class="QLabel" name="_l_valid_facture_attachment_pdf">
-               <property name="text">
-                <string>Pièce jointe PDF</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3" colspan="2">
-              <widget class="QLabel" name="_l_valid_facture_attachment_excel">
-               <property name="text">
-                <string>Pièce jointe Excel</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0" colspan="2">
+             <item row="2" column="0" colspan="2">
               <layout class="QHBoxLayout" name="_h_valid_facture_attachment_pdf">
                <property name="spacing">
                 <number>3</number>
@@ -5766,7 +5821,21 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
               </layout>
              </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QLabel" name="_l_valid_facture_attachment_pdf">
+               <property name="text">
+                <string>Pièce jointe PDF</string>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="3" colspan="2">
+              <widget class="QLabel" name="_l_valid_facture_attachment_excel">
+               <property name="text">
+                <string>Pièce jointe Excel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3" colspan="2">
               <layout class="QHBoxLayout" name="_h_valid_facture_attachment_excel">
                <property name="spacing">
                 <number>3</number>
