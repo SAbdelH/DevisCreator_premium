@@ -4586,7 +4586,7 @@ QCalendarWidget QAbstractItemView:enabled {
                <item>
                 <widget class="QCheckBox" name="_cb_invoice_location">
                  <property name="text">
-                  <string>Location</string>
+                  <string>Élément à louer</string>
                  </property>
                 </widget>
                </item>
@@ -6731,9 +6731,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="_v_inventory_box_edit">
-           <property name="sizeConstraint">
-            <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
-           </property>
            <property name="leftMargin">
             <number>5</number>
            </property>
@@ -6823,6 +6820,9 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -6842,6 +6842,9 @@ QCalendarWidget QAbstractItemView:enabled {
                  <width>0</width>
                  <height>30</height>
                 </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -6863,6 +6866,9 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -6883,14 +6889,28 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="_cb_inventory_quantifiable">
-               <property name="text">
-                <string>Élément quantifiable</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="_h_inventory_info_qty">
+               <item>
+                <widget class="QCheckBox" name="_cb_inventory_quantifiable">
+                 <property name="text">
+                  <string>Élément quantifiable</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="_cb_inventory_location">
+                 <property name="text">
+                  <string>Élément à louer</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
               <widget class="QLabel" name="_l_inventory_type_remise">
@@ -6951,6 +6971,9 @@ QCalendarWidget QAbstractItemView:enabled {
                  <height>30</height>
                 </size>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
               </widget>
              </item>
              <item>
@@ -6972,6 +6995,9 @@ QCalendarWidget QAbstractItemView:enabled {
                    <width>0</width>
                    <height>30</height>
                   </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -7009,6 +7035,9 @@ QCalendarWidget QAbstractItemView:enabled {
                    <width>0</width>
                    <height>30</height>
                   </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
                  </property>
                 </widget>
                </item>

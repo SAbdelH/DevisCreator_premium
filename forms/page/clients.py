@@ -1,3 +1,8 @@
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLineEdit, QSizePolicy, QSpacerItem, \
+    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QDoubleSpinBox, QAbstractSpinBox, QListWidget
+
+
 class clientsPage:
     def initUi_clientForm(self):
         self._p_clients = QWidget()

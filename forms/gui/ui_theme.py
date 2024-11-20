@@ -475,20 +475,11 @@ QRadioButton::indicator:checked:pressed
 	color: rgba(255, 255, 255, 1);
 	
 }}
-#_f_inventory_low_sale {{
-	background-color: rgba(20, 123, 255, 1);
-}}
 #_l_inventory_icon_low_sale {{
 	background-color: rgba(65, 149, 255, 1);
 }}
-#_f_inventory_most_sale {{
-	background-color: rgba(215, 254, 98, 1);
-}}
 #_l_inventory_icon_most_sale {{
 	background-color: rgba(173, 203, 78, 1);
-}}
-#_f_inventory_sum_sold {{
-	background-color: rgba(7, 255, 153, 1);
 }}
 #_l_inventory_icon_sum_sold {{
 	background-color: rgba(0, 230, 138, 1);

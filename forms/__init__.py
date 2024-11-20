@@ -267,11 +267,13 @@ class Ui_MainWindow(QMainWindow, thm, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP
 
         self.retranslateUi(MainWindow)
 
-        self._sw_main_dialog.setCurrentIndex(6)
+        self._sw_main_dialog.setCurrentIndex(7)
         self._sw_login_dialog.setCurrentIndex(0)
         self._cbx_um_sexe.setCurrentIndex(-1)
         self._cbx_um_role.setCurrentIndex(-1)
         self._cbx_invoice_type_remise.setCurrentIndex(-1)
+        self._cbx_inventory_type_remise.setCurrentIndex(-1)
+
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -403,7 +405,7 @@ class Ui_MainWindow(QMainWindow, thm, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP
         self._l_invoice_price.setText(QCoreApplication.translate("MainWindow", u"Prix", None))
         self._l_invoice_marque.setText(QCoreApplication.translate("MainWindow", u"Marque", None))
         self._cb_invoice_quantifiable.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment quantifiable", None))
-        self._cb_invoice_location.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment Location", None))
+        self._cb_invoice_location.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment \u00e0 louer", None))
         self._l_invoice_client.setText(QCoreApplication.translate("MainWindow", u"Client :", None))
         self._l_invoice_warning_message.setText(QCoreApplication.translate("MainWindow", u"! Client avec des factures impay\u00e9es", None))
         self._gb_invoice_info_client.setTitle(QCoreApplication.translate("MainWindow", u"Informations client", None))
@@ -517,7 +519,7 @@ class Ui_MainWindow(QMainWindow, thm, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP
         self._l_inventory_most_sale_value.setText(QCoreApplication.translate("MainWindow", u"- Unit\u00e9s", None))
         self._l_inventory_most_sale.setText(QCoreApplication.translate("MainWindow", u"Le plus vendu", None))
         self._l_inventory_icon_most_sale.setText("")
-        self._l_inventory_sum_value.setText(QCoreApplication.translate("MainWindow", u"1000", None))
+        self._l_inventory_sum_value.setText(QCoreApplication.translate("MainWindow", u"0", None))
         self._l_inventory_sum.setText(QCoreApplication.translate("MainWindow", u"Produits au total", None))
         self._le_inventory_search_product.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Chercher un produit", None))
         self._b_inventory_add_product.setText(QCoreApplication.translate("MainWindow", u"Ajouter un inventaire", None))
@@ -527,6 +529,7 @@ class Ui_MainWindow(QMainWindow, thm, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP
         self._l_inventory_price.setText(QCoreApplication.translate("MainWindow", u"Prix", None))
         self._l_inventory_quantity.setText(QCoreApplication.translate("MainWindow", u"Quantit\u00e9", None))
         self._cb_inventory_quantifiable.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment quantifiable", None))
+        self._cb_inventory_location.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment \u00e0 louer", None))
         self._l_inventory_type_remise.setText(QCoreApplication.translate("MainWindow", u"Type remise", None))
         self._cbx_inventory_type_remise.setItemText(0, QCoreApplication.translate("MainWindow", u"En devise", None))
         self._cbx_inventory_type_remise.setItemText(1, QCoreApplication.translate("MainWindow", u"En pourcentage", None))
@@ -538,6 +541,7 @@ class Ui_MainWindow(QMainWindow, thm, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP
         self._l_inventory_import_path.setText(QCoreApplication.translate("MainWindow", u"Importer depuis une liste", None))
         self._tb_inventory_import_path.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self._b_inventory_add.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
+        self._b_inventory_achat.setText(QCoreApplication.translate("MainWindow", u"Achat", None))
         self._b_inventory_update.setText(QCoreApplication.translate("MainWindow", u"Mettre-\u00e0-jour", None))
         self._b_inventory_delete.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
         self._l_inventory_sum_sold_value.setText(QCoreApplication.translate("MainWindow", u"- \u20ac", None))
