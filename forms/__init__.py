@@ -267,7 +267,7 @@ class Ui_MainWindow(QMainWindow, thm, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP
 
         self.retranslateUi(MainWindow)
 
-        self._sw_main_dialog.setCurrentIndex(7)
+        self._sw_main_dialog.setCurrentIndex(8)
         self._sw_login_dialog.setCurrentIndex(0)
         self._cbx_um_sexe.setCurrentIndex(-1)
         self._cbx_um_role.setCurrentIndex(-1)

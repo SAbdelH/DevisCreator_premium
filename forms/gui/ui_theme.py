@@ -134,7 +134,8 @@ class theme:
 }}
 #_f_calendar QLineEdit, #_f_calendar QTextEdit, #_f_calendar QListWidget,
 #_f_calendar QDateEdit, #_f_calendar QTimeEdit, #_f_left_user_management  QListWidget,
-#_f_valid_facture_list QListWidget, #_p_clients QTableWidget, #_p_factures QComboBox
+#_f_valid_facture_list QListWidget, #_p_clients QTableWidget, #_p_factures QComboBox,
+#_p_inventory QDateEdit
 {{
 	border-radius: 5px;
 	border: 1px solid rgba(214, 219, 223, 1);
@@ -167,7 +168,8 @@ class theme:
 	font: italic 11pt "Arial";
 	color: rgba(72, 166, 255, 1);
 }}
-#_f_graphic_finances QTableWidget, #_f_graphic_finances QListWidget, #_f_graphic_finances QGraphicsView, #_tw_select_table {{
+#_f_graphic_finances QTableWidget, #_f_graphic_finances QListWidget, #_f_graphic_finances QGraphicsView, #_tw_select_table,
+#_p_valid_factures * QTableWidget{{
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 1);
 	color: rgba(0, 0, 0, 1);
@@ -257,7 +259,7 @@ QRadioButton::indicator:checked:pressed
 #_p_clients * QListWidget, #_p_restore QLineEdit, #_p_restore QComboBox, 
 #_p_clients * QDoubleSpinBox, #_p_clients * QLineEdit, #_p_manage_db QTreeWidget,
 #_p_inventory QLineEdit, #_p_inventory QComboBox, #_p_inventory QSpinBox, #_p_inventory QDoubleSpinBox,
-#_p_valid_factures * QComboBox
+#_p_valid_factures * QComboBox, #_p_factures * QListWidget
 {{
 	color: rgba(0, 0, 0, 1);
 	border-radius: 5px;
