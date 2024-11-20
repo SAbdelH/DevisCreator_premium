@@ -299,8 +299,20 @@ class Icons:
         return self.__QIcon("profilClient")
 
     @property
+    def achat_icon(self) -> QIcon:
+        return self.__QIcon("achat")
+
+    @property
+    def profil_client_pixmap(self) -> QPixmap:
+        return self.__QPixmap("profilClient")
+
+    @property
     def mail_client_icon(self) -> QIcon:
         return self.__QIcon("e-mail")
+
+    @property
+    def mail_client_pixmap(self) -> QPixmap:
+        return self.__QPixmap("e-mail")
 
     @property
     def copier_icon(self) -> QIcon:
@@ -311,6 +323,10 @@ class Icons:
         return self.__QIcon("appel")
 
     @property
+    def telephone_pixmap(self) -> QPixmap:
+        return self.__QPixmap("appel")
+
+    @property
     def cacher_widget_icon(self) -> QIcon:
         return self.__QIcon("cacher")
 
@@ -319,16 +335,16 @@ class Icons:
         return self.__QIcon("effacer")
 
     @property
-    def plus_vendu_icon(self) -> QIcon:
-        return self.__QIcon("most_sell")
+    def plus_vendu_pixmap(self) -> QPixmap:
+        return self.__QPixmap("most_sell")
 
     @property
-    def total_vente(self) -> QIcon:
-        return self.__QIcon("sum_sell")
+    def total_vente_pixmap(self) -> QPixmap:
+        return self.__QPixmap("sum_sell")
 
     @property
-    def moins_vendu_icon(self) -> QIcon:
-        return self.__QIcon("low_sell")
+    def moins_vendu_pixmap(self) -> QPixmap:
+        return self.__QPixmap("low_sell")
 
     def restore_icon(self) -> QIcon:
         return self.__QIcon("RESTORE")

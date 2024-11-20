@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -6720,7 +6720,7 @@ QCalendarWidget QAbstractItemView:enabled {
          <widget class="QFrame" name="_f_inventory_box_edit">
           <property name="maximumSize">
            <size>
-            <width>400</width>
+            <width>450</width>
             <height>16777215</height>
            </size>
           </property>
@@ -7046,9 +7046,16 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="_b_inventory_achat">
                <property name="text">
                 <string>Achat</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/achat.png</normaloff>:/icon/icons/achat.png</iconset>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
                </property>
               </widget>
              </item>

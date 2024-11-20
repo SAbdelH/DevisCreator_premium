@@ -7,7 +7,7 @@ import phonenumbers
 from validate_email_address import validate_email
 
 
-class CompanyPage:
+class firmPage:
     def __init__(self):
         self.font6 = QFont()
         self.font6.setPointSize(13)

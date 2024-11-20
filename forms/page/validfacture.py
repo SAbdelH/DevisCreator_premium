@@ -236,6 +236,7 @@ class validFacturePage:
         self._h_valid_facture_preview_three.addWidget(self._b_valid_facture_paid)
         self._v_valid_facture_preview.addLayout(self._h_valid_facture_preview_three)
         self._h_valid_factures.addWidget(self._f_valid_facture_preview)
+        self._sw_main_dialog.addWidget(self._p_valid_factures)
 
     def button_exports_text(self, numero: str = "1120240001"):
         exportText = self._cbx_valid_facture_type_export.currentText()
