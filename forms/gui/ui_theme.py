@@ -1,3 +1,7 @@
+from PySide6.QtGui import QColor
+from PySide6.QtWidgets import QGraphicsDropShadowEffect
+
+
 class theme:
     def light_theme(self):
         self.centralwidget.setStyleSheet(f"""
@@ -581,6 +585,13 @@ QCalendarWidget QAbstractItemView:enabled {{
 	selection-background-color: rgba(42, 157, 143, 1); 
 	color: rgba(0, 0, 0, 1);
 	border-radius: 10px;
+    margin: 6px;
+    padding: 2px;
+}}
+QCalendarWidget QAbstractItemView::item:selected {{
+    border-radius: 10px;
+    margin: 6px;
+    padding: 2px;
 }}
 /* BOUTONS HOVER */
 #_sw_main_dialog QPushButton::hover {{
@@ -589,3 +600,11 @@ QCalendarWidget QAbstractItemView:enabled {{
 	background-color: rgba(235, 245, 251, 1);
 }}
         """)
+
+    @property
+    def shadow(self):
+        shadow = QGraphicsDropShadowEffect(self)
+        shadow.setBlurRadius(8)
+        shadow.setOffset(-0.4, 2)
+        #shadow.setColor(QColor(0, 0, 0, 100))
+        return shadow
