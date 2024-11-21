@@ -1,6 +1,7 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLabel, QListWidget, QGridLayout, QTableWidget, QTableWidgetItem, QHeaderView, QSpacerItem, QSizePolicy, QComboBox, QPushButton)
+from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLabel, QListWidget, QGridLayout,
+                               QTableWidget, QTableWidgetItem, QHeaderView, QSpacerItem, QSizePolicy, QComboBox, QPushButton)
 
 
 class validFacturePage:
@@ -238,7 +239,43 @@ class validFacturePage:
         self._h_valid_factures.addWidget(self._f_valid_facture_preview)
         self._sw_main_dialog.addWidget(self._p_valid_factures)
 
+        self.__retranslateUi()
+
     def button_exports_text(self, numero: str = "1120240001"):
         exportText = self._cbx_valid_facture_type_export.currentText()
         self._b_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", f"{exportText}_{numero}.pdf", None))
         self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", f"{exportText}_{numero}.xlsx", None))
+
+    def __retranslateUi(self):
+        HeaderName = [u"\u00c9l\u00e9ment", u"Prix unitaire", u"Qt\u00e9", u"Remise",
+                        u"Montant TTC", u"Pay\u00e9"]
+
+        self._l_valid_facture_list.setText(QCoreApplication.translate("MainWindow", u"LISTE DES FACTURES", None))
+        self._l_preview_index_invoice.setText(QCoreApplication.translate("MainWindow", u"FACTURE #1120240001", None))
+        self._l_preview_state_invoice.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-family:'Segoe UI Symbol','sans-serif'; color:rgba(253, 237, 236, 1);\">\u25c9 Non pay\u00e9</span></p></body></html>", None))
+        self._l_state_invoice_message.setText(QCoreApplication.translate("MainWindow", u"\u2714\ufe0e Facture valid\u00e9 depuis le 10 Novembre 2024", None))
+        self._l_valid_facture_objet.setText(QCoreApplication.translate("MainWindow", u"Objet", None))
+        self._l_valid_facture_fait_le.setText(QCoreApplication.translate("MainWindow", u"Fait le", None))
+        self._l_valid_facture_fait_le_value.setText("")
+        self._l_valid_facture_objet_value.setText("")
+        self._l_valid_facture_to.setText(QCoreApplication.translate("MainWindow", u"Destinataire", None))
+        self._l_valid_facture_toName_value.setText("")
+        self._l_valid_facture_toMail_value.setText("")
+        self._l_valid_facture_toNum_value.setText("")
+        for i, name in enumerate(HeaderName, start=1):
+            ___qtablewidgetitem = self._tw_valid_facture_elements.horizontalHeaderItem(i)
+            ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", name, None))
+        self._l_valid_facture_montant_ttc_value.setText("")
+        self._l_valid_facture_montant_ht_value.setText("")
+        self._l_valid_facture_montant_ht.setText(QCoreApplication.translate("MainWindow", u"Montant HT", None))
+        self._l_valid_facture_montant_ttc.setText(QCoreApplication.translate("MainWindow", u"Montant TTC", None))
+        self._cbx_valid_facture_type_export.setItemText(0, QCoreApplication.translate("MainWindow", u"Facture", None))
+        self._cbx_valid_facture_type_export.setItemText(1, QCoreApplication.translate("MainWindow", u"Bon de Livraison", None))
+        self._l_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", u"Pi\u00e8ce jointe PDF", None))
+        self._l_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", u"Pi\u00e8ce jointe Excel", None))
+        self._l_valid_facture_pdf_icon.setText("")
+        self._b_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", u"Facture_1120240001.pdf", None))
+        self._l_valid_facture_excel_icon.setText("")
+        self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", u"Facture_1120240001.xlsx", None))
+        self._b_valid_facture_unpaid.setText(QCoreApplication.translate("MainWindow", u"\u2718 Marqu\u00e9 comme non pay\u00e9", None))
+        self._b_valid_facture_paid.setText(QCoreApplication.translate("MainWindow", u"\u2714\ufe0e Marquer comme pay\u00e9", None))

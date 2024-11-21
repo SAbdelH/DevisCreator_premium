@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont, QAction, QIcon
 from PySide6.QtWidgets import (QWidget, QGridLayout, QStackedWidget, QLabel, QSpacerItem, QSizePolicy, QLineEdit,
                                QPushButton, QSpinBox)
@@ -40,7 +40,10 @@ class LoginPage:
         # AJOUT DU GRID WIDGET BLANC A PAGE LOGIN
         self._g_login.addWidget(self._w_login_dialog, 0, 0, 1, 1, Qt.AlignVCenter)
         # AJOUT DE LA PAGE A STACKED WIDGET
+        self._sw_login_dialog.setCurrentIndex(0)
         self._sw_main_dialog.addWidget(self._p_login)
+
+        self.__retranslateUi()
 
     def __initDialogSignin(self):
         # PAGE SIGNIN
@@ -206,3 +209,19 @@ class LoginPage:
         self._g_signup.addWidget(self._b_back_connexion, 9, 0, 1, 2)
         # AJOUT DE LA PAGE SIGNUP DANS LE DIALOG CONNEXION
         self._sw_login_dialog.addWidget(self._p_signup)
+
+    def __retranslateUi(self):
+        self._l_connexion.setText(QCoreApplication.translate("MainWindow", u"Connexion", None))
+        self._l_icon_connexion.setText("")
+        self._le_identifiant.setInputMask("")
+        self._le_identifiant.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Identifiant", None))
+        self._le_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
+        self._b_signin.setText(QCoreApplication.translate("MainWindow", u"Connexion", None))
+        self._b_config_db.setText(QCoreApplication.translate("MainWindow", u"Configurer une connexion", None))
+        self._b_guess_connexion.setText(QCoreApplication.translate("MainWindow", u"Invit\u00e9", None))
+        self._b_back_connexion.setText(QCoreApplication.translate("MainWindow", u"Retour \u00e0 l'\u00e9cran de connexion", None))
+        self._l_icon_config_db.setText("")
+        self._l_config_db.setText(QCoreApplication.translate("MainWindow", u"Configuration d'une connexion", None))
+        self._le_host.setPlaceholderText(QCoreApplication.translate("MainWindow", u"L'H\u00f4te", None))
+        self._le_db_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Base de donn\u00e9es", None))
+        self._b_save_config_db.setText(QCoreApplication.translate("MainWindow", u"Sauvegarde", None))

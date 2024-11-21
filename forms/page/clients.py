@@ -1,6 +1,6 @@
-from PySide6.QtCore import QSize, Qt
-from PySide6.QtWidgets import QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLineEdit, QSizePolicy, QSpacerItem, \
-    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QDoubleSpinBox, QAbstractSpinBox, QListWidget
+from PySide6.QtCore import QSize, Qt, QCoreApplication
+from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLineEdit, QSizePolicy, QSpacerItem,
+    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QDoubleSpinBox, QAbstractSpinBox, QListWidget)
 
 
 class clientsPage:
@@ -190,3 +190,34 @@ class clientsPage:
         self._v_clients_info_box.addLayout(self._h_clients_info_box_bottom)
         self._h_clients.addWidget(self._f_clients_info_box)
         self._sw_main_dialog.addWidget(self._p_clients)
+
+        self.__retranslateUi()
+
+    def __retranslateUi(self):
+        HeaderName =  [u"Cr\u00e9er le", u"Nom", u"T\u00e9l\u00e9phone", u"Mail",
+                        u"Commerce", u"Dette", u"Status", u"Dernier commerce"]
+        self._le_clients_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Chercher un client", None))
+        self._b_clients_add_client.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er", None))
+        self._b_clients_show_info.setText(QCoreApplication.translate("MainWindow", u"Afficher les infos", None))
+        for i, name in enumerate(HeaderName):
+            ___qtablewidgetitem = self._tw_clients_table_info.horizontalHeaderItem(i)
+            ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", name, None))
+
+        self._l_clients_profil_icon.setText("")
+        self._l_clients_client_info.setText(QCoreApplication.translate("MainWindow", u"Client infos", None))
+        self._l_clients_icon_mail.setText("")
+        self._l_clients_mail.setText(QCoreApplication.translate("MainWindow", u"Mail            :", None))
+        self._b_clients_clipbord_mail.setToolTip(QCoreApplication.translate("MainWindow", u"Copier", None))
+        self._b_clients_clipbord_mail.setText("")
+        self._l_clients_icon_num.setText("")
+        self._l_clients_num.setText(QCoreApplication.translate("MainWindow", u"T\u00e9l\u00e9phone :", None))
+        self._b_clients_clipbord_num.setToolTip(QCoreApplication.translate("MainWindow", u"Copier", None))
+        self._b_clients_clipbord_num.setText("")
+        self._l_clients_factures_impayees.setText(QCoreApplication.translate("MainWindow", u"Factures impay\u00e9es", None))
+        self._l_client_dette.setText(QCoreApplication.translate("MainWindow", u"Dette de : ", None))
+        self._ds_clients_dette.setPrefix("")
+        self._ds_clients_dette.setSuffix(QCoreApplication.translate("MainWindow", u" \u20ac", None))
+        self._b_clients_hide_info.setText(QCoreApplication.translate("MainWindow", u"fermer", None))
+        self._b_clients_delete_client.setText(QCoreApplication.translate("MainWindow", u"supprimer", None))
+        self._b_clients_save_client.setText(QCoreApplication.translate("MainWindow", u"Enregistrer", None))
+        self._b_clients_info_export.setText(QCoreApplication.translate("MainWindow", u"Exporter la fiche", None))

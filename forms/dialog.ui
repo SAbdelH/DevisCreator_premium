@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>8</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -1200,7 +1200,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </size>
              </property>
              <property name="currentIndex">
-              <number>0</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="_p_signin">
               <layout class="QGridLayout" name="_g_signin">
@@ -4348,7 +4348,61 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="3" column="0">
+              <widget class="QLineEdit" name="_le_invoice_marque">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLineEdit" name="_le_invoice_name">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <layout class="QHBoxLayout" name="_h_invoice_info_qty">
+               <item>
+                <widget class="QCheckBox" name="_cb_invoice_quantifiable">
+                 <property name="text">
+                  <string>Élément quantifiable</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="_cb_invoice_location">
+                 <property name="text">
+                  <string>Élément à louer</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="_l_invoice_qauntity">
+               <property name="text">
+                <string>Quantité</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
               <widget class="QComboBox" name="_cbx_invoice_type_remise">
                <property name="minimumSize">
                 <size>
@@ -4385,96 +4439,20 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLineEdit" name="_le_invoice_name">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QSpinBox" name="_s_invoice_quantity">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLineEdit" name="_le_invoice_marque">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="_l_invoice_qauntity">
-               <property name="text">
-                <string>Quantité</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="_l_invoice_nom">
-               <property name="text">
-                <string>Nom</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="_l_invoice_price">
-               <property name="text">
-                <string>Prix</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="_l_invoice_type_remise">
-               <property name="text">
-                <string>Type de remise</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="_l_invoice_remise">
-               <property name="text">
-                <string>Remise</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="13" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="14" column="0">
               <layout class="QHBoxLayout" name="_h_btn_invoice_input">
                <item>
                 <widget class="QPushButton" name="_b_invoice_cancel_card">
@@ -4548,6 +4526,49 @@ QCalendarWidget QAbstractItemView:enabled {
                </item>
               </layout>
              </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="_l_invoice_price">
+               <property name="text">
+                <string>Prix</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="_l_invoice_remise">
+               <property name="text">
+                <string>Remise</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QSpinBox" name="_s_invoice_quantity">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="_l_invoice_nom">
+               <property name="text">
+                <string>Nom</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
              <item row="5" column="0">
               <widget class="QDoubleSpinBox" name="_ds_invoice_price">
                <property name="minimumSize">
@@ -4561,36 +4582,25 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
               </widget>
              </item>
-             <item row="12" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
+             <item row="10" column="0">
+              <widget class="QLabel" name="_l_invoice_type_remise">
+               <property name="text">
+                <string>Type de remise</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <layout class="QHBoxLayout" name="_h_invoice_info_qty">
-               <item>
-                <widget class="QCheckBox" name="_cb_invoice_quantifiable">
-                 <property name="text">
-                  <string>Élément quantifiable</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="_cb_invoice_location">
-                 <property name="text">
-                  <string>Élément à louer</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+             <item row="9" column="0">
+              <widget class="QLabel" name="_l_invoiceemptyInventorymess">
+               <property name="text">
+                <string>le matériel n'est plus en stock dans le magasin (attente de retour ...)</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>

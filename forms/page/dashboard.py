@@ -1,8 +1,8 @@
-from PySide6.QtCore import Qt, QSize
+from PySide6.QtCore import Qt, QSize, QCoreApplication
 from PySide6.QtGui import QFont
-from PySide6.QtWidgets import QWidget, QGridLayout, QFrame, QSpacerItem, QRadioButton, QSizePolicy, QHBoxLayout, \
-    QCheckBox, QPushButton, QGraphicsView, QTableWidget, QTableWidgetItem, QVBoxLayout, QListWidget, QHeaderView, \
-    QCalendarWidget, QLabel, QLineEdit, QTextEdit, QDateEdit, QTimeEdit, QToolButton, QComboBox
+from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QSpacerItem, QRadioButton, QSizePolicy, QHBoxLayout,
+    QCheckBox, QPushButton, QGraphicsView, QTableWidget, QTableWidgetItem, QVBoxLayout, QListWidget, QHeaderView,
+    QCalendarWidget, QLabel, QLineEdit, QTextEdit, QDateEdit, QTimeEdit)
 
 
 class DashboardPage:
@@ -36,6 +36,8 @@ class DashboardPage:
         self.__footer()
         # AJOUT DE LA PAGE A STACKED WIDGET
         self._sw_main_dialog.addWidget(self._p_dashboard)
+
+        self.__retranslateUi()
 
     def __financeForm(self):
         # FRAME POUR ACCUEILLIR LES GRAPHIQUES A GAUCHE
@@ -313,3 +315,33 @@ class DashboardPage:
         self._l_evolution_stats.setObjectName(u"_l_evolution_stats")
         self._h_footer_evolution.addWidget(self._l_evolution_stats)
         self._g_dashboard.addLayout(self._h_footer_evolution, 1, 0, 1, 2)
+
+    def __retranslateUi(self):
+        self._r_mois.setText(QCoreApplication.translate("MainWindow", u"Mois", None))
+        self._r_semaine.setText(QCoreApplication.translate("MainWindow", u"Semaine", None))
+        self._cb_devis.setText(QCoreApplication.translate("MainWindow", u"Devis", None))
+        self._cb_factures.setText(QCoreApplication.translate("MainWindow", u"Factures", None))
+        self._r_annee.setText(QCoreApplication.translate("MainWindow", u"Ann\u00e9e", None))
+        self._b_export_stats.setToolTip(QCoreApplication.translate("MainWindow", u"Exporter des analyses", None))
+        self._b_export_stats.setText(QCoreApplication.translate("MainWindow", u"Export", None))
+        ___qtablewidgetitem = self._tw_activity.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Date", None));
+        ___qtablewidgetitem1 = self._tw_activity.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Activit\u00e9s", None));
+        ___qtablewidgetitem2 = self._tw_activity.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Actions", None));
+        ___qtablewidgetitem3 = self._tw_activity.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("MainWindow", u"Budget", None));
+        self._b_more_activity.setText(QCoreApplication.translate("MainWindow", u"Affich\u00e9 plus", None))
+        self._l_parametres.setText(QCoreApplication.translate("MainWindow", u"Param\u00e8tres :", None))
+        self._l_titre_agenda.setText(QCoreApplication.translate("MainWindow", u"Titre :", None))
+        self._l_description.setText(QCoreApplication.translate("MainWindow", u"Description :", None))
+        self._l_jour_agenda.setText(QCoreApplication.translate("MainWindow", u"Jour:", None))
+        self._l_debut_agenda.setText(QCoreApplication.translate("MainWindow", u"D\u00e9but:", None))
+        self._l_fin_agenda.setText(QCoreApplication.translate("MainWindow", u"Fin:", None))
+        self._b_add_agenda.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
+        self._b_update_agenda.setText(QCoreApplication.translate("MainWindow", u"Mettre \u00e0 jour", None))
+        self._b_delete_agenda.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
+        self._l_agenda.setText(QCoreApplication.translate("MainWindow", u"Agenda :", None))
+        self._l_evolution.setText(QCoreApplication.translate("MainWindow", u"Evolution:", None))
+        self._l_evolution_stats.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:600; color:#009051;\">\u25b2\u25bc +15 %</span></p></body></html>", None))

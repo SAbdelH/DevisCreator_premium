@@ -126,7 +126,7 @@ class theme:
 	color: rgba(0, 0, 0, 1);
 }}
 #_f_calendar, #_f_right_info_company, #_f_info_company, #_f_invoice_box_export_invoice,
-#_f_invoice_input_card, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview,
+#_f_invoice_input_cart, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview,
 #_f_clients_info_box, #_f_clients_table, #_f_inventory_box_edit {{
 	background-color: rgba(255, 255, 255, 1);
 	border-radius: 15px;
@@ -309,16 +309,16 @@ QRadioButton::indicator:checked:pressed
 	background-position: center center;
 	background-origin: content;
 }}
-#_b_invoice_export, #_b_invoice_add_card {{
+#_b_invoice_export, #_b_invoice_add_cart {{
 	background-color : rgba(82, 121, 111, 1);
 	color: rgba(255, 255, 255, 1);
 	border-radius: 10px;
 }}
-#_b_invoice_cancel_card {{
+#_b_invoice_cancel_cart {{
 	border: 1px solid rgba(174, 182, 191, 1);
 	border-radius: 10px;
 }}
-#_sw_main_dialog #_b_invoice_export::hover, #_sw_main_dialog #_b_invoice_add_card::hover {{
+#_sw_main_dialog #_b_invoice_export::hover, #_sw_main_dialog #_b_invoice_add_cart::hover {{
 	background-color : rgba(118, 215, 196, 1) !important;
 	color: rgba(0, 0, 0, 1) !important;
 	border-radius: 10px !important;
@@ -366,6 +366,7 @@ QRadioButton::indicator:checked:pressed
 #_f_invoice_box_export_invoice #_ds_invoice_total {{
 	color: rgba(223, 79, 144, 1);
 }}
+#_l_invoiceemptyInventorymess {{color: rgba(188, 71, 73, 1)}}
 /*VALIDATION FACTURE*/
 #_l_valid_facture_fait_le, #_l_valid_facture_objet, #_l_valid_facture_to {{
 	color: rgba(136, 142, 158, 1);

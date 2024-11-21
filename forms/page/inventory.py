@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QLabel, QHBoxLayout, QLineEdit, QPushButton, QListWidget,
     QVBoxLayout, QLayout, QDoubleSpinBox, QSpinBox, QCheckBox, QComboBox, QDateEdit, QToolButton)
 
@@ -147,6 +147,7 @@ class InventoryPage:
         self._cbx_inventory_type_remise.addItem(self.pourcentage_icon, "")
         self._cbx_inventory_type_remise.setObjectName(u"_cbx_inventory_type_remise")
         self._cbx_inventory_type_remise.setMinimumSize(QSize(0, 30))
+        self._cbx_inventory_type_remise.setCurrentIndex(-1)
         self._v_inventory_input.addWidget(self._cbx_inventory_type_remise)
         self._l_inventory_date_fabric = QLabel(self._f_inventory_box_edit)
         self._l_inventory_date_fabric.setObjectName(u"_l_inventory_date_fabric")
@@ -257,3 +258,41 @@ class InventoryPage:
         self._g_inventory_low_sale.addWidget(self._l_inventory_icon_low_sale, 0, 0, 2, 1)
         self._g_inventory.addWidget(self._ccw_inventory_low_sale, 2, 1, 1, 1)
         self._sw_main_dialog.addWidget(self._p_inventory)
+
+        self.__retranslateUi()
+
+    def __retranslateUi(self):
+        self._l_inventory_most_sale_value.setText(QCoreApplication.translate("MainWindow", u"- Unit\u00e9s", None))
+        self._l_inventory_most_sale.setText(QCoreApplication.translate("MainWindow", u"Le plus vendu", None))
+        self._l_inventory_icon_most_sale.setText("")
+        self._l_inventory_sum_value.setText(QCoreApplication.translate("MainWindow", u"0", None))
+        self._l_inventory_sum.setText(QCoreApplication.translate("MainWindow", u"Produits au total", None))
+        self._le_inventory_search_product.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Chercher un produit", None))
+        self._b_inventory_add_product.setText(QCoreApplication.translate("MainWindow", u"Ajouter un inventaire", None))
+        self._l_inventory_informations_product.setText(QCoreApplication.translate("MainWindow", u"Informations du produit", None))
+        self._l_inventory_name.setText(QCoreApplication.translate("MainWindow", u"Nom", None))
+        self._l__inventory_marque.setText(QCoreApplication.translate("MainWindow", u"Marque", None))
+        self._l_inventory_price.setText(QCoreApplication.translate("MainWindow", u"Prix", None))
+        self._l_inventory_quantity.setText(QCoreApplication.translate("MainWindow", u"Quantit\u00e9", None))
+        self._cb_inventory_quantifiable.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment quantifiable", None))
+        self._cb_inventory_location.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment \u00e0 louer", None))
+        self._l_inventory_type_remise.setText(QCoreApplication.translate("MainWindow", u"Type remise", None))
+        self._cbx_inventory_type_remise.setItemText(0, QCoreApplication.translate("MainWindow", u"En devise", None))
+        self._cbx_inventory_type_remise.setItemText(1, QCoreApplication.translate("MainWindow", u"En pourcentage", None))
+
+        self._cbx_inventory_type_remise.setPlaceholderText(QCoreApplication.translate("MainWindow", u"-- S\u00e9l\u00e9ctionnez un type seulement s'il y'a remise", None))
+        self._l_inventory_date_fabric.setText(QCoreApplication.translate("MainWindow", u"Date de fabrication", None))
+        self._l_inventory_illustration_path.setText(QCoreApplication.translate("MainWindow", u"Illustration", None))
+        self._tb_inventory_illustration_path.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self._l_inventory_import_path.setText(QCoreApplication.translate("MainWindow", u"Importer depuis une liste", None))
+        self._tb_inventory_import_path.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self._b_inventory_add.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
+        self._b_inventory_achat.setText(QCoreApplication.translate("MainWindow", u"Achat", None))
+        self._b_inventory_update.setText(QCoreApplication.translate("MainWindow", u"Mettre-\u00e0-jour", None))
+        self._b_inventory_delete.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
+        self._l_inventory_sum_sold_value.setText(QCoreApplication.translate("MainWindow", u"- \u20ac", None))
+        self._l_inventory_sum_sold.setText(QCoreApplication.translate("MainWindow", u"Total vente", None))
+        self._l_inventory_icon_sum_sold.setText("")
+        self._l_inventory_low_sale_value.setText(QCoreApplication.translate("MainWindow", u"- Unit\u00e9s", None))
+        self._l_inventory_low_sale.setText(QCoreApplication.translate("MainWindow", u"Le moins bien vendu", None))
+        self._l_inventory_icon_low_sale.setText("")

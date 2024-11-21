@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QLabel,QPushButton, QGroupBox,
                                 QSpacerItem, QSizePolicy, QLineEdit, QHBoxLayout)
@@ -33,6 +33,8 @@ class firmPage:
         self.__inputInfoForm()
         # AJOUT DE LA PAGE A STACKED WIDGET
         self._sw_main_dialog.addWidget(self._p_info_company)
+
+        self.__retranslateUi()
 
         self.current_step = 0
         self._cpb_step_bar.setCurrentStep(self.current_step)
@@ -596,6 +598,38 @@ class firmPage:
         self._v_info_company.addWidget(self._gb_informations_bancaires)
         self._le_iban.textEdited.connect(self.active_valid_bank)
         self._le_bic.textEdited.connect(self.active_valid_bank)
+
+    def __retranslateUi(self):
+        self._l_icon_company_info_company.setText("")
+        self._b_save_info_company.setText(QCoreApplication.translate("MainWindow", u"Enregistrer", None))
+        self._gb_info_entreprise.setTitle(QCoreApplication.translate("MainWindow", u"Entreprise", None))
+        self._b_valid_nom_entreprise.setText("")
+        self._l_nom_entreprise.setText(QCoreApplication.translate("MainWindow", u"Nom :", None))
+        self._gb_dirigeant.setTitle(QCoreApplication.translate("MainWindow", u"Informations du Dirigeant", None))
+        self._b_valid_dirigeant.setText("")
+        self._l_nom_dirigeant.setText(QCoreApplication.translate("MainWindow", u"Nom", None))
+        self._l_prenom_dirigeant.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e9nom", None))
+        self._gb_adresse_entreprise.setTitle(QCoreApplication.translate("MainWindow", u"Adresse de l'entreprise", None))
+        self._b_valid_adresse_entreprise.setText("")
+        self._l_cp.setText(QCoreApplication.translate("MainWindow", u"Code postal (CP): ", None))
+        self._l_commune.setText(QCoreApplication.translate("MainWindow", u"Commune :", None))
+        self._l_ville.setText(QCoreApplication.translate("MainWindow", u"Ville :", None))
+        self._l_nom_rue.setText(QCoreApplication.translate("MainWindow", u"Nom de rue :", None))
+        self._gb_contact.setTitle(QCoreApplication.translate("MainWindow", u"Contact", None))
+        self._b_valid_contact.setText("")
+        self._l_num_fixe.setText(QCoreApplication.translate("MainWindow", u"Numero fixe", None))
+        self._l_num_portable.setText(QCoreApplication.translate("MainWindow", u"Num\u00e9ro portable", None))
+        self._l_mail.setText(QCoreApplication.translate("MainWindow", u"Email", None))
+        self._gb_informations_legales.setTitle(QCoreApplication.translate("MainWindow", u"Informations l\u00e9gales", None))
+        self._l_siret.setText(QCoreApplication.translate("MainWindow", u"Siret", None))
+        self._l_siren.setText(QCoreApplication.translate("MainWindow", u"Siren", None))
+        self._l_ape.setText(QCoreApplication.translate("MainWindow", u"Code APE", None))
+        self._b_valid_informations_legales.setText("")
+        self._gb_informations_bancaires.setTitle(QCoreApplication.translate("MainWindow", u"Informations bancaires", None))
+        self._b_valid_informations_bancaires.setText("")
+        self._l_iban.setText(QCoreApplication.translate("MainWindow", u"I.B.A.N", None))
+        self._l_bic.setText(QCoreApplication.translate("MainWindow", u"B.I.C", None))
+        self._l_capital.setText(QCoreApplication.translate("MainWindow", u"Capital", None))
 
     def next_step(self):
         sender = self.sender().objectName()

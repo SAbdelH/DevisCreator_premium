@@ -346,12 +346,13 @@ class Icons:
     def moins_vendu_pixmap(self) -> QPixmap:
         return self.__QPixmap("low_sell")
 
+    @property
     def restore_icon(self) -> QIcon:
         return self.__QIcon("RESTORE")
 
     @property
-    def logo_backup_icon(self) -> QIcon:
-        return self.__QIcon("nuage")
+    def logo_backup_pixmap(self) -> QPixmap:
+        return self.__QPixmap("nuage")
 
     @property
     def create_ws_icon(self) -> QIcon:

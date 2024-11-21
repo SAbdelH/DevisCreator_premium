@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QListWidget, QListView, QHBoxLayout, QLabel,
     QLineEdit, QComboBox, QCalendarWidget, QPushButton)
 
@@ -18,6 +18,8 @@ class UserManagementPage:
         self.__inputUser()
         # AJOUT DE LA PAGE A STACKED WIDGET
         self._sw_main_dialog.addWidget(self._p_user_management)
+
+        self.__retranslateUi()
 
     def __UserList(self):
         # FRAME POUR ACCEUILLIR UNE LISTE
@@ -191,6 +193,7 @@ class UserManagementPage:
             self._cbx_um_sexe.addItem(genre_icon, "")
         self._cbx_um_sexe.setObjectName(u"_cbx_um_sexe")
         self._cbx_um_sexe.setMinimumSize(QSize(0, 25))
+        self._cbx_um_sexe.setCurrentIndex(-1)
         self._v_sexe.addWidget(self._cbx_um_sexe)
         # AJOUT DU VERTICAL GENRE DANS HORIZONTAL PLUS INFORMATIONS UTILISATEUR
         self._h_um_nature.addLayout(self._v_sexe)
@@ -207,6 +210,7 @@ class UserManagementPage:
             self._cbx_um_role.addItem(role_icon, "")
         self._cbx_um_role.setObjectName(u"_cbx_um_role")
         self._cbx_um_role.setMinimumSize(QSize(0, 25))
+        self._cbx_um_role.setCurrentIndex(-1)
         self._v_um_role.addWidget(self._cbx_um_role)
         self._h_um_nature.addLayout(self._v_um_role)
         self._v_right_user_management.addLayout(self._h_um_nature)
@@ -261,3 +265,28 @@ class UserManagementPage:
         self._v_right_user_management.addLayout(self._h_um_update)
         # AJOUT VERTICAL FRAME DANS DANS GRID PAGE
         self._g_user_management.addWidget(self._f_right_user_management, 0, 1, 1, 1)
+
+    def __retranslateUi(self):
+        self._l_informations_connexion.setText(QCoreApplication.translate("MainWindow", u"Informations connexion", None))
+        self._l_um_id.setText(QCoreApplication.translate("MainWindow", u"ID Connexion", None))
+        self._l_um_password.setText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
+        self._le_um_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Obligatoire lors de la cr\u00e9ation seulement", None))
+        self._l_General.setText(QCoreApplication.translate("MainWindow", u"G\u00e9n\u00e9rale", None))
+        self._l_um_nom.setText(QCoreApplication.translate("MainWindow", u"Nom", None))
+        self._l_um_prenom.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e9nom", None))
+        self._l_um_poste.setText(QCoreApplication.translate("MainWindow", u"Poste :", None))
+        self._l_um_sexe.setText(QCoreApplication.translate("MainWindow", u"Sexe", None))
+        self._cbx_um_sexe.setItemText(0, QCoreApplication.translate("MainWindow", u"Homme", None))
+        self._cbx_um_sexe.setItemText(1, QCoreApplication.translate("MainWindow", u"Femme", None))
+
+        self._cbx_um_sexe.setPlaceholderText(QCoreApplication.translate("MainWindow", u"-- Selecionnez le genre de l'utilisateur", None))
+        self._l_um_role.setText(QCoreApplication.translate("MainWindow", u"Role", None))
+        self._cbx_um_role.setItemText(0, QCoreApplication.translate("MainWindow", u"Administrateur", None))
+        self._cbx_um_role.setItemText(1, QCoreApplication.translate("MainWindow", u"Responsable", None))
+        self._cbx_um_role.setItemText(2, QCoreApplication.translate("MainWindow", u"Employ\u00e9", None))
+
+        self._cbx_um_role.setPlaceholderText(QCoreApplication.translate("MainWindow", u"-- S\u00e9l\u00e9ctionnez un r\u00f4le", None))
+        self._l_um_expire_account.setText(QCoreApplication.translate("MainWindow", u"Date d'expiration du compte", None))
+        self._b_um_add_usr.setText(QCoreApplication.translate("MainWindow", u"Ajouter", None))
+        self._b_um_update_usr.setText(QCoreApplication.translate("MainWindow", u"Mettre-\u00e0-jour", None))
+        self._b_um_delete_usr.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))

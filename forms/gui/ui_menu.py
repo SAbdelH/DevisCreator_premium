@@ -1,4 +1,4 @@
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout,QVBoxLayout)
 
@@ -33,6 +33,8 @@ class Menu:
         self.headerMenu()
         # CONFIGURATION MENU SIDE BAR
         self.sideMenu()
+
+        self.__retranslateUi()
 
     def headerMenu(self):
         self._f_header = QFrame(self.centralwidget)
@@ -342,6 +344,37 @@ class Menu:
         self._vs_side_menu_two = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self._g_centralwidget.addItem(self._vs_side_menu_two, 3, 1, 1, 1)
 
+    def __retranslateUi(self):
+        self._l_icon_company.setText("")
+        self._b_dashboard.setText(QCoreApplication.translate("MainWindow", u"Tableau de bord", None))
+        self._b_workspace.setText(QCoreApplication.translate("MainWindow", u"Environnement de travail", None))
+        self._b_factures.setText(QCoreApplication.translate("MainWindow", u"Gestion des factures", None))
+        self._b_inventory.setText(QCoreApplication.translate("MainWindow", u"Gestion des Inventraires", None))
+        self._b_manage_db.setText(QCoreApplication.translate("MainWindow", u"Gestion de base de donn\u00e9es", None))
+        self._l_icon_profil.setText("")
+        self._l_pposte.setText(QCoreApplication.translate("MainWindow", u"Chef de Bureau", None))
+        self._l_name_profil.setText(QCoreApplication.translate("MainWindow", u"SOUFOU Abdel Hafidhou", None))
+        self._l_id_profil.setText(QCoreApplication.translate("MainWindow", u"@abdelhafidhousoufou", None))
+        self._b_logout.setText("")
+        self._b_mcreate_ws.setText("")
+        self._b_mcreate_ws.setToolTip(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un environnement de travail", None))
+        self._b_minfo_company.setToolTip(QCoreApplication.translate("MainWindow", u"Informations sur l'entreprise", None))
+        self._b_minfo_company.setText("")
+        self._b_mcreate_user.setToolTip(QCoreApplication.translate("MainWindow", u"G\u00e9rer les utilisateurs", None))
+        self._b_mcreate_user.setText("")
+        self._b_mcreate_devis.setToolTip(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un devis", None))
+        self._b_mcreate_devis.setText("")
+        self._b_mcreate_facture.setToolTip(QCoreApplication.translate("MainWindow", u"Cr\u00e9er une facture", None))
+        self._b_mcreate_facture.setText("")
+        self._b_mvalid_facture.setToolTip(QCoreApplication.translate("MainWindow", u"Valider les factures", None))
+        self._b_mvalid_facture.setText("")
+        self._b_mclient.setToolTip(QCoreApplication.translate("MainWindow", u"G\u00e9rer les clients", None))
+        self._b_mclient.setText("")
+        self._b_mcreate_backup.setToolTip(QCoreApplication.translate("MainWindow", u"G\u00e9rer les sauvegardes", None))
+        self._b_mcreate_backup.setText("")
+        self._b_mmanage_db.setToolTip(QCoreApplication.translate("MainWindow", u"Visualisation des tables", None))
+        self._b_mmanage_db.setText("")
+
     def hideSideMenu(self):
         self._f_side_menu.hide()
         if hasattr(self, "_hs_window_side_menu") :
@@ -369,7 +402,7 @@ class Menu:
         self._g_centralwidget.setVerticalSpacing(0)
 
     def toggleButton(self):
-        sender = self.sender().setChecked(True)
+        self.sender().setChecked(True)
 
     def resetToggleHeaderMenu(self):
         sender = self.sender().objectName()
