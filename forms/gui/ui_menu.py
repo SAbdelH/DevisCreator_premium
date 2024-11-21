@@ -433,7 +433,7 @@ class Menu:
         # Vérification sécurisée avant l'appel de la méthode
         page_info = self.pairButtonPage.get(sender, {})
         page_method = page_info.get('fonct')
-        notignore = self._sw_main_dialog.currentIndex() not in page_info.get('ignore')
+        notignore = self._sw_main_dialog.currentIndex() not in page_info.get('ignore') if 'ignore' in page_info else []
         if page_method and notignore:
             try:
                 page_method(sender)
