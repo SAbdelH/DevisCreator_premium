@@ -300,6 +300,7 @@ class firmPage:
         self._le_cp = QLineEdit(self._gb_adresse_entreprise)
         self._le_cp.setObjectName(u"_le_cp")
         self._le_cp.setMinimumSize(QSize(0, 25))
+        self._le_cp.setMaxLength(5)
         self._le_cp.setClearButtonEnabled(True)
         self._g_adresse_entreprise.addWidget(self._le_cp, 6, 1, 1, 4)
         # SPACER POUR EXCENTRER LE BOUTON VALIDER
@@ -563,12 +564,14 @@ class firmPage:
         # LINEEDIT IBAN
         self._le_iban = QLineEdit(self._f_informations_bancaires_lineedit)
         self._le_iban.setObjectName(u"_le_iban")
+        self._le_iban.setMaxLength(27)
         self._le_iban.setMinimumSize(QSize(0, 25))
         self._le_iban.setClearButtonEnabled(True)
         self._h_informations_bancaires_lineedit.addWidget(self._le_iban)
         # LINEEDIT BIC
         self._le_bic = QLineEdit(self._f_informations_bancaires_lineedit)
         self._le_bic.setObjectName(u"_le_bic")
+        self._le_bic.setMaxLength(11)
         self._le_bic.setMinimumSize(QSize(0, 25))
         self._le_bic.setClearButtonEnabled(True)
         self._h_informations_bancaires_lineedit.addWidget(self._le_bic)
@@ -630,6 +633,14 @@ class firmPage:
         self._l_iban.setText(QCoreApplication.translate("MainWindow", u"I.B.A.N", None))
         self._l_bic.setText(QCoreApplication.translate("MainWindow", u"B.I.C", None))
         self._l_capital.setText(QCoreApplication.translate("MainWindow", u"Capital", None))
+
+    def OpenfirmPage(self):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_info_company'))
+        self._b_minfo_company.blockSignals(True)
+        self._b_minfo_company.setChecked(True)
+        self._b_minfo_company.blockSignals(False)
+        self.hideOuterGroup('workspace')
 
     def next_step(self):
         sender = self.sender().objectName()

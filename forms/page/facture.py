@@ -434,3 +434,16 @@ class InvoicePage:
         self._l_invoice_preview_marque.setText("")
         self._l_invoice_preview_name.setText("")
         self._l_invoice_select_inventory.setText(QCoreApplication.translate("MainWindow", u"Inventaire s\u00e9l\u00e9ctionn\u00e9", None))
+
+    def OpenInvoicePage(self, sender):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_factures'))
+        button = getattr(self, sender)
+        button.blockSignals(True)
+        button.setChecked(True)
+        button.blockSignals(False)
+        self.hideOuterGroup('invoice')
+        if sender == '_b_mcreate_devis':
+            self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er le Devis", None))
+        else:
+            self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er la Facture", None))

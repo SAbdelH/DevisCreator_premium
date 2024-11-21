@@ -266,6 +266,15 @@ class UserManagementPage:
         # AJOUT VERTICAL FRAME DANS DANS GRID PAGE
         self._g_user_management.addWidget(self._f_right_user_management, 0, 1, 1, 1)
 
+    def OpenUserManagementPage(self):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_user_management'))
+        self._b_mcreate_user.blockSignals(True)
+        self._b_mcreate_user.setChecked(True)
+        self._b_mcreate_user.blockSignals(False)
+        self.hideOuterGroup('workspace')
+
+
     def __retranslateUi(self):
         self._l_informations_connexion.setText(QCoreApplication.translate("MainWindow", u"Informations connexion", None))
         self._l_um_id.setText(QCoreApplication.translate("MainWindow", u"ID Connexion", None))

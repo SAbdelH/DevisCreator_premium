@@ -99,3 +99,11 @@ class restorePage:
         self._l_restore_import_file.setText(QCoreApplication.translate("MainWindow", u"Importer sauvegarde", None))
         self._tb_restore_select_file.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self._l_restore_icon.setText("")
+
+    def OpenrestorePage(self):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_restore'))
+        self._b_mmanage_db.blockSignals(True)
+        self._b_mmanage_db.setChecked(True)
+        self._b_mmanage_db.blockSignals(False)
+        self.hideOuterGroup('database')

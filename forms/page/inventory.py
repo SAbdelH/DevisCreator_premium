@@ -296,3 +296,7 @@ class InventoryPage:
         self._l_inventory_low_sale_value.setText(QCoreApplication.translate("MainWindow", u"- Unit\u00e9s", None))
         self._l_inventory_low_sale.setText(QCoreApplication.translate("MainWindow", u"Le moins bien vendu", None))
         self._l_inventory_icon_low_sale.setText("")
+
+    def OpenInventoryPage(self):
+        self.hideSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_inventory'))

@@ -279,3 +279,11 @@ class validFacturePage:
         self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", u"Facture_1120240001.xlsx", None))
         self._b_valid_facture_unpaid.setText(QCoreApplication.translate("MainWindow", u"\u2718 Marqu\u00e9 comme non pay\u00e9", None))
         self._b_valid_facture_paid.setText(QCoreApplication.translate("MainWindow", u"\u2714\ufe0e Marquer comme pay\u00e9", None))
+
+    def OpenvalidFacturePage(self):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_valid_factures'))
+        self._b_mvalid_facture.blockSignals(True)
+        self._b_mvalid_facture.setChecked(True)
+        self._b_mvalid_facture.blockSignals(False)
+        self.hideOuterGroup('invoice')

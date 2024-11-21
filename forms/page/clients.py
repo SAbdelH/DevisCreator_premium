@@ -221,3 +221,11 @@ class clientsPage:
         self._b_clients_delete_client.setText(QCoreApplication.translate("MainWindow", u"supprimer", None))
         self._b_clients_save_client.setText(QCoreApplication.translate("MainWindow", u"Enregistrer", None))
         self._b_clients_info_export.setText(QCoreApplication.translate("MainWindow", u"Exporter la fiche", None))
+
+    def OpenclientsPage(self):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_clients'))
+        self._b_mclient.blockSignals(True)
+        self._b_mclient.setChecked(True)
+        self._b_mclient.blockSignals(False)
+        self.hideOuterGroup('invoice')

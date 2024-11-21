@@ -15,7 +15,7 @@ class Menu:
         self.sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         self.sizePolicy.setHorizontalStretch(0)
         self.sizePolicy.setVerticalStretch(0)
-        self.sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+        self.sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
         self.sizePolicy1.setHorizontalStretch(0)
         self.sizePolicy1.setVerticalStretch(0)
         self.sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
@@ -81,7 +81,6 @@ class Menu:
         self._b_dashboard.setCheckable(True)
         self._b_dashboard.setFlat(True)
         self._b_dashboard.clicked.connect(self.toggleButton)
-        self._b_dashboard.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_dashboard)
         # AJOUT BOUTON WORKSPACE DANS FRAME ENTETE
         self._b_workspace = QPushButton(self._f_btn_header)
@@ -96,7 +95,6 @@ class Menu:
         self._b_workspace.setCheckable(True)
         self._b_workspace.setFlat(True)
         self._b_workspace.clicked.connect(self.toggleButton)
-        self._b_workspace.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_workspace)
         # AJOUT BOUTON FACTURE DANS FRAME ENTETE
         self._b_factures = QPushButton(self._f_btn_header)
@@ -111,7 +109,6 @@ class Menu:
         self._b_factures.setCheckable(True)
         self._b_factures.setFlat(True)
         self._b_factures.clicked.connect(self.toggleButton)
-        self._b_factures.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_factures)
         # AJOUT BOUTON GESTION INVENTAIRE DANS FRAME ENTETE
         self._b_inventory = QPushButton(self._f_btn_header)
@@ -126,7 +123,6 @@ class Menu:
         self._b_inventory.setCheckable(True)
         self._b_inventory.setFlat(True)
         self._b_inventory.clicked.connect(self.toggleButton)
-        self._b_inventory.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_inventory)
         # AJOUT BOUTON GESTION BASE DE DONNÉES DANS FRAME ENTETE
         self._b_manage_db = QPushButton(self._f_btn_header)
@@ -141,7 +137,6 @@ class Menu:
         self._b_manage_db.setCheckable(True)
         self._b_manage_db.setFlat(True)
         self._b_manage_db.clicked.connect(self.toggleButton)
-        self._b_manage_db.toggled.connect(self.resetToggleHeaderMenu)
         self._h_btn_header.addWidget(self._b_manage_db)
         # AJOUT DU FRAME ENTETE DANS LAYOUT ENTETE
         self._h_header.addWidget(self._f_btn_header)
@@ -224,10 +219,7 @@ class Menu:
         self._b_mcreate_ws.setMaximumSize(QSize(36, 36))
         self._b_mcreate_ws.setIcon(self.create_ws_icon)
         self._b_mcreate_ws.setIconSize(QSize(25, 25))
-        self._b_mcreate_ws.setCheckable(True)
         self._b_mcreate_ws.setFlat(True)
-        self._b_mcreate_ws.clicked.connect(self.toggleButton)
-        self._b_mcreate_ws.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_ws)
         # AJOUT DU BOUTON INFORMATION ENTREPRISE
         self._b_minfo_company = QPushButton(self._f_side_menu)
@@ -239,7 +231,6 @@ class Menu:
         self._b_minfo_company.setCheckable(True)
         self._b_minfo_company.setFlat(True)
         self._b_minfo_company.clicked.connect(self.toggleButton)
-        self._b_minfo_company.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_minfo_company, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON CREATION UTILISATEUR
         self._b_mcreate_user = QPushButton(self._f_side_menu)
@@ -253,7 +244,6 @@ class Menu:
         self._b_mcreate_user.setCheckable(True)
         self._b_mcreate_user.setFlat(True)
         self._b_mcreate_user.clicked.connect(self.toggleButton)
-        self._b_mcreate_user.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_user, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION DEVIS
         self._b_mcreate_devis = QPushButton(self._f_side_menu)
@@ -265,7 +255,6 @@ class Menu:
         self._b_mcreate_devis.setCheckable(True)
         self._b_mcreate_devis.setFlat(True)
         self._b_mcreate_devis.clicked.connect(self.toggleButton)
-        self._b_mcreate_devis.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_devis)
         # AJOUT BOUTON CREATION FACTURE
         self._b_mcreate_facture = QPushButton(self._f_side_menu)
@@ -277,7 +266,6 @@ class Menu:
         self._b_mcreate_facture.setCheckable(True)
         self._b_mcreate_facture.setFlat(True)
         self._b_mcreate_facture.clicked.connect(self.toggleButton)
-        self._b_mcreate_facture.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON VALIDE FACTURE
         self._b_mvalid_facture = QPushButton(self._f_side_menu)
@@ -289,7 +277,6 @@ class Menu:
         self._b_mvalid_facture.setCheckable(True)
         self._b_mvalid_facture.setFlat(True)
         self._b_mvalid_facture.clicked.connect(self.toggleButton)
-        self._b_mvalid_facture.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mvalid_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION CLIENT
         self._b_mclient = QPushButton(self._f_side_menu)
@@ -313,7 +300,6 @@ class Menu:
         self._b_mcreate_backup.setCheckable(True)
         self._b_mcreate_backup.setFlat(True)
         self._b_mcreate_backup.clicked.connect(self.toggleButton)
-        self._b_mcreate_backup.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mcreate_backup, 0, Qt.AlignVCenter)
         # AJOUT BOUTON MANAGE DB
         self._b_mmanage_db = QPushButton(self._f_side_menu)
@@ -325,7 +311,6 @@ class Menu:
         self._b_mmanage_db.setCheckable(True)
         self._b_mmanage_db.setFlat(True)
         self._b_mmanage_db.clicked.connect(self.toggleButton)
-        self._b_mmanage_db.toggled.connect(self.resetToggleSideMenu)
         self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON VERTICAL LAYOUT DANS SIDE MENU
         self._v_side_menu.addLayout(self._v_side_menu_two)
@@ -376,22 +361,42 @@ class Menu:
         self._b_mmanage_db.setText("")
 
     def hideSideMenu(self):
-        self._f_side_menu.hide()
-        if hasattr(self, "_hs_window_side_menu") :
-            self._g_centralwidget.removeItem(self._hs_window_side_menu)
-            self._hs_window_side_menu = None
-        if hasattr(self, "_vs_side_menu_one"):
-            self._g_centralwidget.removeItem(self._vs_side_menu_one)
-            self._vs_side_menu_one = None
-        if hasattr(self, "_vs_side_menu_two"):
-            self._g_centralwidget.removeItem(self._vs_side_menu_two)
-            self._vs_side_menu_two = None
-        self._g_centralwidget.setHorizontalSpacing(0)
+        # Vérification et cache du menu latéral
+        if hasattr(self, "_f_side_menu"):
+            self._f_side_menu.hide()
+
+        # Méthode sécurisée pour supprimer les éléments
+        try:
+            # Vérification et suppression de _hs_window_side_menu
+            if hasattr(self, "_hs_window_side_menu") and self._hs_window_side_menu is not None:
+                self._g_centralwidget.removeItem(self._hs_window_side_menu)
+                self._hs_window_side_menu = None
+
+            # Vérification et suppression de _vs_side_menu_one
+            if hasattr(self, "_vs_side_menu_one") and self._vs_side_menu_one is not None:
+                self._g_centralwidget.removeItem(self._vs_side_menu_one)
+                self._vs_side_menu_one = None
+
+            # Vérification et suppression de _vs_side_menu_two
+            if hasattr(self, "_vs_side_menu_two") and self._vs_side_menu_two is not None:
+                self._g_centralwidget.removeItem(self._vs_side_menu_two)
+                self._vs_side_menu_two = None
+
+            # Définition de l'espacement horizontal
+            self._g_centralwidget.setHorizontalSpacing(0)
+
+        except AttributeError as e:
+            # Gestion des erreurs si un attribut est manquant
+            pass
+        except Exception as e:
+            # Gestion des autres types d'erreurs
+            pass
 
     def showSideMenu(self):
-        self._f_side_menu.show()
-        self.__ajouterSpacerSideMenu()
-        self._g_centralwidget.setHorizontalSpacing(1)
+        if not self._f_side_menu.isVisible():
+            self._f_side_menu.show()
+            self.__addSpacerSideMenu()
+            self._g_centralwidget.setHorizontalSpacing(1)
 
     def showHeaderMenu(self):
         self._f_header.show()
@@ -403,17 +408,48 @@ class Menu:
 
     def toggleButton(self):
         self.sender().setChecked(True)
-
-    def resetToggleHeaderMenu(self):
         sender = self.sender().objectName()
+        if sender in self.headerMenuButton:
+            self.resetToggleHeaderMenu(sender)
+        else:
+            self.resetToggleSideMenu(sender)
+
+    def resetToggleHeaderMenu(self, sender):
         for btnName in self.headerMenuButton:
             if btnName != sender:
                 button = getattr(self, btnName)
                 button.setChecked(False)
 
-    def resetToggleSideMenu(self):
-        sender = self.sender().objectName()
+        self.refreshUi(sender)
+
+    def resetToggleSideMenu(self, sender):
         for btnName in self.sideMenuButton:
             if btnName != sender:
                 button = getattr(self, btnName)
                 button.setChecked(False)
+        self.refreshUi(sender)
+
+    def refreshUi(self, sender):
+        # Vérification sécurisée avant l'appel de la méthode
+        page_info = self.pairButtonPage.get(sender, {})
+        page_method = page_info.get('fonct')
+        notignore = self._sw_main_dialog.currentIndex() not in page_info.get('ignore')
+        if page_method and notignore:
+            try:
+                page_method(sender)
+            except TypeError:
+                # Au cas où certaines méthodes ne prennent pas de paramètre
+                page_method()
+        self.pageEnCours.emit(sender)
+
+    def hideOuterGroup(self, groupName: str):
+        _dict_group = {'workspace': ['_b_mcreate_ws', '_b_minfo_company', '_b_mcreate_user'],
+                    'invoice': ['_b_mcreate_devis', '_b_mcreate_facture', '_b_mvalid_facture', '_b_mclient'],
+                    'database': ['_b_mmanage_db', '_b_mcreate_backup']
+                    }
+        for child in self._f_side_menu.children():
+            if isinstance(child, QPushButton):
+                if child.objectName() not in _dict_group.get(groupName, []):
+                    child.setVisible(False)
+                else:
+                    child.setVisible(True)

@@ -316,6 +316,14 @@ class DashboardPage:
         self._h_footer_evolution.addWidget(self._l_evolution_stats)
         self._g_dashboard.addLayout(self._h_footer_evolution, 1, 0, 1, 2)
 
+    def changeEvolutionValue(self, value: str):
+        text = u"<html><head/><body><p><span style=\" font-weight:600; color:#009051;\">\u25b2\u25bc +15 %</span></p></body></html>"
+        return text.replace('+15', value)
+
+    def OpenDashboardPage(self):
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_dashboard'))
+        self.hideSideMenu()
+
     def __retranslateUi(self):
         self._r_mois.setText(QCoreApplication.translate("MainWindow", u"Mois", None))
         self._r_semaine.setText(QCoreApplication.translate("MainWindow", u"Semaine", None))
@@ -344,4 +352,4 @@ class DashboardPage:
         self._b_delete_agenda.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
         self._l_agenda.setText(QCoreApplication.translate("MainWindow", u"Agenda :", None))
         self._l_evolution.setText(QCoreApplication.translate("MainWindow", u"Evolution:", None))
-        self._l_evolution_stats.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:600; color:#009051;\">\u25b2\u25bc +15 %</span></p></body></html>", None))
+        self._l_evolution_stats.setText(QCoreApplication.translate("MainWindow", self.changeEvolutionValue('+0'), None))

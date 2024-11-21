@@ -35,3 +35,11 @@ class DbManagementPage:
 
     def __retranslateUi(self):
         self._b_manage_db_export_table.setText(QCoreApplication.translate("MainWindow", u"Exporter la table", None))
+
+    def OpenDbManagementPage(self):
+        self.showSideMenu()
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_manage_db'))
+        self._b_mmanage_db.blockSignals(True)
+        self._b_mmanage_db.setChecked(True)
+        self._b_mmanage_db.blockSignals(False)
+        self.hideOuterGroup('database')

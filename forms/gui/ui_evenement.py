@@ -1,0 +1,3 @@
+class Refresh:
+    def setup_signals(self):
+        ...
