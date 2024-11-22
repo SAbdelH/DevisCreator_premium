@@ -12,6 +12,7 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
 
     def __init__(self):
         QMainWindow.__init__(self)
+        self.apparence = 'white'
         thm.__init__(self)
         Icns.__init__(self)
         BImg.__init__(self)
@@ -48,7 +49,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
                                 '_b_mcreate_backup': {'fonct': lambda: self.OpenrestorePage(),'ignore': self.ignoreByPage('_b_mcreate_backup')},
                                 '_b_mmanage_db': {'fonct': lambda: self.OpenDbManagementPage(),'ignore': self.ignoreByPage('_b_mmanage_db')},
                                 }
-        self._b_logout.clicked.connect(self.afficherMenu)
         self.menuAction.connect(self.texte)
 
     def setupUi(self, MainWindow):

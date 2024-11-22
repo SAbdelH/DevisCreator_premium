@@ -158,7 +158,8 @@ class theme:
 	border: 1px solid rgba(224, 224, 224, 1);
 	border-radius: 10px;
 	margin: 5px;
-	padding: 15px;
+	padding: 5px;
+	height: 40px;
 }}
 #_f_calendar QListWidget::item:selected {{
 	border: 1px solid rgba(181, 212, 241, 1);

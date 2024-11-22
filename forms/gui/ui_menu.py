@@ -48,7 +48,6 @@ class Menu:
         self._h_header = QHBoxLayout(self._f_header)
         self._h_header.setSpacing(-1)
         self._h_header.setObjectName(u"_h_header")
-        self._f_header.setGraphicsEffect(self.shadow)
         self._h_header.setContentsMargins(5, 0, 5, 0)
         # INSERT ICON ENTREPRISE
         self._l_icon_company = QLabel(self._f_header)
@@ -191,6 +190,7 @@ class Menu:
         self._b_logout.setMaximumSize(QSize(40, 40))
         self._b_logout.setIcon(self.deconnexion_icon)
         self._b_logout.setIconSize(QSize(25, 25))
+        self._b_logout.setGraphicsEffect(self.shadow)
         self._h_profil.addWidget(self._b_logout)
         # AJOUT LAYOUT PROFIL DANS LAYOUT ENTETE
         self._h_header.addLayout(self._h_profil)
@@ -472,23 +472,23 @@ class Menu:
         """
         Cette méthode crée un menu déroulant pour le bouton logout avec des widgets personnalisés et un effet de survol.
         """
-        self.menulogout = QMenu()
-
-
+        self._m_logout_menu = QMenu()
+        self._m_logout_menu.setObjectName("_m_logout_menu")
+        theme, icn = ("Sombre", "dark") if self.apparence == "white" else ("Claire", "white")
         action_dict = {
             "Reglages": {'signal': 'settings', 'img': self.reglage_icon},
             "Centre d'aides": {'signal': 'helps', 'img': self.help_center_icon},
             "Recherche mise-à-jour": {'signal': 'upgrade', 'img': self.software_upgrade_icon},
-            "Apparence": {'signal': 'darkmode', 'img': self.dark_mode_icon},
+            f"Apparence {theme}": {'signal': 'darkmode', 'img': getattr(self, f"{icn}_mode_icon")},
             "hl": {},
-            f"Abonnement {abonnement}": {'img': getattr(self, f"abonnement_{abonnement}_icon")},
+            f"Abonnement {abonnement.capitalize()}": {'img': getattr(self, f"abonnement_{abonnement}_icon")},
             "hl2": {},
             "Se déconnecter": {'signal': 'logout', 'img': self.logout_icon},
         }
 
         for action_text, handler_function in action_dict.items():
             if action_text.startswith("hl"):
-                self.menulogout.addSeparator()
+                self._m_logout_menu.addSeparator()
             else:
                 # Créer un widget personnalisé pour l'action
                 widget = QWidget()
@@ -531,31 +531,30 @@ class Menu:
                             background-color: transparent;
                         }
                     """)
+
+                    def create_click_handler(signal_name):
+                        def click_handler(event):
+                            self.menuAction.emit(signal_name)
+                            self.menulogout.hide()  # Ferme le menu après le clic
+
+                        return click_handler
                     # Connecter l'action au signal
-                    widget.mousePressEvent = lambda event, s=handler_function['signal']: self.menuAction.emit(s)
+                    widget.mousePressEvent = create_click_handler(handler_function['signal'])
                 else:
                     # Désactiver le survol et le clic si pas de signal
                     widget.setStyleSheet("""
-                        QWidget {
+                        QWidget:disabled {
                             padding: 2px;
                             background-color: rgba(240, 240, 240, 1);
+                            color: rgba(244, 162, 97, 1);
                         }
                         QLabel {
                             color: rgba(174, 182, 191, 1);
                         }
                     """)
-                    widget_action.setEnabled(False)  # Désactiver l'interaction de l'élément
+                    widget_action.setEnabled(False)
 
-                self.menulogout.addAction(widget_action)
+                self._m_logout_menu.addAction(widget_action)
 
         # Connecter le bouton au menu
-        self._b_logout.setMenu(self.menulogout)
-
-    def afficherMenu(self):
-        """
-        Cette méthode affiche un menu centrer sur le bouton logout
-        """
-        basGauche = self._b_logout.rect().bottomLeft()
-        marge_verticale = 50  # Ajustez cette valeur pour la marge
-        translation = QPoint((self._b_logout.width() - self.menulogout.sizeHint().width()) // 2, marge_verticale)
-        self.menulogout.exec_(self._b_logout.mapToGlobal(basGauche + translation))
+        self._b_logout.setMenu(self._m_logout_menu)

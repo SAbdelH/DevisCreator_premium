@@ -114,6 +114,10 @@ class Icons:
         return self.__QIcon("dark-mode")
 
     @property
+    def white_mode_icon(self) -> QIcon:
+        return self.__QIcon("white-mode")
+
+    @property
     def help_center_icon(self) -> QIcon:
         return self.__QIcon("helps")
 
