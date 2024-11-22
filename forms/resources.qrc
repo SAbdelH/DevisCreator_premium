@@ -46,7 +46,6 @@
     <file>icons/plus.png</file>
     <file>icons/moins.png</file>
     <file>icons/discuter.png</file>
-    <file>icons/reglages.png</file>
     <file>icons/bases-de-donnees.png</file>
     <file>icons/entreprise.png</file>
     <file>icons/facture-dachat.png</file>
@@ -73,8 +72,8 @@
     <file>icons/invite.png</file>
     <file>icons/login.png</file>
     <file>icons/montrer.png</file>
-    <file>icons/MsCles.png</file>
     <file>icons/supprimer.png</file>
+    <file>icons/company.png</file>
     <file>icons/utilisateur.png</file>
   </qresource>
   <qresource prefix="background">

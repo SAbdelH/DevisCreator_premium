@@ -75,7 +75,7 @@ class InventoryPage:
         self._v_inventory_box_edit = QVBoxLayout(self._f_inventory_box_edit)
         self._v_inventory_box_edit.setObjectName(u"_v_inventory_box_edit")
         self._v_inventory_box_edit.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
-        self._v_inventory_box_edit.setContentsMargins(5, 5, 5, 5)
+        self._v_inventory_box_edit.setContentsMargins(5, 10, 5, 5)
         self._f_inventory_informations_label = QFrame(self._f_inventory_box_edit)
         self._f_inventory_informations_label.setObjectName(u"_f_inventory_informations_label")
         self._f_inventory_informations_label.setMinimumSize(QSize(0, 40))

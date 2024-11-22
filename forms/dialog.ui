@@ -23,7 +23,7 @@
    <string>Logiciel de gestion de Facture</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset>
     <normaloff>:/icon/icons/MsCles.png</normaloff>:/icon/icons/MsCles.png</iconset>
   </property>
   <property name="windowOpacity">
@@ -710,7 +710,7 @@ QCalendarWidget QAbstractItemView:enabled {
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap resource="resources.qrc">:/icon/icons/MsCles.png</pixmap>
+          <pixmap>:/icon/icons/MsCles.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -2283,7 +2283,7 @@ QCalendarWidget QAbstractItemView:enabled {
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources.qrc">:/icon/icons/MsCles.png</pixmap>
+              <pixmap>:/icon/icons/MsCles.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>

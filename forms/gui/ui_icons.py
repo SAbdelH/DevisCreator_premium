@@ -18,8 +18,11 @@ class Icons:
         :param img: Nom de l'image
         :return: un QIcon
         """
+        path = self.images.get(img)
+        if not path or not Path(path).exists():
+            return QIcon()  # Retourne un QIcon vide en cas d'erreur
         icon: QIcon = QIcon()
-        icon.addFile(self.images.get(img), QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(path, QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         return icon
 
     def __QPixmap(self, img: str) -> QPixmap:
@@ -36,7 +39,7 @@ class Icons:
         Un pixmap de l'icon de l'entreprise
         :return: un QPixmap
         """
-        return self.__QPixmap("MsCles")
+        return self.__QPixmap("company")
 
     @property
     def entreprise_qicon(self) -> QIcon:
@@ -44,7 +47,7 @@ class Icons:
         Un QIcon de l'icon de l'entreprise
         :return: un QIcon
         """
-        return self.__QIcon("MsCles")
+        return self.__QIcon("company")
 
     @property
     def tableau_de_bord_icon(self) -> QIcon:
@@ -101,6 +104,34 @@ class Icons:
         :return: un QIcon
         """
         return self.__QIcon("sortir")
+
+    @property
+    def logout_icon(self) -> QIcon:
+        return self.__QIcon("logout")
+
+    @property
+    def dark_mode_icon(self) -> QIcon:
+        return self.__QIcon("dark-mode")
+
+    @property
+    def help_center_icon(self) -> QIcon:
+        return self.__QIcon("helps")
+
+    @property
+    def abonnement_basic_icon(self) -> QIcon:
+        return self.__QIcon("basic")
+
+    @property
+    def abonnement_premium_icon(self) -> QIcon:
+        return self.__QIcon("premium")
+
+    @property
+    def software_upgrade_icon(self) -> QIcon:
+        return self.__QIcon("softupdate")
+
+    @property
+    def reglage_icon(self) -> QIcon:
+        return self.__QIcon("setting")
 
     @property
     def logo_connexion_pixmap(self) -> QPixmap:

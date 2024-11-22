@@ -1,6 +1,7 @@
-from PySide6.QtCore import QSize, Qt, QCoreApplication
-from PySide6.QtGui import QFont
-from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout,QVBoxLayout)
+from PySide6.QtCore import QSize, Qt, QCoreApplication, QPoint
+from PySide6.QtGui import QFont, QAction, QIcon
+from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QGridLayout,
+                               QVBoxLayout, QMenu, QWidget, QWidgetAction)
 
 
 class Menu:
@@ -35,6 +36,8 @@ class Menu:
         self.sideMenu()
 
         self.__retranslateUi()
+
+        self.logOutMenu(abonnement="premium")
 
     def headerMenu(self):
         self._f_header = QFrame(self.centralwidget)
@@ -464,3 +467,95 @@ class Menu:
                     child.setVisible(False)
                 else:
                     child.setVisible(True)
+
+    def logOutMenu(self, abonnement: str = 'premium'):
+        """
+        Cette méthode crée un menu déroulant pour le bouton logout avec des widgets personnalisés et un effet de survol.
+        """
+        self.menulogout = QMenu()
+
+
+        action_dict = {
+            "Reglages": {'signal': 'settings', 'img': self.reglage_icon},
+            "Centre d'aides": {'signal': 'helps', 'img': self.help_center_icon},
+            "Recherche mise-à-jour": {'signal': 'upgrade', 'img': self.software_upgrade_icon},
+            "Apparence": {'signal': 'darkmode', 'img': self.dark_mode_icon},
+            "hl": {},
+            f"Abonnement {abonnement}": {'img': getattr(self, f"abonnement_{abonnement}_icon")},
+            "hl2": {},
+            "Se déconnecter": {'signal': 'logout', 'img': self.logout_icon},
+        }
+
+        for action_text, handler_function in action_dict.items():
+            if action_text.startswith("hl"):
+                self.menulogout.addSeparator()
+            else:
+                # Créer un widget personnalisé pour l'action
+                widget = QWidget()
+                layout = QHBoxLayout(widget)
+                layout.setContentsMargins(5, 0, 5, 0)  # Marges pour l'espacement
+
+                # Ajouter l'icône (QLabel)
+                icon_label = QLabel()
+                icon = handler_function.get('img')
+                if icon and not icon.isNull():
+                    icon_label.setPixmap(icon.pixmap(24, 24))
+
+                # Ajouter le texte (QLabel)
+                text_label = QLabel(action_text)
+                text_label.setAlignment(Qt.AlignVCenter)
+
+                # Ajouter les widgets au layout
+                layout.addWidget(icon_label)
+                layout.addWidget(text_label)
+                layout.addStretch()  # Pour pousser le texte à gauche
+
+                # Créer l'action avec le widget
+                widget_action = QWidgetAction(self)
+                widget_action.setDefaultWidget(widget)
+
+                # Appliquer le style uniquement si un signal est présent
+                if "signal" in handler_function:
+                    # Appliquer un effet de survol
+                    widget.setStyleSheet("""
+                        QWidget:hover {
+                            background-color: rgba(91, 142, 125, 0.7);
+                        }
+                        QWidget {
+                            padding: 2px;
+                        }
+                        QLabel {
+                            color: rgba(0, 0, 0, 1); 
+                        }
+                        QLabel:hover {
+                            background-color: transparent;
+                        }
+                    """)
+                    # Connecter l'action au signal
+                    widget.mousePressEvent = lambda event, s=handler_function['signal']: self.menuAction.emit(s)
+                else:
+                    # Désactiver le survol et le clic si pas de signal
+                    widget.setStyleSheet("""
+                        QWidget {
+                            padding: 2px;
+                            background-color: rgba(240, 240, 240, 1);
+                        }
+                        QLabel {
+                            color: rgba(174, 182, 191, 1);
+                        }
+                    """)
+                    widget_action.setEnabled(False)  # Désactiver l'interaction de l'élément
+
+                self.menulogout.addAction(widget_action)
+
+        # Connecter le bouton au menu
+        self._b_logout.setMenu(self.menulogout)
+
+    def afficherMenu(self):
+        """
+        Cette méthode affiche un menu centrer sur le bouton logout
+        """
+        basGauche = self._b_logout.rect().bottomLeft()
+        marge_verticale = 50  # Ajustez cette valeur pour la marge
+        translation = QPoint((self._b_logout.width() - self.menulogout.sizeHint().width()) // 2, marge_verticale)
+        self.menulogout.exec_(self._b_logout.mapToGlobal(basGauche + translation))
