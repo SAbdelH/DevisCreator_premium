@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>2</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -6754,7 +6754,7 @@ QCalendarWidget QAbstractItemView:enabled {
             <number>5</number>
            </property>
            <property name="topMargin">
-            <number>5</number>
+            <number>10</number>
            </property>
            <property name="rightMargin">
             <number>5</number>
