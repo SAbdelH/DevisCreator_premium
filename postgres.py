@@ -72,4 +72,5 @@ def execute_sql(query, params=None):
 
 nombre = 1
 nt = execute_sql("SELECT * FROM test where id> :nombre", {"nombre": nombre})
-print(nt)
+for (id, nom, cp) in nt.datas:
+    print(id, nom, cp)
