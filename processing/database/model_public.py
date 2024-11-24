@@ -13,7 +13,7 @@ class User(Base):
 
 
     # Définir les colonnes
-    identifiant = Column(String, primary_key=True, autoincrement=False, nullable=False,unique=True)  # VARCHAR NOT NULL, PRIMARY KEY
+    identifiant = Column(String, primary_key=True, autoincrement=False, nullable=False, unique=True)  # VARCHAR NOT NULL, PRIMARY KEY
     email = Column(String(120), unique=True, nullable=False)
     password_hash = Column(String(128), nullable=False)
     nom = Column(String)  # VARCHAR
@@ -21,6 +21,7 @@ class User(Base):
     poste = Column(String)  # VARCHAR
     sexe = Column(String, nullable=True)  # VARCHAR
     role = Column(String, nullable=True)  # VARCHAR
+    group_id = Column(String, nullable=True)
 
 
     def set_password(self, password):
@@ -35,6 +36,11 @@ class User(Base):
     def verify_login(session, username, password):
         """Vérifie les informations de connexion."""
         user = session.query(User).filter_by(username=username).first()
-        if user and user.check_password(password):
-            return user
+        if user:
+            if user.check_password(password):
+                return user
+            else:
+                ...
+        else:
+            ...
         return None

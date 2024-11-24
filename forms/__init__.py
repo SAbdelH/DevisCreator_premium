@@ -9,6 +9,7 @@ from forms.page import *
 class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP):
     pageEnCours = Signal(str)
     menuAction = Signal(str)
+    facturePage = Signal(str)
 
     def __init__(self):
         QMainWindow.__init__(self)
@@ -50,6 +51,7 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
                                 '_b_mmanage_db': {'fonct': lambda: self.OpenDbManagementPage(),'ignore': self.ignoreByPage('_b_mmanage_db')},
                                 }
         self.menuAction.connect(self.texte)
+        self.demarrage()
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -100,7 +102,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         MainWindow.setCentralWidget(self.centralwidget)
         self.retranslateUi(MainWindow)
 
-        self._sw_main_dialog.setCurrentIndex(4)
         QMetaObject.connectSlotsByName(MainWindow)
 
     def texte(self, text):
@@ -125,3 +126,8 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
             '_b_mmanage_db': [v for k, v in self.indexPage.items() if k == '_p_manage_db'],
             }
         return i.get(page, [])
+
+    def switchPage(self, page_name: str):
+        self.pageEnCours.emit(page_name)
+        self._sw_main_dialog.setCurrentIndex(self.indexPage.get(page_name))
+        self._b_logout.setFocus()

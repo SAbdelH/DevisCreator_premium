@@ -413,6 +413,7 @@ class Menu:
             self._g_centralwidget.setHorizontalSpacing(1)
 
     def showHeaderMenu(self):
+        print('o')
         self._f_header.show()
         self._g_centralwidget.setVerticalSpacing(8)
 

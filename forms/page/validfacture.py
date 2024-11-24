@@ -283,7 +283,7 @@ class validFacturePage:
 
     def OpenvalidFacturePage(self):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_valid_factures'))
+        self.switchPage('_p_valid_factures')
         self._b_mvalid_facture.blockSignals(True)
         self._b_mvalid_facture.setChecked(True)
         self._b_mvalid_facture.blockSignals(False)

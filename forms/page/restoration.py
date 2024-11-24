@@ -102,7 +102,7 @@ class restorePage:
 
     def OpenrestorePage(self):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_restore'))
+        self.switchPage('_p_restore')
         self._b_mmanage_db.blockSignals(True)
         self._b_mmanage_db.setChecked(True)
         self._b_mmanage_db.blockSignals(False)

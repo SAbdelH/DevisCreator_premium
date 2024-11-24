@@ -225,7 +225,7 @@ class clientsPage:
 
     def OpenclientsPage(self):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_clients'))
+        self.switchPage('_p_clients')
         self._b_mclient.blockSignals(True)
         self._b_mclient.setChecked(True)
         self._b_mclient.blockSignals(False)

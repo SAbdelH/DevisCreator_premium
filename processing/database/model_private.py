@@ -16,7 +16,7 @@ class Licence(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     licence_key = Column(String, nullable=False)
-    group_id = Column(String, nullable=False)
+    group_id = Column(Integer, nullable=False)
     is_active = Column(Boolean, default=True)
 
     def __repr__(self):

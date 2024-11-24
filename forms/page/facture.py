@@ -439,7 +439,7 @@ class InvoicePage:
 
     def OpenInvoicePage(self, sender):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_factures'))
+        self.switchPage('_p_factures')
         button = getattr(self, sender)
         button.blockSignals(True)
         button.setChecked(True)
@@ -447,5 +447,7 @@ class InvoicePage:
         self.hideOuterGroup('invoice')
         if sender == '_b_mcreate_devis':
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er le Devis", None))
+            self.facturePage.emit("devis")
         else:
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er la Facture", None))
+            self.facturePage.emit("factures")

@@ -123,6 +123,7 @@ class LoginPage:
         self._b_config_db.setAutoFillBackground(False)
         self._b_config_db.setIcon(self.config_db_icon)
         self._b_config_db.setIconSize(QSize(20, 20))
+        self._b_config_db.clicked.connect(lambda: self.switchPageConnexion(1))
         self._g_signin.addWidget(self._b_config_db, 6, 0, 1, 1)
         # AJOUT D'UN BOUTON INVITE
         self._b_guess_connexion = QPushButton(self._p_signin)
@@ -206,6 +207,7 @@ class LoginPage:
         self._b_back_connexion.setObjectName(u"_b_back_connexion")
         self._b_back_connexion.setIcon(self.retour_icon)
         self._b_back_connexion.setIconSize(QSize(20, 20))
+        self._b_back_connexion.clicked.connect(lambda: self.switchPageConnexion(0))
         self._g_signup.addWidget(self._b_back_connexion, 9, 0, 1, 2)
         # AJOUT DE LA PAGE SIGNUP DANS LE DIALOG CONNEXION
         self._sw_login_dialog.addWidget(self._p_signup)
@@ -225,3 +227,16 @@ class LoginPage:
         self._le_host.setPlaceholderText(QCoreApplication.translate("MainWindow", u"L'H\u00f4te", None))
         self._le_db_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Base de donn\u00e9es", None))
         self._b_save_config_db.setText(QCoreApplication.translate("MainWindow", u"Sauvegarde", None))
+
+    def switchPageConnexion(self, index=0):
+        self._sw_login_dialog.setCurrentIndex(index)
+        if index == 0:
+            self._b_signin.setFocus()
+        else:
+            self._b_back_connexion.setFocus()
+
+    def demarrage(self):
+        self.hideSideMenu()
+        self.hideHeaderMenu()
+        self.switchPageConnexion()
+        self.switchPage("_p_login")

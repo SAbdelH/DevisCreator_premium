@@ -636,7 +636,7 @@ class firmPage:
 
     def OpenfirmPage(self):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_info_company'))
+        self.switchPage('_p_info_company')
         self._b_minfo_company.blockSignals(True)
         self._b_minfo_company.setChecked(True)
         self._b_minfo_company.blockSignals(False)

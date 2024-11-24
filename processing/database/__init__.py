@@ -4,10 +4,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import sessionmaker
 
+from processing.database.gui import InteractionInterface
 
-class PostgreSQLDatabase:
-    def __init__(self, maindialog):
-        super().__init__(maindialog)
+
+class PostgreSQLDatabase(InteractionInterface):
+    def __init__(self):
         self.__ePrivate = None
         self.__sPrivate = None
         self.__ePublic = None

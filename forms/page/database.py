@@ -38,7 +38,7 @@ class DbManagementPage:
 
     def OpenDbManagementPage(self):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_manage_db'))
+        self.switchPage('_p_manage_db')
         self._b_mmanage_db.blockSignals(True)
         self._b_mmanage_db.setChecked(True)
         self._b_mmanage_db.blockSignals(False)

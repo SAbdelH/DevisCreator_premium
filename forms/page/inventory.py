@@ -303,4 +303,4 @@ class InventoryPage:
 
     def OpenInventoryPage(self):
         self.hideSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_inventory'))
+        self.switchPage('_p_inventory')

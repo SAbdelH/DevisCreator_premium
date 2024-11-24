@@ -268,12 +268,11 @@ class UserManagementPage:
 
     def OpenUserManagementPage(self):
         self.showSideMenu()
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_user_management'))
+        self.switchPage('_p_user_management')
         self._b_mcreate_user.blockSignals(True)
         self._b_mcreate_user.setChecked(True)
         self._b_mcreate_user.blockSignals(False)
         self.hideOuterGroup('workspace')
-
 
     def __retranslateUi(self):
         self._l_informations_connexion.setText(QCoreApplication.translate("MainWindow", u"Informations connexion", None))

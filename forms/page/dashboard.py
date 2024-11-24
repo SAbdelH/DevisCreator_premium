@@ -321,7 +321,8 @@ class DashboardPage:
         return text.replace('+15', value)
 
     def OpenDashboardPage(self):
-        self._sw_main_dialog.setCurrentIndex(self.indexPage.get('_p_dashboard'))
+        self.switchPage('_p_dashboard')
+        self.showHeaderMenu()
         self.hideSideMenu()
 
     def __retranslateUi(self):
