@@ -273,6 +273,7 @@ class UserManagementPage:
         self._b_mcreate_user.setChecked(True)
         self._b_mcreate_user.blockSignals(False)
         self.hideOuterGroup('workspace')
+        self.pageEnCours.emit("utilisateurs")
 
     def __retranslateUi(self):
         self._l_informations_connexion.setText(QCoreApplication.translate("MainWindow", u"Informations connexion", None))

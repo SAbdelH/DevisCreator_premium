@@ -34,6 +34,28 @@ class InteractionInterface:
                 password = self.maindialog._le_password.text()
                 with self.Session() as spublic, self.privateSession() as sprivate:
                     if WorkSession.login(spublic, sprivate, username, password):
-                        self.maindialog.switchPage("_p_dashboard")
+                        self.profilIconUpdate()
+                        self.maindialog.OpenDashboardPage()
         else:
             ...
+
+    def profilIconUpdate(self):
+        """
+        Mise-à-jour du profil dans l'interface
+        :param info: les informations du profil
+        :return:
+        """
+        info = WorkSession.get_current_user()
+        self.maindialog._l_id_profil.setText(info.identifiant)
+        self.maindialog._l_name_profil.setText(f"{info.nom.upper()} {info.prenom.capitalize()}")
+        self.maindialog._l_pposte.setText(info.poste)
+        __img = {'Administrateur_Homme': self.maindialog.profil_pixmap(),
+                'Administrateur_Femme': self.maindialog.profil_pixmap('Administrateur_Femme'),
+                'Responsable_Femme': self.maindialog.profil_pixmap('Responsable_Femme'),
+                'Responsable_Homme': self.maindialog.profil_pixmap('Responsable_Femme'),
+                'Employe_Homme': self.maindialog.profil_pixmap('Employe_Homme'),
+                'Employe_Femme': self.maindialog.profil_pixmap('Employe_Femme')
+                }
+
+        self.maindialog._l_icon_profil.setPixmap(__img.get(f"{info.role}_{info.sexe}"))
+        self.maindialog._l_icon_profil.setScaledContents(True)

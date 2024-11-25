@@ -413,7 +413,6 @@ class Menu:
             self._g_centralwidget.setHorizontalSpacing(1)
 
     def showHeaderMenu(self):
-        print('o')
         self._f_header.show()
         self._g_centralwidget.setVerticalSpacing(8)
 
@@ -442,6 +441,7 @@ class Menu:
             if btnName != sender:
                 button = getattr(self, btnName)
                 button.setChecked(False)
+
         self.refreshUi(sender)
 
     def refreshUi(self, sender):
@@ -455,7 +455,6 @@ class Menu:
             except TypeError:
                 # Au cas où certaines méthodes ne prennent pas de paramètre
                 page_method()
-        self.pageEnCours.emit(sender)
 
     def hideOuterGroup(self, groupName: str):
         _dict_group = {'workspace': ['_b_mcreate_ws', '_b_minfo_company', '_b_mcreate_user'],

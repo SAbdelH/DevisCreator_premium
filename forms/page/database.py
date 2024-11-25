@@ -43,3 +43,4 @@ class DbManagementPage:
         self._b_mmanage_db.setChecked(True)
         self._b_mmanage_db.blockSignals(False)
         self.hideOuterGroup('database')
+        self.pageEnCours.emit("manage database")

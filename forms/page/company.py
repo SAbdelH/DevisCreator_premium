@@ -641,6 +641,7 @@ class firmPage:
         self._b_minfo_company.setChecked(True)
         self._b_minfo_company.blockSignals(False)
         self.hideOuterGroup('workspace')
+        self.pageEnCours.emit("entreprise")
 
     def next_step(self):
         sender = self.sender().objectName()

@@ -89,7 +89,7 @@ class Icons:
         """
         return self.__QIcon("bases-de-donnees")
 
-    def profil_pixmap(self, img: str = "patron") -> QPixmap:
+    def profil_pixmap(self, img: str = "Administrateur_Homme") -> QPixmap:
         """
         Un pixmap de l'image profil
         :param img: nom du profil

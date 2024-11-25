@@ -447,7 +447,8 @@ class InvoicePage:
         self.hideOuterGroup('invoice')
         if sender == '_b_mcreate_devis':
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er le Devis", None))
-            self.facturePage.emit("devis")
+            self.pageEnCours.emit("devis")
         else:
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er la Facture", None))
-            self.facturePage.emit("factures")
+            self.pageEnCours.emit("factures")
+

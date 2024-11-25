@@ -230,3 +230,4 @@ class clientsPage:
         self._b_mclient.setChecked(True)
         self._b_mclient.blockSignals(False)
         self.hideOuterGroup('invoice')
+        self.pageEnCours.emit("clients")

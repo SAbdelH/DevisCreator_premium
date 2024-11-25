@@ -14,7 +14,6 @@ class WorkSession:
         if user:
             if user.check_password(password):  # Assurez-vous que `check_password` est une méthode qui valide le mot de passe
                 # Vérifier si le groupe de l'utilisateur a une licence valide
-
                 licence = sprivate.query(Licence).filter(and_(Licence.group_id == user.group_id, Licence.is_active == True)).first()
                 if licence:
                     WorkSession._current_user = user

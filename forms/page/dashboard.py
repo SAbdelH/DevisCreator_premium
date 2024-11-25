@@ -324,6 +324,7 @@ class DashboardPage:
         self.switchPage('_p_dashboard')
         self.showHeaderMenu()
         self.hideSideMenu()
+        self.pageEnCours.emit("dashboard")
 
     def __retranslateUi(self):
         self._r_mois.setText(QCoreApplication.translate("MainWindow", u"Mois", None))

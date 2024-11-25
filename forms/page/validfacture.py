@@ -288,3 +288,4 @@ class validFacturePage:
         self._b_mvalid_facture.setChecked(True)
         self._b_mvalid_facture.blockSignals(False)
         self.hideOuterGroup('invoice')
+        self.pageEnCours.emit("valid facture")

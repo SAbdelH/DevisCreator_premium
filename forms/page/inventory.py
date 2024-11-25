@@ -304,3 +304,4 @@ class InventoryPage:
     def OpenInventoryPage(self):
         self.hideSideMenu()
         self.switchPage('_p_inventory')
+        self.pageEnCours.emit("inventaires")

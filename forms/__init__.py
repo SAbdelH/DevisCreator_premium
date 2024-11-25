@@ -9,7 +9,6 @@ from forms.page import *
 class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP):
     pageEnCours = Signal(str)
     menuAction = Signal(str)
-    facturePage = Signal(str)
 
     def __init__(self):
         QMainWindow.__init__(self)
