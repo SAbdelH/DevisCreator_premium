@@ -1,7 +1,8 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont, QAction, QIcon
 from PySide6.QtWidgets import (QWidget, QGridLayout, QStackedWidget, QLabel, QSpacerItem, QSizePolicy, QLineEdit,
-                               QPushButton, QSpinBox)
+                               QPushButton)
+from processing.decrypt import HasIdentifiant
 
 
 class LoginPage:
@@ -106,16 +107,22 @@ class LoginPage:
         self._le_password.findChildren(QAction)[0].setIcon(QIcon(self.images.get('supprimer')))
         self._le_password.addAction(QIcon(self.images.get('cle')), QLineEdit.ActionPosition.LeadingPosition)
         self._g_signin.addWidget(self._le_password, 3, 0, 1, 1)
+        # MESSAGE LICENCE MANQUANTE
+        self._l_licence_missing = QLabel(self._p_signin)
+        self._l_licence_missing.setObjectName(u"_l_licence_missing")
+        self._l_licence_missing.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._l_licence_missing.setVisible(False)
+        self._g_signin.addWidget(self._l_licence_missing, 4, 0, 1, 1)
         # AJOUT D'UN VERTICAL SPACER
         self._vs_signin_two = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-        self._g_signin.addItem(self._vs_signin_two, 4, 0, 1, 1)
+        self._g_signin.addItem(self._vs_signin_two, 5, 0, 1, 1)
         # AJOUT D'UN BOUTON CONNEXION
         self._b_signin = QPushButton(self._p_signin)
         self._b_signin.setObjectName(u"_b_signin")
         #self._b_signin.setMinimumSize(QSize(0, 25))
         self._b_signin.setIcon(self.connexion_icon)
         self._b_signin.setIconSize(QSize(20, 20))
-        self._g_signin.addWidget(self._b_signin, 5, 0, 1, 1)
+        self._g_signin.addWidget(self._b_signin, 6, 0, 1, 1)
         # AJOUT D'UN BOUTON CONFIGURATION BD
         self._b_config_db = QPushButton(self._p_signin)
         self._b_config_db.setObjectName(u"_b_config_db")
@@ -124,13 +131,13 @@ class LoginPage:
         self._b_config_db.setIcon(self.config_db_icon)
         self._b_config_db.setIconSize(QSize(20, 20))
         self._b_config_db.clicked.connect(lambda: self.switchPageConnexion(1))
-        self._g_signin.addWidget(self._b_config_db, 6, 0, 1, 1)
+        self._g_signin.addWidget(self._b_config_db, 7, 0, 1, 1)
         # AJOUT D'UN BOUTON INVITE
         self._b_guess_connexion = QPushButton(self._p_signin)
         self._b_guess_connexion.setObjectName(u"_b_guess_connexion")
         self._b_guess_connexion.setIcon(self.invite_icon)
         self._b_guess_connexion.setIconSize(QSize(20, 20))
-        self._g_signin.addWidget(self._b_guess_connexion, 7, 0, 1, 1)
+        self._g_signin.addWidget(self._b_guess_connexion, 8, 0, 1, 1)
         # AJOUT DE LA PAGE SIGNIN DANS LE DIALOG CONNEXION
         self._sw_login_dialog.addWidget(self._p_signin)
 
@@ -173,42 +180,28 @@ class LoginPage:
         # AJOUT D'UN VERTICAL SPACER
         self._vs_signup_one = QSpacerItem(20, 48, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         self._g_signup.addItem(self._vs_signup_one, 2, 0, 1, 1)
-        # AJOUT DU LINEEDIT HOST
-        self._le_host = QLineEdit(self._p_signup)
-        self._le_host.setObjectName(u"_le_host")
-        self._le_host.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_host.setClearButtonEnabled(True)
-        self._g_signup.addWidget(self._le_host, 3, 0, 1, 2)
-        # AJOUT DU LINEEDIT NOM DE LA BD
-        self._le_db_name = QLineEdit(self._p_signup)
-        self._le_db_name.setObjectName(u"_le_db_name")
-        self._le_db_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_db_name.setClearButtonEnabled(True)
-        self._g_signup.addWidget(self._le_db_name, 4, 0, 1, 2)
-        # AJOUT DU SPINBOX DU PORT
-        self._sb_port = QSpinBox(self._p_signup)
-        self._sb_port.setObjectName(u"_sb_port")
-        self._sb_port.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._sb_port.setProperty(u"showGroupSeparator", True)
-        self._sb_port.setMaximum(9999)
-        self._sb_port.setValue(5432)
-        self._g_signup.addWidget(self._sb_port, 5, 0, 1, 2)
+        # AJOUT DU LINEEDIT LICENCE
+        self._le_licence = QLineEdit(self._p_signup)
+        self._le_licence.setObjectName(u"_le_licence")
+        self._le_licence.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._le_licence.setClearButtonEnabled(True)
+        self._g_signup.addWidget(self._le_licence, 3, 0, 1, 2)
         # AJOUT D'UN VERTICAL SPACER
         self._vs_signup_two = QSpacerItem(20, 48, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-        self._g_signup.addItem(self._vs_signup_two, 6, 0, 1, 1)
+        self._g_signup.addItem(self._vs_signup_two, 4, 0, 1, 1)
         # AJOUT DU BOUTON ENREGISTRER CONFIGURATION
         self._b_save_config_db = QPushButton(self._p_signup)
         self._b_save_config_db.setObjectName(u"_b_save_config_db")
         self._b_save_config_db.setIcon(self.disquette_icon)
         self._b_save_config_db.setIconSize(QSize(20, 20))
-        self._g_signup.addWidget(self._b_save_config_db, 8, 0, 1, 2)
+        self._g_signup.addWidget(self._b_save_config_db, 5, 0, 1, 2)
         # AJOUT DU BOUTON RETOUR CONNEXION
         self._b_back_connexion = QPushButton(self._p_signup)
         self._b_back_connexion.setObjectName(u"_b_back_connexion")
         self._b_back_connexion.setIcon(self.retour_icon)
         self._b_back_connexion.setIconSize(QSize(20, 20))
         self._b_back_connexion.clicked.connect(lambda: self.switchPageConnexion(0))
-        self._g_signup.addWidget(self._b_back_connexion, 9, 0, 1, 2)
+        self._g_signup.addWidget(self._b_back_connexion, 6, 0, 1, 2)
         # AJOUT DE LA PAGE SIGNUP DANS LE DIALOG CONNEXION
         self._sw_login_dialog.addWidget(self._p_signup)
 
@@ -218,25 +211,31 @@ class LoginPage:
         self._le_identifiant.setInputMask("")
         self._le_identifiant.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Identifiant", None))
         self._le_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
+        self._l_licence_missing.setText(QCoreApplication.translate("MainWindow", u"Aucune Licence trouvée", None))
         self._b_signin.setText(QCoreApplication.translate("MainWindow", u"Connexion", None))
         self._b_config_db.setText(QCoreApplication.translate("MainWindow", u"Configurer une connexion", None))
         self._b_guess_connexion.setText(QCoreApplication.translate("MainWindow", u"Invit\u00e9", None))
         self._b_back_connexion.setText(QCoreApplication.translate("MainWindow", u"Retour \u00e0 l'\u00e9cran de connexion", None))
         self._l_icon_config_db.setText("")
         self._l_config_db.setText(QCoreApplication.translate("MainWindow", u"Configuration d'une connexion", None))
-        self._le_host.setPlaceholderText(QCoreApplication.translate("MainWindow", u"L'H\u00f4te", None))
-        self._le_db_name.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Base de donn\u00e9es", None))
+        self._le_licence.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Licence", None))
         self._b_save_config_db.setText(QCoreApplication.translate("MainWindow", u"Sauvegarde", None))
 
-    def switchPageConnexion(self, index=0):
+    def switchPageConnexion(self, index=0, expire_licence: bool = False):
         self._sw_login_dialog.setCurrentIndex(index)
         if index == 0:
             self._b_signin.setFocus()
         else:
             self._b_back_connexion.setFocus()
+        self.active_signin(expire_licence)
 
     def demarrage(self):
         self.hideSideMenu()
         self.hideHeaderMenu()
-        self.switchPageConnexion()
         self.switchPage("_p_login")
+
+    def active_signin(self,expire_licence: bool = False ):
+        self._le_identifiant.setEnabled(HasIdentifiant())
+        self._le_password.setEnabled(HasIdentifiant())
+        self._b_signin.setEnabled(HasIdentifiant())
+        self._l_licence_missing.setVisible(not HasIdentifiant() or expire_licence)

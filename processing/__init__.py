@@ -1,2 +1,3 @@
 from processing.database import PostgreSQLDatabase
-__all__ = ["PostgreSQLDatabase"]
+from processing.dialog import Formulaire
+__all__ = ["PostgreSQLDatabase", "Formulaire"]

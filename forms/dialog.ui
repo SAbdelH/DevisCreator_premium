@@ -1200,7 +1200,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="_p_signin">
               <layout class="QGridLayout" name="_g_signin">
@@ -1219,6 +1219,92 @@ QCalendarWidget QAbstractItemView:enabled {
                <property name="verticalSpacing">
                 <number>22</number>
                </property>
+               <item row="1" column="0">
+                <spacer name="_vs_signin_one">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="5" column="0">
+                <spacer name="_vs_signin_two">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLineEdit" name="_le_password">
+                 <property name="echoMode">
+                  <enum>QLineEdit::EchoMode::Password</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Mot de passe</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QPushButton" name="_b_signin">
+                 <property name="text">
+                  <string>Connexion</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icon/icons/login.png</normaloff>:/icon/icons/login.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="0">
+                <widget class="QPushButton" name="_b_guess_connexion">
+                 <property name="text">
+                  <string>Invité</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icon/icons/invite.png</normaloff>:/icon/icons/invite.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="_l_licence_missing">
+                 <property name="text">
+                  <string>Votre Licence n'est plus actif</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
                <item row="0" column="0">
                 <layout class="QGridLayout" name="_g_icon_signin">
                  <property name="horizontalSpacing">
@@ -1299,19 +1385,6 @@ QCalendarWidget QAbstractItemView:enabled {
                  </item>
                 </layout>
                </item>
-               <item row="1" column="0">
-                <spacer name="_vs_signin_one">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
                <item row="2" column="0">
                 <widget class="QLineEdit" name="_le_identifiant">
                  <property name="inputMask">
@@ -1328,53 +1401,7 @@ QCalendarWidget QAbstractItemView:enabled {
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
-                <widget class="QLineEdit" name="_le_password">
-                 <property name="echoMode">
-                  <enum>QLineEdit::EchoMode::Password</enum>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignCenter</set>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Mot de passe</string>
-                 </property>
-                 <property name="clearButtonEnabled">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <spacer name="_vs_signin_two">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="5" column="0">
-                <widget class="QPushButton" name="_b_signin">
-                 <property name="text">
-                  <string>Connexion</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="resources.qrc">
-                   <normaloff>:/icon/icons/login.png</normaloff>:/icon/icons/login.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="0">
+               <item row="7" column="0">
                 <widget class="QPushButton" name="_b_config_db">
                  <property name="layoutDirection">
                   <enum>Qt::LayoutDirection::LeftToRight</enum>
@@ -1388,23 +1415,6 @@ QCalendarWidget QAbstractItemView:enabled {
                  <property name="icon">
                   <iconset resource="resources.qrc">
                    <normaloff>:/icon/icons/configBD.png</normaloff>:/icon/icons/configBD.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="7" column="0">
-                <widget class="QPushButton" name="_b_guess_connexion">
-                 <property name="text">
-                  <string>Invité</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="resources.qrc">
-                   <normaloff>:/icon/icons/invite.png</normaloff>:/icon/icons/invite.png</iconset>
                  </property>
                  <property name="iconSize">
                   <size>
@@ -1433,36 +1443,6 @@ QCalendarWidget QAbstractItemView:enabled {
                <property name="verticalSpacing">
                 <number>20</number>
                </property>
-               <item row="2" column="0">
-                <spacer name="_vs_signup_one">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>48</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item row="9" column="0" colspan="2">
-                <widget class="QPushButton" name="_b_back_connexion">
-                 <property name="text">
-                  <string>Retour à l'écran de connexion</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="resources.qrc">
-                   <normaloff>:/icon/icons/back.png</normaloff>:/icon/icons/back.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>20</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
                <item row="0" column="0" colspan="2">
                 <layout class="QGridLayout" name="_g_icon_signup">
                  <item row="0" column="1" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
@@ -1540,7 +1520,37 @@ QCalendarWidget QAbstractItemView:enabled {
                  </item>
                 </layout>
                </item>
-               <item row="6" column="0">
+               <item row="7" column="0" colspan="2">
+                <widget class="QPushButton" name="_b_back_connexion">
+                 <property name="text">
+                  <string>Retour à l'écran de connexion</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="resources.qrc">
+                   <normaloff>:/icon/icons/back.png</normaloff>:/icon/icons/back.png</iconset>
+                 </property>
+                 <property name="iconSize">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <spacer name="_vs_signup_one">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>48</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item row="4" column="0">
                 <spacer name="_vs_signup_two">
                  <property name="orientation">
                   <enum>Qt::Orientation::Vertical</enum>
@@ -1553,49 +1563,7 @@ QCalendarWidget QAbstractItemView:enabled {
                  </property>
                 </spacer>
                </item>
-               <item row="3" column="0" colspan="2">
-                <widget class="QLineEdit" name="_le_host">
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignCenter</set>
-                 </property>
-                 <property name="placeholderText">
-                  <string>L'Hôte</string>
-                 </property>
-                 <property name="clearButtonEnabled">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0" colspan="2">
-                <widget class="QLineEdit" name="_le_db_name">
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignCenter</set>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Base de données</string>
-                 </property>
-                 <property name="clearButtonEnabled">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0" colspan="2">
-                <widget class="QSpinBox" name="_sb_port">
-                 <property name="alignment">
-                  <set>Qt::AlignmentFlag::AlignCenter</set>
-                 </property>
-                 <property name="showGroupSeparator" stdset="0">
-                  <bool>true</bool>
-                 </property>
-                 <property name="maximum">
-                  <number>9999</number>
-                 </property>
-                 <property name="value">
-                  <number>5432</number>
-                 </property>
-                </widget>
-               </item>
-               <item row="8" column="0" colspan="2">
+               <item row="6" column="0" colspan="2">
                 <widget class="QPushButton" name="_b_save_config_db">
                  <property name="text">
                   <string>Sauvegarde</string>
@@ -1609,6 +1577,19 @@ QCalendarWidget QAbstractItemView:enabled {
                    <width>20</width>
                    <height>20</height>
                   </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="2">
+                <widget class="QLineEdit" name="_le_licence">
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Licence</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </item>

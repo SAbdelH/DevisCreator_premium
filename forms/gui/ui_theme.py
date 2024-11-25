@@ -379,7 +379,7 @@ QRadioButton::indicator:checked:pressed
 #_f_invoice_box_export_invoice #_ds_invoice_total {{
 	color: rgba(223, 79, 144, 1);
 }}
-#_l_invoiceemptyInventorymess {{color: rgba(188, 71, 73, 1)}}
+#_l_invoiceemptyInventorymess, #_l_licence_missing {{color: rgba(188, 71, 73, 1)}}
 /*VALIDATION FACTURE*/
 #_l_valid_facture_fait_le, #_l_valid_facture_objet, #_l_valid_facture_to {{
 	color: rgba(136, 142, 158, 1);

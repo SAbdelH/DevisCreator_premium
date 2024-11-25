@@ -50,7 +50,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
                                 '_b_mmanage_db': {'fonct': lambda: self.OpenDbManagementPage(),'ignore': self.ignoreByPage('_b_mmanage_db')},
                                 }
         self.menuAction.connect(self.texte)
-        self.demarrage()
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
