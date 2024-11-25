@@ -234,8 +234,8 @@ class LoginPage:
         self.hideHeaderMenu()
         self.switchPage("_p_login")
 
-    def active_signin(self,expire_licence: bool = False ):
-        self._le_identifiant.setEnabled(HasIdentifiant())
-        self._le_password.setEnabled(HasIdentifiant())
-        self._b_signin.setEnabled(HasIdentifiant())
+    def active_signin(self, expire_licence: bool = False ):
+        self._le_identifiant.setEnabled(HasIdentifiant() and not expire_licence)
+        self._le_password.setEnabled(HasIdentifiant() and not expire_licence)
+        self._b_signin.setEnabled(HasIdentifiant() and not expire_licence)
         self._l_licence_missing.setVisible(not HasIdentifiant() or expire_licence)
