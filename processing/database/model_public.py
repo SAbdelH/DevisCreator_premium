@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import bcrypt
 from sqlalchemy import Column, BigInteger, Date, String, Numeric, Time, Integer, Boolean, CheckConstraint, text
 
@@ -33,12 +35,21 @@ class User(Base):
         """Vérifie si le mot de passe est correct."""
         return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
 
+    def set_expire_account(self, expire_date):
+        current_date = datetime.now().date()
+        if expire_date > current_date:
+            self.expire = expire_date
+
+    def check_validity_account(self):
+        validity = self.expire is not None
+        return validity
+
     @staticmethod
     def verify_login(session, username, password):
         """Vérifie les informations de connexion."""
         user = session.query(User).filter_by(username=username).first()
         if user:
-            if user.check_password(password):
+            if user.check_password(password) and user.check_validity_account():
                 return user
             else:
                 ...

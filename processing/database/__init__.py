@@ -8,11 +8,12 @@ from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import sessionmaker
 
 from processing.database.gui import InteractionInterface
+from processing.database.informations import Informations
 from processing.database.model_private import Licence
 from processing.decrypt import source_dir, fernet, HasIdentifiant
 
 
-class PostgreSQLDatabase(InteractionInterface):
+class PostgreSQLDatabase(InteractionInterface, Informations):
     def __init__(self):
         self.__ePrivate = None
         self.__sPrivate = None

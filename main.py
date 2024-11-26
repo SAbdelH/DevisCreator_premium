@@ -9,6 +9,7 @@ class DevisCreator(Formulaire, PostgreSQLDatabase):
         Formulaire.__init__(self)
         self.maindialog._b_signin.clicked.connect(lambda: self.login(sender="DB"))
         self.maindialog._b_save_config_db.clicked.connect(self.saveLicence)
+        self.maindialog._b_um_add_usr.clicked.connect(self.setUserInfo)
 
 if __name__ == "__main__":
     import sys

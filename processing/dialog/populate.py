@@ -1,4 +1,6 @@
-from PySide6.QtCore import QSize, Qt
+from datetime import datetime
+
+from PySide6.QtCore import QSize, Qt, QDate
 from PySide6.QtWidgets import QListWidgetItem
 
 from processing.database.model_public import User
@@ -8,8 +10,17 @@ class PopulateWidget:
 
     def populateUserList(self):
         with self.Session() as session:
-            user = session.query(User)
+            user = session.query(
+                User.identifiant.label("_le_um_id"),
+                User.nom.label("_le_um_nom"),
+                User.prenom.label("_le_um_prenom"),
+                User.poste.label("_le_um_poste"),
+                User.sexe.label("_cbx_um_sexe"),
+                User.role.label("_cbx_um_role"),
+                User.expire.label("_cw_um_expire_account")
+                )
             if user:
+                self.maindialog._lw_um_usrList.clear()
                 self.maindialog._lw_um_usrList.setStyleSheet("""
                         #_p_user_management #_lw_um_usrList {
                             background-image: none !important;
@@ -48,4 +59,19 @@ class PopulateWidget:
                     )
 
     def populateInputUserList(self, info):
-        print(info)
+        current_date = QDate.currentDate()
+        self.maindialog._cw_um_expire_account.setSelectedDate(current_date)
+        for alias, value in info._asdict().items():
+            widget = getattr(self.maindialog, alias, None)
+            if widget:
+                if hasattr(widget, 'setText'):  # Pour QLineEdit
+                    widget.setText(str(value))
+                elif hasattr(widget, 'setCurrentText'):  # Pour QComboBox
+                    widget.setCurrentText(str(value))
+                else:
+                    if value and hasattr(widget, 'setSelectedDate'):
+                        datetime_obj = datetime.strptime(str(value), "%Y-%m-%d")
+                        date_part = datetime_obj.date()
+                        widget.setSelectedDate(
+                            QDate(date_part.year, date_part.month, date_part.day)
+                        )

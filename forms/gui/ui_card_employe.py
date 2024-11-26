@@ -8,7 +8,7 @@ class EmployeeCard(QWidget):
     def __init__(self, info, parent=None):
         super().__init__(parent)
         self.setObjectName("employeeCard")
-        icon = Icons().profil_pixmap(f"{info.role}_{info.sexe}")
+        icon = Icons().profil_pixmap(f"{info._cbx_um_role}_{info._cbx_um_sexe}")
 
         # Store employee info
         self.employee_info = info
@@ -33,13 +33,13 @@ class EmployeeCard(QWidget):
         v_layout.setSpacing(2)
         v_layout.setAlignment(Qt.AlignCenter)
 
-        name_label = QLabel(f"{info.nom.upper()} {info.prenom.capitalize()}")
+        name_label = QLabel(f"{info._le_um_nom.upper()} {info._le_um_prenom.capitalize()}")
         name_label.setFont(QFont("Arial", 10, QFont.Bold))
         name_label.setAlignment(Qt.AlignCenter)
         name_label.setWordWrap(True)
         name_label.setMinimumWidth(90)
 
-        idenfiant_label = QLabel(f"@{info.identifiant}")
+        idenfiant_label = QLabel(f"@{info._le_um_id}")
         font = QFont("Arial", 8)
         font.setBold(True)
         font.setItalic(True)
@@ -48,7 +48,7 @@ class EmployeeCard(QWidget):
         idenfiant_label.setWordWrap(True)
         idenfiant_label.setMinimumWidth(90)
 
-        role_label = QLabel(info.role)
+        role_label = QLabel(info._cbx_um_role)
         role_label.setFont(QFont("Arial", 8))
         role_label.setAlignment(Qt.AlignCenter)
         role_label.setWordWrap(True)
