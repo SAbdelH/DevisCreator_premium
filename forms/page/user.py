@@ -36,6 +36,11 @@ class UserManagementPage:
         self._lw_um_usrList.setObjectName(u"_lw_um_usrList")
         self._lw_um_usrList.setViewMode(QListView.ViewMode.IconMode)
         self._lw_um_usrList.setWordWrap(True)
+        self._lw_um_usrList.setSpacing(20)
+        self._lw_um_usrList.setResizeMode(QListWidget.Adjust)
+        self._lw_um_usrList.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self._lw_um_usrList.setUniformItemSizes(True)
+        self._lw_um_usrList.setGridSize(QSize(110, 150))
         self._v_left_user_management.addWidget(self._lw_um_usrList)
         # AJOUT DU FRAME DANS LA GRID PAGE
         self._g_user_management.addWidget(self._f_left_user_management, 0, 0, 1, 1)

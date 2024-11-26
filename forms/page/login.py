@@ -224,7 +224,7 @@ class LoginPage:
     def switchPageConnexion(self, index=0, expire_licence: bool = False):
         self._sw_login_dialog.setCurrentIndex(index)
         if index == 0:
-            self._b_signin.setFocus()
+            self._b_guess_connexion.setFocus()
         else:
             self._b_back_connexion.setFocus()
         self.active_signin(expire_licence)

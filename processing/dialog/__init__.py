@@ -1,7 +1,8 @@
 from forms import Ui_MainWindow
 from processing.dialog.gui import Update
+from processing.dialog.populate import PopulateWidget
 
-class Formulaire(Update):
+class Formulaire(Update, PopulateWidget):
     def __init__(self):
         self.maindialog = Ui_MainWindow()
         super().__init__()

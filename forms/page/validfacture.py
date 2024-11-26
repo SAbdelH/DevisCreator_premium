@@ -195,6 +195,7 @@ class validFacturePage:
         self._b_valid_facture_attachment_pdf.setIcon(self.telecharger_icon)
         self._b_valid_facture_attachment_pdf.setIconSize(QSize(20, 20))
         self._b_valid_facture_attachment_pdf.setFlat(True)
+        self._b_valid_facture_attachment_pdf.setEnabled(False)
         self._h_valid_facture_attachment_pdf.addWidget(self._b_valid_facture_attachment_pdf)
         self._g_valid_facture_preview_three.addLayout(self._h_valid_facture_attachment_pdf, 1, 0, 1, 2)
         self._h_valid_facture_attachment_excel = QHBoxLayout()
@@ -215,6 +216,7 @@ class validFacturePage:
         self._b_valid_facture_attachment_excel.setIcon(self.telecharger_icon)
         self._b_valid_facture_attachment_excel.setIconSize(QSize(20, 20))
         self._b_valid_facture_attachment_excel.setFlat(True)
+        self._b_valid_facture_attachment_excel.setEnabled(False)
         self._h_valid_facture_attachment_excel.addWidget(self._b_valid_facture_attachment_excel)
         self._g_valid_facture_preview_three.addLayout(self._h_valid_facture_attachment_excel, 1, 3, 1, 2)
         self._v_valid_facture_preview.addLayout(self._g_valid_facture_preview_three)
@@ -242,10 +244,16 @@ class validFacturePage:
 
         self.__retranslateUi()
 
-    def button_exports_text(self, numero: str = "1120240001"):
+    def button_exports_text(self, numero: str = ""):
         exportText = self._cbx_valid_facture_type_export.currentText()
-        self._b_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", f"{exportText}_{numero}.pdf", None))
-        self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", f"{exportText}_{numero}.xlsx", None))
+        if not numero:
+            textpdf = f"ici {exportText} en pdf"
+            textxlsx = f"ici {exportText} en excel"
+        else:
+            textpdf = f"{exportText}_{numero}.pdf"
+            textxlsx = f"{exportText}_{numero}.xlsx"
+        self._b_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", textpdf, None))
+        self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", textxlsx, None))
 
     def __retranslateUi(self):
         HeaderName = [u"\u00c9l\u00e9ment", u"Prix unitaire", u"Qt\u00e9", u"Remise",
@@ -275,9 +283,9 @@ class validFacturePage:
         self._l_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", u"Pi\u00e8ce jointe PDF", None))
         self._l_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", u"Pi\u00e8ce jointe Excel", None))
         self._l_valid_facture_pdf_icon.setText("")
-        self._b_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", u"Facture_1120240001.pdf", None))
+        self._b_valid_facture_attachment_pdf.setText(QCoreApplication.translate("MainWindow", u"ici facture en pdf", None))
         self._l_valid_facture_excel_icon.setText("")
-        self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", u"Facture_1120240001.xlsx", None))
+        self._b_valid_facture_attachment_excel.setText(QCoreApplication.translate("MainWindow", u"ici facture en excel", None))
         self._b_valid_facture_unpaid.setText(QCoreApplication.translate("MainWindow", u"\u2718 Marqu\u00e9 comme non pay\u00e9", None))
         self._b_valid_facture_paid.setText(QCoreApplication.translate("MainWindow", u"\u2714\ufe0e Marquer comme pay\u00e9", None))
 

@@ -21,7 +21,8 @@ class User(Base):
     poste = Column(String)  # VARCHAR
     sexe = Column(String, nullable=True)  # VARCHAR
     role = Column(String, nullable=True)  # VARCHAR
-    group_id = Column(String, nullable=True)
+    group_id = Column(String, nullable=False)
+    expire = Column(Date, nullable=True)
 
 
     def set_password(self, password):

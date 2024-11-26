@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, Integer, String, CheckConstraint
+from sqlalchemy import create_engine, Column, Integer, String, CheckConstraint, Date
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 import bcrypt
@@ -26,10 +26,8 @@ class User(Base):
         {'schema': 'informations'}
     )
 
-
     # Définir les colonnes
-    identifiant = Column(String, primary_key=True, autoincrement=False, nullable=False,
-                         unique=True)  # VARCHAR NOT NULL, PRIMARY KEY
+    identifiant = Column(String, primary_key=True, autoincrement=False, nullable=False, unique=True)  # VARCHAR NOT NULL, PRIMARY KEY
     email = Column(String(120), unique=True, nullable=False)
     password_hash = Column(String(128), nullable=False)
     nom = Column(String)  # VARCHAR
@@ -37,6 +35,8 @@ class User(Base):
     poste = Column(String)  # VARCHAR
     sexe = Column(String, nullable=True)  # VARCHAR
     role = Column(String, nullable=True)  # VARCHAR
+    group_id = Column(String, nullable=False)
+    expire = Column(Date, nullable=True)
 
 
     def set_password(self, password):

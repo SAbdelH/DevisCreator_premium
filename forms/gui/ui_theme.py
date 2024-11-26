@@ -54,7 +54,6 @@ class theme:
 }}
 #_f_btn_header {{
 	border: 1px dashed rgba(174, 182, 191, 1);
-	box-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5), -2px -2px 0 rgba(0, 0, 0, 0.5);
 	border-radius: 20px;
 	background-color: qlineargradient(spread:reflect, x1:0, y1:0, x2:1, y2:0, 
 		stop:0 rgba(214, 219, 223, 1), 
@@ -72,7 +71,6 @@ class theme:
 	background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(246, 221, 204, 1), stop:0.5 rgba(255, 255, 255, 1), stop:1 rgba(246, 221, 204, 1));
 	font-size: 10px;
 	border: 1px solid rgba(204, 209, 209, 1);
-	box-shadow: 0px 0px 20px rgba(238, 238, 238, 1);
 	transition: all 0.5s ease;
 	padding: 3px;
 	text-transform: uppercase;
@@ -186,7 +184,6 @@ class theme:
 	border-radius: 15px;
 	background-color: rgba(255, 255, 255, 1);
 	color: rgba(0, 0, 0, 1);
-	box-shadow: 20px rgba(238, 238, 238, 1);
 	border: 1px solid rgba(234, 237, 237, 1);
 }}
 #_f_graphic_finances QTableWidget QHeaderView::section:horizontal, #_tw_select_table QHeaderView::section:horizontal {{
@@ -263,7 +260,6 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 15px;
 	background-color: rgba(247, 249, 249, 1);
 	border: 1px dashed rgba(174, 182, 191, 1);
-	box-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5), -2px -2px 0 rgba(0, 0, 0, 0.5)
 }}
 
 #_f_info_company QGroupBox QLineEdit, #_f_right_user_management QLineEdit, 
@@ -316,12 +312,6 @@ QRadioButton::indicator:checked:pressed
 	border: 1px solid rgba(234, 237, 237, 1);
 }}
 /*FACTURE CREATION*/
-#_lw_um_usrList {{
-	background-image: url({self.user_bg});
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-origin: content;
-}}
 #_b_invoice_export, #_b_invoice_add_cart {{
 	background-color : rgba(82, 121, 111, 1);
 	color: rgba(255, 255, 255, 1);
