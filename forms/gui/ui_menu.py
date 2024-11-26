@@ -474,8 +474,14 @@ class Menu:
         """
         self._m_logout_menu = QMenu()
         self._m_logout_menu.setObjectName("_m_logout_menu")
+        self._m_logout_menu.setStyleSheet("""#_m_logout_menu{
+                                                background-color: rgba(255, 255, 255, 1);
+                                                color: rgba(0, 0, 0, 1);
+                                                border-radius: 10px;
+                                                }""")
         theme, icn = ("Sombre", "dark") if self.apparence == "white" else ("Claire", "white")
         action_dict = {
+            "": {},
             "Reglages": {'signal': 'settings', 'img': self.reglage_icon},
             "Centre d'aides": {'signal': 'helps', 'img': self.help_center_icon},
             "Recherche mise-à-jour": {'signal': 'upgrade', 'img': self.software_upgrade_icon},
@@ -493,7 +499,7 @@ class Menu:
                 # Créer un widget personnalisé pour l'action
                 widget = QWidget()
                 layout = QHBoxLayout(widget)
-                layout.setContentsMargins(5, 0, 5, 0)  # Marges pour l'espacement
+                layout.setContentsMargins(5, 5, 5, 5)  # Marges pour l'espacement
 
                 # Ajouter l'icône (QLabel)
                 icon_label = QLabel()
@@ -521,9 +527,6 @@ class Menu:
                         QWidget:hover {
                             background-color: rgba(91, 142, 125, 0.7);
                         }
-                        QWidget {
-                            padding: 2px;
-                        }
                         QLabel {
                             color: rgba(0, 0, 0, 1); 
                         }
@@ -544,8 +547,8 @@ class Menu:
                     # Désactiver le survol et le clic si pas de signal
                     widget.setStyleSheet("""
                         QWidget:disabled {
-                            padding: 2px;
-                            background-color: rgba(240, 240, 240, 1);
+                            padding: 1px;
+                            background-color: rgba(255, 255, 255, 1);
                             color: rgba(244, 162, 97, 1);
                         }
                         QLabel {
@@ -555,6 +558,5 @@ class Menu:
                     widget_action.setEnabled(False)
 
                 self._m_logout_menu.addAction(widget_action)
-
         # Connecter le bouton au menu
         self._b_logout.setMenu(self._m_logout_menu)
