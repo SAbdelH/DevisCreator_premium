@@ -167,6 +167,22 @@ class UserManagementPage:
         self._h_inputNameGeneral.addLayout(self._v_inputPrenom)
         # AJOUT HORIZONTAL NOM PRENOM DANS VERTICAL FRAME
         self._v_right_user_management.addLayout(self._h_inputNameGeneral)
+        # HORIZONTAL LAYOUT POUR MAIL
+        self._h_um_mail = QHBoxLayout()
+        self._h_um_mail.setObjectName(u"_h_um_mail")
+        # LABEL MAIL
+        self._l_um_mail = QLabel(self._f_right_user_management)
+        self._l_um_mail.setObjectName(u"_l_um_mail")
+        self._h_um_mail.addWidget(self._l_um_mail)
+        # LINEEDIT MAIL
+        self._le_um_mail = QLineEdit(self._f_right_user_management)
+        self._le_um_mail.setObjectName(u"_le_um_mail")
+        self._le_um_mail.setMinimumSize(QSize(0, 25))
+        self._le_um_mail.setClearButtonEnabled(True)
+        self._h_um_mail.addWidget(self._le_um_mail)
+        # AJOUT DU HORIZONTAL MAIL DANS VERTICAL FRAME
+        self._v_right_user_management.addLayout(self._h_um_mail)
+
         # HORIZONTAL LAYOUT POUR POSTE
         self._h_um_poste = QHBoxLayout()
         self._h_um_poste.setObjectName(u"_h_um_poste")
@@ -258,6 +274,7 @@ class UserManagementPage:
         self._b_um_update_usr.setIcon(self.mise_a_jour_icon)
         self._b_um_update_usr.setIconSize(QSize(20, 20))
         self._b_um_update_usr.setFlat(True)
+        self._b_um_update_usr.setEnabled(False)
         self._h_um_update.addWidget(self._b_um_update_usr)
         # BOUTON SUPPRIMER
         self._b_um_delete_usr = QPushButton(self._f_right_user_management)
@@ -265,6 +282,7 @@ class UserManagementPage:
         self._b_um_delete_usr.setIcon(self.supprimer_icon)
         self._b_um_delete_usr.setIconSize(QSize(20, 20))
         self._b_um_delete_usr.setFlat(True)
+        self._b_um_delete_usr.setEnabled(False)
         self._h_um_update.addWidget(self._b_um_delete_usr)
         # AJOUT DU HORIZONTAL BOUTON DANS VERTICAL FRAME
         self._v_right_user_management.addLayout(self._h_um_update)
@@ -282,19 +300,20 @@ class UserManagementPage:
 
     def __retranslateUi(self):
         self._l_informations_connexion.setText(QCoreApplication.translate("MainWindow", u"Informations connexion", None))
-        self._l_um_id.setText(QCoreApplication.translate("MainWindow", u"ID Connexion", None))
-        self._l_um_password.setText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
+        self._l_um_id.setText(QCoreApplication.translate("MainWindow", u"ID Connexion (*)", None))
+        self._l_um_password.setText(QCoreApplication.translate("MainWindow", u"Mot de passe (*)", None))
         self._le_um_password.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Obligatoire lors de la cr\u00e9ation seulement", None))
         self._l_General.setText(QCoreApplication.translate("MainWindow", u"G\u00e9n\u00e9rale", None))
         self._l_um_nom.setText(QCoreApplication.translate("MainWindow", u"Nom", None))
         self._l_um_prenom.setText(QCoreApplication.translate("MainWindow", u"Pr\u00e9nom", None))
+        self._l_um_mail.setText(QCoreApplication.translate("MainWindow", u"Email :", None))
         self._l_um_poste.setText(QCoreApplication.translate("MainWindow", u"Poste :", None))
-        self._l_um_sexe.setText(QCoreApplication.translate("MainWindow", u"Sexe", None))
+        self._l_um_sexe.setText(QCoreApplication.translate("MainWindow", u"Sexe (*)", None))
         self._cbx_um_sexe.setItemText(0, QCoreApplication.translate("MainWindow", u"Homme", None))
         self._cbx_um_sexe.setItemText(1, QCoreApplication.translate("MainWindow", u"Femme", None))
 
         self._cbx_um_sexe.setPlaceholderText(QCoreApplication.translate("MainWindow", u"-- Selecionnez le genre de l'utilisateur", None))
-        self._l_um_role.setText(QCoreApplication.translate("MainWindow", u"Role", None))
+        self._l_um_role.setText(QCoreApplication.translate("MainWindow", u"Role (*)", None))
         self._cbx_um_role.setItemText(0, QCoreApplication.translate("MainWindow", u"Administrateur", None))
         self._cbx_um_role.setItemText(1, QCoreApplication.translate("MainWindow", u"Responsable", None))
         self._cbx_um_role.setItemText(2, QCoreApplication.translate("MainWindow", u"Employ\u00e9", None))

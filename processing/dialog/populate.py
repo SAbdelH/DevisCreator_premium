@@ -5,6 +5,8 @@ from PySide6.QtWidgets import QListWidgetItem
 
 from processing.database.model_public import User
 from forms.gui.ui_card_employe import EmployeeCard
+from processing.database.session import WorkSession
+
 
 class PopulateWidget:
 
@@ -17,6 +19,7 @@ class PopulateWidget:
                 User.poste.label("_le_um_poste"),
                 User.sexe.label("_cbx_um_sexe"),
                 User.role.label("_cbx_um_role"),
+                User.email.label("_le_um_mail"),
                 User.expire.label("_cw_um_expire_account")
                 )
             if user:
@@ -75,3 +78,6 @@ class PopulateWidget:
                         widget.setSelectedDate(
                             QDate(date_part.year, date_part.month, date_part.day)
                         )
+
+        self.maindialog._b_um_delete_usr.setEnabled(not (self.USER == info._le_um_id))
+        self.maindialog._b_um_update_usr.setEnabled(True)

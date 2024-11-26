@@ -535,7 +535,7 @@ class Menu:
                     def create_click_handler(signal_name):
                         def click_handler(event):
                             self.menuAction.emit(signal_name)
-                            self.menulogout.hide()  # Ferme le menu après le clic
+                            self._m_logout_menu.hide()  # Ferme le menu après le clic
 
                         return click_handler
                     # Connecter l'action au signal

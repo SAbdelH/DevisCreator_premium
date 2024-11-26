@@ -1034,7 +1034,7 @@ QCalendarWidget QAbstractItemView:enabled {
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap resource="resources.qrc">:/icon/icons/patron.png</pixmap>
+            <pixmap>:/icon/icons/patron.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -3739,9 +3739,6 @@ QCalendarWidget QAbstractItemView:enabled {
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="_v_right_user_management">
-           <property name="spacing">
-            <number>-1</number>
-           </property>
            <item>
             <widget class="QFrame" name="_f_title_inputConnexion">
              <property name="minimumSize">
@@ -3957,6 +3954,20 @@ QCalendarWidget QAbstractItemView:enabled {
                 </widget>
                </item>
               </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="_h_um_mail">
+             <item>
+              <widget class="QLabel" name="_l_um_mail">
+               <property name="text">
+                <string>Email :</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="_le_um_mail"/>
              </item>
             </layout>
            </item>

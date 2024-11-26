@@ -16,13 +16,13 @@ class User(Base):
 
     # Définir les colonnes
     identifiant = Column(String, primary_key=True, autoincrement=False, nullable=False, unique=True)  # VARCHAR NOT NULL, PRIMARY KEY
-    email = Column(String(120), unique=True, nullable=False)
+    email = Column(String(120), nullable=True)
     password_hash = Column(String(128), nullable=False)
     nom = Column(String)  # VARCHAR
     prenom = Column(String)  # VARCHAR
     poste = Column(String)  # VARCHAR
-    sexe = Column(String, nullable=True)  # VARCHAR
-    role = Column(String, nullable=True)  # VARCHAR
+    sexe = Column(String, nullable=False)  # VARCHAR
+    role = Column(String, nullable=False)  # VARCHAR
     group_id = Column(String, nullable=False)
     expire = Column(Date, nullable=True)
 

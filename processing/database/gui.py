@@ -5,7 +5,6 @@ from PySide6.QtCore import QCoreApplication
 from sqlalchemy import inspect, and_
 from processing.database.session import WorkSession
 from processing.decrypt import source_dir, fernet
-from processing.database.model_private import Licence
 
 
 class InteractionInterface:
@@ -53,6 +52,7 @@ class InteractionInterface:
         """
         info = WorkSession.get_current_user()
         self.maindialog._l_id_profil.setText(info.identifiant)
+        self.USER = info.identifiant
         self.maindialog._l_name_profil.setText(f"{info.nom.upper()} {info.prenom.capitalize()}")
         self.maindialog._l_pposte.setText(info.poste)
         __img = {'Administrateur_Homme': self.maindialog.profil_pixmap(),
@@ -65,6 +65,16 @@ class InteractionInterface:
 
         self.maindialog._l_icon_profil.setPixmap(__img.get(f"{info.role}_{info.sexe}"))
         self.maindialog._l_icon_profil.setScaledContents(True)
+
+    def disconnect(self):
+        if self.typeConnection == "DB":
+            publicConnection = self.Engine
+            privateConnection = self.privateEngine
+            if publicConnection: publicConnection.dispose()
+            if privateConnection: privateConnection.dispose()
+            WorkSession().logout()
+
+        self.maindialog.demarrage()
 
     def saveLicence(self):
         name = '.hangiya'

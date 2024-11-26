@@ -49,7 +49,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
                                 '_b_mcreate_backup': {'fonct': lambda: self.OpenrestorePage(),'ignore': self.ignoreByPage('_b_mcreate_backup')},
                                 '_b_mmanage_db': {'fonct': lambda: self.OpenDbManagementPage(),'ignore': self.ignoreByPage('_b_mmanage_db')},
                                 }
-        self.menuAction.connect(self.texte)
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -101,9 +100,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
-
-    def texte(self, text):
-        print(text)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Logiciel de gestion de Facture", None))

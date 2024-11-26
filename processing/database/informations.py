@@ -1,5 +1,6 @@
 from datetime import datetime, date
 from processing.database.model_public import User
+from processing.database.session import WorkSession
 
 
 class Informations:
@@ -12,15 +13,15 @@ class Informations:
 
         CDate = dlg._cw_um_expire_account.selectedDate()
         selectedDate = date(CDate.year(), CDate.month(), CDate.day())
-        current_date = datetime.now().date()
         value = [
             dlg._le_um_id.text(),
             dlg._le_um_nom.text(),
             dlg._le_um_prenom.text(),
-            dlg._cbx_um_role.currentText(),
+            dlg._cbx_um_role.currentText().replace("é", "e"),
             dlg._le_um_poste.text(),
             dlg._cbx_um_sexe.currentText(),
-            dlg._le_um_password.text().strip()
+            dlg._le_um_password.text().strip(),
+            dlg._le_um_mail.text()
         ]
         try:
             with self.Session() as session:
@@ -34,13 +35,27 @@ class Informations:
                     user.set_expire_account(selectedDate)
                     if value[6].strip() != "":
                         user.set_password(value[6])
+                    user.email = value[7]
                 else:
-                    __USER = User(identifiant = value[0], nom = value[0], prenom=value[0],
-                                  role=value[0], poste=value[0], sexe=value[0])
-                    session.add(user)
-                    user.set_password(value[6])
-                    user.set_expire_account(selectedDate)
+                    __USER = User(identifiant = value[0], nom = value[1], prenom=value[2],
+                                    role=value[3], poste=value[4], sexe=value[5], group_id=self.GROUP, email=value[7])
+                    __USER.set_password(value[6])
+                    __USER.set_expire_account(selectedDate)
+                    session.add(__USER)
+
             self.populateUserList()
         except Exception as err:
-            ...
+            print(err)
+
+    def deleteUserInfo(self):
+        """
+        Methode pour supprimer les informations de l'utilisateur selectionner dans l'interface
+        :return:
+        """
+        dlg = self.maindialog
+        id = dlg._le_um_id.text()
+        with self.Session() as session:
+            utilisateur = session.query(User).filter(User.identifiant == id).first()
+            session.delete(utilisateur)
+        self.populateUserList()
 

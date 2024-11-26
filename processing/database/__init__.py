@@ -19,7 +19,12 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
         self.__sPrivate = None
         self.__ePublic = None
         self.__sPublic = None
-        self.__cle = None
+        self.__cle: str = None
+        self.USER: str = None
+
+    @property
+    def GROUP(self):
+        return self.__cle
 
     @property
     def Engine(self):
