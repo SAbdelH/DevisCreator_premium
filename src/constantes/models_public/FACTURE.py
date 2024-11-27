@@ -1,5 +1,5 @@
 {
-'name': 'devis',
+'name': 'factures',
 'schema': 'activites',
 'columns': {
     'numero_devis': {
@@ -62,6 +62,9 @@
             'precision': 10,
             'scale': 3
         }
+    },
+    "paye": {
+        "type" : "Boolean"
     }
 },
 'constraints': None

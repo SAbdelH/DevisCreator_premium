@@ -464,11 +464,11 @@ class Menu:
                 else:
                     child.setVisible(True)
 
-    def logOutMenu(self, abonnement: str):
+    def logOutMenu(self, abonnement: str = 'premium'):
         """
-        Cette méthode crée un menu déroulant pour le bouton logout avec des widgets personnalisés et un effet de survol.
+        Crée un menu déroulant personnalisé pour le bouton logout.
 
-        param:
+        Args:
             abonnement (str, optional): Type d'abonnement. Defaults to 'premium'.
         """
         # Créer le menu
@@ -480,18 +480,33 @@ class Menu:
                                                 border-radius: 10px;
                                             }""")
 
+        # Ajouter un indicateur visuel au bouton
+        self._b_logout.setStyleSheet("""
+            QPushButton::after {
+                content: '▼';  # Triangle de menu
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 8px;
+                color: #666;
+            }
+        """)
+
         # Déterminer le thème
         theme, icn = ("Sombre", "dark") if self.apparence == "white" else ("Claire", "white")
 
-        # Définir les actions du menu avec plus de flexibilité
+        # Définir les actions du menu
         action_list = [
+            {"text": "", "icon": None, "signal": None},
             {"text": "Reglages", "icon": self.reglage_icon, "signal": 'settings'},
             {"text": "Centre d'aides", "icon": self.help_center_icon, "signal": 'helps'},
             {"text": "Recherche mise-à-jour", "icon": self.software_upgrade_icon, "signal": 'upgrade'},
             {"text": f"Apparence {theme}", "icon": getattr(self, f"{icn}_mode_icon"), "signal": 'darkmode'},
-            {"text": "separator"},  # Séparateur
-            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement.replace("é","e")}_icon"),"signal": None},
-            {"text": "separator"},  # Autre séparateur
+            {"text": "separator"},
+            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement}_icon"),
+             "signal": None},
+            {"text": "separator"},
             {"text": "Se déconnecter", "icon": self.logout_icon, "signal": 'logout'}
         ]
 
@@ -504,13 +519,13 @@ class Menu:
             # Créer un widget personnalisé pour l'action
             widget = QWidget()
             layout = QHBoxLayout(widget)
-            layout.setContentsMargins(5, 0, 5, 0)
+            layout.setContentsMargins(10, 5, 10, 5)
             layout.setSpacing(10)
 
             # Ajouter l'icône si disponible
             if action_config['icon']:
                 icon_label = QLabel()
-                icon_label.setPixmap(action_config['icon'].pixmap(20, 20))
+                icon_label.setPixmap(action_config['icon'].pixmap(24, 24))
                 layout.addWidget(icon_label)
 
             # Ajouter le texte
@@ -518,7 +533,7 @@ class Menu:
             text_label.setAlignment(Qt.AlignVCenter)
             layout.addWidget(text_label)
 
-            layout.addStretch()  # Pour pousser le contenu à gauche
+            layout.addStretch()
 
             # Créer l'action avec le widget
             widget_action = QWidgetAction(self)
@@ -564,13 +579,12 @@ class Menu:
 
             self._m_logout_menu.addAction(widget_action)
 
-        # Méthode personnalisée pour afficher le menu avec un décalage
+        # Méthode pour afficher le menu avec un décalage
         def show_menu_with_offset():
-            # Calculer le point global du bouton
             global_point = self._b_logout.mapToGlobal(
                 QPoint(
-                    -self._m_logout_menu.sizeHint().width() + self._b_logout.width() + 10,  # Décalage horizontal
-                    self._b_logout.height() + 5  # Décalage vertical
+                    -self._m_logout_menu.sizeHint().width() + self._b_logout.width() + 10,
+                    self._b_logout.height() + 5
                 )
             )
 
