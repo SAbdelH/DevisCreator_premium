@@ -8,7 +8,6 @@ from processing.database.model_tools import create_dynamic_model
 from processing.decrypt import _public
 
 
-
 # Définir le modèle pour la table informations.utilisateurs
 User = create_dynamic_model(**dict(ChainMap(_public.UTILISATEURS, {"Base": Base})))
 
