@@ -50,6 +50,30 @@ class Icons:
         return self.__QIcon("company")
 
     @property
+    def cadena_icon(self) -> QIcon:
+        """
+        Un QIcon de l'icon cadena
+        :return: un QIcon
+        """
+        return self.__QIcon("cadena")
+
+    @property
+    def cle_icon(self) -> QIcon:
+        """
+        Un QIcon de l'icon cle
+        :return: un QIcon
+        """
+        return self.__QIcon("cle")
+
+    @property
+    def utilisateur_icon(self) -> QIcon:
+        """
+        Un QIcon de l'icon cle
+        :return: un QIcon
+        """
+        return self.__QIcon("utilisateur")
+
+    @property
     def tableau_de_bord_icon(self) -> QIcon:
         """
         Un QIcon de l'icon de tableau de bord
@@ -268,6 +292,14 @@ class Icons:
         :return:
         """
         return self.__QIcon("moins")
+
+    @property
+    def backspace_icon(self) -> QIcon:
+        """
+        Un QIcon de l'icon supprimer
+        :return:
+        """
+        return self.__QIcon("supprimer")
 
     @property
     def valid_icon(self) -> QIcon:

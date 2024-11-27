@@ -93,8 +93,8 @@ class LoginPage:
         self._le_identifiant.setMaximumSize(QSize(16777215, 25))
         self._le_identifiant.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._le_identifiant.setClearButtonEnabled(True)
-        self._le_identifiant.findChildren(QAction)[0].setIcon(QIcon(self.images.get('supprimer')))
-        self._le_identifiant.addAction(QIcon(self.images.get('utilisateur')), QLineEdit.ActionPosition.LeadingPosition)
+        self._le_identifiant.findChildren(QAction)[0].setIcon(self.backspace_icon)
+        self._le_identifiant.addAction(self.utilisateur_icon, QLineEdit.ActionPosition.LeadingPosition)
         self._g_signin.addWidget(self._le_identifiant, 2, 0, 1, 1)
         # AJOUT D'UN LINEEDIT POUR LES MOTS DE PASSE DE CONNEXIONS
         self._le_password = QLineEdit(self._p_signin)
@@ -106,8 +106,10 @@ class LoginPage:
         self._le_password.setClearButtonEnabled(False)
         toggleAction = QAction(self.eye_open_icon, "", self)
         self._le_password.addAction(toggleAction, QLineEdit.ActionPosition.TrailingPosition)
+        toggleAction.setVisible(False)
         toggleAction.triggered.connect(lambda: self.toggle_echo_mode(self._le_password, toggleAction))
-        self._le_password.addAction(QIcon(self.images.get('cle')), QLineEdit.ActionPosition.LeadingPosition)
+        self._le_password.addAction(self.cadena_icon, QLineEdit.ActionPosition.LeadingPosition)
+        self._le_password.textChanged.connect(lambda: self.update_toggle_visibility(self._le_password, toggleAction))
         self._g_signin.addWidget(self._le_password, 3, 0, 1, 1)
         # MESSAGE LICENCE MANQUANTE
         self._l_licence_missing = QLabel(self._p_signin)
@@ -187,6 +189,8 @@ class LoginPage:
         self._le_licence.setObjectName(u"_le_licence")
         self._le_licence.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._le_licence.setClearButtonEnabled(True)
+        self._le_licence.findChildren(QAction)[0].setIcon(self.backspace_icon)
+        self._le_licence.addAction(self.cle_icon, QLineEdit.ActionPosition.LeadingPosition)
         self._g_signup.addWidget(self._le_licence, 3, 0, 1, 2)
         # AJOUT D'UN VERTICAL SPACER
         self._vs_signup_two = QSpacerItem(20, 48, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)

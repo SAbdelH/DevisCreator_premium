@@ -136,6 +136,13 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
             lineedit.setEchoMode(QLineEdit.EchoMode.Normal)
             togleAction.setIcon(self.eye_closed_icon)
 
+    def update_toggle_visibility(self, lineedit, toggleAction):
+        if lineedit.text():
+            toggleAction.setVisible(True)
+        else:
+            toggleAction.setVisible(False)
+
+
     def closeEvent(self, event):
         if self._sw_main_dialog.currentIndex() == self.indexPage.get("_p_login"):
             event.accept()

@@ -21,7 +21,7 @@ class PopulateWidget:
                 User.role.label("_cbx_um_role"),
                 User.email.label("_le_um_mail"),
                 User.expire.label("_cw_um_expire_account")
-                )
+                ).order_by(User.nom)
             if user:
                 self.maindialog._lw_um_usrList.clear()
                 self.maindialog._lw_um_usrList.setStyleSheet("""

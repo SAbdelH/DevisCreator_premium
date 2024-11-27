@@ -188,13 +188,6 @@ class theme:
 	border: 1px solid rgba(214, 219, 223, 1);
 	background-color: rgba(255, 255, 255, 0.7);
 }}
-#_f_right_user_management QComboBox QAbstractItemView::item:hover,
-#_p_restore QComboBox QAbstractItemView::item:hover,
-#_p_inventory QComboBox QAbstractItemView::item:hover,
-#_p_valid_factures QComboBox QAbstractItemView::item:hover,
-#_p_factures QComboBox QAbstractItemView::item:hover {{
-    background-color: rgba(91, 142, 125, 0.7);
-}}
 #_p_factures QComboBox,
 #_f_calendar QListWidget::item {{
 	background-color: rgba(247, 248, 250, 1);

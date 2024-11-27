@@ -111,7 +111,9 @@ class UserManagementPage:
         self._le_um_password.setClearButtonEnabled(False)
         toggleAction = QAction(self.eye_open_icon, "", self)
         self._le_um_password.addAction(toggleAction, QLineEdit.ActionPosition.TrailingPosition)
+        toggleAction.setVisible(False)
         toggleAction.triggered.connect(lambda: self.toggle_echo_mode(self._le_um_password, toggleAction))
+        self._le_um_password.textChanged.connect(lambda: self.update_toggle_visibility(self._le_password, toggleAction))
         self._v_um_input_password.addWidget(self._le_um_password)
         # AJOUT DU VERTICAL INPUT PASSWORD DANS HORIZONTAL INPUT CONNEXIONS
         self._h_inputConnexion.addLayout(self._v_um_input_password)
