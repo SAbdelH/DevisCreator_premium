@@ -10,6 +10,51 @@ class theme:
 	background-color: rgba(246, 246, 246, 1);
 	color: rgba(0, 0, 0, 1);
 }}
+
+#centralwidget QComboBox::down-arrow {{
+    image: url({self.dropdownComboButton_icon});
+    border: none;
+    border-radius: 5px;
+    background: none;
+}}
+#centralwidget QComboBox::down-arrow:on {{ 
+    top: 1px;
+    left: 1px;
+}}
+#centralwidget QComboBox:on {{ 
+    padding-top: 3px;
+    padding-left: 4px;
+}}
+#centralwidget QComboBox QAbstractItemView {{
+    border: 2px solid darkgray;
+    selection-background-color: rgba(91, 142, 125, 0.7);
+}}
+#centralwidget QComboBox QAbstractItemView::item {{
+    background-color: rgba(255, 255, 255, 1);
+}}
+#centralwidget QComboBox QAbstractItemView::item:hover  {{
+    background-color: rgba(244, 162, 97, 0.7);
+    color: rgba(0, 0, 0, 1)
+}}
+#centralwidget QSpinBox::up-arrow, #centralwidget QDoubleSpinBox::up-arrow, #centralwidget QDateEdit::up-arrow,  
+#centralwidget QTimeEdit::up-arrow {{
+    image: url({self.upChevron_icon});
+    width: 7px;
+    height: 7px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+}}
+#centralwidget QSpinBox::down-arrow, #centralwidget QDoubleSpinBox::down-arrow, #centralwidget QDateEdit::down-arrow,  
+#centralwidget QTimeEdit::down-arrow  {{
+    image: url({self.downChevron_icon});
+    width: 7px;
+    height: 7px;
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+}}
+
 /* PAGE LOGIN */
 #_w_login_dialog, #_sw_login_dialog {{
 	border-radius: 20px;

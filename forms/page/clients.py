@@ -231,3 +231,4 @@ class clientsPage:
         self._b_mclient.blockSignals(False)
         self.hideOuterGroup('invoice')
         self.pageEnCours.emit("clients")
+        self.resetToggleSideMenu('_b_mclient')

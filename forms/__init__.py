@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 ## Created by: Qt User Interface Compiler version 6.8.0
 
-from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal)
-from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget)
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QEvent)
+from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit)
 from forms.gui import *
 from forms.page import *
 
 class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP):
     pageEnCours = Signal(str)
     menuAction = Signal(str)
+    fermeture_fenetre = Signal(QEvent)
 
     def __init__(self):
         QMainWindow.__init__(self)
@@ -125,3 +126,33 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         self.pageEnCours.emit(page_name)
         self._sw_main_dialog.setCurrentIndex(self.indexPage.get(page_name))
         self._b_logout.setFocus()
+
+    def toggle_echo_mode(self, lineedit, togleAction):
+        # Basculer entre les modes Normal et Password
+        if lineedit.echoMode() == QLineEdit.EchoMode.Normal:
+            lineedit.setEchoMode(QLineEdit.EchoMode.Password)
+            togleAction.setIcon(self.eye_open_icon)  # Mettre l'icône œil fermé
+        else:
+            lineedit.setEchoMode(QLineEdit.EchoMode.Normal)
+            togleAction.setIcon(self.eye_closed_icon)
+
+    def closeEvent(self, event):
+        if self._sw_main_dialog.currentIndex() == self.indexPage.get("_p_login"):
+            event.accept()
+        else:
+            # Créer une QMessageBox personnalisée
+            message_box = QMessageBox(self)
+            message_box.setWindowTitle("Avertissement")
+            message_box.setText("Êtes-vous sûr de quitter ?")
+
+            # Définir les boutons Oui et Non
+            message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            icone_personnalisee = self.reflexion_pixmap
+            message_box.setIconPixmap(icone_personnalisee)
+            reply = message_box.exec_()
+
+            # Vérifier la réponse de l'utilisateur
+            if reply == QMessageBox.Yes:
+                self.fermeture_fenetre.emit(event)
+            else:
+                event.ignore()

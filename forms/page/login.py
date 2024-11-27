@@ -103,8 +103,10 @@ class LoginPage:
         self._le_password.setMaximumSize(QSize(16777215, 25))
         self._le_password.setEchoMode(QLineEdit.EchoMode.Password)
         self._le_password.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self._le_password.setClearButtonEnabled(True)
-        self._le_password.findChildren(QAction)[0].setIcon(QIcon(self.images.get('supprimer')))
+        self._le_password.setClearButtonEnabled(False)
+        toggleAction = QAction(self.eye_open_icon, "", self)
+        self._le_password.addAction(toggleAction, QLineEdit.ActionPosition.TrailingPosition)
+        toggleAction.triggered.connect(lambda: self.toggle_echo_mode(self._le_password, toggleAction))
         self._le_password.addAction(QIcon(self.images.get('cle')), QLineEdit.ActionPosition.LeadingPosition)
         self._g_signin.addWidget(self._le_password, 3, 0, 1, 1)
         # MESSAGE LICENCE MANQUANTE

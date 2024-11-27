@@ -642,6 +642,7 @@ class firmPage:
         self._b_minfo_company.blockSignals(False)
         self.hideOuterGroup('workspace')
         self.pageEnCours.emit("entreprise")
+        self.resetToggleSideMenu('_b_minfo_company')
 
     def next_step(self):
         sender = self.sender().objectName()

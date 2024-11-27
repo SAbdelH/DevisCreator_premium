@@ -108,3 +108,4 @@ class restorePage:
         self._b_mmanage_db.blockSignals(False)
         self.hideOuterGroup('database')
         self.pageEnCours.emit("manage backup")
+        self.resetToggleSideMenu('_b_mcreate_backup')

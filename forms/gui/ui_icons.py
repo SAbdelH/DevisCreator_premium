@@ -130,6 +130,10 @@ class Icons:
         return self.__QIcon("premium")
 
     @property
+    def abonnement_invite_icon(self) -> QIcon:
+        return self.__QIcon("free")
+
+    @property
     def software_upgrade_icon(self) -> QIcon:
         return self.__QIcon("softupdate")
 
@@ -442,6 +446,18 @@ class Icons:
         return self.images.get("checkedb")
 
     @property
+    def dropdownComboButton_icon(self) -> str:
+        return self.images.get("dropdown")
+
+    @property
+    def upChevron_icon(self) -> str:
+        return self.images.get("up-chevron")
+
+    @property
+    def downChevron_icon(self) -> str:
+        return self.images.get("down-chevron")
+
+    @property
     def opentoolbox_icon(self) -> str:
         return self.images.get("openfolder")
 
@@ -456,6 +472,10 @@ class Icons:
     @property
     def iadresse_pixmap(self) -> QPixmap:
         return self.__QPixmap("iadresse")
+
+    @property
+    def reflexion_pixmap(self) -> QPixmap:
+        return self.__QPixmap("think")
 
     @property
     def ibank_pixmap(self) -> QPixmap:
@@ -476,3 +496,11 @@ class Icons:
     @property
     def idirigeant_pixmap(self) -> QPixmap:
         return self.__QPixmap("idirigeant")
+
+    @property
+    def eye_closed_icon(self) -> QIcon:
+        return self.__QIcon("closeeye")
+
+    @property
+    def eye_open_icon(self) -> QIcon:
+        return self.__QIcon("openeye")

@@ -37,8 +37,6 @@ class Menu:
 
         self.__retranslateUi()
 
-        self.logOutMenu(abonnement="premium")
-
     def headerMenu(self):
         self._f_header = QFrame(self.centralwidget)
         self._f_header.setObjectName(u"_f_header")
@@ -428,21 +426,19 @@ class Menu:
         else:
             self.resetToggleSideMenu(sender)
 
+        self.refreshUi(sender)
+
     def resetToggleHeaderMenu(self, sender):
         for btnName in self.headerMenuButton:
             if btnName != sender:
                 button = getattr(self, btnName)
                 button.setChecked(False)
 
-        self.refreshUi(sender)
-
     def resetToggleSideMenu(self, sender):
         for btnName in self.sideMenuButton:
             if btnName != sender:
                 button = getattr(self, btnName)
                 button.setChecked(False)
-
-        self.refreshUi(sender)
 
     def refreshUi(self, sender):
         # Vérification sécurisée avant l'appel de la méthode
@@ -468,95 +464,117 @@ class Menu:
                 else:
                     child.setVisible(True)
 
-    def logOutMenu(self, abonnement: str = 'premium'):
+    def logOutMenu(self, abonnement: str):
         """
         Cette méthode crée un menu déroulant pour le bouton logout avec des widgets personnalisés et un effet de survol.
+
+        param:
+            abonnement (str, optional): Type d'abonnement. Defaults to 'premium'.
         """
+        # Créer le menu
         self._m_logout_menu = QMenu()
         self._m_logout_menu.setObjectName("_m_logout_menu")
         self._m_logout_menu.setStyleSheet("""#_m_logout_menu{
                                                 background-color: rgba(255, 255, 255, 1);
                                                 color: rgba(0, 0, 0, 1);
                                                 border-radius: 10px;
-                                                }""")
+                                            }""")
+
+        # Déterminer le thème
         theme, icn = ("Sombre", "dark") if self.apparence == "white" else ("Claire", "white")
-        action_dict = {
-            "": {},
-            "Reglages": {'signal': 'settings', 'img': self.reglage_icon},
-            "Centre d'aides": {'signal': 'helps', 'img': self.help_center_icon},
-            "Recherche mise-à-jour": {'signal': 'upgrade', 'img': self.software_upgrade_icon},
-            f"Apparence {theme}": {'signal': 'darkmode', 'img': getattr(self, f"{icn}_mode_icon")},
-            "hl": {},
-            f"Abonnement {abonnement.capitalize()}": {'img': getattr(self, f"abonnement_{abonnement}_icon")},
-            "hl2": {},
-            "Se déconnecter": {'signal': 'logout', 'img': self.logout_icon},
-        }
 
-        for action_text, handler_function in action_dict.items():
-            if action_text.startswith("hl"):
+        # Définir les actions du menu avec plus de flexibilité
+        action_list = [
+            {"text": "Reglages", "icon": self.reglage_icon, "signal": 'settings'},
+            {"text": "Centre d'aides", "icon": self.help_center_icon, "signal": 'helps'},
+            {"text": "Recherche mise-à-jour", "icon": self.software_upgrade_icon, "signal": 'upgrade'},
+            {"text": f"Apparence {theme}", "icon": getattr(self, f"{icn}_mode_icon"), "signal": 'darkmode'},
+            {"text": "separator"},  # Séparateur
+            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement.replace("é","e")}_icon"),"signal": None},
+            {"text": "separator"},  # Autre séparateur
+            {"text": "Se déconnecter", "icon": self.logout_icon, "signal": 'logout'}
+        ]
+
+        for action_config in action_list:
+            # Gestion des séparateurs
+            if action_config['text'] == "separator":
                 self._m_logout_menu.addSeparator()
-            else:
-                # Créer un widget personnalisé pour l'action
-                widget = QWidget()
-                layout = QHBoxLayout(widget)
-                layout.setContentsMargins(5, 5, 5, 5)  # Marges pour l'espacement
+                continue
 
-                # Ajouter l'icône (QLabel)
+            # Créer un widget personnalisé pour l'action
+            widget = QWidget()
+            layout = QHBoxLayout(widget)
+            layout.setContentsMargins(5, 0, 5, 0)
+            layout.setSpacing(10)
+
+            # Ajouter l'icône si disponible
+            if action_config['icon']:
                 icon_label = QLabel()
-                icon = handler_function.get('img')
-                if icon and not icon.isNull():
-                    icon_label.setPixmap(icon.pixmap(24, 24))
-
-                # Ajouter le texte (QLabel)
-                text_label = QLabel(action_text)
-                text_label.setAlignment(Qt.AlignVCenter)
-
-                # Ajouter les widgets au layout
+                icon_label.setPixmap(action_config['icon'].pixmap(20, 20))
                 layout.addWidget(icon_label)
-                layout.addWidget(text_label)
-                layout.addStretch()  # Pour pousser le texte à gauche
 
-                # Créer l'action avec le widget
-                widget_action = QWidgetAction(self)
-                widget_action.setDefaultWidget(widget)
+            # Ajouter le texte
+            text_label = QLabel(action_config['text'])
+            text_label.setAlignment(Qt.AlignVCenter)
+            layout.addWidget(text_label)
 
-                # Appliquer le style uniquement si un signal est présent
-                if "signal" in handler_function:
-                    # Appliquer un effet de survol
-                    widget.setStyleSheet("""
-                        QWidget:hover {
-                            background-color: rgba(91, 142, 125, 0.7);
-                        }
-                        QLabel {
-                            color: rgba(0, 0, 0, 1); 
-                        }
-                        QLabel:hover {
-                            background-color: transparent;
-                        }
-                    """)
+            layout.addStretch()  # Pour pousser le contenu à gauche
 
-                    def create_click_handler(signal_name):
-                        def click_handler(event):
-                            self.menuAction.emit(signal_name)
-                            self._m_logout_menu.hide()  # Ferme le menu après le clic
+            # Créer l'action avec le widget
+            widget_action = QWidgetAction(self)
+            widget_action.setDefaultWidget(widget)
 
-                        return click_handler
-                    # Connecter l'action au signal
-                    widget.mousePressEvent = create_click_handler(handler_function['signal'])
-                else:
-                    # Désactiver le survol et le clic si pas de signal
-                    widget.setStyleSheet("""
-                        QWidget:disabled {
-                            padding: 1px;
-                            background-color: rgba(255, 255, 255, 1);
-                            color: rgba(244, 162, 97, 1);
-                        }
-                        QLabel {
-                            color: rgba(174, 182, 191, 1);
-                        }
-                    """)
-                    widget_action.setEnabled(False)
+            # Gestion du style et des interactions
+            if action_config['signal']:
+                # Style et interaction pour les actions avec signal
+                widget.setStyleSheet("""
+                    QWidget:hover {
+                        background-color: rgba(91, 142, 125, 0.7);
+                        border-radius: 5px;
+                    }
+                    QLabel {
+                        color: rgba(0, 0, 0, 1); 
+                    }
+                    QLabel:hover {
+                        background-color: transparent;
+                    }
+                """)
 
-                self._m_logout_menu.addAction(widget_action)
-        # Connecter le bouton au menu
-        self._b_logout.setMenu(self._m_logout_menu)
+                def create_click_handler(signal_name):
+                    def click_handler(event):
+                        self.menuAction.emit(signal_name)
+                        self._m_logout_menu.hide()
+
+                    return click_handler
+
+                widget.mousePressEvent = create_click_handler(action_config['signal'])
+            else:
+                # Style pour les actions sans signal (désactivées)
+                widget.setStyleSheet("""
+                    QWidget:disabled {
+                        padding: 1px;
+                        background-color: rgba(255, 255, 255, 1);
+                        color: rgba(244, 162, 97, 1);
+                    }
+                    QLabel {
+                        color: rgba(174, 182, 191, 1);
+                    }
+                """)
+                widget_action.setEnabled(False)
+
+            self._m_logout_menu.addAction(widget_action)
+
+        # Méthode personnalisée pour afficher le menu avec un décalage
+        def show_menu_with_offset():
+            # Calculer le point global du bouton
+            global_point = self._b_logout.mapToGlobal(
+                QPoint(
+                    -self._m_logout_menu.sizeHint().width() + self._b_logout.width() + 10,  # Décalage horizontal
+                    self._b_logout.height() + 5  # Décalage vertical
+                )
+            )
+
+            self._m_logout_menu.exec_(global_point)
+
+        # Connecter le bouton au menu personnalisé
+        self._b_logout.clicked.connect(show_menu_with_offset)

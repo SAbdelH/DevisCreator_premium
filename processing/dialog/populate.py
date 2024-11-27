@@ -70,7 +70,7 @@ class PopulateWidget:
                 if hasattr(widget, 'setText'):  # Pour QLineEdit
                     widget.setText(str(value))
                 elif hasattr(widget, 'setCurrentText'):  # Pour QComboBox
-                    widget.setCurrentText(str(value))
+                    widget.setCurrentText(str(value).replace("Employe", "Employé"))
                 else:
                     if value and hasattr(widget, 'setSelectedDate'):
                         datetime_obj = datetime.strptime(str(value), "%Y-%m-%d")

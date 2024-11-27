@@ -452,3 +452,5 @@ class InvoicePage:
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er la Facture", None))
             self.pageEnCours.emit("factures")
 
+        self.resetToggleSideMenu(sender)
+

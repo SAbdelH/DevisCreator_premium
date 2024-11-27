@@ -40,9 +40,10 @@ class InteractionInterface:
                 with self.Session() as spublic, self.privateSession() as sprivate:
                     if WorkSession.login(spublic, sprivate, username, password):
                         self.profilIconUpdate()
+                        self.maindialog.logOutMenu(abonnement=WorkSession.getLicence())
                         self.maindialog.OpenDashboardPage()
         else:
-            ...
+            self.maindialog.logOutMenu(abonnement="invité")
 
     def profilIconUpdate(self):
         """
@@ -51,7 +52,7 @@ class InteractionInterface:
         :return:
         """
         info = WorkSession.get_current_user()
-        self.maindialog._l_id_profil.setText(info.identifiant)
+        self.maindialog._l_id_profil.setText(f"@{info.identifiant}")
         self.USER = info.identifiant
         self.maindialog._l_name_profil.setText(f"{info.nom.upper()} {info.prenom.capitalize()}")
         self.maindialog._l_pposte.setText(info.poste)

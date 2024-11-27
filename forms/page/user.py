@@ -1,4 +1,5 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
+from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QListWidget, QListView, QHBoxLayout, QLabel,
     QLineEdit, QComboBox, QCalendarWidget, QPushButton)
 
@@ -108,6 +109,9 @@ class UserManagementPage:
         self._le_um_password.setEchoMode(QLineEdit.EchoMode.Password)
         self._le_um_password.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._le_um_password.setClearButtonEnabled(False)
+        toggleAction = QAction(self.eye_open_icon, "", self)
+        self._le_um_password.addAction(toggleAction, QLineEdit.ActionPosition.TrailingPosition)
+        toggleAction.triggered.connect(lambda: self.toggle_echo_mode(self._le_um_password, toggleAction))
         self._v_um_input_password.addWidget(self._le_um_password)
         # AJOUT DU VERTICAL INPUT PASSWORD DANS HORIZONTAL INPUT CONNEXIONS
         self._h_inputConnexion.addLayout(self._v_um_input_password)
@@ -297,6 +301,7 @@ class UserManagementPage:
         self._b_mcreate_user.blockSignals(False)
         self.hideOuterGroup('workspace')
         self.pageEnCours.emit("utilisateurs")
+        self.resetToggleSideMenu('_b_mcreate_user')
 
     def __retranslateUi(self):
         self._l_informations_connexion.setText(QCoreApplication.translate("MainWindow", u"Informations connexion", None))
