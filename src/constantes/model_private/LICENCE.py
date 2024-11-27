@@ -1,5 +1,5 @@
 {
-    'name': 'licence',
+    'name': 'licences',
     'schema': 'public',
     'columns': {
         'id': {'type': 'Integer', 'primary_key': True, 'autoincrement': True, 'nullable': False},
