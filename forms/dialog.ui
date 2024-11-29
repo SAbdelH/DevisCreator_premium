@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -2733,7 +2733,110 @@ QCalendarWidget QAbstractItemView:enabled {
               <property name="verticalSpacing">
                <number>-1</number>
               </property>
-              <item row="7" column="4">
+              <item row="2" column="1" colspan="4">
+               <widget class="QLineEdit" name="_le_nom_rue">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0" colspan="4">
+               <spacer name="_hs_valid_adresse_entreprise">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="_l_nom_rue">
+                <property name="minimumSize">
+                 <size>
+                  <width>118</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>118</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Nom de rue :</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <spacer name="_vs_marge_adresse">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Vertical</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Policy::Fixed</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="4" column="1" colspan="4">
+               <widget class="QLineEdit" name="_le_commune">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="_l_commune">
+                <property name="minimumSize">
+                 <size>
+                  <width>118</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>118</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Commune :</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="4">
                <widget class="QPushButton" name="_b_valid_adresse_entreprise">
                 <property name="minimumSize">
                  <size>
@@ -2765,51 +2868,16 @@ QCalendarWidget QAbstractItemView:enabled {
                 </property>
                </widget>
               </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="_l_cp">
+              <item row="3" column="1" colspan="4">
+               <widget class="QLineEdit" name="_le_ville">
                 <property name="minimumSize">
                  <size>
-                  <width>118</width>
-                  <height>0</height>
+                  <width>0</width>
+                  <height>25</height>
                  </size>
                 </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>118</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Code postal (CP): </string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="_l_commune">
-                <property name="minimumSize">
-                 <size>
-                  <width>118</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>118</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <bold>false</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Commune :</string>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -2837,8 +2905,31 @@ QCalendarWidget QAbstractItemView:enabled {
                 </property>
                </widget>
               </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="_l_nom_rue">
+              <item row="6" column="1" colspan="4">
+               <widget class="QLineEdit" name="_le_cp">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="maxLength">
+                 <number>5</number>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="_l_departement">
+                <property name="text">
+                 <string>Département :</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="_l_cp">
                 <property name="minimumSize">
                  <size>
                   <width>118</width>
@@ -2857,93 +2948,19 @@ QCalendarWidget QAbstractItemView:enabled {
                  </font>
                 </property>
                 <property name="text">
-                 <string>Nom de rue :</string>
+                 <string>Code postal (CP): </string>
                 </property>
                </widget>
               </item>
-              <item row="6" column="1" colspan="4">
-               <widget class="QLineEdit" name="_le_cp">
+              <item row="7" column="1" colspan="4">
+               <widget class="QLineEdit" name="_le_departement">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
                   <height>25</height>
                  </size>
                 </property>
-                <property name="maxLength">
-                 <number>5</number>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>true</bool>
-                </property>
                </widget>
-              </item>
-              <item row="4" column="1" colspan="4">
-               <widget class="QLineEdit" name="_le_commune">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>25</height>
-                 </size>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1" colspan="4">
-               <widget class="QLineEdit" name="_le_ville">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>25</height>
-                 </size>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1" colspan="4">
-               <widget class="QLineEdit" name="_le_nom_rue">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>25</height>
-                 </size>
-                </property>
-                <property name="clearButtonEnabled">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <spacer name="_vs_marge_adresse">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Vertical</enum>
-                </property>
-                <property name="sizeType">
-                 <enum>QSizePolicy::Policy::Fixed</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item row="7" column="0" colspan="4">
-               <spacer name="_hs_valid_adresse_entreprise">
-                <property name="orientation">
-                 <enum>Qt::Orientation::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </widget>

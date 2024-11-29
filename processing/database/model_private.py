@@ -5,6 +5,8 @@ from processing.database.model_tools import create_dynamic_model
 from processing.decrypt import _private
 
 
+# Définir le modèle pour la table informations.path
+Chemin = create_dynamic_model(**dict(ChainMap(_private.CHEMIN, {"Base": Base})))
 
 # Définir le modèle pour la table activites.activites
 Group = create_dynamic_model(**dict(ChainMap(_private.GROUP, {"Base": Base})))

@@ -3,10 +3,12 @@
 
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QEvent)
 from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit)
+from forms.animation import AnimationForm as ANF
+from forms.notifications import NotificationWidget
 from forms.gui import *
 from forms.page import *
 
-class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP):
+class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP, ANF):
     pageEnCours = Signal(str)
     menuAction = Signal(str)
     fermeture_fenetre = Signal(QEvent)
@@ -18,6 +20,7 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         Icns.__init__(self)
         BImg.__init__(self)
         Menu.__init__(self)
+        ANF.__init__(self)
         LP.__init__(self)
         DP.__init__(self)
         FP.__init__(self)
@@ -50,6 +53,11 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
                                 '_b_mcreate_backup': {'fonct': lambda: self.OpenrestorePage(),'ignore': self.ignoreByPage('_b_mcreate_backup')},
                                 '_b_mmanage_db': {'fonct': lambda: self.OpenDbManagementPage(),'ignore': self.ignoreByPage('_b_mmanage_db')},
                                 }
+        # ----- Notifications ---------
+        self.animationShowNotification = None
+        self.animationHideNotification = None
+        self.notification = NotificationWidget(self)
+        self.notification.hide()
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -142,6 +150,15 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         else:
             toggleAction.setVisible(False)
 
+    def getCompanyInfos(self) -> dict:
+        current_page = self._sw_main_dialog.widget(
+            self.indexPage.get("_p_info_company")
+        )
+        # Récupérer tous les enfants de la page actuelle
+        all_objects = current_page.findChildren(QWidget)
+        filtered_objects = [obj for obj in all_objects if isinstance(obj, QLineEdit)]
+        data = {obj.objectName(): obj.text() for obj in filtered_objects}
+        return data, filtered_objects
 
     def closeEvent(self, event):
         if self._sw_main_dialog.currentIndex() == self.indexPage.get("_p_login"):

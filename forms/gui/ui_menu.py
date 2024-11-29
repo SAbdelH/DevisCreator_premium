@@ -464,7 +464,7 @@ class Menu:
                 else:
                     child.setVisible(True)
 
-    def logOutMenu(self, abonnement: str = 'premium'):
+    def logOutMenu(self, abonnement: str):
         """
         Crée un menu déroulant personnalisé pour le bouton logout.
 
@@ -504,8 +504,7 @@ class Menu:
             {"text": "Recherche mise-à-jour", "icon": self.software_upgrade_icon, "signal": 'upgrade'},
             {"text": f"Apparence {theme}", "icon": getattr(self, f"{icn}_mode_icon"), "signal": 'darkmode'},
             {"text": "separator"},
-            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement}_icon"),
-             "signal": None},
+            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement}_icon"), "signal": None},
             {"text": "separator"},
             {"text": "Se déconnecter", "icon": self.logout_icon, "signal": 'logout'}
         ]
@@ -519,7 +518,7 @@ class Menu:
             # Créer un widget personnalisé pour l'action
             widget = QWidget()
             layout = QHBoxLayout(widget)
-            layout.setContentsMargins(10, 5, 10, 5)
+            layout.setContentsMargins(5, 5, 5, 5)
             layout.setSpacing(10)
 
             # Ajouter l'icône si disponible

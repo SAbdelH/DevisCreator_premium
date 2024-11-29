@@ -1,7 +1,6 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont, QAction, QIcon
-from PySide6.QtWidgets import (QWidget, QGridLayout, QStackedWidget, QLabel, QSpacerItem, QSizePolicy, QLineEdit,
-                               QPushButton)
+from PySide6.QtWidgets import (QWidget, QGridLayout, QStackedWidget, QLabel, QSpacerItem, QSizePolicy, QLineEdit, QPushButton)
 from processing.decrypt import HasIdentifiant
 
 

@@ -18,9 +18,6 @@ def create_schemas(session, base):
     for schema in schemas:
         if schema:
             session.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
-            for role in ['Responsable', 'Employe', 'Administrateur']:
-                grant_query = f'GRANT ALL ON SCHEMA "{schema}" TO "{role}" WITH GRANT OPTION;'
-                session.execute(text(grant_query))
 
     session.commit()
 
@@ -41,6 +38,10 @@ def drop_schemas(session, base):
         if schema:
             session.execute(text(f"DROP SCHEMA IF EXISTS {schema} CASCADE"))
     session.commit()
+
+def create_tables(engine, base):
+    # Importez les modèles pour qu'ils soient connus par SQLAlchemy
+    base.metadata.create_all(bind=engine)
 
 def reset_sequences(session, model, col='id'):
     # Obtenir le nom de la séquence

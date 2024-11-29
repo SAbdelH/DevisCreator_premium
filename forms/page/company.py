@@ -147,7 +147,7 @@ class firmPage:
         # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_info_entreprise)
 
-        self._le_nom_entreprise.textEdited.connect(self.active_valid_entrepise)
+        self._le_nom_entreprise.textChanged.connect(self.active_valid_entrepise)
 
     def __groupbox_dirigeant(self):
         # GROUPBOX DES INFORMATIONS DU DIRIGEANT
@@ -233,8 +233,8 @@ class firmPage:
         self._b_valid_dirigeant.setEnabled(False)
         # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_dirigeant)
-        self._le_nom_dirigeant.textEdited.connect(self.active_valid_dirigeant)
-        self._le_prenom_dirigeant.textEdited.connect(self.active_valid_dirigeant)
+        self._le_nom_dirigeant.textChanged.connect(self.active_valid_dirigeant)
+        self._le_prenom_dirigeant.textChanged.connect(self.active_valid_dirigeant)
 
     def __groupbox_adresse(self):
         # GROUPBOX DE L'ADRESSE DE L'ENTREPRISE
@@ -303,6 +303,15 @@ class firmPage:
         self._le_cp.setMaxLength(5)
         self._le_cp.setClearButtonEnabled(True)
         self._g_adresse_entreprise.addWidget(self._le_cp, 6, 1, 1, 4)
+        # LABEL DEPARTEMENT
+        self._l_departement = QLabel(self._gb_adresse_entreprise)
+        self._l_departement.setObjectName(u"_l_departement")
+        self._g_adresse_entreprise.addWidget(self._l_departement, 7, 0, 1, 1)
+        # LINEEDIT DEPARTEMENT
+        self._le_departement = QLineEdit(self._gb_adresse_entreprise)
+        self._le_departement.setObjectName(u"_le_departement")
+        self._le_departement.setMinimumSize(QSize(0, 25))
+        self._g_adresse_entreprise.addWidget(self._le_departement, 7, 1, 1, 4)
         # SPACER POUR EXCENTRER LE BOUTON VALIDER
         self._hs_valid_adresse_entreprise = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._g_adresse_entreprise.addItem(self._hs_valid_adresse_entreprise, 7, 0, 1, 4)
@@ -316,13 +325,13 @@ class firmPage:
         self._b_valid_adresse_entreprise.setFlat(True)
         self._b_valid_adresse_entreprise.clicked.connect(self.next_step)
         self._b_valid_adresse_entreprise.setEnabled(False)
-        self._g_adresse_entreprise.addWidget(self._b_valid_adresse_entreprise, 7, 4, 1, 1)
+        self._g_adresse_entreprise.addWidget(self._b_valid_adresse_entreprise, 8, 4, 1, 1)
         # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_adresse_entreprise)
-        self._le_commune.textEdited.connect(self.active_valid_adresse)
-        self._le_cp.textEdited.connect(self.active_valid_adresse)
-        self._le_ville.textEdited.connect(self.active_valid_adresse)
-        self._le_nom_rue.textEdited.connect(self.active_valid_adresse)
+        self._le_commune.textChanged.connect(self.active_valid_adresse)
+        self._le_cp.textChanged.connect(self.active_valid_adresse)
+        self._le_ville.textChanged.connect(self.active_valid_adresse)
+        self._le_nom_rue.textChanged.connect(self.active_valid_adresse)
 
     def __groupbox_contact(self):
         # GROUPBOX DES INFORMATIONS DE CONTACTS
@@ -415,9 +424,9 @@ class firmPage:
         self._g_contact.addWidget(self._b_valid_contact, 3, 1, 1, 1)
         # AJOUT DU GROUPE DANS VERTICAL LAYOUT PAGE A DROITE
         self._v_info_company.addWidget(self._gb_contact)
-        self._le_num_portable.textEdited.connect(self.active_valid_contact)
-        self._le_num_fixe.textEdited.connect(self.active_valid_contact)
-        self._le_mail.textEdited.connect(self.active_valid_contact)
+        self._le_num_portable.textChanged.connect(self.active_valid_contact)
+        self._le_num_fixe.textChanged.connect(self.active_valid_contact)
+        self._le_mail.textChanged.connect(self.active_valid_contact)
 
     def __groupbox_insee(self):
         # GROUPBOX DES INFORMATIONS LEGALES
@@ -599,8 +608,8 @@ class firmPage:
         self._g_informations_bancaires.addWidget(self._f_informations_bancaires_lineedit, 2, 0, 1, 2)
         # AJOUT DU GROUPBOX DANS LE VERTICAL LE VERTICAL DU FRAME A DROITE
         self._v_info_company.addWidget(self._gb_informations_bancaires)
-        self._le_iban.textEdited.connect(self.active_valid_bank)
-        self._le_bic.textEdited.connect(self.active_valid_bank)
+        self._le_iban.textChanged.connect(self.active_valid_bank)
+        self._le_bic.textChanged.connect(self.active_valid_bank)
 
     def __retranslateUi(self):
         self._l_icon_company_info_company.setText("")
@@ -615,6 +624,7 @@ class firmPage:
         self._gb_adresse_entreprise.setTitle(QCoreApplication.translate("MainWindow", u"Adresse de l'entreprise", None))
         self._b_valid_adresse_entreprise.setText("")
         self._l_cp.setText(QCoreApplication.translate("MainWindow", u"Code postal (CP): ", None))
+        self._l_departement.setText(QCoreApplication.translate("MainWindow", u"D\u00e9partement :", None))
         self._l_commune.setText(QCoreApplication.translate("MainWindow", u"Commune :", None))
         self._l_ville.setText(QCoreApplication.translate("MainWindow", u"Ville :", None))
         self._l_nom_rue.setText(QCoreApplication.translate("MainWindow", u"Nom de rue :", None))

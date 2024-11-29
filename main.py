@@ -6,6 +6,7 @@ from processing import PostgreSQLDatabase, Formulaire
 class DevisCreator(Formulaire, PostgreSQLDatabase):
     def __init__(self):
         self.typeConnection = None
+        self.cacheInfoCompany = None
         PostgreSQLDatabase.__init__(self)
         Formulaire.__init__(self)
         self.maindialog.fermeture_fenetre.connect(self.fermeture)
@@ -15,6 +16,15 @@ class DevisCreator(Formulaire, PostgreSQLDatabase):
         self.maindialog._b_um_update_usr.clicked.connect(self.setUserInfo)
         self.maindialog._b_um_delete_usr.clicked.connect(self.deleteUserInfo)
         self.maindialog.menuAction.connect(self.on_menu_clicked)
+        self.maindialog._b_mcreate_ws.clicked.connect(self.createWorkspace)
+        self.maindialog._b_save_info_company.clicked.connect(self.saveCompanyInfo)
+
+    def RaiseErreur(self, objet):
+        oldStyle = objet.styleSheet()
+        objet.setStyleSheet(
+            "border: 2px solid;border-color: rgb(255, 114, 110); color: black;"
+        )
+        objet.textChanged.connect(lambda: objet.setStyleSheet(oldStyle))
 
     def fermeture(self, event):
         self.disconnect()

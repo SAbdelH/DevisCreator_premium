@@ -530,6 +530,10 @@ class Icons:
         return self.__QPixmap("idirigeant")
 
     @property
+    def insee_pixmap(self) -> QPixmap:
+        return self.__QPixmap("insee")
+
+    @property
     def eye_closed_icon(self) -> QIcon:
         return self.__QIcon("closeeye")
 

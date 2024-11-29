@@ -11,6 +11,7 @@ from processing.database.gui import InteractionInterface
 from processing.database.informations import Informations
 from processing.database.model_private import Licence
 from processing.decrypt import source_dir, fernet, HasIdentifiant
+from processing.enumerations import LevelCritic as LVL
 
 
 class PostgreSQLDatabase(InteractionInterface, Informations):
@@ -96,6 +97,7 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
 
         except OperationalError as err:
             error_message = str(err).lower()
+            self.maindialog.show_notification(error_message, LVL.critical)
 
         return __connect
 
@@ -110,12 +112,17 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
                                                             )
                                                         ).first()
                 if not licence:
+                    mess = u"Votre Licence est expirée"
                     self.maindialog._l_licence_missing.setText(
-                        QCoreApplication.translate("MainWindow",
-                                                u"Votre Licence est expirée ou n'existe pas",
-                                                None))
+                        QCoreApplication.translate("MainWindow",mess,None))
+                    self.maindialog.show_notification(mess, LVL.critical)
+
                     expireLicence = True
         elif not self.checkExistBase:
+            mess = u"Votre Licence n'existe pas"
+            self.maindialog._l_licence_missing.setText(
+                QCoreApplication.translate("MainWindow", mess, None))
+            self.maindialog.show_notification(mess, LVL.critical)
             file_path.unlink(missing_ok=True)
 
         return expireLicence

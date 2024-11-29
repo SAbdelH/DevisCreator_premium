@@ -8,7 +8,10 @@
             'autoincrement': False,
             'nullable': False
         },
-        'patron': {
+        'resp_nom': {
+            'type': 'String'
+        },
+        'resp_prenom': {
             'type': 'String'
         },
         'adresse': {
@@ -27,6 +30,9 @@
             'type': 'String'
         },
         'mail': {
+            'type': 'String'
+        },
+        'portable': {
             'type': 'String'
         },
         'telephone': {

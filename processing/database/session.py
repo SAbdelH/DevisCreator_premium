@@ -11,26 +11,23 @@ class WorkSession:
     __groupID = None
 
     @staticmethod
-    def login(spublic, sprivate,  username: str, password: str):
+    def login(objet, spublic, sprivate,  username: str, password: str):
         # Vérifier les informations d'identification de l'utilisateur
         WorkSession.__spublic = spublic
         WorkSession.__sprivate = sprivate
 
         user = spublic.query(User).filter(User.identifiant == username).first()
         if user:
-            if user.check_password(password):  # Assurez-vous que `check_password` est une méthode qui valide le mot de passe
+            if user.check_password(password):
                 # Vérifier si le groupe de l'utilisateur a une licence valide
                 WorkSession.__groupID = user.group_id
-                if WorkSession.getLicence():
-                    WorkSession._current_user = user
-                    return True
-                else:
-                    print("licence expiré ou inexistante")
-                    return False
+                WorkSession._current_user = user
+                return True
             else:
-                print("mot de passe incorrect")
+                objet.RaiseErreur(objet.maindialog._le_password)
+                return False
         else:
-            print("Nom d'utilisateur incorrect.")
+            objet.RaiseErreur(objet.maindialog._le_identifiant)
             return False
 
     @staticmethod
