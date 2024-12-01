@@ -57,5 +57,13 @@
             'type': 'Integer'
         }
     },
-    'constraints': None
+    'constraints': [
+    # Index composé
+    {
+        'type': 'Index',
+        'name': 'idx_entreprise',
+        'columns': ['nom', 'resp_nom', 'resp_prenom', 'adresse','ville', 'commune', 'code_postal', 'departement',
+                    'mail', 'portable', 'telephone', 'siren', 'siret', 'code_ape', 'iban', 'bic', 'capital']
+    }
+    ]
 }

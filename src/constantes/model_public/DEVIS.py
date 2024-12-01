@@ -64,5 +64,31 @@
         }
     }
 },
-'constraints': None
+'constraints': [
+    # Index unique sur identifiant
+    {
+        'type': 'Index',
+        'name': 'uq_numero_devis_devis',
+        'columns': ['numero_devis'],
+        'unique': True
+    },
+    # Index sur quantité
+    {
+        'type': 'Index',
+        'name': 'idx_devis_quantite',
+        'columns': ['quantite']
+    },
+    # Index sur prix
+    {
+        'type': 'Index',
+        'name': 'idx_devis_prix',
+        'columns': ['prix']
+    },
+    # Index sur client
+    {
+        'type': 'Index',
+        'name': 'idx_devis_client',
+        'columns': ['client']
+    },
+]
 }

@@ -10,5 +10,18 @@
         'heure_fin': {'type': 'Time', 'nullable': False},
         'crea_user': {'type': 'String'}
     },
-    'constraints': None
+    'constraints': [
+    # Index sur user
+    {
+        'type': 'Index',
+        'name': 'idx_agenda_user',
+        'columns': ['crea_user']
+    },
+    # Index composé sur nom et prénom
+    {
+        'type': 'Index',
+        'name': 'idx_agenda',
+        'columns': ['titre', 'jour', 'heure_debut', 'heure_fin']
+    }
+    ]
     }

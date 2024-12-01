@@ -4,6 +4,30 @@ from collections import namedtuple
 from processing.enumerations import LevelCritic as LVL
 
 
+def getDepartementByCommuneName(commune: str) -> str:
+    # Commande curl en tant que liste d'arguments
+    command = [
+        "curl",
+        "https://geo.api.gouv.fr/communes",
+        "-G",  # Pour indiquer que c'est une requête GET
+        "--data-urlencode", f"nom={commune}",
+        "--data-urlencode", "fields=departement",
+        "--data-urlencode", "boost=population",
+        "--data-urlencode", "limit=5"
+    ]
+
+    # Exécute la commande et capture la sortie
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+        response_data = eval(result.stdout)
+        if len(response_data)>0:
+            name = response_data[0].get("departement", {}).get("nom")
+        else:
+            name = None
+    except subprocess.CalledProcessError as e:
+        name = None
+    return name
+
 def getToken(objet) -> str:
     url = "https://api.insee.fr/token"
     auth_header = "Authorization: Basic VGY2YlNQWklBWkZ6RUVpTTJsT0JmS0RvcFpJYTpQdEVKYnlINkFteFlIbTZCVUxadWNSRE1vXzBh"
@@ -30,7 +54,7 @@ def getToken(objet) -> str:
 def getInfoEtablissement(objet,  siret: str):
     token: str = getToken(objet)
     # Champs du namedtuple
-    fields = ["entreprise", "respNom", "respPrenom", "adresse", "commune", "ville", "cp", "siret", "siren", "ape"]
+    fields = ["entreprise", "respNom", "respPrenom", "adresse", "commune", "ville", "cp", "siret", "siren", "ape", "departement"]
     NT_Entreprise = namedtuple("InformationEntreprise", fields)
 
     if token:
@@ -72,7 +96,8 @@ def getInfoEtablissement(objet,  siret: str):
                 adresseInfo.get('codePostalEtablissement'),  # cp
                 etablissement.get("siret"),  # siret
                 etablissement.get("siren"),  # siren
-                etablissement.get("uniteLegale", {}).get("activitePrincipaleUniteLegale", "").replace(".", "")  # ape
+                etablissement.get("uniteLegale", {}).get("activitePrincipaleUniteLegale", "").replace(".", ""),  # ape
+                getDepartementByCommuneName(adresseInfo.get('libelleCommuneEtablissement'))
             ]
 
             nt_instance = NT_Entreprise(*values)

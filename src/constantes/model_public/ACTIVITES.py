@@ -8,5 +8,12 @@
         'action': {'type': 'String'},
         'budget': {'type': 'Numeric', 'type_params': {'precision': 10, 'scale': 3}}
     },
-    'constraints': None
+    'constraints': [
+    # Index composé
+    {
+        'type': 'Index',
+        'name': 'idx_activite',
+        'columns': ['id', 'crea_date','activites', 'action', 'budget']
+    }
+    ]
     }

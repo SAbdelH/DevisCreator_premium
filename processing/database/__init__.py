@@ -3,9 +3,9 @@ from contextlib import contextmanager
 from pathlib import Path
 
 from PySide6.QtCore import QCoreApplication
-from sqlalchemy import create_engine, and_, inspect
+from sqlalchemy import create_engine, and_, inspect, QueuePool
 from sqlalchemy.exc import OperationalError
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 from processing.database.gui import InteractionInterface
 from processing.database.informations import Informations
@@ -42,7 +42,7 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
             session.rollback()  # Annuler les changements en cas d'erreur
             raise  # Relancer l'exception
         finally:
-            session.close()
+            self.__sPublic.remove()
 
     @property
     def privateEngine(self):
@@ -59,7 +59,7 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
             session.rollback()  # Annuler les changements en cas d'erreur
             raise  # Relancer l'exception
         finally:
-            session.close()
+            self.__sPrivate.remove()
 
     @property
     def _tryConnect(self):
@@ -86,13 +86,29 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
                     # Construction de l'URL public de connexion SQLAlchemy
                     DATABASE_URL = 'postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}'.format(**publicjson)
                     # Création du moteur public SQLAlchemy
-                    self.__ePublic = create_engine(DATABASE_URL)
-                    self.__sPublic = sessionmaker(bind=self.__ePublic)
+                    self.__ePublic = create_engine(
+                        DATABASE_URL,
+                        poolclass=QueuePool,
+                        pool_size=10,  # Nombre de connexions maintenues dans le pool
+                        max_overflow=20,  # Nombre de connexions supplémentaires autorisées temporairement
+                        pool_timeout=30,  # Temps d'attente max pour obtenir une connexion du pool
+                        pool_recycle=3600  # Recycler les connexions après 1 heure
+                    )
+                    # Session scopée
+                    self.__sPublic = scoped_session(sessionmaker(bind=self.__ePublic))
                     # Construction de l'URL privé de connexion SQLAlchemy
                     DATABASE_URL = 'postgresql+psycopg2://{user}:{password}@{host}:{port}/{database}'.format(**privatejson)
                     # Création du moteur privé SQLAlchemy
-                    self.__ePrivate = create_engine(DATABASE_URL)
-                    self.__sPrivate = sessionmaker(bind=self.__ePrivate)
+                    self.__ePrivate = create_engine(
+                        DATABASE_URL,
+                        poolclass=QueuePool,
+                        pool_size=10,
+                        max_overflow=20,
+                        pool_timeout=30,
+                        pool_recycle=3600
+                    )
+                    # Session scopée
+                    self.__sPrivate = scoped_session(sessionmaker(bind=self.__ePrivate))
                 __connect = True
 
         except OperationalError as err:

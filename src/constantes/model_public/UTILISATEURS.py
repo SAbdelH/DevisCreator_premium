@@ -55,6 +55,37 @@
         'type': 'CheckConstraint',
         'condition': "role IN ('Administrateur', 'Responsable', 'Employe')",
         'name': 'check_role'
+    },
+    # Index unique sur identifiant
+    {
+        'type': 'Index',
+        'name': 'uq_identifiant',
+        'columns': ['identifiant'],
+        'unique': True
+    },
+    # Index sur role
+    {
+        'type': 'Index',
+        'name': 'idx_role',
+        'columns': ['role']
+    },
+    # Index sur poste
+    {
+        'type': 'Index',
+        'name': 'idx_poste',
+        'columns': ['poste']
+    },
+    # Index sur group_id
+    {
+        'type': 'Index',
+        'name': 'idx_group_id',
+        'columns': ['group_id']
+    },
+    # Index composé sur nom et prénom
+    {
+        'type': 'Index',
+        'name': 'idx_nom_prenom',
+        'columns': ['nom', 'prenom']
     }
 ]
 }

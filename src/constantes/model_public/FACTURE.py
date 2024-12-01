@@ -2,7 +2,7 @@
 'name': 'factures',
 'schema': 'activites',
 'columns': {
-    'numero_devis': {
+    'numero_facture': {
         'type': 'String',
         'primary_key': True,
         'autoincrement': False,
@@ -67,5 +67,31 @@
         "type" : "Boolean"
     }
 },
-'constraints': None
+'constraints': [
+    # Index unique sur identifiant
+    {
+        'type': 'Index',
+        'name': 'uq_numero_facture_facture',
+        'columns': ['numero_facture'],
+        'unique': True
+    },
+    # Index sur quantité
+    {
+        'type': 'Index',
+        'name': 'idx_facture_quantite',
+        'columns': ['quantite']
+    },
+    # Index sur prix
+    {
+        'type': 'Index',
+        'name': 'idx_facture_prix',
+        'columns': ['prix']
+    },
+    # Index sur client
+    {
+        'type': 'Index',
+        'name': 'idx_facture_client',
+        'columns': ['client']
+    },
+]
 }

@@ -322,6 +322,8 @@ class DashboardPage:
 
     def OpenDashboardPage(self):
         self.switchPage('_p_dashboard')
+        self._b_dashboard.setChecked(True)
+        self.resetToggleHeaderMenu("_b_dashboard")
         self.showHeaderMenu()
         self.hideSideMenu()
         self.pageEnCours.emit("dashboard")

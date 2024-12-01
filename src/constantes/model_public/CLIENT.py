@@ -24,5 +24,20 @@
     'crea_date': {
         'type': 'Date'
     },
-}
+},
+'constraints': [
+    # Index sur id
+    {
+        'type': 'Index',
+        'name': 'idx_client_id',
+        'columns': ['id'],
+        'unique': True
+    },
+    # Index sur id
+    {
+        'type': 'Index',
+        'name': 'idx_client_nom',
+        'columns': ['nom']
+    }
+]
 }

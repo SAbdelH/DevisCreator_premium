@@ -6,6 +6,7 @@ from processing.database.session import WorkSession
 from processing.decrypt import source_dir, fernet
 from processing.enumerations import LevelCritic as LVL
 from processing.database.model_public import Entreprise
+from processing.database.model_tools import get_table_schema
 
 
 class InteractionInterface:
@@ -106,7 +107,7 @@ class InteractionInterface:
 
     def saveCompanyInfo(self):
         table_name = Entreprise.__tablename__
-        schema = Entreprise.__table_args__["schema"]
+        schema = get_table_schema(Entreprise)
         info, _ = self.maindialog.getCompanyInfos()
 
         with self.Session() as session:

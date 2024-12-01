@@ -13,6 +13,12 @@
         'type': 'CheckConstraint',
         'condition': "abonnement IN ('basic', 'premium')",
         'name': 'check_abonnement'
+    },
+    # Index sur group_id
+    {
+        'type': 'Index',
+        'name': 'idx_group_id',
+        'columns': ['group_id']
     }
     ]
     }

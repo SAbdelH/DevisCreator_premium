@@ -14,5 +14,13 @@
         'date_fabric': {'type': 'Date'},
         'crea_user': {'type': 'String'},
     },
-    'constraints': None
+    'constraints': [
+    # Index unique sur nom
+    {
+        'type': 'Index',
+        'name': 'uq_inv_nom',
+        'columns': ['nom'],
+        'unique': True
+    },
+    ]
 }

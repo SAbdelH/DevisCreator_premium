@@ -1,5 +1,6 @@
 import sqlalchemy
-from sqlalchemy import Column, CheckConstraint, text
+from sqlalchemy import Column, CheckConstraint, text, Index
+
 
 def create_schemas(session, base):
     schemas = set()
@@ -20,6 +21,15 @@ def create_schemas(session, base):
             session.execute(text(f"CREATE SCHEMA IF NOT EXISTS {schema};"))
 
     session.commit()
+
+def get_table_schema(cls):
+    # Vérifie si __table_args__ est défini et qu'il contient un élément
+    if hasattr(cls, '__table_args__') and isinstance(cls.__table_args__, tuple):
+        for item in cls.__table_args__:
+            # Si l'élément est un dictionnaire et contient la clé "schema"
+            if isinstance(item, dict) and "schema" in item:
+                return item["schema"]
+    return None
 
 def drop_schemas(session, base):
     schemas = set()
@@ -81,6 +91,13 @@ def create_dynamic_model(Base, name, schema, columns, constraints=None):
         for constraint in constraints:
             if constraint['type'] == 'CheckConstraint':
                 constraint_objects.append(CheckConstraint(constraint['condition'], name=constraint['name']))
+            elif constraint['type'] == 'Index':
+                # Ajouter un index
+                index_columns = constraint['columns']  # Liste des colonnes pour l'index
+                unique = constraint.get('unique', False)  # Déterminer si l'index est unique
+                index_name = constraint['name']  # Nom de l'index
+                constraint_objects.append(Index(index_name, *index_columns, unique=unique))
+
         table_args = (*constraint_objects, {'schema': schema})
 
     attrs = {
