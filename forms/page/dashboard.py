@@ -1,8 +1,14 @@
+from datetime import date, time
+
 from PySide6.QtCore import Qt, QSize, QCoreApplication
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QSpacerItem, QRadioButton, QSizePolicy, QHBoxLayout,
-    QCheckBox, QPushButton, QGraphicsView, QTableWidget, QTableWidgetItem, QVBoxLayout, QListWidget, QHeaderView,
-    QCalendarWidget, QLabel, QLineEdit, QTextEdit, QDateEdit, QTimeEdit)
+                               QCheckBox, QPushButton, QGraphicsView, QTableWidget, QTableWidgetItem, QVBoxLayout,
+                               QListWidget, QHeaderView,
+                               QCalendarWidget, QLabel, QLineEdit, QTextEdit, QDateEdit, QTimeEdit, QListWidgetItem)
+
+from forms.gui.ui_agenda_items import AgendaItems
+from test import AgendaInfo
 
 
 class DashboardPage:
@@ -296,6 +302,7 @@ class DashboardPage:
         # LIST WIGET DES AGENDAS
         self._lw_agenda = QListWidget(self._f_calendar)
         self._lw_agenda.setObjectName(u"_lw_agenda")
+        self._lw_agenda.setSpacing(0)
         self._v_calendar.addWidget(self._lw_agenda)
         self._g_dashboard.addWidget(self._f_calendar, 0, 1, 1, 1)
 
@@ -327,6 +334,19 @@ class DashboardPage:
         self.showHeaderMenu()
         self.hideSideMenu()
         self.pageEnCours.emit("dashboard")
+        agenda_data = [
+            AgendaInfo("RDV Médecin", "Consultation annuelle", date(2024, 12, 15), time(14, 30), time(15, 30)),
+            AgendaInfo("Réunion Projet", "Bilan de fin d'année", date(2024, 12, 20), time(9, 0), time(11, 0)),
+            AgendaInfo("test3", "Bilan de fin d'année", date(2024, 12, 20), time(9, 0), time(11, 0)),
+        ]
+
+        # Ajout des widgets personnalisés à la liste
+        for info in agenda_data:
+            item = QListWidgetItem(self._lw_agenda)
+            custom_widget = AgendaItems(info)
+            item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
+            self._lw_agenda.addItem(item)
+            self._lw_agenda.setItemWidget(item, custom_widget)
 
     def __retranslateUi(self):
         self._r_mois.setText(QCoreApplication.translate("MainWindow", u"Mois", None))

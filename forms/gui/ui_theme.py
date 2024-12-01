@@ -188,9 +188,8 @@ class theme:
 	border: 1px solid rgba(214, 219, 223, 1);
 	background-color: rgba(255, 255, 255, 0.7);
 }}
-#_p_factures QComboBox,
-#_f_calendar QListWidget::item {{
-	background-color: rgba(247, 248, 250, 1);
+#_p_factures QComboBox{{
+	background-color: rgba(254, 249, 231, 0.6);
 	border: 1px solid rgba(224, 224, 224, 1);
 	border-radius: 10px;
 	margin: 5px;
@@ -201,6 +200,8 @@ class theme:
 	border: 1px solid rgba(181, 212, 241, 1);
 	border-top: 5px solid rgba(247, 220, 111, 1);
 	color: rgba(0, 0, 0, 1);
+	margin: 0px;
+	padding: 0px;
 }}
 #_lw_agenda {{
 	background-image: url({self.a_faire_bg});
