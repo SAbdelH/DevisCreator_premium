@@ -4,7 +4,7 @@
     'columns': {
         'id': {'type': 'BigInteger', 'primary_key': True, 'autoincrement': True},
         'titre': {'type': 'String'},
-        'description': {'type': 'String', 'type_params': {'length': 60}},
+        'description': {'type': 'String'},
         'jour': {'type': 'Date', 'nullable': False},
         'heure_debut': {'type': 'Time', 'nullable': False},
         'heure_fin': {'type': 'Time', 'nullable': False},

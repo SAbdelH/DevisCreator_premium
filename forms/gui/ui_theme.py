@@ -116,7 +116,6 @@ class theme:
 	background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(246, 221, 204, 1), stop:0.5 rgba(255, 255, 255, 1), stop:1 rgba(246, 221, 204, 1));
 	font-size: 10px;
 	border: 1px solid rgba(204, 209, 209, 1);
-	transition: all 0.5s ease;
 	padding: 3px;
 	text-transform: uppercase;
 }}
@@ -187,6 +186,7 @@ class theme:
 	border-radius: 5px;
 	border: 1px solid rgba(214, 219, 223, 1);
 	background-color: rgba(255, 255, 255, 0.7);
+	padding: 5px;
 }}
 #_p_factures QComboBox{{
 	background-color: rgba(254, 249, 231, 0.6);
@@ -196,20 +196,13 @@ class theme:
 	padding: 5px;
 	height: 40px;
 }}
+#_f_calendar QListWidget::item {{ margin: 0px 5px;}}
 #_f_calendar QListWidget::item:selected {{
-	border: 1px solid rgba(181, 212, 241, 1);
 	border-top: 5px solid rgba(247, 220, 111, 1);
 	color: rgba(0, 0, 0, 1);
 	margin: 0px;
 	padding: 0px;
 }}
-#_lw_agenda {{
-	background-image: url({self.a_faire_bg});
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-origin: content;
-}}
-
 /* FINANCES FRAME */
 #_f_graphic_finances {{
 	border: none;

@@ -5,10 +5,11 @@ from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QE
 from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit)
 from forms.animation import AnimationForm as ANF
 from forms.notifications import NotificationWidget
+from forms.temps import TempsForm as TF
 from forms.gui import *
 from forms.page import *
 
-class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP, ANF):
+class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP, VFP, CP, MP, RP, DMP, ANF, TF):
     pageEnCours = Signal(str)
     menuAction = Signal(str)
     fermeture_fenetre = Signal(QEvent)
@@ -32,6 +33,7 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         RP.__init__(self)
         DMP.__init__(self)
         rf.__init__(self)
+        TF.__init__(self)
         self.setupUi(self)
         self.RandomBackground()
         self.light_theme()
@@ -58,6 +60,10 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         self.animationHideNotification = None
         self.notification = NotificationWidget(self)
         self.notification.hide()
+        # REGLAGES DES CALENDRIER
+        self.aujourdhui()
+        self._cw_agenda.selectionChanged.connect(self.dateSelected)
+        self.dateSelected()
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():

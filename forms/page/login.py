@@ -94,6 +94,7 @@ class LoginPage:
         self._le_identifiant.setClearButtonEnabled(True)
         self._le_identifiant.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._le_identifiant.addAction(self.utilisateur_icon, QLineEdit.ActionPosition.LeadingPosition)
+        self._le_identifiant.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self._g_signin.addWidget(self._le_identifiant, 2, 0, 1, 1)
         # AJOUT D'UN LINEEDIT POUR LES MOTS DE PASSE DE CONNEXIONS
         self._le_password = QLineEdit(self._p_signin)
@@ -108,6 +109,7 @@ class LoginPage:
         toggleAction.setVisible(False)
         toggleAction.triggered.connect(lambda: self.toggle_echo_mode(self._le_password, toggleAction))
         self._le_password.addAction(self.cadena_icon, QLineEdit.ActionPosition.LeadingPosition)
+        self._le_password.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self._le_password.textChanged.connect(lambda: self.update_toggle_visibility(self._le_password, toggleAction))
         self._g_signin.addWidget(self._le_password, 3, 0, 1, 1)
         # MESSAGE LICENCE MANQUANTE
@@ -190,6 +192,7 @@ class LoginPage:
         self._le_licence.setClearButtonEnabled(True)
         self._le_licence.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._le_licence.addAction(self.cle_icon, QLineEdit.ActionPosition.LeadingPosition)
+        self._le_licence.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self._g_signup.addWidget(self._le_licence, 3, 0, 1, 2)
         # AJOUT D'UN VERTICAL SPACER
         self._vs_signup_two = QSpacerItem(20, 48, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
@@ -229,8 +232,10 @@ class LoginPage:
     def switchPageConnexion(self, index=0, expire_licence: bool = False):
         self._sw_login_dialog.setCurrentIndex(index)
         if index == 0:
-            self._b_guess_connexion.setFocus()
+            self._l_icon_connexion.setFocusPolicy(Qt.StrongFocus)
+            self._l_icon_connexion.setFocus()
         else:
+            self._b_back_connexion.setFocusPolicy(Qt.StrongFocus)
             self._b_back_connexion.setFocus()
         self.active_signin(expire_licence)
 

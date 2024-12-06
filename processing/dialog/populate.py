@@ -1,9 +1,11 @@
-from datetime import datetime
+from datetime import datetime, date
 
-from PySide6.QtCore import QSize, Qt, QDate
+from PySide6.QtCore import QSize, Qt, QDate, QTime
 from PySide6.QtWidgets import QListWidgetItem
+from sqlalchemy import func
 
-from processing.database.model_public import User, Entreprise
+from forms.gui.ui_agenda_items import AgendaItem
+from processing.database.model_public import User, Entreprise, Agenda
 from forms.gui.ui_card_employe import EmployeeCard
 
 
@@ -119,3 +121,72 @@ class PopulateWidget:
                 for func in functions:
                     getattr(self.maindialog, func)()
         return l
+
+    def populateAgenda(self):
+        dlg = self.maindialog
+        dlg._lw_agenda.clear()
+        with (self.Session() as session):
+            agenda = (
+                session.query(
+                    Agenda.id,
+                    Agenda.titre,
+                    Agenda.description,
+                    Agenda.heure_debut,
+                    Agenda.jour,
+                    Agenda.heure_fin,
+                    func.to_char(Agenda.jour, 'dd-mm-yyyy').label('fjour')
+                )
+                .filter(
+                    func.to_char(Agenda.jour, 'mm/yyyy') >= func.to_char(date.today(), 'mm/yyyy')
+                )
+            )
+        if agenda.count() > 0:
+            # Ajout des widgets personnalisés à la liste
+            for row, rdv in enumerate(agenda):
+                info = {
+                    'id': rdv.id,
+                    'titre': rdv.titre,
+                    'description': rdv.description,
+                    'heure_debut': rdv.heure_debut,
+                    'jour' : rdv.jour,
+                    'heure_fin': rdv.heure_fin,
+                    'fjour': rdv.fjour
+                }
+                self.agendaID[row] = info
+                item = QListWidgetItem(dlg._lw_agenda)
+                custom_widget = AgendaItem(rdv)  # Crée un widget personnalisé pour l'élément
+
+                # Ajouter les données au QListWidgetItem
+                item.setData(Qt.UserRole, info)  # Associer les données à l'item
+
+                item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
+                dlg._lw_agenda.addItem(item)
+                dlg._lw_agenda.setItemWidget(item, custom_widget)
+        else:
+            dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
+                    background-image: url({dlg.a_faire_bg});
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-origin: content;
+                }}""")
+
+        dlg._lw_agenda.itemClicked.connect(self.onAgendaItemSelected)
+        dlg._lw_agenda.scrollToBottom()
+
+    def onAgendaItemSelected(self, item):
+        dlg = self.maindialog
+        agenda_row = item.data(Qt.UserRole)
+
+        titre = agenda_row.get("titre")
+        description = agenda_row.get("description")
+        jour = agenda_row.get("jour")
+        heure_debut = agenda_row.get("heure_debut")
+        heure_fin = agenda_row.get("heure_fin")
+
+        dlg._le_titre_agenda.setText(titre)
+        dlg._le_description.setText(description)
+
+        dlg._de_jour_agenda.setDate(jour)
+        dlg._cw_agenda.setSelectedDate(jour)
+        dlg._te_debut_agenda.setTime(heure_debut)
+        dlg._te_fin_agenda.setTime(heure_fin)

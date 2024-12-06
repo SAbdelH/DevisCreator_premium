@@ -193,6 +193,9 @@ class clientsPage:
         self._sw_main_dialog.addWidget(self._p_clients)
 
         self.__retranslateUi()
+        self._f_clients_info_box.setVisible(False)
+        self._b_clients_add_client.clicked.connect(self.ShowClientInfoBox)
+        self._b_clients_hide_info.clicked.connect(self.ShowClientInfoBox)
 
     def __retranslateUi(self):
         HeaderName =  [u"Cr\u00e9er le", u"Nom", u"T\u00e9l\u00e9phone", u"Mail",
@@ -232,3 +235,7 @@ class clientsPage:
         self.hideOuterGroup('invoice')
         self.pageEnCours.emit("clients")
         self.resetToggleSideMenu('_b_mclient')
+
+    def ShowClientInfoBox(self):
+        isVisible = self._f_clients_info_box.isVisible()
+        self._f_clients_info_box.setVisible(not isVisible)

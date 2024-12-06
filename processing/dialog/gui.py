@@ -6,6 +6,8 @@ class Update:
             self.populateUserList()
         elif text == '_p_info_company':
             if self.WorkspaceExist() : self.populateInfoCompany()
+        elif text == '_p_dashboard':
+            self.populateAgenda()
 
     def on_menu_clicked(self, text):
         if text == 'logout':

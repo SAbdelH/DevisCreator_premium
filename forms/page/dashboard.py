@@ -5,10 +5,7 @@ from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QSpacerItem, QRadioButton, QSizePolicy, QHBoxLayout,
                                QCheckBox, QPushButton, QGraphicsView, QTableWidget, QTableWidgetItem, QVBoxLayout,
                                QListWidget, QHeaderView,
-                               QCalendarWidget, QLabel, QLineEdit, QTextEdit, QDateEdit, QTimeEdit, QListWidgetItem)
-
-from forms.gui.ui_agenda_items import AgendaItems
-from test import AgendaInfo
+                               QCalendarWidget, QLabel, QLineEdit,  QDateEdit, QTimeEdit)
 
 
 class DashboardPage:
@@ -23,6 +20,7 @@ class DashboardPage:
         self.font5 = QFont()
         self.font5.setBold(True)
         self.font5.setUnderline(True)
+        self.max_chars = 50
 
     def initUi_DashboardForm(self):
         # PAGE TABLEAU DE BORD
@@ -184,7 +182,7 @@ class DashboardPage:
         # FRAME POUR LES PARAMETRES AGENDA
         self._f_calendar = QFrame(self._p_dashboard)
         self._f_calendar.setObjectName(u"_f_calendar")
-        self._f_calendar.setMaximumSize(QSize(375, 16777215))
+        self._f_calendar.setMaximumSize(QSize(395, 16777215))
         self._f_calendar.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_calendar.setFrameShadow(QFrame.Shadow.Raised)
         # VERTICAL LAYOUT POUR ACCUEILLIR LES WIDGETS
@@ -230,10 +228,20 @@ class DashboardPage:
         self._l_description.setFont(self.font3)
         self._v_description.addWidget(self._l_description)
         # TEXTEDIT DESCRIPTION
-        self._te_description = QTextEdit(self._f_calendar)
-        self._te_description.setObjectName(u"_te_description")
-        self._te_description.setMaximumSize(QSize(16777215, 100))
-        self._v_description.addWidget(self._te_description)
+        self._le_description = QLineEdit(self._f_calendar)
+        self._le_description.setObjectName(u"_te_description")
+        self._le_description.setMaxLength(self.max_chars)
+        self._le_description.setPlaceholderText("Entrez une description (max 50 caractères)")
+        self._le_description.setMaximumSize(QSize(16777215, 50))
+        self._le_description.setMinimumSize(QSize(16777215, 40))
+        # Mettre à jour l'indicateur en fonction des caractères
+        self._le_description.textChanged.connect(self.update_char_count)
+        self._v_description.addWidget(self._le_description)
+        # Label pour l'indicateur de caractères
+        self.char_count_label = QLabel(f"Caractères restarts : {self.max_chars}", self)
+        self.char_count_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
+        self.char_count_label.setStyleSheet("color: #808B96; font-size: 10pt;")
+        self._v_description.addWidget(self.char_count_label)
         self._v_calendar.addLayout(self._v_description)
         # HORIZONTAL LAYOUT POUR LA DATE HEURE
         self._h_dateedit_agenda = QHBoxLayout()
@@ -255,6 +263,7 @@ class DashboardPage:
         # TIMEEDIT DEBUT
         self._te_debut_agenda = QTimeEdit(self._f_calendar)
         self._te_debut_agenda.setObjectName(u"_te_debut_agenda")
+        self._te_debut_agenda.setDisplayFormat("HH:mm:ss")
         self._h_dateedit_agenda.addWidget(self._te_debut_agenda)
         # LABEL FIN
         self._l_fin_agenda = QLabel(self._f_calendar)
@@ -264,6 +273,7 @@ class DashboardPage:
         # TIMEEDIT FIN
         self._te_fin_agenda = QTimeEdit(self._f_calendar)
         self._te_fin_agenda.setObjectName(u"_te_fin_agenda")
+        self._te_fin_agenda.setDisplayFormat("HH:mm:ss")
         self._h_dateedit_agenda.addWidget(self._te_fin_agenda)
         self._v_calendar.addLayout(self._h_dateedit_agenda)
         # AJOUT HORIZONTAL LAYOUT POUR BOUTON
@@ -334,19 +344,13 @@ class DashboardPage:
         self.showHeaderMenu()
         self.hideSideMenu()
         self.pageEnCours.emit("dashboard")
-        agenda_data = [
-            AgendaInfo("RDV Médecin", "Consultation annuelle", date(2024, 12, 15), time(14, 30), time(15, 30)),
-            AgendaInfo("Réunion Projet", "Bilan de fin d'année", date(2024, 12, 20), time(9, 0), time(11, 0)),
-            AgendaInfo("test3", "Bilan de fin d'année", date(2024, 12, 20), time(9, 0), time(11, 0)),
-        ]
 
-        # Ajout des widgets personnalisés à la liste
-        for info in agenda_data:
-            item = QListWidgetItem(self._lw_agenda)
-            custom_widget = AgendaItems(info)
-            item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
-            self._lw_agenda.addItem(item)
-            self._lw_agenda.setItemWidget(item, custom_widget)
+    def update_char_count(self):
+        text = self._le_description.text()
+        chars_left = self.max_chars - len(text)
+
+        # Mettre à jour l'indicateur de caractères restants
+        self.char_count_label.setText(f"Caractères restants : {chars_left}")
 
     def __retranslateUi(self):
         self._r_mois.setText(QCoreApplication.translate("MainWindow", u"Mois", None))

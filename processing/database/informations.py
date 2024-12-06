@@ -1,10 +1,11 @@
-from datetime import date
+from datetime import date, datetime
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QInputDialog, QMessageBox
+from sqlalchemy import or_, func
 
 from processing.database.base_public import Base
-from processing.database.model_public import User, Entreprise
+from processing.database.model_public import User, Entreprise, Agenda, Clients
 from processing.database.siren import getInfoEtablissement
 from processing.database.model_tools import create_schemas, create_tables
 from processing.enumerations import LevelCritic as LVL
@@ -148,3 +149,77 @@ class Informations:
             elif not ok:
                 break
         return __execute
+
+    def setPlanning(self, action: str = 'add'):
+        dlg = self.maindialog
+
+        # Récupérer la date sélectionnée à partir de QCalendarWidget
+        CDate = dlg._cw_agenda.selectedDate()
+        selectedDate = datetime(CDate.year(), CDate.month(), CDate.day()).strftime("%Y-%m-%d")
+        # Récupérer les paramètres depuis l'UI
+        nom = dlg._le_titre_agenda.text()
+        jour = datetime.strptime(selectedDate, "%Y-%m-%d").date()  # Convertir en objet `date`
+        heure_debut = dlg._te_debut_agenda.time().toString("HH:mm:00")  # Heure de début
+        heure_fin = dlg._te_fin_agenda.time().toString("HH:mm:00")  # Heure de fin
+        description = dlg._le_description.text()
+
+        with self.Session() as session:
+            if action == 'add':
+                # Créer une nouvelle instance d'Agenda
+                new_agenda = Agenda(
+                    titre=nom,
+                    description = description,
+                    jour=jour,
+                    heure_debut=heure_debut,
+                    heure_fin=heure_fin,
+                    crea_user=self.USER
+                )
+
+                # Ajouter l'agenda à la session
+                session.add(new_agenda)
+            else:
+                # Si c'est une mise à jour, récupérer l'élément sélectionné et mettre à jour
+                selected_items = dlg._lw_agenda.selectedItems()
+                if selected_items:
+                    for item in selected_items:
+                        row_index = dlg._lw_agenda.row(item)
+                        agenda_id = self.agendaID.get(row_index, {}).get("id")  # Récupérer l'ID de l'agenda
+                        if action == 'update':
+                            # Récupérer l'instance de l'agenda à mettre à jour
+                            agenda_to_update = session.query(Agenda).filter_by(id=agenda_id).first()
+
+                            if agenda_to_update:
+                                # Mettre à jour les champs de l'agenda
+                                agenda_to_update.titre = nom
+                                agenda_to_update.description = description
+                                agenda_to_update.jour = jour
+                                agenda_to_update.heure_debut = heure_debut
+                                agenda_to_update.heure_fin = heure_fin
+                                agenda_to_update.crea_user = self.USER
+                        else:
+                            session.query(Agenda).filter_by(id=agenda_id).delete()
+
+        # Repeupler l'agenda après l'ajout/mise à jour
+        self.populateAgenda()
+
+    def setClient(self, action: str = 'add'):
+        dlg = self.maindialog
+        nom = dlg._le_clients_profil_name.text()
+        mail = dlg._le_clients_mail_value.text()
+        num = dlg._le_clients_num_value.text()
+        try:
+            with self.Session() as session:
+                conditions = or_(Clients.nom == nom, Clients.telephone == num, Clients.email == mail)
+                if action == 'add':
+                    client = session.query(Clients).filter(conditions).first()
+                    if client:
+                        client.nom = nom
+                        client.telephone = num
+                        client.email = mail
+                    else:
+                        __Client = Clients(nom=nom, telephone=num, email=mail, commerce=0, crea_date=func.current_date())
+                        session.add(__Client)
+                else:
+                    session.query(Clients).filter(conditions).delete()
+        except Exception as err:
+            self.maindialog.show_notification(str(err), LVL.warning)
