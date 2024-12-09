@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1303</width>
-    <height>872</height>
+    <height>907</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>2</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -1941,6 +1941,12 @@ QCalendarWidget QAbstractItemView:enabled {
         </item>
         <item row="0" column="1">
          <widget class="QFrame" name="_f_calendar">
+          <property name="minimumSize">
+           <size>
+            <width>410</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>375</width>
@@ -2059,7 +2065,14 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="_de_jour_agenda"/>
+              <widget class="QDateEdit" name="_de_jour_agenda">
+               <property name="minimumSize">
+                <size>
+                 <width>90</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QLabel" name="_l_debut_agenda">
@@ -2074,7 +2087,11 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QTimeEdit" name="_te_debut_agenda"/>
+              <widget class="QTimeEdit" name="_te_debut_agenda">
+               <property name="displayFormat">
+                <string>HH:mm:ss</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QLabel" name="_l_fin_agenda">
@@ -2089,7 +2106,20 @@ QCalendarWidget QAbstractItemView:enabled {
               </widget>
              </item>
              <item>
-              <widget class="QTimeEdit" name="_te_fin_agenda"/>
+              <widget class="QTimeEdit" name="_te_fin_agenda">
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="displayFormat">
+                <string>HH:mm:ss</string>
+               </property>
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>

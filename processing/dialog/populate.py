@@ -162,6 +162,13 @@ class PopulateWidget:
                 item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
                 dlg._lw_agenda.addItem(item)
                 dlg._lw_agenda.setItemWidget(item, custom_widget)
+                dlg._lw_um_usrList.setStyleSheet("""
+                #_lw_agenda {{
+                    border-radius: 5px;
+                    border: 1px solid rgba(214, 219, 223, 1);
+                    background-color: rgba(255, 255, 255, 0.7);
+                    padding: 5px;
+                }}""")
         else:
             dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
                     background-image: url({dlg.a_faire_bg});

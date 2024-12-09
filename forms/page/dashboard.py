@@ -182,7 +182,8 @@ class DashboardPage:
         # FRAME POUR LES PARAMETRES AGENDA
         self._f_calendar = QFrame(self._p_dashboard)
         self._f_calendar.setObjectName(u"_f_calendar")
-        self._f_calendar.setMaximumSize(QSize(395, 16777215))
+        self._f_calendar.setMinimumSize(QSize(410, 16777215))
+        self._f_calendar.setMaximumSize(QSize(420, 16777215))
         self._f_calendar.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_calendar.setFrameShadow(QFrame.Shadow.Raised)
         # VERTICAL LAYOUT POUR ACCUEILLIR LES WIDGETS
@@ -254,6 +255,7 @@ class DashboardPage:
         # DATE EDIT JOUR
         self._de_jour_agenda = QDateEdit(self._f_calendar)
         self._de_jour_agenda.setObjectName(u"_de_jour_agenda")
+        self._de_jour_agenda.setMinimumSize(QSize(100, 0))
         self._h_dateedit_agenda.addWidget(self._de_jour_agenda)
         # LABEL DEBUT
         self._l_debut_agenda = QLabel(self._f_calendar)
@@ -264,6 +266,7 @@ class DashboardPage:
         self._te_debut_agenda = QTimeEdit(self._f_calendar)
         self._te_debut_agenda.setObjectName(u"_te_debut_agenda")
         self._te_debut_agenda.setDisplayFormat("HH:mm:ss")
+        self._te_debut_agenda.setMaximumSize(QSize(80, 16777215))
         self._h_dateedit_agenda.addWidget(self._te_debut_agenda)
         # LABEL FIN
         self._l_fin_agenda = QLabel(self._f_calendar)
@@ -274,6 +277,7 @@ class DashboardPage:
         self._te_fin_agenda = QTimeEdit(self._f_calendar)
         self._te_fin_agenda.setObjectName(u"_te_fin_agenda")
         self._te_fin_agenda.setDisplayFormat("HH:mm:ss")
+        self._te_fin_agenda.setMaximumSize(QSize(80, 16777215))
         self._h_dateedit_agenda.addWidget(self._te_fin_agenda)
         self._v_calendar.addLayout(self._h_dateedit_agenda)
         # AJOUT HORIZONTAL LAYOUT POUR BOUTON

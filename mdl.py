@@ -64,7 +64,7 @@ session = Session()
 
 # Créer un utilisateur
 new_user = User(identifiant='abdelhafidhousoufou', email='test@example.com', nom="SOUFOU",
-                prenom="Abdel", poste="Chef de bureau", sexe='Homme', role='Administrateur')
+                prenom="Abdel", poste="Chef de bureau", sexe='Homme', role='Administrateur', group_id="1111111")
 new_user.set_password('bankai')
 
 # Ajouter à la session et sauvegarder dans la base
