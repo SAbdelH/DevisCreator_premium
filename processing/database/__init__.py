@@ -139,7 +139,7 @@ class PostgreSQLDatabase(InteractionInterface, Informations):
             self.maindialog._l_licence_missing.setText(
                 QCoreApplication.translate("MainWindow", mess, None))
             self.maindialog.show_notification(mess, LVL.critical)
-            file_path.unlink(missing_ok=True)
+            #file_path.unlink(missing_ok=True)
 
         return expireLicence
 

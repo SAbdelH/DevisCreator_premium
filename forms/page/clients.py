@@ -1,6 +1,7 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLineEdit, QSizePolicy, QSpacerItem,
-    QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QDoubleSpinBox, QAbstractSpinBox, QListWidget)
+                               QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QDoubleSpinBox,
+                               QAbstractSpinBox, QListWidget, QAbstractItemView)
 
 
 class clientsPage:
@@ -45,16 +46,24 @@ class clientsPage:
         self._tw_clients_table_info.setObjectName(u"_tw_clients_table_info")
         self._tw_clients_table_info.horizontalHeader().setCascadingSectionResizes(False)
         self._tw_clients_table_info.horizontalHeader().setProperty(u"showSortIndicator", True)
-        self._tw_clients_table_info.horizontalHeader().setStretchLastSection(True)
+        self._tw_clients_table_info.horizontalHeader().setStretchLastSection(False)
+        self._tw_clients_table_info.resizeColumnsToContents()
         clientTableColumn = 8
         if (self._tw_clients_table_info.columnCount() < clientTableColumn):
             self._tw_clients_table_info.setColumnCount(clientTableColumn)
+        col_larg = {1, 3}
         for i in range(clientTableColumn):
             __qtablewidgetitem = QTableWidgetItem()
             self._tw_clients_table_info.setHorizontalHeaderItem(i, __qtablewidgetitem)
             self._tw_clients_table_info.horizontalHeader().setSectionResizeMode(
-                i, QHeaderView.Stretch
+                i, QHeaderView.Stretch if i in col_larg else QHeaderView.Interactive
             )
+            if i in col_larg:
+                self._tw_clients_table_info.setColumnWidth(i, 100)
+        self._tw_clients_table_info.setFrameStyle(0)
+        self._tw_clients_table_info.setShowGrid(False)
+        self._tw_clients_table_info.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
+        self._tw_clients_table_info.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self._v_clients_table.addWidget(self._tw_clients_table_info)
         self._h_clients.addWidget(self._f_clients_table)
         self._f_clients_info_box = QFrame(self._p_clients)
@@ -159,6 +168,8 @@ class clientsPage:
         self._ds_clients_dette.setMinimumSize(QSize(0, 30))
         self._ds_clients_dette.setReadOnly(True)
         self._ds_clients_dette.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
+        self._ds_clients_dette.setDecimals(3)
+        self._ds_clients_dette.setMinimum(-9999999999999999635896294965248.000000000000000)
         self._ds_clients_dette.setMaximum(9999999999999999635896294965248.000000000000000)
         self._h_clients_dette.addWidget(self._ds_clients_dette)
         self._v_clients_info_box.addLayout(self._h_clients_dette)
@@ -196,6 +207,9 @@ class clientsPage:
         self._f_clients_info_box.setVisible(False)
         self._b_clients_add_client.clicked.connect(self.ShowClientInfoBox)
         self._b_clients_hide_info.clicked.connect(self.ShowClientInfoBox)
+        self._b_clients_show_info.clicked.connect(self.ShowClientInfoBox)
+        self.EnabledShowInfoClient()
+        self._tw_clients_table_info.itemSelectionChanged.connect(self.EnabledShowInfoClient)
 
     def __retranslateUi(self):
         HeaderName =  [u"Cr\u00e9er le", u"Nom", u"T\u00e9l\u00e9phone", u"Mail",
@@ -239,3 +253,10 @@ class clientsPage:
     def ShowClientInfoBox(self):
         isVisible = self._f_clients_info_box.isVisible()
         self._f_clients_info_box.setVisible(not isVisible)
+        if isVisible:
+            self._tw_clients_table_info.clearSelection()
+            self._tw_clients_table_info.setCurrentItem(None)
+            self.EnabledShowInfoClient()
+
+    def EnabledShowInfoClient(self):
+        self._b_clients_show_info.setEnabled(self._tw_clients_table_info.currentRow()>0)

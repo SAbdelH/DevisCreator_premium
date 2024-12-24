@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ## Created by: Qt User Interface Compiler version 6.8.0
-
+import pyperclip
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QEvent)
 from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit)
 from forms.animation import AnimationForm as ANF
@@ -64,6 +64,9 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         self.aujourdhui()
         self._cw_agenda.selectionChanged.connect(self.dateSelected)
         self.dateSelected()
+        # REGLAGES DES CLIPBOARD
+        self._b_clients_clipbord_mail.clicked.connect(self.clipboard)
+        self._b_clients_clipbord_num.clicked.connect(self.clipboard)
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -186,3 +189,10 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
                 self.fermeture_fenetre.emit(event)
             else:
                 event.ignore()
+
+    def clipboard(self):
+        sender = self.sender().objectName()
+        if sender == "_b_clients_clipbord_mail":
+            pyperclip.copy(self._le_clients_mail_value.text())
+        else:
+            pyperclip.copy(self._le_clients_num_value.text())

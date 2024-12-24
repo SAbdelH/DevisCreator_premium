@@ -24,6 +24,7 @@ class DevisCreator(Formulaire, PostgreSQLDatabase):
         self.maindialog._b_delete_agenda.clicked.connect(lambda: self.setPlanning('delete'))
         self.maindialog._b_clients_save_client.clicked.connect(lambda: self.setClient('add'))
         self.maindialog._b_clients_delete_client.clicked.connect(lambda: self.setClient('delete'))
+        self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.populateClientInfo)
 
     def RaiseErreur(self, objet):
         oldStyle = objet.styleSheet()

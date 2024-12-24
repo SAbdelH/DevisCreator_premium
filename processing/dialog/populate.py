@@ -1,10 +1,12 @@
 from datetime import datetime, date
 
 from PySide6.QtCore import QSize, Qt, QDate, QTime
-from PySide6.QtWidgets import QListWidgetItem
+from PySide6.QtGui import QBrush, QColor
+from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem
 from sqlalchemy import func
 
 from forms.gui.ui_agenda_items import AgendaItem
+from forms.gui.ui_client_statut import CustomDelegate
 from processing.database.model_public import User, Entreprise, Agenda
 from forms.gui.ui_card_employe import EmployeeCard
 
@@ -140,6 +142,7 @@ class PopulateWidget:
                     func.to_char(Agenda.jour, 'mm/yyyy') >= func.to_char(date.today(), 'mm/yyyy')
                 )
             )
+
         if agenda.count() > 0:
             # Ajout des widgets personnalisés à la liste
             for row, rdv in enumerate(agenda):
@@ -162,7 +165,7 @@ class PopulateWidget:
                 item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
                 dlg._lw_agenda.addItem(item)
                 dlg._lw_agenda.setItemWidget(item, custom_widget)
-                dlg._lw_um_usrList.setStyleSheet("""
+                dlg._lw_agenda.setStyleSheet("""
                 #_lw_agenda {{
                     border-radius: 5px;
                     border: 1px solid rgba(214, 219, 223, 1);
@@ -197,3 +200,44 @@ class PopulateWidget:
         dlg._cw_agenda.setSelectedDate(jour)
         dlg._te_debut_agenda.setTime(heure_debut)
         dlg._te_fin_agenda.setTime(heure_fin)
+
+    def populateClientTable(self):
+        # Ajouter des lignes avec des données
+        data = [
+            ["10/11/2022", "Dr Emmet Brown - Kids Bath", "0639000000",  "mail@mail.com", "6,099", "-6,099", "ACCEPTED","10/12/2022"],
+            ["10/11/2022", "Dr Emmet Brown", "0639000001", "mail@mail.com", "6,109", "-6,879", "PENDING",
+             "10/12/2022"],
+            ["10/11/2022", "Abdel", "0639056789", "mail@mail.com", "7.07", "-1009,94", "OVERDUE",
+             "10/12/2022"],
+        ]
+        table_widget = self.maindialog._tw_clients_table_info
+        #table_widget.clear()
+        for row_index, row_data in enumerate(data):
+            table_widget.insertRow(row_index)
+            for col_index, value in enumerate(row_data):
+                item = QTableWidgetItem(value)
+
+                # Appliquer un style personnalisé pour la 6ème colonne (Status)
+                if col_index == 6:
+                    if value == "ACCEPTED":
+                        item.setForeground(QBrush(QColor("green")))  # Texte en vert
+                    elif value == "PENDING":
+                        item.setForeground(QBrush(QColor("orange")))  # Texte en orange
+                    elif value == "OVERDUE":
+                        item.setForeground(QBrush(QColor("red")))  # Texte en rouge
+                # Centrer les éléments
+                item.setTextAlignment(Qt.AlignCenter)
+                table_widget.setItem(row_index, col_index, item)
+
+        # Appliquer le délégué personnalisé
+        delegate = CustomDelegate()
+        table_widget.setItemDelegate(delegate)
+
+    def populateClientInfo(self):
+        table_widget = self.maindialog._tw_clients_table_info
+        selected_row = table_widget.currentRow()
+        if selected_row >= 0:  # Vérifier qu'une ligne est sélectionnée
+            self.maindialog._le_clients_profil_name.setText(table_widget.item(selected_row, 1).text())
+            self.maindialog._le_clients_num_value.setText(table_widget.item(selected_row, 2).text())
+            self.maindialog._le_clients_mail_value.setText(table_widget.item(selected_row, 3).text())
+            self.maindialog._ds_clients_dette.setValue(float(table_widget.item(selected_row, 5).text().replace(',', '.')))

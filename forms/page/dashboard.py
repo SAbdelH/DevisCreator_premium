@@ -182,7 +182,7 @@ class DashboardPage:
         # FRAME POUR LES PARAMETRES AGENDA
         self._f_calendar = QFrame(self._p_dashboard)
         self._f_calendar.setObjectName(u"_f_calendar")
-        self._f_calendar.setMinimumSize(QSize(410, 16777215))
+        self._f_calendar.setMinimumSize(QSize(420, 16777215))
         self._f_calendar.setMaximumSize(QSize(420, 16777215))
         self._f_calendar.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_calendar.setFrameShadow(QFrame.Shadow.Raised)
@@ -239,13 +239,14 @@ class DashboardPage:
         self._le_description.textChanged.connect(self.update_char_count)
         self._v_description.addWidget(self._le_description)
         # Label pour l'indicateur de caractères
-        self.char_count_label = QLabel(f"Caractères restarts : {self.max_chars}", self)
+        self.char_count_label = QLabel(f"Caractères restants : {self.max_chars}", self)
         self.char_count_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
         self.char_count_label.setStyleSheet("color: #808B96; font-size: 10pt;")
         self._v_description.addWidget(self.char_count_label)
         self._v_calendar.addLayout(self._v_description)
         # HORIZONTAL LAYOUT POUR LA DATE HEURE
         self._h_dateedit_agenda = QHBoxLayout()
+        self._h_dateedit_agenda.setSpacing(6)
         self._h_dateedit_agenda.setObjectName(u"_h_dateedit_agenda")
         # LABEL JOUR
         self._l_jour_agenda = QLabel(self._f_calendar)
@@ -266,7 +267,8 @@ class DashboardPage:
         self._te_debut_agenda = QTimeEdit(self._f_calendar)
         self._te_debut_agenda.setObjectName(u"_te_debut_agenda")
         self._te_debut_agenda.setDisplayFormat("HH:mm:ss")
-        self._te_debut_agenda.setMaximumSize(QSize(80, 16777215))
+        self._te_debut_agenda.setMinimumSize(QSize(85, 16777215))
+        self._te_debut_agenda.setMaximumSize(QSize(90, 16777215))
         self._h_dateedit_agenda.addWidget(self._te_debut_agenda)
         # LABEL FIN
         self._l_fin_agenda = QLabel(self._f_calendar)
@@ -277,7 +279,8 @@ class DashboardPage:
         self._te_fin_agenda = QTimeEdit(self._f_calendar)
         self._te_fin_agenda.setObjectName(u"_te_fin_agenda")
         self._te_fin_agenda.setDisplayFormat("HH:mm:ss")
-        self._te_fin_agenda.setMaximumSize(QSize(80, 16777215))
+        self._te_fin_agenda.setMinimumSize(QSize(85, 16777215))
+        self._te_fin_agenda.setMaximumSize(QSize(90, 16777215))
         self._h_dateedit_agenda.addWidget(self._te_fin_agenda)
         self._v_calendar.addLayout(self._h_dateedit_agenda)
         # AJOUT HORIZONTAL LAYOUT POUR BOUTON

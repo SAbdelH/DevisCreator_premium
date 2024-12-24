@@ -8,6 +8,8 @@ class Update:
             if self.WorkspaceExist() : self.populateInfoCompany()
         elif text == '_p_dashboard':
             self.populateAgenda()
+        elif text == "_p_clients":
+            self.populateClientTable()
 
     def on_menu_clicked(self, text):
         if text == 'logout':

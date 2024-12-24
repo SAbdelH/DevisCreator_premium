@@ -3,7 +3,7 @@ from pathlib import Path
 from cryptography.fernet import Fernet
 import json
 
-entrerScript = Path(__file__).parent / "model_public"
+entrerScript = Path(__file__).parent / "model_private"
 sortieScript = Path(__file__).parents[2] / 'core'
 
 def cryptScript(entrer, sortie, nom):
@@ -19,4 +19,4 @@ def cryptScript(entrer, sortie, nom):
         f.write(encrypted_bytes)
 
 
-cryptScript(entrerScript, sortieScript, "public_models")
+cryptScript(entrerScript, sortieScript, "private_models")

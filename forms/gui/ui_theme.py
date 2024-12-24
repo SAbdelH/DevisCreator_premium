@@ -469,7 +469,8 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 7px;
 	padding: 5px
 }}
-#_tw_clients_table_info QHeaderView::section:horizontal {{
+
+#_tw_clients_table_info, #_tw_clients_table_info QHeaderView, #_tw_clients_table_info QHeaderView::section, #_tw_clients_table_info QTableCornerButton::section {{
 	background-color: rgba(255, 255, 255, 1);
 	color: rgba(164, 164, 164, 1);
 	border: none;

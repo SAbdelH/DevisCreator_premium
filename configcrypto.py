@@ -5,22 +5,23 @@ from cryptography.fernet import Fernet
 import json
 
 key = Fernet.generate_key()
+print(Path(__file__).parent / "core/DCM")
 
 with open(Path(__file__).parent / "core/DCM", "wb") as f:
     f.write(key)
 
 private = {"publicjson" : {
-    "user": 'software',
-    "password": 'engine',
+    "user": 'abdelhafidhousoufou',
+    "password": 'bankai',
     "database": None,
-    "host": '85.215.137.38',
+    "host": 'localhost',
     "port": '5432',
 },
 "privatejson" : {
-    "user": 'software',
-    "password": 'engine',
+    "user": 'abdelhafidhousoufou',
+    "password": 'bankai',
     "database": "verify",
-    "host": '85.215.137.38',
+    "host": 'localhost',
     "port": '5432',
 }
 }
