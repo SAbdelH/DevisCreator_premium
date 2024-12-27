@@ -209,7 +209,7 @@ class clientsPage:
         self._b_clients_hide_info.clicked.connect(self.ShowClientInfoBox)
         self._b_clients_show_info.clicked.connect(self.ShowClientInfoBox)
         self.EnabledShowInfoClient()
-        self._tw_clients_table_info.itemSelectionChanged.connect(self.EnabledShowInfoClient)
+        self._tw_clients_table_info.currentItemChanged.connect(self.EnabledShowInfoClient)
 
     def __retranslateUi(self):
         HeaderName =  [u"Cr\u00e9er le", u"Nom", u"T\u00e9l\u00e9phone", u"Mail",
@@ -259,4 +259,4 @@ class clientsPage:
             self.EnabledShowInfoClient()
 
     def EnabledShowInfoClient(self):
-        self._b_clients_show_info.setEnabled(self._tw_clients_table_info.currentRow()>0)
+        self._b_clients_show_info.setEnabled(self._tw_clients_table_info.currentRow()>=0)

@@ -5,7 +5,7 @@ from cryptography.fernet import Fernet
 import json
 
 key = Fernet.generate_key()
-print(Path(__file__).parent / "core/DCM")
+
 
 with open(Path(__file__).parent / "core/DCM", "wb") as f:
     f.write(key)

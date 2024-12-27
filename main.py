@@ -8,8 +8,7 @@ class DevisCreator(Formulaire, PostgreSQLDatabase):
         self.typeConnection = None
         self.cacheInfoCompany = None
         self.agendaID = {}
-        PostgreSQLDatabase.__init__(self)
-        Formulaire.__init__(self)
+        [base.__init__(self) for base in DevisCreator.__bases__[::-1]]
         self.maindialog.fermeture_fenetre.connect(self.fermeture)
         self.maindialog._b_signin.clicked.connect(lambda: self.login(sender="DB"))
         self.maindialog._b_save_config_db.clicked.connect(self.saveLicence)
@@ -24,7 +23,7 @@ class DevisCreator(Formulaire, PostgreSQLDatabase):
         self.maindialog._b_delete_agenda.clicked.connect(lambda: self.setPlanning('delete'))
         self.maindialog._b_clients_save_client.clicked.connect(lambda: self.setClient('add'))
         self.maindialog._b_clients_delete_client.clicked.connect(lambda: self.setClient('delete'))
-        self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.populateClientInfo)
+        self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.onClientItemSelected)
 
     def RaiseErreur(self, objet):
         oldStyle = objet.styleSheet()

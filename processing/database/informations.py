@@ -5,7 +5,7 @@ from PySide6.QtWidgets import QInputDialog, QMessageBox
 from sqlalchemy import or_, func
 
 from processing.database.base_public import Base
-from processing.database.model_public import User, Entreprise, Agenda, Clients
+from processing.database.model_public import User, Entreprise, Agenda, Clients, Inventaires
 from processing.database.siren import getInfoEtablissement
 from processing.database.model_tools import create_schemas, create_tables
 from processing.enumerations import LevelCritic as LVL
@@ -221,5 +221,38 @@ class Informations:
                         session.add(__Client)
                 else:
                     session.query(Clients).filter(conditions).delete()
+        except Exception as err:
+            self.maindialog.show_notification(str(err), LVL.warning)
+
+    def setInventory(self, **value):
+        action = value.get('action')
+        nom = value.get('nom')
+        prix = value.get('prix')
+        marque = value.get('marque')
+        quantite = value.get('quantite')
+        remise = value.get('remise')
+        type_remise = value.get('type_remise')
+        quantifiable = value.get('quantifiable')
+        louable = value.get('louable')
+        date_fabric = value.get('date_fabric')
+        try:
+            with self.Session() as session:
+                if action in('add', 'purchase'):
+                    inventory = session.query(Inventaires).filter(Inventaires.nom == nom).first()
+                    if inventory:
+                        inventory.nom = nom
+                        inventory.prix = prix
+                        inventory.marque = marque
+                        inventory.quantite = quantite
+                        inventory.remise = remise
+                        inventory.type_remise = type_remise
+                        inventory.quantifiable = quantifiable
+                        inventory.louable = louable
+                        inventory.date_fabric = date_fabric
+                    else:
+                        __Inventaire = Inventaires(nom=nom, prix=prix, marque=marque, quantite=quantite,
+                        type_remise= type_remise, remise=remise, quantifiable=quantifiable, louable=louable,
+                        date_fabric=func.current_date(), crea_user=func.current_user())
+                        session.add(__Inventaire)
         except Exception as err:
             self.maindialog.show_notification(str(err), LVL.warning)

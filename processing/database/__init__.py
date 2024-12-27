@@ -10,11 +10,12 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from processing.database.gui import InteractionInterface
 from processing.database.informations import Informations
 from processing.database.model_private import Licence
+from processing.database.console import executeSQL
 from processing.decrypt import source_dir, fernet, HasIdentifiant
 from processing.enumerations import LevelCritic as LVL
 
 
-class PostgreSQLDatabase(InteractionInterface, Informations):
+class PostgreSQLDatabase(InteractionInterface, Informations, executeSQL):
     def __init__(self):
         self.__ePrivate = None
         self.__sPrivate = None

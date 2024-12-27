@@ -43,7 +43,7 @@ class CustomDelegate(QStyledItemDelegate):
             # Rendu personnalisé pour les autres colonnes
             if not (option.state & QStyle.State_Selected):  # Ne remplir en blanc que si non sélectionné
                 painter.setPen(Qt.NoPen)
-                painter.setBrush(QBrush(QColor(255, 255, 255)))
+                painter.setBrush(QBrush(QColor(255, 255, 255, 217)))
                 painter.drawRect(option.rect)
 
             # Dessiner le texte

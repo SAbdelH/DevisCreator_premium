@@ -17,7 +17,7 @@ class InteractionInterface:
         :return:
         """
         workspaceTables = ['activites', 'agenda', 'factures', 'devis', 'entreprise',
-                        'inventaires', 'clients', 'utilisateurs']
+                        'inventaires', 'clients', 'utilisateurs', 'achat']
         if self._tryConnect:
 
             inspector = inspect(self.Engine)

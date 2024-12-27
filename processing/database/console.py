@@ -2,7 +2,6 @@ from collections import  namedtuple
 
 from sqlalchemy.ext.automap import automap_base
 
-from mdl import engine
 from processing.enumerations import LevelCritic as LVL
 
 from sqlalchemy import text, inspect, MetaData, Table

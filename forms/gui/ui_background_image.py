@@ -1,10 +1,11 @@
 import random
 from pathlib import Path
 
+IGNORE_BACKGROUND_IMAGES = ['analyse', 'camembert', 'evolution', 'histogram', 'clients', 'inventory',
+                                'listActivity', 'table', 'teams', 'ToDo', 'home_bckgnd']
 
 class BackgroundImage:
-    IGNORE_BACKGROUND_IMAGES = ['analyse', 'camembert', 'evolution', 'histogram',
-                                'listActivity', 'table', 'teams', 'ToDo']
+
     def __init__(self):
         self.arrierePlan = {
             img.stem: img.as_posix()
@@ -13,10 +14,15 @@ class BackgroundImage:
         }
 
     def RandomBackground(self):
-        arrierePlan = {k: v for k, v in self.arrierePlan.items() if k not in self.IGNORE_BACKGROUND_IMAGES}
+        arrierePlan = {k: v for k, v in self.arrierePlan.items() if k not in IGNORE_BACKGROUND_IMAGES}
         randomImg = random.choice(list(arrierePlan))
         self._p_login.setStyleSheet(
             f"#_p_login {{ border-image: url({arrierePlan[randomImg]}) 0 0 0 0 stretch stretch; }}"
+        )
+
+    def home_bg(self):
+        self._p_dashboard.setStyleSheet(
+            f"#_p_dashboard {{ border-image: url({self.arrierePlan.get('home_bckgnd')}) 0 0 0 0 stretch stretch; }}"
         )
 
     @property
@@ -50,3 +56,11 @@ class BackgroundImage:
     @property
     def analyse_bg(self) -> str:
         return self.arrierePlan.get("analyse")
+
+    @property
+    def clients_bg(self) -> str:
+        return self.arrierePlan.get("clients")
+
+    @property
+    def inventory_bg(self) -> str:
+        return self.arrierePlan.get("inventory")

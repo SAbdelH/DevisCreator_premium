@@ -68,3 +68,6 @@ Inventaires = create_dynamic_model(**dict(ChainMap(_public.INVENTAIRES, {"Base":
 
 # Définir le modèle pour la table informations.clients
 Clients = create_dynamic_model(**dict(ChainMap(_public.CLIENT, {"Base": Base})))
+
+# Définir le modèle pour la table informations.clients
+Achat = create_dynamic_model(**dict(ChainMap(_public.ACHAT, {"Base": Base})))

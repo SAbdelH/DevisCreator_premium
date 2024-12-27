@@ -445,6 +445,12 @@ QRadioButton::indicator:checked:pressed
 	border-radius: 7px;
 	padding: 5px
 }}
+#_tw_clients_table_info {{
+    background-image: url({self.clients_bg});
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
+}}
 #_b_clients_hide_info {{
 	color: rgba(144, 219, 249, 1);
 	border: 1px solid rgba(144, 219, 249, 1);
@@ -502,6 +508,10 @@ QRadioButton::indicator:checked:pressed
 #_lw_inventory_list_inventory {{
 	background-color: transparent;
 	background: transparent;
+	background-image: url({self.inventory_bg});
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-origin: content;
 }}
 #_f_inventory_low_sale, #_f_inventory_most_sale, #_f_inventory_sum_sold {{
 	border-radius: 10px;

@@ -17,25 +17,10 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
     def __init__(self):
         QMainWindow.__init__(self)
         self.apparence = 'white'
-        thm.__init__(self)
-        Icns.__init__(self)
-        BImg.__init__(self)
-        Menu.__init__(self)
-        ANF.__init__(self)
-        LP.__init__(self)
-        DP.__init__(self)
-        FP.__init__(self)
-        UMP.__init__(self)
-        IP.__init__(self)
-        VFP.__init__(self)
-        CP.__init__(self)
-        MP.__init__(self)
-        RP.__init__(self)
-        DMP.__init__(self)
-        rf.__init__(self)
-        TF.__init__(self)
+        [base.__init__(self) for base in Ui_MainWindow.__bases__[1:]]
         self.setupUi(self)
         self.RandomBackground()
+        self.home_bg()
         self.light_theme()
         self.indexPage = {
             self._sw_main_dialog.widget(index).objectName(): index

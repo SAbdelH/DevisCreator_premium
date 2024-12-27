@@ -72,6 +72,7 @@ class InventoryPage:
         self._f_inventory_box_edit.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_inventory_box_edit.setFrameShadow(QFrame.Shadow.Raised)
         self._f_inventory_box_edit.setGraphicsEffect(self.shadow)
+        self._f_inventory_box_edit.setVisible(False)
         self._v_inventory_box_edit = QVBoxLayout(self._f_inventory_box_edit)
         self._v_inventory_box_edit.setObjectName(u"_v_inventory_box_edit")
         self._v_inventory_box_edit.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
@@ -216,6 +217,13 @@ class InventoryPage:
         self._b_inventory_delete.setFlat(True)
         self._h_inventory_box_bottom.addWidget(self._b_inventory_delete)
         self._v_inventory_box_edit.addLayout(self._h_inventory_box_bottom)
+        self._b_export_inv_model = QPushButton(self._f_inventory_box_edit)
+        self._b_export_inv_model.setObjectName(u"_b_export_inv_model")
+        self._b_export_inv_model.setIcon(self.excel_icon)
+        self._b_export_inv_model.setCheckable(False)
+        self._b_export_inv_model.setAutoDefault(False)
+        self._b_export_inv_model.setFlat(True)
+        self._v_inventory_box_edit.addWidget(self._b_export_inv_model)
         self._g_inventory.addWidget(self._f_inventory_box_edit, 1, 3, 2, 1, Qt.AlignVCenter)
         self._ccw_inventory_sum_sold = CustomCardWidget([244, 162, 97, 1], self)
         self._ccw_inventory_sum_sold.setObjectName(u"_ccw_inventory_sum_sold")
@@ -263,6 +271,8 @@ class InventoryPage:
         self._g_inventory.addWidget(self._ccw_inventory_low_sale, 2, 1, 1, 1)
         self._sw_main_dialog.addWidget(self._p_inventory)
 
+        self._b_inventory_add_product.clicked.connect(self.InventoryboxEdit)
+
         self.__retranslateUi()
 
     def __retranslateUi(self):
@@ -295,6 +305,7 @@ class InventoryPage:
         self._b_inventory_update.setText(QCoreApplication.translate("MainWindow", u"Mettre-\u00e0-jour", None))
         self._b_inventory_delete.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
         self._l_inventory_sum_sold_value.setText(QCoreApplication.translate("MainWindow", u"- \u20ac", None))
+        self._b_export_inv_model.setText(QCoreApplication.translate("MainWindow", u"Export Model Import", None))
         self._l_inventory_sum_sold.setText(QCoreApplication.translate("MainWindow", u"Total vente", None))
         self._l_inventory_icon_sum_sold.setText("")
         self._l_inventory_low_sale_value.setText(QCoreApplication.translate("MainWindow", u"- Unit\u00e9s", None))
@@ -305,3 +316,6 @@ class InventoryPage:
         self.hideSideMenu()
         self.switchPage('_p_inventory')
         self.pageEnCours.emit("inventaires")
+
+    def InventoryboxEdit(self):
+        self._f_inventory_box_edit.setVisible(not self._f_inventory_box_edit.isVisible())

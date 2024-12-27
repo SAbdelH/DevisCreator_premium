@@ -540,3 +540,7 @@ class Icons:
     @property
     def eye_open_icon(self) -> QIcon:
         return self.__QIcon("openeye")
+
+    @property
+    def database_table(self) -> QIcon:
+        return self.__QIcon("tableau")

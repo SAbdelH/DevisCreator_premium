@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>1</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -6159,8 +6159,23 @@ QCalendarWidget QAbstractItemView:enabled {
            </item>
            <item>
             <widget class="QTableWidget" name="_tw_clients_table_info">
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SelectionMode::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectionBehavior::SelectRows</enum>
+             </property>
+             <property name="showGrid">
+              <bool>true</bool>
+             </property>
              <attribute name="horizontalHeaderCascadingSectionResizes">
               <bool>false</bool>
+             </attribute>
+             <attribute name="horizontalHeaderDefaultSectionSize">
+              <number>90</number>
              </attribute>
              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
               <bool>true</bool>
@@ -6168,6 +6183,7 @@ QCalendarWidget QAbstractItemView:enabled {
              <attribute name="horizontalHeaderStretchLastSection">
               <bool>true</bool>
              </attribute>
+             <row/>
              <column>
               <property name="text">
                <string>Créer le</string>
@@ -6208,6 +6224,46 @@ QCalendarWidget QAbstractItemView:enabled {
                <string>Dernier commerce</string>
               </property>
              </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>10/11/2022</string>
+              </property>
+             </item>
+             <item row="0" column="1">
+              <property name="text">
+               <string>Dr Emmet Brown - Kids Bath</string>
+              </property>
+             </item>
+             <item row="0" column="2">
+              <property name="text">
+               <string>0639000000</string>
+              </property>
+             </item>
+             <item row="0" column="3">
+              <property name="text">
+               <string>mail@mail.com</string>
+              </property>
+             </item>
+             <item row="0" column="4">
+              <property name="text">
+               <string>6,099</string>
+              </property>
+             </item>
+             <item row="0" column="5">
+              <property name="text">
+               <string>-6,099</string>
+              </property>
+             </item>
+             <item row="0" column="6">
+              <property name="text">
+               <string>ACCEPTED</string>
+              </property>
+             </item>
+             <item row="0" column="7">
+              <property name="text">
+               <string>10/12/2022</string>
+              </property>
+             </item>
             </widget>
            </item>
           </layout>
@@ -6515,6 +6571,12 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
                <property name="suffix">
                 <string> €</string>
+               </property>
+               <property name="decimals">
+                <number>3</number>
+               </property>
+               <property name="minimum">
+                <double>-10000000000000000905969664.000000000000000</double>
                </property>
                <property name="maximum">
                 <double>9999999999999999635896294965248.000000000000000</double>
