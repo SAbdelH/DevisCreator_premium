@@ -237,7 +237,7 @@ class Informations:
         date_fabric = value.get('date_fabric')
         try:
             with self.Session() as session:
-                if action in('add', 'purchase'):
+                if action in('add', 'purchase', 'update'):
                     inventory = session.query(Inventaires).filter(Inventaires.nom == nom).first()
                     if inventory:
                         inventory.nom = nom
@@ -254,5 +254,7 @@ class Informations:
                         type_remise= type_remise, remise=remise, quantifiable=quantifiable, louable=louable,
                         date_fabric=func.current_date(), crea_user=func.current_user())
                         session.add(__Inventaire)
+                else:
+                    session.query(Inventaires).filter(Inventaires.nom == nom).delete()
         except Exception as err:
             self.maindialog.show_notification(str(err), LVL.warning)

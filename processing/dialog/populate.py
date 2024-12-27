@@ -274,6 +274,7 @@ class PopulateWidget:
         self.maindialog._trw_db_structure.itemDoubleClicked.connect(self.onTreeItemDoubleClicked)
 
     def onTreeItemDoubleClicked(self, item, column):
+        self.maindialog._b_manage_db_export_table.setEnabled(True)
         if item.parent():
             schema_name = item.parent().text(0)  # Nom du schéma
             table_name = item.text(0)  # Nom de la table
@@ -283,7 +284,7 @@ class PopulateWidget:
                     nt = self.execute_sql(session, query)
 
                     # Configurer le QTableWidget
-                    self.maindialog._tw_select_table.clear()  # Nettoyer le tableau
+                    self.maindialog._tw_select_table.clear()
                     self.maindialog._tw_select_table.setRowCount(len(nt.datas))
                     self.maindialog._tw_select_table.setColumnCount(len(nt.entete))
 

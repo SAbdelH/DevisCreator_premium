@@ -26,14 +26,14 @@ class theme:
     padding-left: 4px;
 }}
 #centralwidget QComboBox QAbstractItemView {{
-    border: 2px solid darkgray;
+    background-color: rgba(229, 231, 233, 1);
     selection-background-color: rgba(91, 142, 125, 0.7);
 }}
 #centralwidget QComboBox QAbstractItemView::item {{
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(130, 224, 170, 1);
 }}
 #centralwidget QComboBox QAbstractItemView::item:hover  {{
-    background-color: rgba(244, 162, 97, 0.7);
+    background-color: rgba(130, 224, 170, 1);
     color: rgba(0, 0, 0, 1)
 }}
 #centralwidget QSpinBox::up-arrow, #centralwidget QDoubleSpinBox::up-arrow, #centralwidget QDateEdit::up-arrow,  
@@ -537,9 +537,17 @@ QRadioButton::indicator:checked:pressed
 /*TREE WIDGET*/
 QTreeWidget {{
     background-color: rgba(255, 255, 255, 1);
-	color : rgba(0, 0, 0, 1);
-    	border: none;
-    	font-size: 14px;
+    color : rgba(0, 0, 0, 1);
+    border: none;
+    font-size: 14px;
+    padding: 4px;
+}}
+QHeaderView::section {{
+    background-color: rgba(213, 245, 227, 1);
+    color : rgba(0, 0, 0, 1);
+    border: none;
+    font-size: 14px;
+    padding: 4px;
 }}
 QTreeWidget::item {{
     padding: 4px 8px;

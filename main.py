@@ -1,14 +1,19 @@
+from pathlib import Path
 from PySide6 import QtWidgets
 
-from processing import PostgreSQLDatabase, Formulaire
+from processing import *
 
 
-class DevisCreator(Formulaire, PostgreSQLDatabase):
+class DevisCreator(PostgreSQLDatabase, Formulaire, Layout):
+    JSON = _JSON
+    LIST = _LIST
     def __init__(self):
         self.typeConnection = None
         self.cacheInfoCompany = None
         self.agendaID = {}
-        [base.__init__(self) for base in DevisCreator.__bases__[::-1]]
+        self.mkOutputFolder()
+        self.init_Style()
+        [base.__init__(self) for base in DevisCreator.__bases__]
         self.maindialog.fermeture_fenetre.connect(self.fermeture)
         self.maindialog._b_signin.clicked.connect(lambda: self.login(sender="DB"))
         self.maindialog._b_save_config_db.clicked.connect(self.saveLicence)
@@ -24,6 +29,16 @@ class DevisCreator(Formulaire, PostgreSQLDatabase):
         self.maindialog._b_clients_save_client.clicked.connect(lambda: self.setClient('add'))
         self.maindialog._b_clients_delete_client.clicked.connect(lambda: self.setClient('delete'))
         self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.onClientItemSelected)
+        self.maindialog._b_manage_db_export_table.clicked.connect(lambda : dbTableToExcel(self))
+
+    def mkOutputFolder(self):
+        self.outputfolder = Path.home() / "Documents" / "Sorties DevisCreator"
+        self.outputfolder.mkdir(exist_ok=True, parents=True)
+
+        for NOM in self.LIST.DOSSIER_EXPORT:
+            dossier = Path(self.outputfolder / NOM)
+            dossier.mkdir(exist_ok=True, parents=True)
+        return self.outputfolder
 
     def RaiseErreur(self, objet):
         oldStyle = objet.styleSheet()

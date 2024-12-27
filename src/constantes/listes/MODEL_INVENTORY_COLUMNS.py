@@ -1,0 +1,9 @@
+(
+    "nom",
+    "prix",
+    "marque",
+    "quantite",
+    "remise",
+    "type_remise",
+    "date_fabric",
+)

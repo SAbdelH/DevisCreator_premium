@@ -1,0 +1,15 @@
+{
+    "horizontal": None,
+    "vertical": None,
+    "textRotation": 0,
+    "wrapText": None,
+    "shrinkToFit": None,
+    "indent": 0,
+    "relativeIndent": 0,
+    "justifyLastLine": None,
+    "readingOrder": 0,
+    "text_rotation": None,
+    "wrap_text": None,
+    "shrink_to_fit": None,
+    "mergeCell": None,
+}

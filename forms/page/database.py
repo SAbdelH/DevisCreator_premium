@@ -25,6 +25,7 @@ class DbManagementPage:
         self._b_manage_db_export_table = QPushButton(self._p_manage_db)
         self._b_manage_db_export_table.setObjectName(u"_b_manage_db_export_table")
         self._b_manage_db_export_table.setIcon(self.excel_icon)
+        self._b_manage_db_export_table.setEnabled(False)
         self._g_manage_db.addWidget(self._b_manage_db_export_table, 1, 2, 1, 1)
         self._sw_main_dialog.addWidget(self._p_manage_db)
         self._g_centralwidget.addWidget(self._sw_main_dialog, 1, 2, 4, 1)
