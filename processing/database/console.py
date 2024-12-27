@@ -9,7 +9,7 @@ from sqlalchemy import text, inspect, MetaData, Table
 
 class executeSQL:
     """
-    Class postgres_execute_sql permet d'éxécuter des requête sql postgres
+    Class executeSQL permet d'éxécuter des requête sql postgres
     """
     def execute_sql(self, Session, query, params=None):
         """Méthode utilitaire pour exécuter une requête"""
