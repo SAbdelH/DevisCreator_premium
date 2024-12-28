@@ -2,7 +2,9 @@ import subprocess
 from pathlib import Path
 
 import openpyxl
+from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
+from openpyxl.worksheet.table import Table, TableStyleInfo
 from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.workbook.workbook import Workbook
 
@@ -63,6 +65,77 @@ class Excel:
                 self.forceSuppression(script_path)
                 pdfPath = None
         return pdfPath
+
+    def mise_forme_tableau(self, **kwargs):
+        """
+        Cette méthode vise à créer une mise en forme tableau
+        :key worksheet: La feuille de calcul
+        :key tableName : Nom du tableau (Optionnel)
+        :key styleName : Nom du style de table
+        :key add_one : Booléen pour ajouter plus 1 si maximum col et ligne est égale à 1
+        [‘PivotStyleLight5’, ‘TableStyleMedium24’, ‘TableStyleMedium25’, ‘PivotStyleMedium19’, ‘PivotStyleMedium18’,
+        ‘PivotStyleMedium13’, ‘PivotStyleMedium12’, ‘PivotStyleMedium11’, ‘PivotStyleMedium10’, ‘PivotStyleMedium17’,
+        ‘PivotStyleMedium16’, ‘PivotStyleMedium15’, ‘PivotStyleMedium14’, ‘PivotStyleLight22’, ‘PivotStyleLight23’,
+        ‘PivotStyleLight4’, ‘PivotStyleLight21’, ‘PivotStyleLight26’, ‘PivotStyleLight27’, ‘PivotStyleLight24’,
+        ‘PivotStyleLight25’, ‘PivotStyleLight28’, ‘PivotStyleLight2’, ‘PivotStyleDark9’, ‘PivotStyleDark6’,
+        ‘PivotStyleDark7’, ‘PivotStyleDark4’, ‘PivotStyleDark5’, ‘PivotStyleDark2’, ‘PivotStyleDark3’,
+        ‘PivotStyleDark1’, ‘TableStyleMedium22’, ‘TableStyleMedium23’, ‘TableStyleMedium20’, ‘TableStyleMedium21’,
+        ‘TableStyleMedium26’, ‘TableStyleMedium27’, ‘TableStyleLight5’, ‘TableStyleLight4’, ‘TableStyleLight9’,
+        ‘TableStyleLight8’, ‘PivotStyleLight17’, ‘PivotStyleLight16’, ‘PivotStyleLight15’, ‘PivotStyleLight14’,
+        ‘PivotStyleLight13’, ‘PivotStyleLight12’, ‘PivotStyleLight11’, ‘PivotStyleLight10’, ‘PivotStyleLight19’,
+        ‘PivotStyleLight18’, ‘PivotStyleLight9’, ‘PivotStyleDark10’, ‘PivotStyleDark11’, ‘PivotStyleDark12’,
+        ‘PivotStyleDark13’, ‘PivotStyleDark14’, ‘PivotStyleDark15’, ‘PivotStyleDark16’, ‘PivotStyleDark17’,
+        ‘PivotStyleDark18’, ‘PivotStyleDark19’, ‘TableStyleMedium3’, ‘TableStyleMedium2’, ‘TableStyleMedium1’,
+        ‘TableStyleMedium7’, ‘TableStyleMedium6’, ‘TableStyleMedium5’, ‘TableStyleMedium4’, ‘TableStyleMedium9’,
+        ‘TableStyleMedium8’, ‘PivotStyleLight20’, ‘TableStyleMedium19’, ‘TableStyleMedium18’, ‘TableStyleMedium13’,
+        ‘TableStyleMedium12’, ‘TableStyleMedium11’, ‘TableStyleMedium10’, ‘TableStyleMedium17’, ‘TableStyleMedium16’,
+        ‘TableStyleMedium15’, ‘TableStyleMedium14’, ‘TableStyleLight20’, ‘TableStyleLight21’, ‘TableStyleDark8’,
+        ‘TableStyleDark9’, ‘TableStyleDark6’, ‘TableStyleDark7’, ‘TableStyleDark4’, ‘TableStyleDark5’, ‘TableStyleDark2’,
+        ‘TableStyleDark3’, ‘TableStyleDark1’, ‘PivotStyleDark8’, ‘PivotStyleMedium22’, ‘PivotStyleMedium23’,
+        ‘PivotStyleMedium20’, ‘PivotStyleMedium21’, ‘PivotStyleMedium26’, ‘PivotStyleMedium27’, ‘PivotStyleMedium24’,
+        ‘PivotStyleMedium25’, ‘PivotStyleMedium28’, ‘PivotStyleLight8’, ‘TableStyleLight17’, ‘TableStyleLight16’,
+        ‘TableStyleLight15’, ‘TableStyleLight14’, ‘TableStyleLight13’, ‘TableStyleLight12’, ‘TableStyleLight11’,
+        ‘TableStyleLight10’, ‘TableStyleLight19’, ‘TableStyleLight18’, ‘PivotStyleDark28’, ‘PivotStyleDark21’,
+        ‘PivotStyleDark20’, ‘PivotStyleDark23’, ‘PivotStyleDark22’, ‘PivotStyleDark25’, ‘PivotStyleDark24’,
+        ‘PivotStyleDark27’, ‘PivotStyleDark26’, ‘PivotStyleLight1’, ‘TableStyleMedium28’, ‘PivotStyleLight3’,
+        ‘TableStyleDark10’, ‘TableStyleDark11’, ‘PivotStyleMedium3’, ‘PivotStyleMedium2’, ‘PivotStyleMedium1’,
+        ‘PivotStyleMedium7’, ‘PivotStyleMedium6’, ‘PivotStyleMedium5’, ‘PivotStyleMedium4’, ‘PivotStyleLight7’,
+        ‘PivotStyleMedium9’, ‘PivotStyleMedium8’, ‘TableStyleLight3’, ‘PivotStyleLight6’, ‘TableStyleLight2’,
+        ‘TableStyleLight1’, ‘TableStyleLight7’, ‘TableStyleLight6’])
+        :return:
+        """
+        workbook = kwargs.get('workbook')
+        worksheet = kwargs.get('worksheet')
+        styleName = kwargs.get('styleName', "TableStyleMedium9")
+        tableName = kwargs.get('tableName', "Tableau_1")
+        sauvegarde = kwargs.get('save')
+        add_one =  kwargs.get('add_one', False)
+
+        # 1. Ajouter un tableau si les données sont déjà présentes
+        table_range = self.generer_range_feuille(worksheet, add_one)
+
+        # 2. Créer un tableau
+        table = Table(displayName=tableName, ref=table_range)
+
+        # 3. Appliquer un style au tableau
+        style = TableStyleInfo(
+            name=styleName,  # Style prédéfini
+            showFirstColumn=False,  # Mettre en évidence la première colonne
+            showLastColumn=False,  # Mettre en évidence la dernière colonne
+            showRowStripes=True,  # Appliquer des bandes alternées aux lignes
+            showColumnStripes=False  # Appliquer des bandes alternées aux colonnes
+        )
+        table.tableStyleInfo = style
+
+        # 4. Ajouter le tableau à la feuille
+        worksheet.add_table(table)
+
+        # 5. Zoom de la feuille
+        worksheet.sheet_view.zoomToFit = True
+        worksheet.sheet_view.zoomScale = 105
+
+        # 6. Sauvegarder les modifications dans le fichier
+        workbook.save(sauvegarde)
 
     def mise_en_page(self, **kwargs):
         """
@@ -208,6 +281,29 @@ class Excel:
                 }
                 cell.border = openpyxl.styles.Border(**b)
         workbook.save(sauvegarde)
+
+    def generer_range_feuille(self, ws: Worksheet, add_one: bool = False):
+        """
+        Génère automatiquement la plage utilisée dans une feuille Excel.
+
+        Args:
+            ws (Worksheet): La feuille de calcul active ou sélectionnée.
+
+        Returns:
+            str: La plage sous forme "A1:Z100" en fonction des données de la feuille.
+        """
+        min_row = ws.min_row
+        max_row = (ws.max_row + 1 if ws.max_row == 1 and add_one else ws.max_row)
+        min_col = ws.min_column
+        max_col = (ws.max_column + 1 if ws.max_column == 1 and add_one else ws.max_column)
+
+        # Convertir les indices de colonnes en lettres (ex : 1 -> A, 3 -> C)
+        min_col_letter = get_column_letter(min_col)
+        max_col_letter = get_column_letter(max_col)
+
+        # Construire la plage
+        table_range = f"{min_col_letter}{min_row}:{max_col_letter}{max_row}"
+        return table_range
 
     def ajouter_validation_liste(self, **kwargs):
         """
