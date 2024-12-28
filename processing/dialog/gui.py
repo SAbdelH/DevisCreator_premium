@@ -33,7 +33,7 @@ class Update:
         )
         return folder
 
-    def ouvrir_fichier(self, lien=None):
+    def OpenFile(self, lien=None):
         """
         Cette méthode permet d'ouvrir un chemin Quel que soit le système d'exploitation
         :param lien : Chemin vers le fichier

@@ -34,7 +34,7 @@ def ModelImportInventory(self):
         self.maindialog.show_notification(
             f"Export de {file.as_posix()} fini !", LVL.success
         )
-        self.ouvrir_fichier(file.as_posix())
+        self.OpenFile(file.as_posix())
     except Exception as e:
         self.maindialog.show_notification(
             str(e), LVL.warning
