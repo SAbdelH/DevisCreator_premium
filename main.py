@@ -1,3 +1,4 @@
+import platform
 from pathlib import Path
 from PySide6 import QtWidgets
 
@@ -12,6 +13,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout):
         self.cacheInfoCompany = None
         self.agendaID = {}
         self.mkOutputFolder()
+        self.systeme = platform.system()
         self.init_Style()
         [base.__init__(self) for base in DevisCreator.__bases__]
         self.maindialog.fermeture_fenetre.connect(self.fermeture)
@@ -30,6 +32,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout):
         self.maindialog._b_clients_delete_client.clicked.connect(lambda: self.setClient('delete'))
         self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.onClientItemSelected)
         self.maindialog._b_manage_db_export_table.clicked.connect(lambda : dbTableToExcel(self))
+        self.maindialog._b_export_inv_model.clicked.connect(lambda : ModelImportInventory(self))
 
     def mkOutputFolder(self):
         self.outputfolder = Path.home() / "Documents" / "Sorties DevisCreator"
