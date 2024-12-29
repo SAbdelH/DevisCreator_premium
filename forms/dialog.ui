@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -6992,6 +6992,9 @@ QCalendarWidget QAbstractItemView:enabled {
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
+               <property name="maximum">
+                <double>9999999999999999583119736832.000000000000000</double>
+               </property>
               </widget>
              </item>
              <item>
@@ -7014,6 +7017,9 @@ QCalendarWidget QAbstractItemView:enabled {
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="maximum">
+                <number>999999999</number>
                </property>
               </widget>
              </item>
@@ -7074,6 +7080,38 @@ QCalendarWidget QAbstractItemView:enabled {
                   <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
                 </property>
                </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="_l_inventory_remise">
+               <property name="text">
+                <string>Remise</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="_ds_inventory_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="prefix">
+                <string/>
+               </property>
+               <property name="suffix">
+                <string> %</string>
+               </property>
+               <property name="maximum">
+                <double>1000000000000000044885712678075916785549312.000000000000000</double>
+               </property>
               </widget>
              </item>
              <item>
@@ -8201,6 +8239,7 @@ QCalendarWidget QAbstractItemView:enabled {
  </widget>
  <resources>
   <include location="resources.qrc"/>
+  <include location="../../../.designer/backup/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

@@ -104,11 +104,9 @@ class Excel:
         ‘TableStyleLight1’, ‘TableStyleLight7’, ‘TableStyleLight6’])
         :return:
         """
-        workbook = kwargs.get('workbook')
         worksheet = kwargs.get('worksheet')
         styleName = kwargs.get('styleName', "TableStyleMedium9")
         tableName = kwargs.get('tableName', "Tableau_1")
-        sauvegarde = kwargs.get('save')
         add_one =  kwargs.get('add_one', False)
 
         # 1. Ajouter un tableau si les données sont déjà présentes
@@ -132,10 +130,7 @@ class Excel:
 
         # 5. Zoom de la feuille
         worksheet.sheet_view.zoomToFit = True
-        worksheet.sheet_view.zoomScale = 105
-
-        # 6. Sauvegarder les modifications dans le fichier
-        workbook.save(sauvegarde)
+        worksheet.sheet_view.zoomScale = 102
 
     def mise_en_page(self, **kwargs):
         """

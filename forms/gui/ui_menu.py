@@ -116,7 +116,7 @@ class Menu:
         self._b_inventory.setObjectName(u"_b_inventory")
         self.sizePolicy.setHeightForWidth(self._b_inventory.sizePolicy().hasHeightForWidth())
         self._b_inventory.setSizePolicy(self.sizePolicy)
-        self._b_inventory.setMinimumSize(QSize(180, 45))
+        self._b_inventory.setMinimumSize(QSize(200, 45))
         self._b_inventory.setMaximumSize(QSize(16777215, 45))
         self._b_inventory.setFont(self.font)
         self._b_inventory.setIcon(self.gestion_inventaire_icon)

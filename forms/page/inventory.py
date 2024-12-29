@@ -1,4 +1,5 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
+from PySide6.QtGui import QImageReader
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QLabel, QHBoxLayout, QLineEdit, QPushButton, QListWidget,
     QVBoxLayout, QLayout, QDoubleSpinBox, QSpinBox, QCheckBox, QComboBox, QDateEdit, QToolButton)
 
@@ -122,6 +123,7 @@ class InventoryPage:
         self._ds_inventory_price.setObjectName(u"_ds_inventory_price")
         self._ds_inventory_price.setMinimumSize(QSize(0, 30))
         self._ds_inventory_price.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._ds_inventory_price.setMaximum(9999999999999999583119736832.000000000000000)
         self._v_inventory_input.addWidget(self._ds_inventory_price)
         self._l_inventory_quantity = QLabel(self._f_inventory_box_edit)
         self._l_inventory_quantity.setObjectName(u"_l_inventory_quantity")
@@ -131,14 +133,17 @@ class InventoryPage:
         self._s_inventory_quantity.setObjectName(u"_s_inventory_quantity")
         self._s_inventory_quantity.setMinimumSize(QSize(0, 30))
         self._s_inventory_quantity.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._s_inventory_quantity.setMaximum(999999999)
         self._v_inventory_input.addWidget(self._s_inventory_quantity)
         self._h_inventory_info_qty = QHBoxLayout()
         self._h_inventory_info_qty.setObjectName(u"_h_inventory_info_qty")
         self._cb_inventory_quantifiable = QCheckBox(self._f_inventory_box_edit)
         self._cb_inventory_quantifiable.setObjectName(u"_cb_inventory_quantifiable")
+        self._cb_inventory_quantifiable.toggled.connect(lambda: self.__toggle(self._cb_inventory_quantifiable))
         self._h_inventory_info_qty.addWidget(self._cb_inventory_quantifiable)
         self._cb_inventory_location = QCheckBox(self._f_inventory_box_edit)
         self._cb_inventory_location.setObjectName(u"_cb_inventory_location")
+        self._cb_inventory_location.toggled.connect(lambda: self.__toggle(self._cb_inventory_location))
         self._h_inventory_info_qty.addWidget(self._cb_inventory_location)
         self._v_inventory_input.addLayout(self._h_inventory_info_qty)
         self._l_inventory_type_remise = QLabel(self._f_inventory_box_edit)
@@ -151,7 +156,18 @@ class InventoryPage:
         self._cbx_inventory_type_remise.setObjectName(u"_cbx_inventory_type_remise")
         self._cbx_inventory_type_remise.setMinimumSize(QSize(0, 30))
         self._cbx_inventory_type_remise.setCurrentIndex(-1)
+        self._cbx_inventory_type_remise.currentIndexChanged.connect(self.remise_prefix)
         self._v_inventory_input.addWidget(self._cbx_inventory_type_remise)
+        self._l_invoice_remise = QLabel(self._f_inventory_box_edit)
+        self._l_invoice_remise.setObjectName(u"_l_invoice_remise")
+        self._l_invoice_remise.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._v_inventory_input.addWidget(self._l_invoice_remise)
+        self._ds_inventory_remise = QDoubleSpinBox(self._f_inventory_box_edit)
+        self._ds_inventory_remise.setObjectName(u"_ds_inventory_remise")
+        self._ds_inventory_remise.setMinimumSize(QSize(0, 30))
+        self._ds_inventory_remise.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._ds_inventory_remise.setMaximum(1000000000000000044885712678075916785549312.000000000000000)
+        self._v_inventory_input.addWidget(self._ds_inventory_remise)
         self._l_inventory_date_fabric = QLabel(self._f_inventory_box_edit)
         self._l_inventory_date_fabric.setObjectName(u"_l_inventory_date_fabric")
         self._l_inventory_date_fabric.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -272,6 +288,10 @@ class InventoryPage:
         self._sw_main_dialog.addWidget(self._p_inventory)
 
         self._b_inventory_add_product.clicked.connect(self.InventoryboxEdit)
+        self._tb_inventory_import_path.clicked.connect(
+            lambda: self.__setImportPath("_tb_inventory_import_path"))
+        self._tb_inventory_illustration_path.clicked.connect(
+            lambda: self.__setImportPath("_tb_inventory_illustration_path"))
 
         self.__retranslateUi()
 
@@ -295,6 +315,8 @@ class InventoryPage:
         self._cbx_inventory_type_remise.setItemText(1, QCoreApplication.translate("MainWindow", u"En pourcentage", None))
 
         self._cbx_inventory_type_remise.setPlaceholderText(QCoreApplication.translate("MainWindow", u"-- S\u00e9l\u00e9ctionnez un type seulement s'il y'a remise", None))
+        self._l_invoice_remise.setText(QCoreApplication.translate("MainWindow", u"Remise", None))
+        self._ds_inventory_remise.setPrefix("")
         self._l_inventory_date_fabric.setText(QCoreApplication.translate("MainWindow", u"Date de fabrication", None))
         self._l_inventory_illustration_path.setText(QCoreApplication.translate("MainWindow", u"Illustration", None))
         self._tb_inventory_illustration_path.setText(QCoreApplication.translate("MainWindow", u"...", None))
@@ -312,6 +334,14 @@ class InventoryPage:
         self._l_inventory_low_sale.setText(QCoreApplication.translate("MainWindow", u"Le moins bien vendu", None))
         self._l_inventory_icon_low_sale.setText("")
 
+    def remise_prefix(self):
+        if self._cbx_inventory_type_remise.currentText() == "En devise":
+            self._ds_inventory_remise.setSuffix(QCoreApplication.translate("MainWindow", u" \u20ac", None))
+        elif self._cbx_inventory_type_remise.currentText() == "En pourcentage":
+            self._ds_inventory_remise.setSuffix(QCoreApplication.translate("MainWindow", u" %", None))
+        else:
+            self._ds_inventory_remise.setSuffix("")
+
     def OpenInventoryPage(self):
         self.hideSideMenu()
         self.switchPage('_p_inventory')
@@ -319,3 +349,31 @@ class InventoryPage:
 
     def InventoryboxEdit(self):
         self._f_inventory_box_edit.setVisible(not self._f_inventory_box_edit.isVisible())
+
+    def __setImportPath(self, sender):
+        a = {"_tb_inventory_import_path": {
+                                    "object": "_le_inventory_import_path",
+                                    "title": "Selectionner le fichier excel des inventaires",
+                                    "extensionName": "Excel",
+                                    "extension": ["xlsx"]
+                                    },
+            "_tb_inventory_illustration_path": {
+                                    "object": "_le_inventory_illustration_path",
+                                    "title": "Selectionner une image pour l'inventaire",
+                                    "extensionName": "Images",
+                                    "extension": [ext.data().decode() for ext in QImageReader.supportedImageFormats()]
+                                    }
+            }
+        object = a.get(sender, {}).get("object")
+        title = a.get(sender, {}).get("title")
+        extensionName = a.get(sender, {}).get("extensionName")
+        extension = a.get(sender, {}).get("extension")
+        path = self.GetOpenDialogFilePath(title, extensionName, extension)
+
+        getattr(self, object).setText(path)
+
+    def __toggle(self, sender):
+        if sender.objectName() == "_cb_inventory_location":
+            self._cb_inventory_quantifiable.setChecked(False)
+        else:
+            self._cb_inventory_location.setChecked(False)

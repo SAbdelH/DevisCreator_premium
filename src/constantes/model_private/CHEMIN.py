@@ -1,11 +1,11 @@
 {
     'name': 'path',
-    'schema': 'informations',
+    'schema': 'public',
     'columns': {
         'id': {'type': 'Integer', 'primary_key': True, 'autoincrement': True, 'nullable': False},
         'company': {'type': 'String', 'nullable': False},
         'name': {'type': 'String', 'nullable': False},
-        'path': {'type': 'String', 'nullable': False}
+        'path': {'type': 'String', 'nullable': True}
     },
     'constraints': [
     # Index unique sur id

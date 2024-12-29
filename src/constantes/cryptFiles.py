@@ -3,9 +3,9 @@ from pathlib import Path
 from cryptography.fernet import Fernet
 import json
 
-entrerScript = Path(__file__).parent / "model_public"
+entrerScript = Path(__file__).parent / "model_private"
 sortieScript = Path(__file__).parents[2] / 'core'
-entrerConstante = Path(__file__).parent / "_json"
+entrerConstante = Path(__file__).parent / "listes"
 applscript = """tell application "Microsoft Excel"
             set visible to false -- Garde Excel caché
             set display alerts to false -- Désactive les alertes
@@ -57,6 +57,6 @@ def cryptSCPT(text, sortie):
     with open(Path(sortie, "SCPT"), "wb") as f:
         f.write(encrypted_text)
 
-cryptSCPT(applscript, sortieScript)
-#cryptConstantes(entrerConstante, sortieScript, "JSON")
-#cryptScript(entrerScript, sortieScript, "public_models")
+#cryptSCPT(applscript, sortieScript)
+cryptConstantes(entrerConstante, sortieScript, "LIST")
+#cryptScript(entrerScript, sortieScript, "private_models")

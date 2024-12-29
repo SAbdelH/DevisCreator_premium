@@ -12,7 +12,7 @@ class Update:
         elif text == '_p_user_management':
             self.populateUserList()
         elif text == '_p_info_company':
-            if self.WorkspaceExist() : self.populateInfoCompany()
+            if self.WorkspaceExist(): self.populateInfoCompany()
         elif text == '_p_dashboard':
             self.populateAgenda()
         elif text == "_p_clients":
@@ -23,15 +23,6 @@ class Update:
     def on_menu_clicked(self, text):
         if text == 'logout':
             self.disconnect()
-
-    def GetOpenDialogFolderPath(self):
-        folder = QFileDialog.getExistingDirectory(
-            parent=self.maindialog,
-            caption='Sélectionner un dossier',
-            # dir=os.getcwd(),  # Dossier de départ
-            options=QFileDialog.ShowDirsOnly  # | QFileDialog.DontUseNativeDialog
-        )
-        return folder
 
     def OpenFile(self, lien=None):
         """

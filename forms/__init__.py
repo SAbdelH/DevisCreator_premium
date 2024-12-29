@@ -2,7 +2,8 @@
 ## Created by: Qt User Interface Compiler version 6.8.0
 import pyperclip
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QEvent)
-from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit)
+from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit,
+                               QFileDialog)
 from forms.animation import AnimationForm as ANF
 from forms.notifications import NotificationWidget
 from forms.temps import TempsForm as TF
@@ -181,3 +182,22 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
             pyperclip.copy(self._le_clients_mail_value.text())
         else:
             pyperclip.copy(self._le_clients_num_value.text())
+
+    def GetOpenDialogFolderPath(self):
+        folder = QFileDialog.getExistingDirectory(
+            parent=self,
+            caption='Sélectionner un dossier',
+            # dir=os.getcwd(),  # Dossier de départ
+            options=QFileDialog.ShowDirsOnly  # | QFileDialog.DontUseNativeDialog
+        )
+        return folder
+
+    def GetOpenDialogFilePath(self, title:str, extensionName:str, extensions:list):
+        filtre = f"{extensionName} ({' '.join(["*.{}".format(ext) for ext in extensions])})"
+        file, _ = QFileDialog.getOpenFileName(
+            parent=self,
+            caption=title,
+            # dir=os.getcwd(),  # Dossier de départ
+            filter=filtre
+        )
+        return file
