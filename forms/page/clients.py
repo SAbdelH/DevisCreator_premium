@@ -5,6 +5,10 @@ from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLineE
 
 
 class clientsPage:
+    def __init__(self):
+        self.cp_last_update = None
+        self.firstOpenClient = True
+
     def initUi_clientForm(self):
         self._p_clients = QWidget()
         self._p_clients.setObjectName(u"_p_clients")

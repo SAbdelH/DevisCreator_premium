@@ -11,6 +11,10 @@ class InvoicePage:
         self.font8.setPointSize(14)
         self.font8.setBold(True)
 
+        self.ip_last_update = None
+        self.firstOpenFacture = True
+        self.firstOpenDevis = True
+
     def initUi_InvoiceForm(self):
         self._p_factures = QWidget()
         self._p_factures.setObjectName(u"_p_factures")

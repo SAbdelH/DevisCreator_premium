@@ -22,6 +22,15 @@ class DashboardPage:
         self.font5.setUnderline(True)
         self.max_chars = 50
 
+        self.agenda_last_update = None
+        self.tableActivity_last_update = None
+        self.listActivity_last_update = None
+        self.ghistogram_last_update = None
+        self.gevolution_last_update = None
+        self.gproduction_last_update = None
+        self.gcamembert_last_update = None
+        self.firstOpenDashboard = True
+
     def initUi_DashboardForm(self):
         # PAGE TABLEAU DE BORD
         self._p_dashboard = QWidget()

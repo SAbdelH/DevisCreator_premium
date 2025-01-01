@@ -2,11 +2,32 @@ from datetime import datetime
 from collections import ChainMap
 
 import bcrypt
+from sqlalchemy import desc, and_, func
 
 from processing.database.base_public import Base
 from processing.database.model_tools import create_dynamic_model
 from processing.decrypt import _public
 
+# Définir le modèle pour la table activites.ui_update
+Ui_Update = create_dynamic_model(**dict(ChainMap(_public.UI_UPDATE, {"Base": Base})))
+
+
+@staticmethod
+def verify_update(session, page: str, filtre=None):
+    conditions = [
+        Ui_Update.nom == page,
+        func.date(Ui_Update.crea_date) >= func.current_date()
+    ]
+    if filtre:
+        conditions.append(filtre)
+
+    ui = (session.query(Ui_Update)
+          .filter(and_(*conditions))
+          .order_by(desc(Ui_Update.crea_date))
+          .first())
+    return ui
+
+Ui_Update.verify_update = verify_update
 
 # Définir le modèle pour la table informations.utilisateurs
 User = create_dynamic_model(**dict(ChainMap(_public.UTILISATEURS, {"Base": Base})))
@@ -35,10 +56,6 @@ def verify_login(session, username, password):
     if user:
         if user.check_password(password) and user.check_validity_account():
             return user
-        else:
-            ...
-    else:
-        ...
     return None
 
 # Ajout des méthodes à la classe

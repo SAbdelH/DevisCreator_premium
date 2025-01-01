@@ -5,6 +5,10 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QListW
 
 
 class UserManagementPage:
+    def __init__(self):
+        self.ump_last_update = None
+        self.firstOpenUser = True
+
     def initUi_UserForm(self):
         # PAGE GESTION DES UTILISATEURS
         self._p_user_management = QWidget()

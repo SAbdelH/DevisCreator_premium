@@ -7,6 +7,10 @@ from forms.gui import CustomCardWidget
 
 
 class InventoryPage:
+    def __init__(self):
+        self.mp_last_update = None
+        self.firstOpenInventory = True
+
     def initUi_InventoryForm(self):
         self._p_inventory = QWidget()
         self._p_inventory.setObjectName(u"_p_inventory")
@@ -66,6 +70,7 @@ class InventoryPage:
         self._g_inventory.addLayout(self._h_inventory_top, 0, 0, 1, 4)
         self._lw_inventory_list_inventory = QListWidget(self._p_inventory)
         self._lw_inventory_list_inventory.setObjectName(u"_lw_inventory_list_inventory")
+        self._lw_inventory_list_inventory.setSpacing(6)
         self._g_inventory.addWidget(self._lw_inventory_list_inventory, 1, 0, 1, 3)
         self._f_inventory_box_edit = QFrame(self._p_inventory)
         self._f_inventory_box_edit.setObjectName(u"_f_inventory_box_edit")

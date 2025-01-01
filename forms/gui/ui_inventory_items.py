@@ -8,11 +8,12 @@ class InventoryItem(QWidget):
         super().__init__(parent)
         self.setStyleSheet("""
                     QFrame #inventory_frame {
-                        background-color: rgba(255, 255, 255, 0.35);
+                        background-color: rgba(240, 240, 240, 0.75);
+                        border-radius: 10px;
                     }
                     #_l_icon {
                         border: None;
-                        border-radius: 5px;
+                        border-radius: 10px;
                         background-color: rgba(255, 255, 255, 1);
                     }
                     #_l_price, #_l_remise {
@@ -93,7 +94,7 @@ class InventoryItem(QWidget):
         self._v_remise = QVBoxLayout()
         self._v_remise.setSizeConstraint(QLayout.SizeConstraint.SetMinAndMaxSize)
         self._l_remise = QLabel("Remise", self.frame)
-        self._l_remise.setObjectName("_l_marque")
+        self._l_remise.setObjectName("_l_remise")
         self._l_remise.setMaximumSize(QSize(80, 16777215))
         self._v_remise.addWidget(self._l_remise)
 

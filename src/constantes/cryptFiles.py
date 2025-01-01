@@ -3,7 +3,7 @@ from pathlib import Path
 from cryptography.fernet import Fernet
 import json
 
-entrerScript = Path(__file__).parent / "model_private"
+entrerScript = Path(__file__).parent / "model_public"
 sortieScript = Path(__file__).parents[2] / 'core'
 entrerConstante = Path(__file__).parent / "listes"
 applscript = """tell application "Microsoft Excel"
@@ -58,5 +58,5 @@ def cryptSCPT(text, sortie):
         f.write(encrypted_text)
 
 #cryptSCPT(applscript, sortieScript)
-cryptConstantes(entrerConstante, sortieScript, "LIST")
-#cryptScript(entrerScript, sortieScript, "private_models")
+#cryptConstantes(entrerConstante, sortieScript, "LIST")
+cryptScript(entrerScript, sortieScript, "public_models")

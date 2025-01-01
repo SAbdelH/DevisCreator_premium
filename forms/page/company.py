@@ -18,7 +18,8 @@ class firmPage:
         self.orderGroup = ['_gb_info_entreprise', '_gb_dirigeant', '_gb_adresse_entreprise', '_gb_contact',
                             '_gb_informations_legales', '_gb_informations_bancaires']
 
-        self.firstOpenFirm=True
+        self.firstOpenFirm = True
+        self.fp_last_update = None
 
     def init_CompanyForm(self):
         # PAGE D'ENREGISTREMENT DES INFORMATIONS DE L'ENTREPRISE

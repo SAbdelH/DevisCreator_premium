@@ -4,6 +4,10 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QSpacerItem, QSizePolicy, Q
 
 
 class restorePage:
+    def __init__(self):
+        self.rp_last_update = None
+        self.firstOpenRestoration = True
+
     def initUi_retoreForm(self):
         self._p_restore = QWidget()
         self._p_restore.setObjectName(u"_p_restore")

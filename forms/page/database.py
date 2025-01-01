@@ -4,6 +4,9 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QTreeWidget, QTreeWidgetIte
 
 
 class DbManagementPage:
+    def __init__(self):
+        self.firstOpenDbManager = True
+
     def initUi_dbTablesForm(self):
         self._p_manage_db = QWidget()
         self._p_manage_db.setObjectName(u"_p_manage_db")

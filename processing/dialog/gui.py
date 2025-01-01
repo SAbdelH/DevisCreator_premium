@@ -19,6 +19,8 @@ class Update:
             self.populateClientTable()
         elif text == "_p_manage_db":
             self.populateDatabaseExplorer()
+        elif text == "_p_inventory":
+            self.populateListInventory()
 
     def on_menu_clicked(self, text):
         if text == 'logout':

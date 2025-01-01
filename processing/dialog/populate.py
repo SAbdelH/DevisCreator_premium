@@ -3,11 +3,13 @@ from datetime import datetime, date
 from PySide6.QtCore import QSize, Qt, QDate, QTime
 from PySide6.QtGui import QBrush, QColor, QStandardItemModel, QStandardItem
 from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem
-from sqlalchemy import func, inspect
+from sqlalchemy import func, inspect, and_
 
 from forms.gui.ui_agenda_items import AgendaItem
+from forms.gui.ui_inventory_items import InventoryItem
 from forms.gui.ui_client_statut import CustomDelegate
-from processing.database.model_public import User, Entreprise, Agenda
+from processing.database.model_public import User, Entreprise, Agenda, Ui_Update
+from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
 from forms.gui.ui_card_employe import EmployeeCard
 
@@ -16,54 +18,59 @@ class PopulateWidget:
 
     def populateUserList(self):
         with self.Session() as session:
-            user = session.query(
-                User.identifiant.label("_le_um_id"),
-                User.nom.label("_le_um_nom"),
-                User.prenom.label("_le_um_prenom"),
-                User.poste.label("_le_um_poste"),
-                User.sexe.label("_cbx_um_sexe"),
-                User.role.label("_cbx_um_role"),
-                User.email.label("_le_um_mail"),
-                User.expire.label("_cw_um_expire_account")
-                ).order_by(User.nom)
-            if user:
-                self.maindialog._lw_um_usrList.clear()
-                self.maindialog._lw_um_usrList.setStyleSheet("""
-                        #_p_user_management #_lw_um_usrList {
-                            background-image: none !important;
-                        }
-                        #_lw_um_usrList::item {
-                            background-color: qlineargradient(spread:repeat, x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #DDDEFF, stop: 1 #FFFFFF);
-                            border: 1px solid rgba(214, 219, 223, 1);
-                            border-radius: 8px;
-                            margin: 5px;
-                        }
-                        #_lw_um_usrList::item:hover {
-                            border-color: rgba(129, 178, 154, 1);
-                        }
-                        #_lw_um_usrList::item:selected {
-                            border-color: rgba(224, 122, 95, 1);
-                        }
-                    """)
-                for employe in user:
-                    card = EmployeeCard(employe)
-                    item = QListWidgetItem(self.maindialog._lw_um_usrList)
-                    item.setSizeHint(QSize(110, 120))
-                    self.maindialog._lw_um_usrList.setItemWidget(item, card)
+            update = Ui_Update().verify_update(session, 'user')
+            first = self.maindialog.firstOpenUser
+            if first:  self.maindialog.ump_last_update = datetime.now().date()
 
-                    # Store employee info in item data
-                    item.setData(Qt.UserRole, employe)
-                    # Connect item clicked signal
-                    self.maindialog._lw_um_usrList.itemClicked.connect(lambda item: self.populateInputUserList(item.data(Qt.UserRole)))
-            else:
-                self.maindialog._lw_um_usrList.setStyleSheet(f"""
-                        # _p_user_management #_lw_um_usrList {{
-                        background - image: url({self.maindialog.user_bg});
-                        background - repeat: no - repeat;
-                        background - position: center center;
-                        background - origin: content;
-                    }}"""
-                    )
+            if first or (update and update.crea_date > self.maindialog.ump_last_update):
+                user = session.query(
+                    User.identifiant.label("_le_um_id"),
+                    User.nom.label("_le_um_nom"),
+                    User.prenom.label("_le_um_prenom"),
+                    User.poste.label("_le_um_poste"),
+                    User.sexe.label("_cbx_um_sexe"),
+                    User.role.label("_cbx_um_role"),
+                    User.email.label("_le_um_mail"),
+                    User.expire.label("_cw_um_expire_account")
+                    ).order_by(User.nom)
+                if user:
+                    self.maindialog._lw_um_usrList.clear()
+                    self.maindialog._lw_um_usrList.setStyleSheet("""
+                            #_p_user_management #_lw_um_usrList {
+                                background-image: none !important;
+                            }
+                            #_lw_um_usrList::item {
+                                background-color: qlineargradient(spread:repeat, x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #DDDEFF, stop: 1 #FFFFFF);
+                                border: 1px solid rgba(214, 219, 223, 1);
+                                border-radius: 8px;
+                                margin: 5px;
+                            }
+                            #_lw_um_usrList::item:hover {
+                                border-color: rgba(129, 178, 154, 1);
+                            }
+                            #_lw_um_usrList::item:selected {
+                                border-color: rgba(224, 122, 95, 1);
+                            }
+                        """)
+                    for employe in user:
+                        card = EmployeeCard(employe)
+                        item = QListWidgetItem(self.maindialog._lw_um_usrList)
+                        item.setSizeHint(QSize(110, 120))
+                        self.maindialog._lw_um_usrList.setItemWidget(item, card)
+
+                        # Store employee info in item data
+                        item.setData(Qt.UserRole, employe)
+                        # Connect item clicked signal
+                        self.maindialog._lw_um_usrList.itemClicked.connect(lambda item: self.populateInputUserList(item.data(Qt.UserRole)))
+                else:
+                    self.maindialog._lw_um_usrList.setStyleSheet(f"""
+                            # _p_user_management #_lw_um_usrList {{
+                            background - image: url({self.maindialog.user_bg});
+                            background - repeat: no - repeat;
+                            background - position: center center;
+                            background - origin: content;
+                        }}"""
+                        )
 
     def populateInputUserList(self, info):
         current_date = QDate.currentDate()
@@ -89,7 +96,11 @@ class PopulateWidget:
     def populateInfoCompany(self):
         l = 0
         with self.Session() as session:
-            if self.maindialog.firstOpenFirm:
+            update = Ui_Update().verify_update(session, 'company')
+            first = self.maindialog.firstOpenFirm
+            if first:  self.maindialog.fp_last_update = datetime.now().date()
+
+            if first or (update and update.crea_date > self.maindialog.fp_last_update):
                 company = session.query(Entreprise).first()
                 self.cacheInfoCompany ={column.name: getattr(company, column.name) for column in Entreprise.__table__.columns}
                 if self.cacheInfoCompany:
@@ -130,60 +141,69 @@ class PopulateWidget:
         dlg = self.maindialog
         dlg._lw_agenda.clear()
         with (self.Session() as session):
-            agenda = (
-                session.query(
-                    Agenda.id,
-                    Agenda.titre,
-                    Agenda.description,
-                    Agenda.heure_debut,
-                    Agenda.jour,
-                    Agenda.heure_fin,
-                    func.to_char(Agenda.jour, 'dd-mm-yyyy').label('fjour')
+            update = Ui_Update().verify_update(session, 'agenda',
+                                            filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
+            first = self.maindialog.firstOpenDashboard
+            if first:  self.maindialog.agenda_last_update = datetime.now().date()
+
+            if first or (update and update.crea_date > self.maindialog.agenda_last_update):
+                agenda = (
+                    session.query(
+                        Agenda.id,
+                        Agenda.titre,
+                        Agenda.description,
+                        Agenda.heure_debut,
+                        Agenda.jour,
+                        Agenda.heure_fin,
+                        func.to_char(Agenda.jour, 'dd-mm-yyyy').label('fjour')
+                    )
+                    .filter(
+                        and_(
+                        func.to_char(Agenda.jour, 'mm/yyyy') >= func.to_char(date.today(), 'mm/yyyy'),
+                        Agenda.crea_user == func.current_user()
+                        )
+                    )
                 )
-                .filter(
-                    func.to_char(Agenda.jour, 'mm/yyyy') >= func.to_char(date.today(), 'mm/yyyy')
-                )
-            )
 
-        if agenda.count() > 0:
-            # Ajout des widgets personnalisés à la liste
-            for row, rdv in enumerate(agenda):
-                info = {
-                    'id': rdv.id,
-                    'titre': rdv.titre,
-                    'description': rdv.description,
-                    'heure_debut': rdv.heure_debut,
-                    'jour' : rdv.jour,
-                    'heure_fin': rdv.heure_fin,
-                    'fjour': rdv.fjour
-                }
-                self.agendaID[row] = info
-                item = QListWidgetItem(dlg._lw_agenda)
-                custom_widget = AgendaItem(rdv)  # Crée un widget personnalisé pour l'élément
+                if agenda.count() > 0:
+                    # Ajout des widgets personnalisés à la liste
+                    for row, rdv in enumerate(agenda):
+                        info = {
+                            'id': rdv.id,
+                            'titre': rdv.titre,
+                            'description': rdv.description,
+                            'heure_debut': rdv.heure_debut,
+                            'jour' : rdv.jour,
+                            'heure_fin': rdv.heure_fin,
+                            'fjour': rdv.fjour
+                        }
+                        self.agendaID[row] = info
+                        item = QListWidgetItem(dlg._lw_agenda)
+                        custom_widget = AgendaItem(rdv)  # Crée un widget personnalisé pour l'élément
 
-                # Ajouter les données au QListWidgetItem
-                item.setData(Qt.UserRole, info)  # Associer les données à l'item
+                        # Ajouter les données au QListWidgetItem
+                        item.setData(Qt.UserRole, info)  # Associer les données à l'item
 
-                item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
-                dlg._lw_agenda.addItem(item)
-                dlg._lw_agenda.setItemWidget(item, custom_widget)
-                dlg._lw_agenda.setStyleSheet("""
-                #_lw_agenda {{
-                    border-radius: 5px;
-                    border: 1px solid rgba(214, 219, 223, 1);
-                    background-color: rgba(255, 255, 255, 0.7);
-                    padding: 5px;
-                }}""")
-        else:
-            dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
-                    background-image: url({dlg.a_faire_bg});
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    background-origin: content;
-                }}""")
+                        item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
+                        dlg._lw_agenda.addItem(item)
+                        dlg._lw_agenda.setItemWidget(item, custom_widget)
+                        dlg._lw_agenda.setStyleSheet("""
+                        #_lw_agenda {{
+                            border-radius: 5px;
+                            border: 1px solid rgba(214, 219, 223, 1);
+                            background-color: rgba(255, 255, 255, 0.7);
+                            padding: 5px;
+                        }}""")
+                else:
+                    dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
+                            background-image: url({dlg.a_faire_bg});
+                            background-repeat: no-repeat;
+                            background-position: center center;
+                            background-origin: content;
+                        }}""")
 
-        dlg._lw_agenda.itemClicked.connect(self.onAgendaItemSelected)
-        dlg._lw_agenda.scrollToBottom()
+            dlg._lw_agenda.itemClicked.connect(self.onAgendaItemSelected)
+            dlg._lw_agenda.scrollToBottom()
 
     def onAgendaItemSelected(self, item):
         dlg = self.maindialog
@@ -245,34 +265,36 @@ class PopulateWidget:
             self.maindialog._ds_clients_dette.setValue(float(table_widget.item(selected_row, 5).text().replace(',', '.')))
 
     def populateDatabaseExplorer(self):
-        self.maindialog._trw_db_structure.clear()
-        inspector = inspect(self.Engine)
-        __accept_schema = {
-            "activites": ["achat", "activites", "devis", "factures"],
-            "informations": ["clients"],
-            "inventaires": ["inventaires"]
-        }
+        first = self.maindialog.firstOpenUser
+        if first:
+            self.maindialog._trw_db_structure.clear()
+            inspector = inspect(self.Engine)
+            __accept_schema = {
+                "activites": ["achat", "activites", "devis", "factures"],
+                "informations": ["clients"],
+                "inventaires": ["inventaires"]
+            }
 
-        qtreewidgetitem1 = QTreeWidgetItem()
-        qtreewidgetitem1.setText(0, u"Dossier")
-        self.maindialog._trw_db_structure.setHeaderItem(qtreewidgetitem1)
+            qtreewidgetitem1 = QTreeWidgetItem()
+            qtreewidgetitem1.setText(0, u"Dossier")
+            self.maindialog._trw_db_structure.setHeaderItem(qtreewidgetitem1)
 
-        items = []
-        for schema in inspector.get_schema_names():
-            if schema in __accept_schema:
-                item = QTreeWidgetItem([schema])
-                for table in inspector.get_table_names(schema=schema):
-                    if table in __accept_schema.get(schema):
-                        # Créer un nouveau QTreeWidgetItem pour la table
-                        child_item = QTreeWidgetItem([table])
-                        # Ajouter l'icône à l'élément table
-                        child_item.setIcon(0, self.maindialog.database_table)
-                        # L'ajouter comme enfant
-                        item.addChild(child_item)
-                items.append(item)
+            items = []
+            for schema in inspector.get_schema_names():
+                if schema in __accept_schema:
+                    item = QTreeWidgetItem([schema])
+                    for table in inspector.get_table_names(schema=schema):
+                        if table in __accept_schema.get(schema):
+                            # Créer un nouveau QTreeWidgetItem pour la table
+                            child_item = QTreeWidgetItem([table])
+                            # Ajouter l'icône à l'élément table
+                            child_item.setIcon(0, self.maindialog.database_table)
+                            # L'ajouter comme enfant
+                            item.addChild(child_item)
+                    items.append(item)
 
-        self.maindialog._trw_db_structure.insertTopLevelItems(0, items)
-        self.maindialog._trw_db_structure.itemDoubleClicked.connect(self.onTreeItemDoubleClicked)
+            self.maindialog._trw_db_structure.insertTopLevelItems(0, items)
+            self.maindialog._trw_db_structure.itemDoubleClicked.connect(self.onTreeItemDoubleClicked)
 
     def onTreeItemDoubleClicked(self, item, column):
         self.maindialog._b_manage_db_export_table.setEnabled(True)
@@ -319,3 +341,22 @@ class PopulateWidget:
                         background - origin: content;}}""")
             except Exception as err:
                 self.maindialog.show_notification(str(err), LVL.warning)
+
+    def populateListInventory(self):
+        dlg = self.maindialog
+        dlg._lw_inventory_list_inventory.clear()
+        infos = [{"nom": "Samsung TV OS",'marque': "Samsung",
+                'quantity': 40, 'price': 1200.00,'discount': 12,
+                'icon': "/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/icon.png"},
+                {"nom": "LG TV OS", 'marque': "LG",
+                 'quantity': 10, 'price': 1250.00, 'discount': 0,
+                 'icon': "/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/icon.png"}
+                ]
+
+        for info in infos:
+            item = QListWidgetItem(dlg._lw_inventory_list_inventory)
+            custom_widget = InventoryItem(info)
+            item.setData(Qt.UserRole, info)
+            item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
+            dlg._lw_inventory_list_inventory.addItem(item)
+            dlg._lw_inventory_list_inventory.setItemWidget(item, custom_widget)

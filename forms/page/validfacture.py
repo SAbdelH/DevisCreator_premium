@@ -10,6 +10,9 @@ class validFacturePage:
         self.font9.setPointSize(15)
         self.font9.setBold(True)
 
+        self.vfp_last_update = None
+        self.firstOpenValidFacture = True
+
     def initUi_validFactureForm(self):
         self._p_valid_factures = QWidget()
         self._p_valid_factures.setObjectName(u"_p_valid_factures")
