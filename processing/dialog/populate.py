@@ -4,7 +4,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QSize, Qt, QDate, QTime
 from PySide6.QtGui import QBrush, QColor, QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QListWidget
+from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QListWidget, QApplication
 from sqlalchemy import func, inspect, and_, text
 from sqlalchemy.orm import class_mapper
 
@@ -405,9 +405,14 @@ class PopulateWidget:
                 method_callable = method(inventory_row.get(col, ''), liste_name) if callable(
                     method) else method
 
-                # Application de la méthode sur le widget si conditions respectées
+                # widget
                 widget_obj = getattr(dlg, widget_name)
-                if not (liste_name != "invList" and col in ("fabrication_date", "marque")):
-                    getattr(widget_obj, method_callable)(value)
-                    if col == "quantite" and liste_name != "invList" and value == 0:
-                        self.RaiseErreur(widget_obj)
+                widget_obj.blockSignals(True)
+                # Appliquer la méthode sur le widget
+                getattr(widget_obj, method_callable)(value)
+                widget_obj.blockSignals(False)
+                widget_obj.repaint()
+                QApplication.processEvents()
+
+                if col == "quantite" and liste_name != "_lw_inventory_list_inventory" and value == 0:
+                    self.RaiseErreur(widget_obj)

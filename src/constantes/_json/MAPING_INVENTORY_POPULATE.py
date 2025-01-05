@@ -27,7 +27,7 @@
     "type_remise": (
         lambda val, liste_name: "_cbx_inventory_type_remise" if liste_name == "_lw_inventory_list_inventory" else "_cbx_invoice_type_remise",
         "setCurrentIndex",
-        lambda val, liste_name: (0 if val == "En devise" else 1 if val == "En pourcentage" else -1)
+        lambda val, liste_name: (0 if val == "€" else 1 if val == "%" else -1)
     ),
     "date_fabric": (
         lambda val, liste_name: "_de_inventory_fabric",
@@ -35,12 +35,12 @@
         lambda val, liste_name: (QDate.fromString(val, "dd-MM-yyyy") if val else QDate.currentDate()),
     ),
     'quantifiable' : (
-        lambda val, liste_name: "_cb_invoice_quantifiable",
+        lambda val, liste_name: "_cb_inventory_quantifiable" if liste_name == "_lw_inventory_list_inventory" else "_cb_invoice_quantifiable",
         "setChecked",
         lambda val, liste_name: val,
     ),
     'louable' : (
-        lambda val, liste_name: "_cb_invoice_location",
+        lambda val, liste_name: "_cb_inventory_location" if liste_name == "_lw_inventory_list_inventory" else "_cb_invoice_location",
         "setChecked",
         lambda val, liste_name: val,
     )

@@ -57,7 +57,8 @@ class ActivityInsert:
                 "achat": "Achat" if purchase > 0 else "Non",
                 "prix achat": purchase,
                 "date_fabric": self.maindialog._de_inventory_fabric.date().toString("yyyy-MM-dd"),
-                "lien": self.maindialog._le_inventory_illustration_path.text().strip()
+                "lien": self.maindialog._le_inventory_illustration_path.text().strip(),
+                "crea_user" : WorkSession.get_current_user()
             }
             with self.Session() as session:
                 exist_inv = self.__action(session, __params, 'dlg')
