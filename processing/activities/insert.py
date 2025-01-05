@@ -3,18 +3,22 @@ from datetime import date
 import openpyxl
 from shutil import copy2
 from pathlib import Path
-from sqlalchemy import func, desc, and_
 
+from PySide6.QtWidgets import QDialog
+from sqlalchemy import func, and_
+
+from forms.gui import AchatDialog
 from processing.database.model_private import Chemin
-from processing.database.model_public import Inventaires, Activites, Achat
+from processing.database.model_public import Inventaires, Activites, Achat, Ui_Update
+from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
 
 
 class ActivityInsert:
-    def inventoryInsert(self):
+    def inventoryInsert(self, action: str|None = None):
         exist_inv = 0
         MODEL_IMPORT = self.maindialog._le_inventory_import_path.text().strip()
-        if MODEL_IMPORT != "":
+        if Path(MODEL_IMPORT).suffix == ".xlsx":
             wb = openpyxl.load_workbook(MODEL_IMPORT)
             ws = wb.active
             colExist = {
@@ -31,12 +35,16 @@ class ActivityInsert:
                 with self.Session() as session:
                     for idx, ligne in enumerate(ws.iter_rows(min_row=2, max_row=ws.max_row, values_only=True), start=2):
                         __params = {nameColumn: ligne[index - 1] for nameColumn, index in colExist.items()}
-                        __params['crea_user'] = session.query(func.current_user()).first()[0]
+                        __params['crea_user'] = WorkSession.get_current_user()
                         self.__action(session,__params)
+                    updt = Ui_Update(nom='inventory', crea_date=func.now(), crea_user=func.current_user())
+                    session.add(updt)
+                    session.commit()
                 exist_inv = 1
         else:
             remise = self.maindialog._ds_inventory_remise.value()
             type_remise = self.maindialog._cbx_inventory_type_remise.currentText()
+            purchase = self.__achat if action == 'purchase' else 0
             __params = {
                 "nom": self.maindialog._le_inventory_name.text().strip(),
                 "marque": self.maindialog._le_inventory_marque.text().strip(),
@@ -44,13 +52,18 @@ class ActivityInsert:
                 "quantite": self.maindialog._s_inventory_quantity.value(),
                 "remise": None if remise is None or remise == 0 else remise,
                 "type_remise": None if remise == None or remise == 0 else "%" if type_remise == 'En pourcentage' else "€",
-                "quantifiable": self.maindialog.isChecked(),
-                "louable": self.maindialog._cb_inventory_quantifiable.isChecked(),
+                "quantifiable": self.maindialog._cb_inventory_quantifiable.isChecked(),
+                "louable": self.maindialog._cb_inventory_location.isChecked(),
+                "achat": "Achat" if purchase > 0 else "Non",
+                "prix achat": purchase,
                 "date_fabric": self.maindialog._de_inventory_fabric.date().toString("yyyy-MM-dd"),
                 "lien": self.maindialog._le_inventory_illustration_path.text().strip()
             }
             with self.Session() as session:
                 exist_inv = self.__action(session, __params, 'dlg')
+                updt = Ui_Update(nom='inventory', crea_date=func.now(), crea_user=func.current_user())
+                session.add(updt)
+                session.commit()
 
         self.maindialog.show_notification(
                     f"Les inventaires ont été {'mis-à-jour' if exist_inv != 0 else 'importé'}",
@@ -68,19 +81,22 @@ class ActivityInsert:
     def __insert(self, session, __params: dict):
         if (lien:=__params.get('lien')):
             source = Path(lien.strip())
-            self.__copyImage(session, source, __params.get('nom'))
+            self.__copyImage(source, __params.get('nom'))
         __params.pop("lien")
+        budget = None
         if (achat:=__params.get('achat'))=="Achat":
             Dachat = Achat(nom=__params['nom'], prix=__params['prix achat'], quantite=__params['quantite'],
-                        crea_date=date.today(), crea_user=func.current_user)
+                        crea_date=func.now(), crea_user=func.current_user())
+            budget = __params['prix achat']
             session.add(Dachat)
         __params.pop("achat")
         __params.pop("prix achat")
 
         inventaire = Inventaires(**__params)
-        activite = Activites(crea_date=date.today(),
+        activite = Activites(crea_date=func.now(),
                             activites=__params['nom'],
-                            action='Achat inventaire' if achat=="Achat" else 'Ajout inventaire')
+                            action='Achat inventaire' if achat=="Achat" else 'Ajout inventaire',
+                            budget=budget)
         session.add(inventaire)
         session.add(activite)
         session.commit()
@@ -89,7 +105,7 @@ class ActivityInsert:
         inventaire = session.query(Inventaires).filter(Inventaires.nom == __params.get('nom')).first()
         if (lien:=__params.get('lien')):
             source = Path(lien.strip())
-            self.__copyImage(session, source, __params.get('nom'))
+            self.__copyImage(source, __params.get('nom'))
         __params.pop("lien")
 
         if origin == 'xlsx' :
@@ -98,7 +114,7 @@ class ActivityInsert:
         inventaire.update(data)
         if (achat := __params.get('achat')) == "Achat":
             Dachat = Achat(nom=__params['nom'], prix=__params['prix achat'], quantite=__params['quantite'],
-                        crea_date=date.today(), crea_user=func.current_user)
+                        crea_date=func.now(), crea_user=func.current_user())
             session.add(Dachat)
         __params.pop("achat")
         __params.pop("prix achat")
@@ -111,7 +127,19 @@ class ActivityInsert:
         session.add(activites)
         session.commit()
 
-    def __copyImage(self, session, source: Path, nom):
-        inventory_path = session.query(Chemin.path).filter(and_(Chemin.nom=='inventaire', Chemin.company==self.GROUP)).first()
-        if inventory_path:
-            copy2(src = source, dst = Path(inventory_path[0]) / f"{nom}{source.suffix}")
+    @property
+    def __achat(self):
+        dialog = AchatDialog()
+        if dialog.exec_() == QDialog.Accepted:
+            return dialog.get_price()
+        else:
+            return 0
+
+    def __copyImage(self, source: Path, nom):
+        with self.privateSession() as session:
+            inventory_path = (session.query(Chemin.path)
+                                .filter(
+                                    and_(Chemin.name=='inventaire', Chemin.company==self.GROUP)
+                                ).first())
+            if inventory_path:
+                copy2(src = source, dst = Path(inventory_path[0]) / f"{nom}{source.suffix}")

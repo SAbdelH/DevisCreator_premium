@@ -471,7 +471,6 @@ class Menu:
         Args:
             abonnement (str, optional): Type d'abonnement. Defaults to 'premium'.
         """
-        # Créer le menu
         self._m_logout_menu = QMenu()
         self._m_logout_menu.setObjectName("_m_logout_menu")
         self._m_logout_menu.setStyleSheet("""#_m_logout_menu{
@@ -480,10 +479,9 @@ class Menu:
                                                 border-radius: 10px;
                                             }""")
 
-        # Ajouter un indicateur visuel au bouton
         self._b_logout.setStyleSheet("""
             QPushButton::after {
-                content: '▼';  # Triangle de menu
+                content: '▼';
                 position: absolute;
                 right: 5px;
                 top: 50%;
@@ -493,10 +491,8 @@ class Menu:
             }
         """)
 
-        # Déterminer le thème
         theme, icn = ("Sombre", "dark") if self.apparence == "white" else ("Claire", "white")
 
-        # Définir les actions du menu
         action_list = [
             {"text": "", "icon": None, "signal": None},
             {"text": "Reglages", "icon": self.reglage_icon, "signal": 'settings'},
@@ -504,43 +500,37 @@ class Menu:
             {"text": "Recherche mise-à-jour", "icon": self.software_upgrade_icon, "signal": 'upgrade'},
             {"text": f"Apparence {theme}", "icon": getattr(self, f"{icn}_mode_icon"), "signal": 'darkmode'},
             {"text": "separator"},
-            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement}_icon"), "signal": None},
+            {"text": f"Abonnement {abonnement.capitalize()}", "icon": getattr(self, f"abonnement_{abonnement}_icon"),
+             "signal": None},
             {"text": "separator"},
             {"text": "Se déconnecter", "icon": self.logout_icon, "signal": 'logout'}
         ]
 
-        for action_config in action_list:
-            # Gestion des séparateurs
+        for i, action_config in enumerate(action_list):
             if action_config['text'] == "separator":
                 self._m_logout_menu.addSeparator()
                 continue
 
-            # Créer un widget personnalisé pour l'action
             widget = QWidget()
             layout = QHBoxLayout(widget)
             layout.setContentsMargins(5, 5, 5, 5)
             layout.setSpacing(10)
 
-            # Ajouter l'icône si disponible
+            icon_label = None
             if action_config['icon']:
                 icon_label = QLabel()
                 icon_label.setPixmap(action_config['icon'].pixmap(24, 24))
                 layout.addWidget(icon_label)
 
-            # Ajouter le texte
             text_label = QLabel(action_config['text'])
             text_label.setAlignment(Qt.AlignVCenter)
             layout.addWidget(text_label)
 
             layout.addStretch()
-
-            # Créer l'action avec le widget
             widget_action = QWidgetAction(self)
             widget_action.setDefaultWidget(widget)
 
-            # Gestion du style et des interactions
             if action_config['signal']:
-                # Style et interaction pour les actions avec signal
                 widget.setStyleSheet("""
                     QWidget:hover {
                         background-color: rgba(91, 142, 125, 0.7);
@@ -549,21 +539,34 @@ class Menu:
                     QLabel {
                         color: rgba(0, 0, 0, 1); 
                     }
-                    QLabel:hover {
-                        background-color: transparent;
-                    }
                 """)
 
-                def create_click_handler(signal_name):
+                def create_click_handler(signal_name, icon_label=icon_label, text_label=text_label):
                     def click_handler(event):
-                        self.menuAction.emit(signal_name)
+                        if signal_name == 'darkmode':
+                            # Inverser le thème
+                            if self.apparence == 'white':
+                                self.dark_theme()
+                                self.apparence = 'dark'
+                            else:
+                                self.light_theme()
+                                self.apparence = 'white'
+
+                            # Mettre à jour l'icône et le texte
+                            new_theme = "Sombre" if self.apparence == "white" else "Claire"
+                            text_label.setText(f"Apparence {new_theme}")
+                            if icon_label:
+                                new_icon = getattr(self, f"{self.apparence}_mode_icon")
+                                icon_label.setPixmap(new_icon.pixmap(24, 24))
+                        else:
+                            self.menuAction.emit(signal_name)
+
                         self._m_logout_menu.hide()
 
                     return click_handler
 
                 widget.mousePressEvent = create_click_handler(action_config['signal'])
             else:
-                # Style pour les actions sans signal (désactivées)
                 widget.setStyleSheet("""
                     QWidget:disabled {
                         padding: 1px;

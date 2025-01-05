@@ -5,7 +5,7 @@ from PySide6 import QtWidgets
 from processing import *
 
 
-class DevisCreator(PostgreSQLDatabase, Formulaire, Layout):
+class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
     JSON = _JSON
     LIST = _LIST
     def __init__(self):
@@ -33,6 +33,10 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout):
         self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.onClientItemSelected)
         self.maindialog._b_manage_db_export_table.clicked.connect(lambda : dbTableToExcel(self))
         self.maindialog._b_export_inv_model.clicked.connect(lambda : ModelImportInventory(self))
+        self.maindialog._b_inventory_add.clicked.connect(lambda: self.setInventory(action="add"))
+        self.maindialog._b_inventory_update.clicked.connect(lambda: self.setInventory(action="update"))
+        self.maindialog._b_inventory_achat.clicked.connect(lambda : self.setInventory(action='purchase'))
+        self.maindialog._b_inventory_delete.clicked.connect(lambda: self.setInventory(action='delete'))
 
     def mkOutputFolder(self):
         self.outputfolder = Path.home() / "Documents" / "Sorties DevisCreator"

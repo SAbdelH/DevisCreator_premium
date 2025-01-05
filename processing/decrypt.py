@@ -1,6 +1,8 @@
 import json
 from collections import namedtuple
 from pathlib import Path
+
+from PySide6.QtCore import QDate
 from cryptography.fernet import Fernet
 
 source_dir = Path(__file__).parents[1]
@@ -44,8 +46,10 @@ with open(Path(source_dir, "core", "JSON"), "rb") as f:
     encrypted_bytes = f.read()
 decrypted_bytes = fernet.decrypt(encrypted_bytes)
 j = json.loads(decrypted_bytes.decode("utf-8"))
+# Contexte pour l'évaluation
+context = {"QDate": QDate}
 entete = list(j.keys())
-_JSON = namedtuple("_JSON", entete)(*[eval(j.get(key)) for key in entete])
+_JSON = namedtuple("_JSON", entete)(*[eval(j.get(key), context) for key in entete])
 
 # ---- AppleScript EXCEL vers PDF ------
 with open(Path(source_dir, "core", "SCPT"), "rb") as f:

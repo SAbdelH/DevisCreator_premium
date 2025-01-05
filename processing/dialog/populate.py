@@ -1,14 +1,18 @@
 from datetime import datetime, date
+from functools import partial
+from pathlib import Path
 
 from PySide6.QtCore import QSize, Qt, QDate, QTime
 from PySide6.QtGui import QBrush, QColor, QStandardItemModel, QStandardItem
-from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem
-from sqlalchemy import func, inspect, and_
+from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QListWidget
+from sqlalchemy import func, inspect, and_, text
+from sqlalchemy.orm import class_mapper
 
 from forms.gui.ui_agenda_items import AgendaItem
 from forms.gui.ui_inventory_items import InventoryItem
 from forms.gui.ui_client_statut import CustomDelegate
-from processing.database.model_public import User, Entreprise, Agenda, Ui_Update
+from processing.database.model_private import Chemin
+from processing.database.model_public import (User, Entreprise, Agenda, Ui_Update, Inventaires)
 from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
 from forms.gui.ui_card_employe import EmployeeCard
@@ -71,6 +75,7 @@ class PopulateWidget:
                             background - origin: content;
                         }}"""
                         )
+                self.maindialog.ump_last_update = datetime.now().date()
 
     def populateInputUserList(self, info):
         current_date = QDate.currentDate()
@@ -134,7 +139,7 @@ class PopulateWidget:
                     "active_valid_contact", "active_valid_bank"]
                     for func in functions:
                         getattr(self.maindialog, func)()
-                    self.maindialog.firstOpenFirm = False
+                    self.maindialog.fp_last_update = datetime.now().date()
         return l
 
     def populateAgenda(self):
@@ -201,6 +206,8 @@ class PopulateWidget:
                             background-position: center center;
                             background-origin: content;
                         }}""")
+
+                self.maindialog.agenda_last_update = datetime.now().date()
 
             dlg._lw_agenda.itemClicked.connect(self.onAgendaItemSelected)
             dlg._lw_agenda.scrollToBottom()
@@ -342,21 +349,65 @@ class PopulateWidget:
             except Exception as err:
                 self.maindialog.show_notification(str(err), LVL.warning)
 
-    def populateListInventory(self):
-        dlg = self.maindialog
-        dlg._lw_inventory_list_inventory.clear()
-        infos = [{"nom": "Samsung TV OS",'marque': "Samsung",
-                'quantity': 40, 'price': 1200.00,'discount': 12,
-                'icon': "/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/icon.png"},
-                {"nom": "LG TV OS", 'marque': "LG",
-                 'quantity': 10, 'price': 1250.00, 'discount': 0,
-                 'icon': "/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/icon.png"}
-                ]
+    def populateListInventory(self, liste: QListWidget):
+        liste.clear()
+        with self.Session() as session:
+            update = Ui_Update().verify_update(session, 'inventory',
+                                               filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
+            first = self.maindialog.firstOpenInventory
+            if first:  self.maindialog.mp_last_update = datetime.now().date()
 
-        for info in infos:
-            item = QListWidgetItem(dlg._lw_inventory_list_inventory)
-            custom_widget = InventoryItem(info)
-            item.setData(Qt.UserRole, info)
-            item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
-            dlg._lw_inventory_list_inventory.addItem(item)
-            dlg._lw_inventory_list_inventory.setItemWidget(item, custom_widget)
+            if first or (update and update.crea_date > self.maindialog.mp_last_update):
+                session.execute(text("SET lc_time TO 'fr_FR.UTF-8';"))
+                query = session.query(
+                    Inventaires.nom,
+                    Inventaires.prix,
+                    Inventaires.marque,
+                    Inventaires.quantite,
+                    Inventaires.remise,
+                    Inventaires.type_remise,
+                    Inventaires.quantifiable,
+                    Inventaires.louable,
+                    func.to_char(Inventaires.date_fabric, 'DD-MM-YYYY').label('date_fabric')
+                ).order_by(Inventaires.nom)
+                inventaires = query.all()
+                if inventaires:
+                    ContentPath = {}
+                    with self.privateSession() as privateSession:
+                        inventory_path = privateSession.query(Chemin.path).filter(Chemin.name == 'inventaire').first()
+                        if inventory_path:
+                            ContentPath = {
+                                file.stem: file.as_posix() for file in Path(inventory_path[0]).rglob("*")
+                            }
+                    for inventaire in inventaires:
+                        info = Inventaires.to_dict(inventaire)
+                        info["icon"] = ContentPath.get(inventaire.nom)
+                        item = QListWidgetItem(liste)
+                        custom_widget = InventoryItem(info)
+                        item.setData(Qt.UserRole, info)
+                        item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
+                        liste.addItem(item)
+                        liste.setItemWidget(item, custom_widget)
+                    self.maindialog.mp_last_update = datetime.now().date()
+
+            liste.itemClicked.connect(partial(self.onInventoryItemSelected, liste_name=liste.objectName()))
+
+    def onInventoryItemSelected(self, item: QListWidgetItem, liste_name: str):
+        dlg = self.maindialog
+        inventory_row = item.data(Qt.UserRole)
+        # Parcourir les colonnes définies dans MAPING_INVENTORY_POPULATE
+        for col in self.JSON.MAPING_INVENTORY_POPULATE:
+            if col in inventory_row:
+                widget, method, value_transform = self.JSON.MAPING_INVENTORY_POPULATE[col]
+                # Transformation de la valeur si nécessaire
+                value = value_transform(inventory_row.get(col, ''), liste_name)
+                widget_name = widget(inventory_row.get(col, ''), liste_name)
+                method_callable = method(inventory_row.get(col, ''), liste_name) if callable(
+                    method) else method
+
+                # Application de la méthode sur le widget si conditions respectées
+                widget_obj = getattr(dlg, widget_name)
+                if not (liste_name != "invList" and col in ("fabrication_date", "marque")):
+                    getattr(widget_obj, method_callable)(value)
+                    if col == "quantite" and liste_name != "invList" and value == 0:
+                        self.RaiseErreur(widget_obj)

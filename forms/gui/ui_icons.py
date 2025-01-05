@@ -544,3 +544,7 @@ class Icons:
     @property
     def database_table(self) -> QIcon:
         return self.__QIcon("tableau")
+
+    @property
+    def achatDialog(self) -> QPixmap:
+        return self.__QPixmap('panier')

@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>7</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -1200,7 +1200,7 @@ QCalendarWidget QAbstractItemView:enabled {
               </size>
              </property>
              <property name="currentIndex">
-              <number>1</number>
+              <number>0</number>
              </property>
              <widget class="QWidget" name="_p_signin">
               <layout class="QGridLayout" name="_g_signin">
@@ -6837,7 +6837,11 @@ QCalendarWidget QAbstractItemView:enabled {
          </layout>
         </item>
         <item row="1" column="0" colspan="3">
-         <widget class="QListWidget" name="_lw_inventory_list_inventory"/>
+         <widget class="QListWidget" name="_lw_inventory_list_inventory">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+         </widget>
         </item>
         <item row="1" column="3" rowspan="2" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
          <widget class="QFrame" name="_f_inventory_box_edit">
@@ -8239,7 +8243,6 @@ QCalendarWidget QAbstractItemView:enabled {
  </widget>
  <resources>
   <include location="resources.qrc"/>
-  <include location="../../../.designer/backup/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

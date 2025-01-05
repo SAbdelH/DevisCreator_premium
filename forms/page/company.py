@@ -61,8 +61,19 @@ class firmPage:
         self._l_icon_company_info_company.setObjectName(u"_l_icon_company_info_company")
         self._l_icon_company_info_company.setMinimumSize(QSize(380, 250))
         self._l_icon_company_info_company.setMaximumSize(QSize(16777215, 200))
-        self._l_icon_company_info_company.setPixmap(self.entreprise_pixmap_icon)
-        self._l_icon_company_info_company.setScaledContents(True)
+        #self._l_icon_company_info_company.setPixmap(self.entreprise_pixmap_icon)
+        self._l_icon_company_info_company.setScaledContents(False)
+        pixmap = self.entreprise_pixmap_icon
+        if not pixmap.isNull():
+            # Mise à l'échelle proportionnelle
+            scaled_pixmap = pixmap.scaled(
+                self._l_icon_company_info_company.size(),  # Taille du QLabel
+                Qt.KeepAspectRatio,  # Conserver le ratio
+                Qt.SmoothTransformation  # Transformation douce pour une meilleure qualité
+            )
+            self._l_icon_company_info_company.setPixmap(scaled_pixmap)
+
+
         self._v_right_info_company.addWidget(self._l_icon_company_info_company, 0,Qt.AlignTop)
         # PROGRESS BAR DES ETAPES DE CREATION
         labels = ["Entreprise", "Informations du dirigeant", "Adresse de l'entreprise", "Informations de contact",

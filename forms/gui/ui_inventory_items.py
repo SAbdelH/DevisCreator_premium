@@ -1,6 +1,7 @@
-from PySide6.QtCore import QSize
+from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QFont, QPixmap
 from PySide6.QtWidgets import QWidget, QFrame, QSizePolicy, QHBoxLayout, QLabel, QVBoxLayout, QLayout
+import imagesize
 
 
 class InventoryItem(QWidget):
@@ -8,16 +9,13 @@ class InventoryItem(QWidget):
         super().__init__(parent)
         self.setStyleSheet("""
                     QFrame #inventory_frame {
-                        background-color: rgba(240, 240, 240, 0.75);
+                        background-color: rgba(240, 240, 240, 0.65);
                         border-radius: 10px;
                     }
                     #_l_icon {
                         border: None;
                         border-radius: 10px;
                         background-color: rgba(255, 255, 255, 1);
-                    }
-                    #_l_price, #_l_remise {
-                        color: rgba(208, 211, 212, 1)
                     }
                 """)
         # Frame principal
@@ -34,9 +32,17 @@ class InventoryItem(QWidget):
         self._l_icon.setObjectName("_l_icon")
         self._l_icon.setMinimumSize(QSize(70, 70))
         self._l_icon.setMaximumSize(QSize(70, 70))
-        self._l_icon.setScaledContents(True)
+        self._l_icon.setScaledContents(False)
         if icon_path := info.get('icon'):
-            self._l_icon.setPixmap(QPixmap(icon_path))
+            pixmap = QPixmap(icon_path)
+            if not pixmap.isNull():
+                # Mise à l'échelle proportionnelle
+                scaled_pixmap = pixmap.scaled(
+                    self._l_icon.size(),  # Taille du QLabel
+                    Qt.KeepAspectRatio,  # Conserver le ratio
+                    Qt.SmoothTransformation  # Transformation douce pour une meilleure qualité
+                )
+                self._l_icon.setPixmap(scaled_pixmap)
         self._h_frame.addWidget(self._l_icon)
         # Info section
         self._v_info = QVBoxLayout()
@@ -60,13 +66,14 @@ class InventoryItem(QWidget):
         self._l_marque_name.setObjectName("_l_marque_name")
         self._h_inv_info.addWidget(self._l_marque_name)
 
-        self._l_quantity = QLabel("Qté : ", self.frame)
+        self._l_quantity = QLabel("Quantité : ", self.frame)
         self._l_quantity.setObjectName("_l_quantity")
-        self._l_quantity.setMaximumSize(QSize(35, 16777215))
+        self._l_quantity.setMaximumSize(QSize(60, 16777215))
         self._l_quantity.setFont(font)
         self._h_inv_info.addWidget(self._l_quantity)
 
-        self._l_quantity_value = QLabel(f"{info.get('quantity', 0)} Unités")
+        qv = info.get('quantite', 0)
+        self._l_quantity_value = QLabel(f"{qv} en stock{'s' if qv > 1 else ''}")
         self._l_quantity_value.setObjectName("_l_quantity_value")
         self._h_inv_info.addWidget(self._l_quantity_value)
 
@@ -84,7 +91,7 @@ class InventoryItem(QWidget):
         self._l_price.setMaximumSize(QSize(80, 16777215))
         self._v_price.addWidget(self._l_price)
 
-        self._l_price_value = QLabel(f"{info.get('price', 0.0):,.2f} €")
+        self._l_price_value = QLabel(f"{info.get('prix', 0.0):,.2f} €")
         self._l_price_value.setObjectName("_l_price_value")
         self._l_price_value.setMaximumSize(QSize(80, 16777215))
         self._v_price.addWidget(self._l_price_value)
@@ -98,7 +105,9 @@ class InventoryItem(QWidget):
         self._l_remise.setMaximumSize(QSize(80, 16777215))
         self._v_remise.addWidget(self._l_remise)
 
-        self._l_remise_value = QLabel(f"{info.get('discount', 0.0):.2f} %")
+        if not (remise := info.get('remise')):
+            remise = 0.0
+        self._l_remise_value = QLabel(f"{remise:.2f} %")
         self._l_remise_value.setObjectName("_l_marque")
         self._l_remise_value.setMaximumSize(QSize(80, 16777215))
         self._v_remise.addWidget(self._l_remise_value)
@@ -110,3 +119,12 @@ class InventoryItem(QWidget):
         outer_layout.setContentsMargins(0, 0, 0, 0)
         outer_layout.setSpacing(0)
         outer_layout.addWidget(self.frame)
+
+    def get_image_orientation(self, image_path):
+        width, height = imagesize.get(image_path)
+
+        if width > height:
+            return "landscape"
+        elif height > width:
+            return "portrait"
+        return "square"

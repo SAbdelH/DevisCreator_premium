@@ -1,5 +1,7 @@
+from pathlib import Path
+
 from PySide6.QtCore import QSize, Qt, QCoreApplication
-from PySide6.QtGui import QImageReader
+from PySide6.QtGui import QImageReader, QAction
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QLabel, QHBoxLayout, QLineEdit, QPushButton, QListWidget,
     QVBoxLayout, QLayout, QDoubleSpinBox, QSpinBox, QCheckBox, QComboBox, QDateEdit, QToolButton)
 
@@ -110,6 +112,8 @@ class InventoryPage:
         self._le_inventory_name.setObjectName(u"_le_inventory_name")
         self._le_inventory_name.setMinimumSize(QSize(0, 30))
         self._le_inventory_name.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._le_inventory_name.setClearButtonEnabled(True)
+        self._le_inventory_name.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._v_inventory_input.addWidget(self._le_inventory_name)
         self._l__inventory_marque = QLabel(self._f_inventory_box_edit)
         self._l__inventory_marque.setObjectName(u"_l__inventory_marque")
@@ -119,6 +123,8 @@ class InventoryPage:
         self._le_inventory_marque.setObjectName(u"_le_inventory_marque")
         self._le_inventory_marque.setMinimumSize(QSize(0, 30))
         self._le_inventory_marque.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._le_inventory_marque.setClearButtonEnabled(True)
+        self._le_inventory_marque.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._v_inventory_input.addWidget(self._le_inventory_marque)
         self._l_inventory_price = QLabel(self._f_inventory_box_edit)
         self._l_inventory_price.setObjectName(u"_l_inventory_price")
@@ -192,6 +198,8 @@ class InventoryPage:
         self._le_inventory_illustration_path.setObjectName(u"_le_inventory_illustration_path")
         self._le_inventory_illustration_path.setMinimumSize(QSize(0, 30))
         self._le_inventory_illustration_path.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._le_inventory_illustration_path.setClearButtonEnabled(True)
+        self._le_inventory_illustration_path.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._h_inventory_illustration.addWidget(self._le_inventory_illustration_path)
         self._tb_inventory_illustration_path = QToolButton(self._f_inventory_box_edit)
         self._tb_inventory_illustration_path.setObjectName(u"_tb_inventory_illustration_path")
@@ -208,6 +216,8 @@ class InventoryPage:
         self._le_inventory_import_path.setObjectName(u"_le_inventory_import_path")
         self._le_inventory_import_path.setMinimumSize(QSize(0, 30))
         self._le_inventory_import_path.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self._le_inventory_import_path.setClearButtonEnabled(True)
+        self._le_inventory_import_path.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._h_inventory_import_path.addWidget(self._le_inventory_import_path)
         self._tb_inventory_import_path = QToolButton(self._f_inventory_box_edit)
         self._tb_inventory_import_path.setObjectName(u"_tb_inventory_import_path")
@@ -298,6 +308,9 @@ class InventoryPage:
         self._tb_inventory_illustration_path.clicked.connect(
             lambda: self.__setImportPath("_tb_inventory_illustration_path"))
 
+        self._le_inventory_import_path.textChanged.connect(self.__EnabledButtons)
+        self._lw_inventory_list_inventory.itemDoubleClicked.connect(self.InventoryboxEdit)
+
         self.__retranslateUi()
 
     def __retranslateUi(self):
@@ -382,3 +395,20 @@ class InventoryPage:
             self._cb_inventory_quantifiable.setChecked(False)
         else:
             self._cb_inventory_location.setChecked(False)
+
+    def __EnabledButtons(self):
+        condition = Path(self._le_inventory_import_path.text()).suffix != ".xlsx"
+        self._b_inventory_achat.setEnabled(condition)
+        self._b_inventory_delete.setEnabled(condition)
+        self._b_inventory_update.setEnabled(condition)
+        self._le_inventory_illustration_path.setEnabled(condition)
+        self._le_inventory_name.setEnabled(condition)
+        self._le_inventory_marque.setEnabled(condition)
+        self._s_inventory_quantity.setEnabled(condition)
+        self._ds_inventory_remise.setEnabled(condition)
+        self._ds_inventory_price.setEnabled(condition)
+        self._de_inventory_fabric.setEnabled(condition)
+        self._cb_inventory_location.setEnabled(condition)
+        self._cb_inventory_quantifiable.setEnabled(condition)
+        self._cbx_inventory_type_remise.setEnabled(condition)
+        self._tb_inventory_illustration_path.setEnabled(condition)

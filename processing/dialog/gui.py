@@ -14,13 +14,13 @@ class Update:
         elif text == '_p_info_company':
             if self.WorkspaceExist(): self.populateInfoCompany()
         elif text == '_p_dashboard':
-            self.populateAgenda()
+            if self.WorkspaceExist(): self.populateAgenda()
         elif text == "_p_clients":
             self.populateClientTable()
         elif text == "_p_manage_db":
             self.populateDatabaseExplorer()
         elif text == "_p_inventory":
-            self.populateListInventory()
+            if self.WorkspaceExist(): self.populateListInventory(self.maindialog._lw_inventory_list_inventory)
 
     def on_menu_clicked(self, text):
         if text == 'logout':

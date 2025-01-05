@@ -12,10 +12,7 @@ def ModelImportInventory(self):
         for i, name in enumerate(self.LIST.MODEL_INVENTORY_COLUMNS):
             cellule = ws.cell(row=1, column=i + 1)
             cellule.value = name
-            # cellule.font = openpyxl.styles.Font(bold=True, name="Calibri", size=13, color="000000")
             cellule.alignment = self.alignerCentrer
-            # cellule.fill = openpyxl.styles.PatternFill(start_color="f4a261", end_color="f4a261", fill_type="solid")
-            # self.BordureExterieur(wb, ws, self.thin, 1, 1, i + 1, i + 1, file)
 
         largCol = {1: 43, 3: 27, 6: 15, 7: 16, 8: 16, 9: 16, 10: 16, 11: 16, 12: 71}
         for col in range(1, 13):

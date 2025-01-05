@@ -22,7 +22,7 @@
             }
         },
     'crea_date': {
-        'type': 'Date'
+        'type': 'DateTime','type_params': {'timezone': False}, 'default': 'func.now()', 'onupdate': 'func.now()'
     },
 },
 'constraints': [

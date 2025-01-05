@@ -4,7 +4,7 @@
     'columns': {
         'id': {'type': 'BigInteger', 'primary_key': True, 'autoincrement': True},
         'nom': {'type': 'String'},
-        'crea_date': {'type': 'Date'},
+        'crea_date': {'type': 'DateTime', 'type_params': {'timezone': False}, 'default': 'func.now()', 'onupdate': 'func.now()'},
         'crea_user': {'type': 'String'},
     },
     'constraints': [

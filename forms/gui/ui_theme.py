@@ -197,7 +197,7 @@ class theme:
 	height: 40px;
 }}
 #_f_calendar QListWidget::item {{ margin: 0px 5px;}}
-#_f_calendar QListWidget::item:selected {{
+#_f_calendar QListWidget::item:selected, #_p_inventory QListWidget::item:selected {{
 	border-top: 5px solid rgba(247, 220, 111, 1);
 	color: rgba(0, 0, 0, 1);
 	margin: 0px;
@@ -648,6 +648,9 @@ QCalendarWidget QAbstractItemView::item:selected {{
 	background-color: rgba(235, 245, 251, 1);
 }}
         """)
+
+    def dark_theme(self):
+        self.centralwidget.setStyleSheet("")
 
     @property
     def shadow(self):

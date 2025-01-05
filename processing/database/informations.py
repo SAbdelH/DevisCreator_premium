@@ -4,8 +4,8 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QInputDialog, QMessageBox
 from sqlalchemy import or_, func
 
-from processing.database.base_public import Base
-from processing.database.model_public import User, Entreprise, Agenda, Clients, Inventaires
+from processing.database.base import Base
+from processing.database.model_public import User, Entreprise, Agenda, Clients, Inventaires, Ui_Update
 from processing.database.siren import getInfoEtablissement
 from processing.database.model_tools import create_schemas, create_tables
 from processing.enumerations import LevelCritic as LVL
@@ -51,6 +51,10 @@ class Informations:
                     __USER.set_expire_account(selectedDate)
                     session.add(__USER)
 
+                updt = Ui_Update(nom='user', crea_date=func.now(), crea_user=func.current_user())
+                session.add(updt)
+                session.commit()
+
             self.populateUserList()
         except Exception as err:
             self.maindialog.show_notification(err, LVL.warning)
@@ -65,6 +69,9 @@ class Informations:
         with self.Session() as session:
             utilisateur = session.query(User).filter(User.identifiant == id).first()
             session.delete(utilisateur)
+            updt = Ui_Update(nom='user', crea_date=func.now(), crea_user=func.current_user())
+            session.add(updt)
+            session.commit()
         self.populateUserList()
 
     def createWorkspace(self):
@@ -199,6 +206,10 @@ class Informations:
                         else:
                             session.query(Agenda).filter_by(id=agenda_id).delete()
 
+            updt = Ui_Update(nom='agenda', crea_date=func.now(), crea_user=func.current_user())
+            session.add(updt)
+            session.commit()
+
         # Repeupler l'agenda après l'ajout/mise à jour
         self.populateAgenda()
 
@@ -226,35 +237,16 @@ class Informations:
 
     def setInventory(self, **value):
         action = value.get('action')
-        nom = value.get('nom')
-        prix = value.get('prix')
-        marque = value.get('marque')
-        quantite = value.get('quantite')
-        remise = value.get('remise')
-        type_remise = value.get('type_remise')
-        quantifiable = value.get('quantifiable')
-        louable = value.get('louable')
-        date_fabric = value.get('date_fabric')
         try:
-            with self.Session() as session:
-                if action in('add', 'purchase', 'update'):
-                    inventory = session.query(Inventaires).filter(Inventaires.nom == nom).first()
-                    if inventory:
-                        inventory.nom = nom
-                        inventory.prix = prix
-                        inventory.marque = marque
-                        inventory.quantite = quantite
-                        inventory.remise = remise
-                        inventory.type_remise = type_remise
-                        inventory.quantifiable = quantifiable
-                        inventory.louable = louable
-                        inventory.date_fabric = date_fabric
-                    else:
-                        __Inventaire = Inventaires(nom=nom, prix=prix, marque=marque, quantite=quantite,
-                        type_remise= type_remise, remise=remise, quantifiable=quantifiable, louable=louable,
-                        date_fabric=func.current_date(), crea_user=func.current_user())
-                        session.add(__Inventaire)
-                else:
+            if action in ('add', 'purchase', 'update'):
+                self.inventoryInsert(action)
+            else:
+                with self.Session() as session:
+                    nom = self.maindialog._le_inventory_name.text()
                     session.query(Inventaires).filter(Inventaires.nom == nom).delete()
+                    updt = Ui_Update(nom='inventory', crea_date=func.now(), crea_user=func.current_user())
+                    session.add(updt)
+                    session.commit()
+            self.populateListInventory(self.maindialog._lw_inventory_list_inventory)
         except Exception as err:
             self.maindialog.show_notification(str(err), LVL.warning)

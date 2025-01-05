@@ -6,7 +6,7 @@
         'nom': {'type': 'String'},
         'prix': {'type': 'Numeric', 'type_params': {'precision': 10, 'scale': 3}},
         'quantite': {'type': 'Integer'},
-        'crea_date': {'type': 'Date'},
+        'crea_date': {'type': 'DateTime', 'type_params': {'timezone': False}, 'default': 'func.now()', 'onupdate': 'func.now()'},
         'crea_user': {'type': 'String'},
     },
     'constraints': [

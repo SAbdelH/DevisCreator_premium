@@ -7,6 +7,7 @@
         'group_id': {'type': 'String', 'nullable': False},
         'abonnement': {'type': 'String', 'nullable': False, 'default': 'basic'},
         'is_active': {'type': 'Boolean', 'default': True},
+        'crea_date': {'type': 'DateTime', 'type_params': {'timezone': True}, 'nullable': False}
     },
     'constraints': [
         {
