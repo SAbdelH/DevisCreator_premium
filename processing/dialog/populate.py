@@ -2,11 +2,10 @@ from datetime import datetime, date
 from functools import partial
 from pathlib import Path
 
-from PySide6.QtCore import QSize, Qt, QDate, QTime
-from PySide6.QtGui import QBrush, QColor, QStandardItemModel, QStandardItem
+from PySide6.QtCore import QSize, Qt, QDate
+from PySide6.QtGui import QBrush, QColor, QIcon, QPixmap
 from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QListWidget, QApplication
 from sqlalchemy import func, inspect, and_, text
-from sqlalchemy.orm import class_mapper
 
 from forms.gui.ui_agenda_items import AgendaItem
 from forms.gui.ui_inventory_items import InventoryItem
@@ -75,7 +74,7 @@ class PopulateWidget:
                             background - origin: content;
                         }}"""
                         )
-                self.maindialog.ump_last_update = datetime.now().date()
+                self.maindialog.ump_last_update = datetime.now()
 
     def populateInputUserList(self, info):
         current_date = QDate.currentDate()
@@ -103,7 +102,7 @@ class PopulateWidget:
         with self.Session() as session:
             update = Ui_Update().verify_update(session, 'company')
             first = self.maindialog.firstOpenFirm
-            if first:  self.maindialog.fp_last_update = datetime.now().date()
+            if first:  self.maindialog.fp_last_update = datetime.now()
 
             if first or (update and update.crea_date > self.maindialog.fp_last_update):
                 company = session.query(Entreprise).first()
@@ -149,7 +148,7 @@ class PopulateWidget:
             update = Ui_Update().verify_update(session, 'agenda',
                                             filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
             first = self.maindialog.firstOpenDashboard
-            if first:  self.maindialog.agenda_last_update = datetime.now().date()
+            if first:  self.maindialog.agenda_last_update = datetime.now()
 
             if first or (update and update.crea_date > self.maindialog.agenda_last_update):
                 agenda = (
@@ -349,15 +348,25 @@ class PopulateWidget:
             except Exception as err:
                 self.maindialog.show_notification(str(err), LVL.warning)
 
-    def populateListInventory(self, liste: QListWidget):
+    def populateListInventory(self, liste: QListWidget, filter_text: str = ""):
         liste.clear()
-        with self.Session() as session:
-            update = Ui_Update().verify_update(session, 'inventory',
-                                               filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
-            first = self.maindialog.firstOpenInventory
-            if first:  self.maindialog.mp_last_update = datetime.now().date()
+        _LIST_NAME = liste.objectName()
 
-            if first or (update and update.crea_date > self.maindialog.mp_last_update):
+        with (self.Session() as session):
+            update = Ui_Update(
+            ).verify_update(session,
+                            'inventory',
+                            filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant
+                            )
+            first = self.maindialog.firstOpenInventory or self.maindialog.firstOpenFacture or self.maindialog.firstOpenDevis
+            if first:
+                self.maindialog.mp_last_update = datetime.now()
+                self.maindialog.ip_last_update = datetime.now()
+
+            updt = ((update and update.crea_date > self.maindialog.mp_last_update) or
+                    (update and update.crea_date > self.maindialog.ip_last_update))
+
+            if first or updt or filter_text:
                 session.execute(text("SET lc_time TO 'fr_FR.UTF-8';"))
                 query = session.query(
                     Inventaires.nom,
@@ -370,6 +379,9 @@ class PopulateWidget:
                     Inventaires.louable,
                     func.to_char(Inventaires.date_fabric, 'DD-MM-YYYY').label('date_fabric')
                 ).order_by(Inventaires.nom)
+                # Ajouter un filtre basé sur le texte saisi
+                if filter_text:
+                    query = query.filter(Inventaires.nom.ilike(f"%{filter_text}%"))
                 inventaires = query.all()
                 if inventaires:
                     ContentPath = {}
@@ -379,18 +391,33 @@ class PopulateWidget:
                             ContentPath = {
                                 file.stem: file.as_posix() for file in Path(inventory_path[0]).rglob("*")
                             }
-                    for inventaire in inventaires:
-                        info = Inventaires.to_dict(inventaire)
-                        info["icon"] = ContentPath.get(inventaire.nom)
-                        item = QListWidgetItem(liste)
-                        custom_widget = InventoryItem(info)
-                        item.setData(Qt.UserRole, info)
-                        item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
-                        liste.addItem(item)
-                        liste.setItemWidget(item, custom_widget)
-                    self.maindialog.mp_last_update = datetime.now().date()
+                    self.all_Inventory_list_populate(inventaires, ContentPath, _LIST_NAME, filter_text!="")
 
-            liste.itemClicked.connect(partial(self.onInventoryItemSelected, liste_name=liste.objectName()))
+    def all_Inventory_list_populate(self, inventaires, ContentPath, _LIST_NAME, filter: bool = False):
+        dlg = self.maindialog
+        __allList = [dlg._lw_inventory_list_inventory, dlg._lw_invoice_list_inventory]
+        listes = [LW for LW in __allList if LW.objectName() == _LIST_NAME] if filter else __allList
+        for liste in listes:
+            for inventaire in inventaires:
+                info = Inventaires.to_dict(inventaire)
+                info["icon"] = ContentPath.get(inventaire.nom)
+                if _LIST_NAME == "_lw_inventory_list_inventory":
+                    item = QListWidgetItem(liste)
+                    custom_widget = InventoryItem(info)
+                    item.setSizeHint(custom_widget.sizeHint())
+                else:
+                    icon = QIcon(ContentPath.get(inventaire.nom))
+                    item = QListWidgetItem(icon, inventaire.nom)
+
+                item.setData(Qt.UserRole, info)
+                # Ajuste la taille de l'item selon le widget
+                liste.addItem(item)
+                if _LIST_NAME == "_lw_inventory_list_inventory":
+                    liste.setItemWidget(item, custom_widget)
+
+            dlg.mp_last_update = datetime.now().date()
+
+            liste.itemClicked.connect(partial(self.onInventoryItemSelected, liste_name=_LIST_NAME))
 
     def onInventoryItemSelected(self, item: QListWidgetItem, liste_name: str):
         dlg = self.maindialog
@@ -405,14 +432,30 @@ class PopulateWidget:
                 method_callable = method(inventory_row.get(col, ''), liste_name) if callable(
                     method) else method
 
+
                 # widget
                 widget_obj = getattr(dlg, widget_name)
-                widget_obj.blockSignals(True)
-                # Appliquer la méthode sur le widget
-                getattr(widget_obj, method_callable)(value)
-                widget_obj.blockSignals(False)
+                # Appliquer la méthode spécifiée sur le widget avec la valeur donnée
+                method = getattr(widget_obj, method_callable)
+                method(value)
                 widget_obj.repaint()
                 QApplication.processEvents()
 
                 if col == "quantite" and liste_name != "_lw_inventory_list_inventory" and value == 0:
                     self.RaiseErreur(widget_obj)
+
+        if liste_name != "_lw_inventory_list_inventory":
+            self.maindialog._l_invoice_preview_name.setText(inventory_row.get("nom"))
+            self.maindialog._l_invoice_preview_marque.setText(inventory_row.get("marque"))
+            self.maindialog._l_invoice_preview_quantity.setText(str(inventory_row.get("quantite")))
+            self.maindialog._l_invoice_preview.setScaledContents(False)
+            if icon_path := inventory_row.get('icon'):
+                pixmap = QPixmap(icon_path)
+                if not pixmap.isNull():
+                    # Mise à l'échelle proportionnelle
+                    scaled_pixmap = pixmap.scaled(
+                        self.maindialog._l_invoice_preview.size(),  # Taille du QLabel
+                        Qt.KeepAspectRatio,  # Conserver le ratio
+                        Qt.SmoothTransformation  # Transformation douce pour une meilleure qualité
+                    )
+                    self.maindialog._l_invoice_preview.setPixmap(scaled_pixmap)

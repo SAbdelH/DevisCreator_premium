@@ -35,12 +35,13 @@ class ActivityInsert:
                 with self.Session() as session:
                     for idx, ligne in enumerate(ws.iter_rows(min_row=2, max_row=ws.max_row, values_only=True), start=2):
                         __params = {nameColumn: ligne[index - 1] for nameColumn, index in colExist.items()}
-                        __params['crea_user'] = WorkSession.get_current_user()
-                        self.__action(session,__params)
+                        __params['quantifiable'] = True if __params.get('quantifiable').lower() == 'oui' else False
+                        __params['louable'] = True if __params.get('louable').lower() == 'oui' else False
+                        __params['crea_user'] = WorkSession.get_current_user().identifiant
+                        exist_inv = exist_inv if (result := self.__action(session, __params)) == 0 else result
                     updt = Ui_Update(nom='inventory', crea_date=func.now(), crea_user=func.current_user())
                     session.add(updt)
                     session.commit()
-                exist_inv = 1
         else:
             remise = self.maindialog._ds_inventory_remise.value()
             type_remise = self.maindialog._cbx_inventory_type_remise.currentText()
@@ -58,10 +59,10 @@ class ActivityInsert:
                 "prix achat": purchase,
                 "date_fabric": self.maindialog._de_inventory_fabric.date().toString("yyyy-MM-dd"),
                 "lien": self.maindialog._le_inventory_illustration_path.text().strip(),
-                "crea_user" : WorkSession.get_current_user()
+                "crea_user" : WorkSession.get_current_user().identifiant
             }
             with self.Session() as session:
-                exist_inv = self.__action(session, __params, 'dlg')
+                exist_inv = exist_inv if (result := self.__action(session, __params, 'dlg')) == 0 else result
                 updt = Ui_Update(nom='inventory', crea_date=func.now(), crea_user=func.current_user())
                 session.add(updt)
                 session.commit()

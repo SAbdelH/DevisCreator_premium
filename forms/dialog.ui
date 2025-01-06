@@ -1137,7 +1137,7 @@ QCalendarWidget QAbstractItemView:enabled {
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -5174,7 +5174,16 @@ QCalendarWidget QAbstractItemView:enabled {
             </widget>
            </item>
            <item>
-            <widget class="QListWidget" name="_lw_invoice_list_inventory"/>
+            <widget class="QListWidget" name="_lw_invoice_list_inventory">
+             <property name="selectionRectVisible">
+              <bool>true</bool>
+             </property>
+             <item>
+              <property name="text">
+               <string>Nouvel élément</string>
+              </property>
+             </item>
+            </widget>
            </item>
            <item>
             <widget class="QFrame" name="_f_invoice_preview_card">
@@ -5324,6 +5333,9 @@ QCalendarWidget QAbstractItemView:enabled {
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignCenter</set>
                    </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
                   </widget>
                  </item>
                  <item row="3" column="1" colspan="2">
@@ -5333,6 +5345,9 @@ QCalendarWidget QAbstractItemView:enabled {
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignCenter</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
                    </property>
                   </widget>
                  </item>

@@ -15,7 +15,7 @@
         lambda val, liste_name: float(val) if val else 0,
     ),
     "quantite": (
-        lambda val, liste_name: "_s_inventory_quantity",
+        lambda val, liste_name: "_s_inventory_quantity" if liste_name == "_lw_inventory_list_inventory" else "_s_invoice_quantity",
         "setValue",
         lambda val, liste_name: int(val) if val else 0,
     ),

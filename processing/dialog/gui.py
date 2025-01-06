@@ -1,8 +1,9 @@
 import os
 import subprocess
+from functools import partial
 from pathlib import Path
 
-from PySide6.QtWidgets import QFileDialog
+from PySide6.QtWidgets import QFileDialog, QListWidget
 
 
 class Update:
@@ -19,8 +20,19 @@ class Update:
             self.populateClientTable()
         elif text == "_p_manage_db":
             self.populateDatabaseExplorer()
-        elif text == "_p_inventory":
-            if self.WorkspaceExist(): self.populateListInventory(self.maindialog._lw_inventory_list_inventory)
+        elif text in ("devis", "factures", "_p_inventory"):
+            if self.WorkspaceExist():
+                liste = self.maindialog._lw_inventory_list_inventory if text == "_p_inventory" \
+                    else self.maindialog._lw_invoice_list_inventory
+                self.populateListInventory(liste)
+                if text == "_p_inventory":
+                    self.maindialog._le_inventory_search_product.textChanged.connect(
+                        partial(self.onSearchTextChanged, liste)
+                    )
+                else:
+                    self.maindialog._le_invoice_inventory_filter.textChanged.connect(
+                        partial(self.onSearchTextChanged, liste)
+                )
 
     def on_menu_clicked(self, text):
         if text == 'logout':
@@ -47,3 +59,6 @@ class Update:
                 if Path(lien).is_file()
                 else subprocess.Popen(["xdg-open", lien])
             )
+
+    def onSearchTextChanged(self, liste: QListWidget, text: str):
+        self.populateListInventory(liste, filter_text=text.strip())
