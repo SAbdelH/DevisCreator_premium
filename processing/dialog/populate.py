@@ -1,3 +1,4 @@
+from collections import namedtuple
 from datetime import datetime, date
 from functools import partial
 from pathlib import Path
@@ -151,11 +152,19 @@ class PopulateWidget:
             if first:  self.maindialog.agenda_last_update = datetime.now()
 
             if first or (update and update.crea_date > self.maindialog.agenda_last_update):
+                session.execute(text("SET lc_time TO 'fr_FR.UTF-8';"))
                 agenda = (
                     session.query(
                         Agenda.id,
                         Agenda.titre,
                         Agenda.description,
+                        func.substr(func.to_char(Agenda.jour, 'TMDay'),1,3).label('day'),
+                        func.to_char(Agenda.jour, 'dd').label('day_number'),
+                        func.concat(
+                            func.to_char(Agenda.heure_debut, 'HH24:MI'),
+                            ' - ',
+                            func.to_char(Agenda.heure_fin, 'HH24:MI')
+                        ).label('delay'),
                         Agenda.heure_debut,
                         Agenda.jour,
                         Agenda.heure_fin,
@@ -177,27 +186,36 @@ class PopulateWidget:
                             'titre': rdv.titre,
                             'description': rdv.description,
                             'heure_debut': rdv.heure_debut,
+                            'day': rdv.day,
+                            'day_number': rdv.day_number,
+                            'delay': rdv.delay,
                             'jour' : rdv.jour,
                             'heure_fin': rdv.heure_fin,
                             'fjour': rdv.fjour
                         }
+                        infos = namedtuple("info", info.keys())(*info.values())
                         self.agendaID[row] = info
                         item = QListWidgetItem(dlg._lw_agenda)
-                        custom_widget = AgendaItem(rdv)  # Crée un widget personnalisé pour l'élément
+                        custom_widget = AgendaItem(infos)  # Crée un widget personnalisé pour l'élément
 
                         # Ajouter les données au QListWidgetItem
                         item.setData(Qt.UserRole, info)  # Associer les données à l'item
 
-                        item.setSizeHint(custom_widget.sizeHint())  # Ajuste la taille de l'item selon le widget
+                        item.setSizeHint(QSize(custom_widget.width(), 80))  # Ajuste la taille de l'item selon le widget
                         dlg._lw_agenda.addItem(item)
                         dlg._lw_agenda.setItemWidget(item, custom_widget)
                         dlg._lw_agenda.setStyleSheet("""
-                        #_lw_agenda {{
+                        #_lw_agenda {
                             border-radius: 5px;
                             border: 1px solid rgba(214, 219, 223, 1);
                             background-color: rgba(255, 255, 255, 0.7);
-                            padding: 5px;
-                        }}""")
+                            padding: 2px;
+                            spacing: 0px;
+                        }
+                        QListWidget::item {
+                            padding: 0px;  /* Supprime le padding des items */
+                            margin: 2px 0px;  /* Ajoute une petite marge verticale entre les items */
+                        }""")
                 else:
                     dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
                             background-image: url({dlg.a_faire_bg});

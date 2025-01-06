@@ -15,6 +15,8 @@ class InvoicePage:
         self.firstOpenFacture = True
         self.firstOpenDevis = True
 
+        self.CurrentInvoicePage: str|None = None
+
     def initUi_InvoiceForm(self):
         self._p_factures = QWidget()
         self._p_factures.setObjectName(u"_p_factures")
@@ -149,9 +151,11 @@ class InvoicePage:
         self._h_invoice_info_qty.setObjectName(u"_h_invoice_info_qty")
         self._cb_invoice_quantifiable = QCheckBox(self._f_invoice_input_cart)
         self._cb_invoice_quantifiable.setObjectName(u"_cb_invoice_quantifiable")
+        self._cb_invoice_quantifiable.toggled.connect(lambda: self._cb_invoice_location.setChecked(False))
         self._h_invoice_info_qty.addWidget(self._cb_invoice_quantifiable)
         self._cb_invoice_location = QCheckBox(self._f_invoice_input_cart)
         self._cb_invoice_location.setObjectName(u"_cb_invoice_location")
+        self._cb_invoice_location.toggled.connect(lambda: self._cb_invoice_quantifiable.setChecked(False))
         self._h_invoice_info_qty.addWidget(self._cb_invoice_location)
         self._g_invoice_input_cart.addLayout(self._h_invoice_info_qty, 8, 0, 1, 1)
         self._l_invoiceemptyInventorymess = QLabel(self._f_invoice_input_cart)
@@ -481,9 +485,11 @@ class InvoicePage:
         if sender == '_b_mcreate_devis':
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er le Devis", None))
             self.pageEnCours.emit("devis")
+            self.CurrentInvoicePage = "devis"
         else:
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er la Facture", None))
             self.pageEnCours.emit("factures")
+            self.CurrentInvoicePage = "factures"
 
         self.resetToggleSideMenu(sender)
 

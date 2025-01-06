@@ -226,6 +226,7 @@ class DashboardPage:
         self._le_titre_agenda = QLineEdit(self._f_calendar)
         self._le_titre_agenda.setObjectName(u"_le_titre_agenda")
         self._le_titre_agenda.setClearButtonEnabled(True)
+        self._le_titre_agenda.setMaxLength(42)
         self._h_title_agenda.addWidget(self._le_titre_agenda)
         self._v_calendar.addLayout(self._h_title_agenda)
         # AJOUT VERTICAL LAYOUT DESCRIPTION
