@@ -1,5 +1,6 @@
 {
     "Ajout inventaire": "inventaire",
+    "Achat inventaire": "achat",
     "Ajout utilisateur": "adduser",
     "Supprimer": "deluser",
     "Mise-à-jour utilisateur": "uptuser",

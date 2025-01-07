@@ -8,6 +8,7 @@ from processing import *
 class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
     JSON = _JSON
     LIST = _LIST
+    SCRIPT = _SCRIPTS
     def __init__(self):
         self.typeConnection = None
         self.cacheInfoCompany = None
@@ -18,6 +19,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
         [base.__init__(self) for base in DevisCreator.__bases__]
         self.maindialog.fermeture_fenetre.connect(self.fermeture)
         self.maindialog._b_signin.clicked.connect(lambda: self.login(sender="DB"))
+        self.maindialog.EnterPress.connect(lambda: self.login("DB"))
         self.maindialog._b_save_config_db.clicked.connect(self.saveLicence)
         self.maindialog._b_um_add_usr.clicked.connect(self.setUserInfo)
         self.maindialog._b_um_update_usr.clicked.connect(self.setUserInfo)

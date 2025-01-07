@@ -877,12 +877,6 @@ class theme:
             background-position: center center;
             background-origin: content;
         }}
-        #_tw_activity, #_tw_select_table {{
-            background-image: url({self.table_bg});
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-origin: content;
-        }}
         #_lw_activity {{
             background-image: url({self.activites_bg});
             background-repeat: no-repeat;

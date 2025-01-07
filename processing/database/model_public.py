@@ -12,11 +12,13 @@ from processing.decrypt import _public
 Ui_Update = create_dynamic_model(**dict(ChainMap(_public.UI_UPDATE, {"Base": Base, "additional_bases": (ModelMixin,)})))
 
 @staticmethod
-def verify_update(session, page: str, filtre=None):
+def verify_update(session, page: str|None = None, filtre=None):
     conditions = [
-        Ui_Update.nom == page,
         func.date(Ui_Update.crea_date) >= func.current_date()
     ]
+
+    if page:
+        conditions.append(Ui_Update.nom == page)
     if filtre:
         conditions.append(filtre)
 

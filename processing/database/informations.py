@@ -87,9 +87,10 @@ class Informations:
             # Étape 1 : Créer les schémas
             create_schemas(session, Base)
             session.commit()
-
-        # Étape 2 : Créer les tables
-        create_tables(engine, Base)
+            # Étape 2 : Créer les tables
+            create_tables(engine, Base)
+            # Étape 3 : Créer les vues
+            self.execute_sql(session, self.SCRIPT.INIT_DETAIL)
 
         # Rafraîchir les métadonnées après création des tables
         Base.metadata.reflect(bind=engine)

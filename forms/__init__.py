@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 ## Created by: Qt User Interface Compiler version 6.8.0
 import pyperclip
-from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QEvent)
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt, Signal, QEvent, Slot)
 from PySide6.QtWidgets import (QGridLayout, QMainWindow, QStackedWidget, QTabWidget, QWidget, QMessageBox, QLineEdit,
                                QFileDialog)
 from forms.animation import AnimationForm as ANF
+from forms.evenements import KeyPressFilter
 from forms.notifications import NotificationWidget
 from forms.temps import TempsForm as TF
 from forms.gui import *
@@ -14,6 +15,8 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
     pageEnCours = Signal(str)
     menuAction = Signal(str)
     fermeture_fenetre = Signal(QEvent)
+    deleteCart = Signal(list)
+    EnterPress = Signal(bool)
 
     def __init__(self):
         QMainWindow.__init__(self)
@@ -53,6 +56,12 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         # REGLAGES DES CLIPBOARD
         self._b_clients_clipbord_mail.clicked.connect(self.clipboard)
         self._b_clients_clipbord_num.clicked.connect(self.clipboard)
+        # ----- Les evenements ---------
+        self.keyPressFilter = KeyPressFilter(self._lw_list_cart)
+        self._lw_list_cart.installEventFilter(self.keyPressFilter)
+        self.keyPressFilter.itemsDeleted.connect(self.on_items_deleted)
+        # Installer le filtre d'événements pour détecter les touches
+        self._sw_main_dialog.installEventFilter(self)
 
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
@@ -201,3 +210,23 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
             filter=filtre
         )
         return file
+
+    @Slot(list)
+    def on_items_deleted(self, deleted_items):
+        """
+        Méthode appelée lorsque des éléments sont supprimés. Ici, on peut les traiter.
+        """
+        # Envoyer les éléments supprimés via le signal commandeSupprimees
+        self.deleteCart.emit(deleted_items)
+
+    def eventFilter(self, source, event):
+        if event.type() == QEvent.KeyPress:
+            if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+                # Vérifier si l'utilisateur est sur une page spécifique
+                current_index = self._sw_main_dialog.currentIndex()
+                logCI = self._sw_login_dialog.currentIndex()
+                loginPage = self.indexPage.get('_p_login')
+                if current_index == loginPage and logCI == 0:
+                    self.EnterPress.emit(True)
+
+        return super(Ui_MainWindow, self).eventFilter(source, event)

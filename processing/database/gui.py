@@ -17,12 +17,19 @@ class InteractionInterface:
         :return:
         """
         workspaceTables = ['activites', 'agenda', 'factures', 'devis', 'entreprise',
-                        'inventaires', 'clients', 'utilisateurs', 'achat', 'ui_update']
+                        'inventaires', 'clients', 'utilisateurs', 'achat', 'ui_update',
+                        'details']
         if self._tryConnect:
 
             inspector = inspect(self.Engine)
-            existTable = [table for schema in inspector.get_schema_names() for table in
-                        inspector.get_table_names(schema=schema) if table in workspaceTables]
+            existTable = [
+                table_or_view
+                for schema in inspector.get_schema_names()
+                for table_or_view in (
+                        inspector.get_table_names(schema=schema) + inspector.get_view_names(schema=schema)
+                )
+                if table_or_view in workspaceTables
+            ]
 
             if len(workspaceTables) == len(existTable):
                 return True

@@ -171,7 +171,10 @@ class DashboardPage:
         # LIST DES ACTIVITES
         self._lw_activity = QListWidget(self._f_graphic_finances)
         self._lw_activity.setObjectName(u"_lw_activity")
-        self._lw_activity.setMaximumSize(QSize(350, 16777215))
+        self._lw_activity.setMaximumSize(QSize(400, 16777215))
+        self._lw_activity.setIconSize(QSize(35, 35))
+        self._lw_activity.setProperty("isWrapping", True)
+        self._lw_activity.setWordWrap(True)
         self._v_activityList.addWidget(self._lw_activity)
         # BOUTON AFFICHER PLUS
         self._b_more_activity = QPushButton(self._f_graphic_finances)

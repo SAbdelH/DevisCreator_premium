@@ -15,7 +15,10 @@ class Update:
         elif text == '_p_info_company':
             if self.WorkspaceExist(): self.populateInfoCompany()
         elif text == '_p_dashboard':
-            if self.WorkspaceExist(): self.populateAgenda()
+            if self.WorkspaceExist():
+                self.populateAgenda()
+                self.populateActivitiesTable()
+                self.populateActivList()
         elif text == "_p_clients":
             self.populateClientTable()
         elif text == "_p_manage_db":

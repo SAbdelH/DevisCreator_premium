@@ -49,7 +49,7 @@ def dbTableToExcel(self):
             for row in range(row_count):
                 for col in range(self.maindialog._tw_select_table.columnCount()):
                     item = self.maindialog._tw_select_table.item(row, col)
-                    value = item.text() if item else ""  # Valeur vide si aucune donnée
+                    value = item.text()
                     ws.cell(row=row + 2, column=col + 1, value=value)
                     self.BordureExterieur(wb, ws, self.thin, row + 2, row + 2, col + 1, col + 1, file_path)
 

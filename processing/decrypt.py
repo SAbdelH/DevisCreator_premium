@@ -56,3 +56,11 @@ with open(Path(source_dir, "core", "SCPT"), "rb") as f:
     encrypted_bytes = f.read()
 decrypted_bytes = fernet.decrypt(encrypted_bytes)
 APPLESCRIPT = decrypted_bytes.decode("utf-8")
+
+# ---- Scripts SQL des traitement ------
+with open(Path(source_dir, "core", "SQL"), "rb") as f:
+    encrypted_bytes = f.read()
+decrypted_bytes = fernet.decrypt(encrypted_bytes)
+sc = json.loads(decrypted_bytes.decode("utf-8"))
+entete = list(sc.keys())
+_SCRIPTS = namedtuple("_SCRIPTS", entete)(*[sc.get(key) for key in entete])
