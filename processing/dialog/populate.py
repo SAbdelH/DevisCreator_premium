@@ -186,7 +186,7 @@ class PopulateWidget:
                             'titre': rdv.titre,
                             'description': rdv.description,
                             'heure_debut': rdv.heure_debut,
-                            'day': rdv.day,
+                            'day': f"{rdv.day}.",
                             'day_number': rdv.day_number,
                             'delay': rdv.delay,
                             'jour' : rdv.jour,

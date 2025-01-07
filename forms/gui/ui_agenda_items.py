@@ -22,7 +22,7 @@ class AgendaItem(QWidget):
             border-radius: 8px;
             }
         QFrame #agenda_frame {
-            background-color: rgba(216, 226, 220, 0.4);
+            background-color: rgba(216, 226, 220, 0.7);
             /*border: 1px dotted rgba(93, 109, 126, 1);*/
             border-radius: 8px;
             }
@@ -88,9 +88,16 @@ class AgendaItem(QWidget):
         self.title.setWordWrap(True)
         self.info_grid.addWidget(self.title, 0, 0, 1, 1)
 
+        self.line_2 = QFrame(self.frame)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.Shape.HLine)
+        self.line_2.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.info_grid.addWidget(self.line_2, 1, 0, 1, 1)
+
         self.delay = QLabel(info.delay)
         self.delay.setObjectName(u"delay")
-        self.delay.setMaximumSize(QSize(80, 16777215))
+        self.delay.setMaximumSize(QSize(80, 20))
         self.delay.setFont(font1)
         self.info_grid.addWidget(self.delay, 1, 0, 1, 1)
 
