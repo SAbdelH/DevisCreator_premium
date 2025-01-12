@@ -85,6 +85,10 @@ def create_tables(engine, base):
     # Importez les modèles pour qu'ils soient connus par SQLAlchemy
     base.metadata.create_all(bind=engine)
 
+def create_view(self, session):
+    self.execute_sql(session, self.SCRIPT.INIT_DETAIL)
+    self.execute_sql(session, self.SCRIPT.INIT_DETTE)
+
 def reset_sequences(session, model, col='id'):
     # Obtenir le nom de la séquence
     sequence_name = f"{model.__table__.fullname}_{col}_seq"  # Nom de la séquence basé sur le nom de la table

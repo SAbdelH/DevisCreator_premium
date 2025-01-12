@@ -15,21 +15,21 @@ class CustomDelegate(QStyledItemDelegate):
             text = index.data()  # Récupérer le texte de la cellule
             if text:
                 # Couleur de texte en fonction de la valeur
-                if text == "ACCEPTED":
-                    text_color = QColor("green")
-                elif text == "PENDING":
-                    text_color = QColor("orange")
-                elif text == "OVERDUE":
-                    text_color = QColor("red")
+                if text == "REGLÉ":
+                    text_color = QColor("#4E966F")
+                elif text == "EN ATTENTE":
+                    text_color = QColor("#D7A271")
+                elif text == "ENDETTÉ":
+                    text_color = QColor("#CB7072")
                 else:
                     text_color = QColor("black")
 
                 # Configurer les dimensions du texte
                 painter.setFont(option.font)
                 text_rect = painter.boundingRect(option.rect, Qt.AlignCenter, text)
-
+                bg = {"EN ATTENTE": "#FEF5EF", "ENDETTÉ": "#FDEDED"}
                 # Dessiner le fond arrondi autour du texte
-                painter.setBrush(QBrush(QColor(242, 243, 244)))  # Fond gris clair
+                painter.setBrush(QBrush(QColor(bg.get(text, "#F9F9F9"))))  # Fond gris clair
                 painter.setPen(Qt.NoPen)
                 margin = 4  # Marges autour du texte
                 text_rect.adjust(-margin, -margin, margin, margin)  # Étendre le rectangle

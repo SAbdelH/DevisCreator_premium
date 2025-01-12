@@ -7,7 +7,7 @@ from PySide6.QtWidgets import QFileDialog, QListWidget
 
 
 class Update:
-    def on_page_changed(self, text):
+    def on_page_changed(self, text:str):
         if text == '_p_login':
             self.maindialog.switchPageConnexion(0, self.checkLicence)
         elif text == '_p_user_management':
@@ -19,6 +19,8 @@ class Update:
                 self.populateAgenda()
                 self.populateActivitiesTable()
                 self.populateActivList()
+                if self.maindialog.firstOpenDashboard:
+                    self.maindialog.firstOpenDashboard = False
         elif text == "_p_clients":
             self.populateClientTable()
         elif text == "_p_manage_db":
@@ -27,14 +29,14 @@ class Update:
             if self.WorkspaceExist():
                 liste = self.maindialog._lw_inventory_list_inventory if text == "_p_inventory" \
                     else self.maindialog._lw_invoice_list_inventory
-                self.populateListInventory(liste)
+                self.populateListInventory(liste, "", text)
                 if text == "_p_inventory":
                     self.maindialog._le_inventory_search_product.textChanged.connect(
-                        partial(self.onSearchTextChanged, liste)
+                        partial(self.onSearchTextChanged, liste, page=text)
                     )
                 else:
                     self.maindialog._le_invoice_inventory_filter.textChanged.connect(
-                        partial(self.onSearchTextChanged, liste)
+                        partial(self.onSearchTextChanged, liste, page=text)
                 )
 
     def on_menu_clicked(self, text):
@@ -63,5 +65,5 @@ class Update:
                 else subprocess.Popen(["xdg-open", lien])
             )
 
-    def onSearchTextChanged(self, liste: QListWidget, text: str):
-        self.populateListInventory(liste, filter_text=text.strip())
+    def onSearchTextChanged(self, liste: QListWidget, text:str, page:str):
+        self.populateListInventory(liste, filter_text=text.strip(), page=page)

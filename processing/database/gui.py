@@ -18,7 +18,7 @@ class InteractionInterface:
         """
         workspaceTables = ['activites', 'agenda', 'factures', 'devis', 'entreprise',
                         'inventaires', 'clients', 'utilisateurs', 'achat', 'ui_update',
-                        'details']
+                        'details', 'dette_client']
         if self._tryConnect:
 
             inspector = inspect(self.Engine)

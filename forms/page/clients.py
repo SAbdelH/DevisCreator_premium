@@ -55,19 +55,18 @@ class clientsPage:
         clientTableColumn = 8
         if (self._tw_clients_table_info.columnCount() < clientTableColumn):
             self._tw_clients_table_info.setColumnCount(clientTableColumn)
-        col_larg = {1, 3}
+        col_larg = {0, 2, 4, 5, 6, 7}
         for i in range(clientTableColumn):
             __qtablewidgetitem = QTableWidgetItem()
             self._tw_clients_table_info.setHorizontalHeaderItem(i, __qtablewidgetitem)
             self._tw_clients_table_info.horizontalHeader().setSectionResizeMode(
-                i, QHeaderView.Stretch if i in col_larg else QHeaderView.Interactive
+                i, QHeaderView.ResizeMode.ResizeToContents if i in col_larg else QHeaderView.ResizeMode.Stretch
             )
-            if i in col_larg:
-                self._tw_clients_table_info.setColumnWidth(i, 100)
         self._tw_clients_table_info.setFrameStyle(0)
         self._tw_clients_table_info.setShowGrid(False)
         self._tw_clients_table_info.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self._tw_clients_table_info.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self._tw_clients_table_info.verticalHeader().setVisible(False)
         self._v_clients_table.addWidget(self._tw_clients_table_info)
         self._h_clients.addWidget(self._f_clients_table)
         self._f_clients_info_box = QFrame(self._p_clients)

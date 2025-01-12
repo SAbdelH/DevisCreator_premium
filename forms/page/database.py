@@ -22,6 +22,7 @@ class DbManagementPage:
         self._tw_select_table = QTableWidget(self._p_manage_db)
         self._tw_select_table.setObjectName(u"_tw_select_table")
         self._tw_select_table.horizontalHeader().setStretchLastSection(True)
+        self._tw_select_table.verticalHeader().setVisible(False)
         self._g_manage_db.addWidget(self._tw_select_table, 0, 1, 1, 2)
         self._hs_separator_manage_db_bottom = QSpacerItem(876, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._g_manage_db.addItem(self._hs_separator_manage_db_bottom, 1, 1, 1, 1)

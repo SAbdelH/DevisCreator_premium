@@ -7,7 +7,7 @@ class theme:
         self.centralwidget.setStyleSheet(f"""
         /* BACKGROUND PRINCIPAL */
         #centralwidget {{
-            background-color: rgba(246, 246, 246, 1);
+            background-color: rgba(232, 234, 236, 1);
             color: rgba(0, 0, 0, 1);
         }}
         

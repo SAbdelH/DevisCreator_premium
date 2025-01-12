@@ -7,7 +7,7 @@ from sqlalchemy import or_, func
 from processing.database.base import Base
 from processing.database.model_public import User, Entreprise, Agenda, Clients, Inventaires, Ui_Update
 from processing.database.siren import getInfoEtablissement
-from processing.database.model_tools import create_schemas, create_tables
+from processing.database.model_tools import create_schemas, create_tables, create_view
 from processing.enumerations import LevelCritic as LVL
 
 
@@ -90,7 +90,7 @@ class Informations:
             # Étape 2 : Créer les tables
             create_tables(engine, Base)
             # Étape 3 : Créer les vues
-            self.execute_sql(session, self.SCRIPT.INIT_DETAIL)
+            create_view(self, session)
 
         # Rafraîchir les métadonnées après création des tables
         Base.metadata.reflect(bind=engine)

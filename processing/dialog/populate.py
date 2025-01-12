@@ -2,6 +2,7 @@ from collections import namedtuple
 from datetime import datetime, date
 from functools import partial
 from pathlib import Path
+from pprint import PrettyPrinter
 
 from PySide6.QtCore import QSize, Qt, QDate
 from PySide6.QtGui import QBrush, QColor, QIcon, QPixmap
@@ -77,6 +78,7 @@ class PopulateWidget:
                         }}"""
                         )
                 self.maindialog.ump_last_update = datetime.now()
+                self.maindialog.firstOpenUser = False
 
     def populateInputUserList(self, info):
         current_date = QDate.currentDate()
@@ -141,6 +143,7 @@ class PopulateWidget:
                     for func in functions:
                         getattr(self.maindialog, func)()
                     self.maindialog.fp_last_update = datetime.now().date()
+                    self.maindialog.firstOpenFirm = False
         return l
 
     def populateAgenda(self):
@@ -250,35 +253,50 @@ class PopulateWidget:
 
     def populateClientTable(self):
         # Ajouter des lignes avec des données
-        data = [
-            ["10/11/2022", "Dr Emmet Brown - Kids Bath", "0639000000",  "mail@mail.com", "6,099", "-6,099", "ACCEPTED","10/12/2022"],
-            ["10/11/2022", "Dr Emmet Brown", "0639000001", "mail@mail.com", "6,109", "-6,879", "PENDING",
-             "10/12/2022"],
-            ["10/11/2022", "Abdel", "0639056789", "mail@mail.com", "7.07", "-1009,94", "OVERDUE",
-             "10/12/2022"],
-        ]
-        table_widget = self.maindialog._tw_clients_table_info
-        #table_widget.clear()
-        for row_index, row_data in enumerate(data):
-            table_widget.insertRow(row_index)
-            for col_index, value in enumerate(row_data):
-                item = QTableWidgetItem(value)
+        with self.Session() as session:
+            update = Ui_Update().verify_update(session, Ui_Update.nom in ('client', 'devis', 'facture'))
+            first = self.maindialog.firstOpenClient
+            if first:  self.maindialog.cp_last_update = datetime.now()
 
-                # Appliquer un style personnalisé pour la 6ème colonne (Status)
-                if col_index == 6:
-                    if value == "ACCEPTED":
-                        item.setForeground(QBrush(QColor("green")))  # Texte en vert
-                    elif value == "PENDING":
-                        item.setForeground(QBrush(QColor("orange")))  # Texte en orange
-                    elif value == "OVERDUE":
-                        item.setForeground(QBrush(QColor("red")))  # Texte en rouge
-                # Centrer les éléments
-                item.setTextAlignment(Qt.AlignCenter)
-                table_widget.setItem(row_index, col_index, item)
+            if first or (update and update.crea_date > self.maindialog.cp_last_update):
+                Qr = self.execute_sql(session, 'SELECT * FROM "informations"."dette_client"')
+                table_widget = self.maindialog._tw_clients_table_info
+                table_widget.clearContents()
+                if Qr.success and Qr.lines > 0:
+                    for row_index, row_data in enumerate(Qr.datas):
+                        table_widget.insertRow(row_index)
+                        for col_index, value in enumerate(row_data):
+                            item = QTableWidgetItem(str(value))
 
-        # Appliquer le délégué personnalisé
-        delegate = CustomDelegate()
-        table_widget.setItemDelegate(delegate)
+                            # Appliquer un style personnalisé pour la 6ème colonne (Status)
+                            if col_index == 6:
+                                if value == "REGLÉ":
+                                    item.setForeground(QBrush(QColor("#4E966F")))  # Texte en vert
+                                elif value == "EN ATTENTE":
+                                    item.setForeground(QBrush(QColor("#D7A271")))  # Texte en orange
+                                elif value == "ENDETTÉ":
+                                    item.setForeground(QBrush(QColor("#CB7072")))  # Texte en rouge
+                            # Centrer les éléments
+                            item.setTextAlignment(Qt.AlignCenter)
+                            table_widget.setItem(row_index, col_index, item)
+
+                    # Appliquer le délégué personnalisé
+                    delegate = CustomDelegate()
+                    table_widget.setItemDelegate(delegate)
+                    table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
+                        background-image: url("");
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-origin: content;
+                    }}""")
+                    self.maindialog.firstOpenClient = False
+                else:
+                    table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
+                        background-image: url({self.maindialog.clients_bg});
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-origin: content;
+                    }}""")
 
     def onClientItemSelected(self):
         table_widget = self.maindialog._tw_clients_table_info
@@ -287,10 +305,10 @@ class PopulateWidget:
             self.maindialog._le_clients_profil_name.setText(table_widget.item(selected_row, 1).text())
             self.maindialog._le_clients_num_value.setText(table_widget.item(selected_row, 2).text())
             self.maindialog._le_clients_mail_value.setText(table_widget.item(selected_row, 3).text())
-            self.maindialog._ds_clients_dette.setValue(float(table_widget.item(selected_row, 5).text().replace(',', '.')))
+            self.maindialog._ds_clients_dette.setValue(float(table_widget.item(selected_row, 5).text().replace(' €', '')))
 
     def populateDatabaseExplorer(self):
-        first = self.maindialog.firstOpenUser
+        first = self.maindialog.firstOpenDbManager
         if first:
             self.maindialog._trw_db_structure.clear()
             inspector = inspect(self.Engine)
@@ -320,6 +338,7 @@ class PopulateWidget:
 
             self.maindialog._trw_db_structure.insertTopLevelItems(0, items)
             self.maindialog._trw_db_structure.itemDoubleClicked.connect(self.onTreeItemDoubleClicked)
+            self.maindialog.firstOpenDbManager = False
 
     def onTreeItemDoubleClicked(self, item, column):
         self.maindialog._b_manage_db_export_table.setEnabled(True)
@@ -367,23 +386,25 @@ class PopulateWidget:
             except Exception as err:
                 self.maindialog.show_notification(str(err), LVL.warning)
 
-    def populateListInventory(self, liste: QListWidget, filter_text: str = ""):
+    def populateListInventory(self, liste: QListWidget, filter_text:str="", page:str|None=None):
         liste.clear()
         _LIST_NAME = liste.objectName()
 
-        with (self.Session() as session):
+        with self.Session() as session:
             update = Ui_Update(
             ).verify_update(session,
                             'inventory',
                             filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant
                             )
-            first = self.maindialog.firstOpenInventory or self.maindialog.firstOpenFacture or self.maindialog.firstOpenDevis
-            if first:
+            first = self.maindialog.firstOpenInventory if page == "_p_inventory" else \
+                            self.maindialog.firstOpenFacture if page=="factures" else  self.maindialog.firstOpenDevis
+            if first and page == "_p_inventory":
                 self.maindialog.mp_last_update = datetime.now()
+            else:
                 self.maindialog.ip_last_update = datetime.now()
 
-            updt = ((update and update.crea_date > self.maindialog.mp_last_update) or
-                    (update and update.crea_date > self.maindialog.ip_last_update))
+            updt = ((update and update.crea_date > self.maindialog.mp_last_update) if page == "_p_inventory"
+                    else (update and update.crea_date > self.maindialog.ip_last_update))
 
             if first or updt or filter_text:
                 session.execute(text("SET lc_time TO 'fr_FR.UTF-8';"))
@@ -414,8 +435,11 @@ class PopulateWidget:
                                 file.stem: file.as_posix() for file in Path(inventory_path[0]).rglob("*")
                             }
                     self.all_Inventory_list_populate(inventaires, ContentPath, _LIST_NAME, filter_text!="")
+                if page == "_p_inventory": self.maindialog.firstOpenInventory = False
+                elif page == "factures" : self.maindialog.firstOpenFacture = False
+                else: self.maindialog.firstOpenDevis = False
 
-    def all_Inventory_list_populate(self, inventaires, ContentPath, _LIST_NAME, filter: bool = False):
+    def all_Inventory_list_populate(self, inventaires, ContentPath, _LIST_NAME, filter:bool=False):
         dlg = self.maindialog
         __allList = [dlg._lw_inventory_list_inventory, dlg._lw_invoice_list_inventory]
         listes = [LW for LW in __allList if LW.objectName() == _LIST_NAME] if filter else __allList
@@ -441,7 +465,7 @@ class PopulateWidget:
 
             liste.itemClicked.connect(partial(self.onInventoryItemSelected, liste_name=_LIST_NAME))
 
-    def onInventoryItemSelected(self, item: QListWidgetItem, liste_name: str):
+    def onInventoryItemSelected(self, item: QListWidgetItem, liste_name:str):
         dlg = self.maindialog
         inventory_row = item.data(Qt.UserRole)
         # Parcourir les colonnes définies dans MAPING_INVENTORY_POPULATE

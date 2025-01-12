@@ -7,6 +7,8 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QSpacerItem, QRadio
                                QListWidget, QHeaderView,
                                QCalendarWidget, QLabel, QLineEdit,  QDateEdit, QTimeEdit)
 
+from forms.gui import CBW
+
 
 class DashboardPage:
     def __init__(self):
@@ -33,7 +35,7 @@ class DashboardPage:
 
     def initUi_DashboardForm(self):
         # PAGE TABLEAU DE BORD
-        self._p_dashboard = QWidget()
+        self._p_dashboard = CBW() #QWidget()
         self._p_dashboard.setObjectName(u"_p_dashboard")
         # GRID PAGE DASHBOARD
         self._g_dashboard = QGridLayout(self._p_dashboard)
@@ -162,7 +164,7 @@ class DashboardPage:
             self._tw_activity.horizontalHeader().setSectionResizeMode(
                 col, QHeaderView.Stretch
             )
-
+        self._tw_activity.verticalHeader().setVisible(False)
         self._h_activity_info.addWidget(self._tw_activity)
         # VERTICAL LAYOUT POUR LA LIST DES ACTIVITES ET UN BOUTON
         self._v_activityList = QVBoxLayout()
