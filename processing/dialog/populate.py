@@ -14,7 +14,7 @@ from forms.gui.ui_agenda_items import AgendaItem
 from forms.gui.ui_inventory_items import InventoryItem
 from forms.gui.ui_client_statut import CustomDelegate
 from processing.database.model_private import Chemin
-from processing.database.model_public import (User, Entreprise, Agenda, Ui_Update, Inventaires, Activites)
+from processing.database.model_public import (User, Entreprise, Agenda, Ui_Update, Inventaires, Activites, Clients)
 from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
 from forms.gui.ui_card_employe import EmployeeCard
@@ -305,7 +305,18 @@ class PopulateWidget:
             self.maindialog._le_clients_profil_name.setText(table_widget.item(selected_row, 1).text())
             self.maindialog._le_clients_num_value.setText(table_widget.item(selected_row, 2).text())
             self.maindialog._le_clients_mail_value.setText(table_widget.item(selected_row, 3).text())
-            self.maindialog._ds_clients_dette.setValue(float(table_widget.item(selected_row, 5).text().replace(' €', '')))
+            dette = table_widget.item(selected_row, 5).text().replace(' €', '')
+            self.maindialog._ds_clients_dette.setValue(float(dette) if dette else 0)
+
+    def populateClientList(self):
+        with self.Session() as session:
+            clients = session.query(Clients).all()
+            for client in clients:
+                info = client.__dict__
+                icon = QIcon(self.maindialog.profil_client_icon)
+                item = QListWidgetItem(icon, client.nom)
+                item.setData(Qt.UserRole, info)
+                self.maindialog..addItem(item)
 
     def populateDatabaseExplorer(self):
         first = self.maindialog.firstOpenDbManager

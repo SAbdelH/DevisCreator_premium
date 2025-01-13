@@ -840,7 +840,7 @@ class theme:
             border-radius: 10px;
             margin: 5px;
             padding: 5px;
-            height: 40px;
+            height: 30px;
         }}
         #_f_calendar QListWidget::item {{ margin: 0px 5px;}}
         #_f_calendar QListWidget::item:selected, #_p_inventory QListWidget::item:selected {{
