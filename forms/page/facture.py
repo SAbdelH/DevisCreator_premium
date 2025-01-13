@@ -188,6 +188,7 @@ class InvoicePage:
         self._cbx_invoice_client = QComboBox(self._f_invoice_box_export_invoice)
         self._cbx_invoice_client.setObjectName(u"_cbx_invoice_client")
         self._cbx_invoice_client.setMinimumSize(QSize(0, 30))
+        self._cbx_invoice_client.setEditable(True)
         self._v_incoice_client_combo.addWidget(self._cbx_invoice_client)
         self._f_invoice_warning_client = QFrame(self._f_invoice_box_export_invoice)
         self._f_invoice_warning_client.setObjectName(u"_f_invoice_warning_client")

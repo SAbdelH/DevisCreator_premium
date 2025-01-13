@@ -2,12 +2,11 @@ from collections import namedtuple
 from datetime import datetime, date
 from functools import partial
 from pathlib import Path
-from pprint import PrettyPrinter
 
 from PySide6.QtCore import QSize, Qt, QDate
 from PySide6.QtGui import QBrush, QColor, QIcon, QPixmap
 from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QListWidget, QApplication, \
-    QAbstractItemView
+    QAbstractItemView, QCompleter
 from sqlalchemy import func, inspect, and_, text, case
 
 from forms.gui.ui_agenda_items import AgendaItem
@@ -308,15 +307,58 @@ class PopulateWidget:
             dette = table_widget.item(selected_row, 5).text().replace(' €', '')
             self.maindialog._ds_clients_dette.setValue(float(dette) if dette else 0)
 
-    def populateClientList(self):
+    def populateClientCombo(self, page:str = "factures"):
+        # Ajouter des lignes avec des données
         with self.Session() as session:
-            clients = session.query(Clients).all()
-            for client in clients:
-                info = client.__dict__
-                icon = QIcon(self.maindialog.profil_client_icon)
-                item = QListWidgetItem(icon, client.nom)
-                item.setData(Qt.UserRole, info)
-                self.maindialog..addItem(item)
+            update = Ui_Update().verify_update(session, Ui_Update.nom in ('client', 'devis', 'facture'))
+            first = self.maindialog.firstOpenFacture if page == "factures" else self.maindialog.firstOpenDevis
+            if first:  self.maindialog.ip_last_update = datetime.now()
+
+            if first or (update and update.crea_date > self.maindialog.ip_last_update):
+                Qr = self.execute_sql(session, 'SELECT * FROM "informations"."dette_client"')
+                # Remplir le QComboBox
+                self.maindialog._cbx_invoice_client.clear()
+                complete = []
+                if Qr.success and Qr.lines > 0:
+                    for row_index, row_data in enumerate(Qr.datas):
+                        nt = namedtuple('client', Qr.entete)(*row_data)
+                        client_name = nt.nom
+                        complete.append(nt.nom)
+                        icon = QIcon(self.maindialog.profil_client_icon)
+                        # Agrandir l'icône (par exemple, en la redimensionnant à 32x32 pixels)
+                        icon_size = QSize(25, 25)  # Définir la nouvelle taille
+                        icon_pixmap = icon.pixmap(icon_size)
+                        self.maindialog._cbx_invoice_client.addItem(icon_pixmap, client_name, userData=nt)
+
+                    # Configurer le QCompleter
+                    completer = QCompleter(complete, self.maindialog._cbx_invoice_client)
+                    completer.setCaseSensitivity(Qt.CaseInsensitive)  # Insensible à la casse
+                    self.maindialog._cbx_invoice_client.setCompleter(completer)  # Associer le QCompleter au QComboBox
+                    # Connecter un signal pour vérifier l'entrée à la fin de l'édition
+                    self.maindialog._cbx_invoice_client.lineEdit().editingFinished.connect(lambda: self.handleEditingFinishedCombo(self.maindialog._cbx_invoice_client))
+                    self.maindialog._cbx_invoice_client.setCurrentIndex(-1)
+                    # Connecter un signal pour mettre à jour les autres widgets
+                    self.maindialog._cbx_invoice_client.currentIndexChanged.connect(self.onClientIndexChanged)
+                    self.maindialog.firstOpenFacture = False
+                    self.maindialog.firstOpenDevis = False
+
+    def onClientIndexChanged(self):
+        # Récupérer l'élément sélectionné dans le QComboBox
+        index = self.maindialog._cbx_invoice_client.currentIndex()
+        client_data = self.maindialog._cbx_invoice_client.itemData(index, Qt.UserRole)
+
+        if client_data:
+            # Remplir les widgets avec les données du namatuple
+            self.maindialog._le_invoice_nomclient.setText(client_data.nom)
+            self.maindialog._le_invoice_numclient.setText(client_data.telephone)
+            self.maindialog._le_invoice_mailclient.setText(client_data.email)
+            self.maindialog._f_invoice_warning_client.setVisible(client_data.statut != "REGLÉ")
+        else:
+            # Vider les widgets si aucun client n'est sélectionné
+            self.maindialog._le_invoice_nomclient.clear()
+            self.maindialog._le_invoice_numclient.clear()
+            self.maindialog._le_invoice_mailclient.clear()
+            self.maindialog._f_invoice_warning_client.setVisible(False)
 
     def populateDatabaseExplorer(self):
         first = self.maindialog.firstOpenDbManager
@@ -398,7 +440,6 @@ class PopulateWidget:
                 self.maindialog.show_notification(str(err), LVL.warning)
 
     def populateListInventory(self, liste: QListWidget, filter_text:str="", page:str|None=None):
-        liste.clear()
         _LIST_NAME = liste.objectName()
 
         with self.Session() as session:
@@ -455,10 +496,11 @@ class PopulateWidget:
         __allList = [dlg._lw_inventory_list_inventory, dlg._lw_invoice_list_inventory]
         listes = [LW for LW in __allList if LW.objectName() == _LIST_NAME] if filter else __allList
         for liste in listes:
+            liste.clear()
             for inventaire in inventaires:
                 info = Inventaires.to_dict(inventaire)
                 info["icon"] = ContentPath.get(inventaire.nom)
-                if _LIST_NAME == "_lw_inventory_list_inventory":
+                if liste.objectName() == "_lw_inventory_list_inventory":
                     item = QListWidgetItem(liste)
                     custom_widget = InventoryItem(info)
                     item.setSizeHint(custom_widget.sizeHint())
@@ -469,7 +511,7 @@ class PopulateWidget:
                 item.setData(Qt.UserRole, info)
                 # Ajuste la taille de l'item selon le widget
                 liste.addItem(item)
-                if _LIST_NAME == "_lw_inventory_list_inventory":
+                if liste.objectName() == "_lw_inventory_list_inventory":
                     liste.setItemWidget(item, custom_widget)
 
             dlg.mp_last_update = datetime.now().date()

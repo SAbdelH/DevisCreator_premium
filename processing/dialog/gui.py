@@ -3,7 +3,8 @@ import subprocess
 from functools import partial
 from pathlib import Path
 
-from PySide6.QtWidgets import QFileDialog, QListWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QFileDialog, QListWidget, QComboBox
 
 
 class Update:
@@ -35,7 +36,7 @@ class Update:
                         partial(self.onSearchTextChanged, liste, page=text)
                     )
                 else:
-                    self.populateClientList()
+                    self.populateClientCombo(text)
                     self.maindialog._le_invoice_inventory_filter.textChanged.connect(
                         partial(self.onSearchTextChanged, liste, page=text)
                 )
@@ -68,3 +69,13 @@ class Update:
 
     def onSearchTextChanged(self, liste: QListWidget, text:str, page:str):
         self.populateListInventory(liste, filter_text=text.strip(), page=page)
+
+    def handleEditingFinishedCombo(self, comboBox: QComboBox):
+        # Récupérer le texte saisi par l'utilisateur
+        entered_text = comboBox.currentText()
+
+        # Vérifier si le texte correspond à une option existante
+        index = comboBox.findText(entered_text, Qt.MatchFixedString)
+        if index == -1:
+            # Aucun élément correspondant trouvé, définir l'index courant sur -1
+            comboBox.setCurrentIndex(-1)

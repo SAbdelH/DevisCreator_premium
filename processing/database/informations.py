@@ -233,6 +233,12 @@ class Informations:
                         session.add(__Client)
                 else:
                     session.query(Clients).filter(conditions).delete()
+                updt = Ui_Update(nom='client', crea_date=func.now(), crea_user=func.current_user())
+                session.add(updt)
+                session.commit()
+                self.populateClientTable()
+                self.populateClientCombo()
+
         except Exception as err:
             self.maindialog.show_notification(str(err), LVL.warning)
 
