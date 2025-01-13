@@ -28,42 +28,22 @@ def getDepartementByCommuneName(commune: str) -> str:
         name = None
     return name
 
-def getToken(objet) -> str:
-    url = "https://api.insee.fr/token"
-    auth_header = "Authorization: Basic VGY2YlNQWklBWkZ6RUVpTTJsT0JmS0RvcFpJYTpQdEVKYnlINkFteFlIbTZCVUxadWNSRE1vXzBh"
-    data = "grant_type=client_credentials"
-
-    curl_command = [
-        "curl", "-k", "-d", data, "-H", auth_header, url
-    ]
-
-    result = subprocess.run(curl_command, capture_output=True, text=True)
-
-    # Utilisation de json.loads pour analyser la réponse
-    try:
-        response_data = json.loads(result.stdout)
-        token = response_data.get("access_token")
-        return token
-    except json.JSONDecodeError as err:
-        objet.maindialog.show_notification(
-            "Erreur lors de la récupération du token.",
-            LVL.warning,
-        )
-        return None
+def getToken() -> str:
+    return "155a471d-7c08-41c9-9a47-1d7c08a1c9b2"
 
 def getInfoEtablissement(objet,  siret: str):
-    token: str = getToken(objet)
+    token: str = getToken()
     # Champs du namedtuple
     fields = ["entreprise", "respNom", "respPrenom", "adresse", "commune", "ville", "cp", "siret", "siren", "ape", "departement"]
     NT_Entreprise = namedtuple("InformationEntreprise", fields)
 
     if token:
         # URL de l'API (comme dans votre code précédent)
-        url = f"https://api.insee.fr/entreprises/sirene/V3.11/siret/{siret}"
+        url = f"https://api.insee.fr/api-sirene/3.11/siret/{siret}"
 
         # En-têtes dynamiques
         accept_header = "Accept: application/json"
-        auth_header = f"Authorization: Bearer {token}"
+        auth_header = f"X-INSEE-Api-Key-Integration: {token}"
 
         # Commande curl pour obtenir les données
         curl_command = [
@@ -75,10 +55,11 @@ def getInfoEtablissement(objet,  siret: str):
         try:
             data = json.loads(result.stdout)
         except json.JSONDecodeError:
-            objet.maindialog.show_notification(
-                "Erreur lors de la récupération des données de l'établissement.",
-                LVL.warning,
-            )
+            print("erreur 1")
+            # objet.maindialog.show_notification(
+            #     "Erreur lors de la récupération des données de l'établissement.",
+            #     LVL.warning,
+            # )
             return None, 0  # Retourne None et 0 si la requête échoue
 
         if data.get("header", {}).get("statut") == 200:
