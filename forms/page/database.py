@@ -10,8 +10,10 @@ class DbManagementPage:
     def initUi_dbTablesForm(self):
         self._p_manage_db = QWidget()
         self._p_manage_db.setObjectName(u"_p_manage_db")
+        # GRID DE PAGE
         self._g_manage_db = QGridLayout(self._p_manage_db)
         self._g_manage_db.setObjectName(u"_g_manage_db")
+        # TREE WIDGET DES TABLES BASE DE DONNÉES
         self._trw_db_structure = QTreeWidget(self._p_manage_db)
         self._trw_db_structure.setObjectName(u"_trw_db_structure")
         self._trw_db_structure.setMaximumSize(QSize(250, 16777215))
@@ -19,18 +21,22 @@ class DbManagementPage:
         self._trw_db_structure.setWordWrap(True)
         self._trw_db_structure.setHeaderHidden(False)
         self._g_manage_db.addWidget(self._trw_db_structure, 0, 0, 2, 1)
+        # TABLES WIDGET
         self._tw_select_table = QTableWidget(self._p_manage_db)
         self._tw_select_table.setObjectName(u"_tw_select_table")
         self._tw_select_table.horizontalHeader().setStretchLastSection(True)
         self._tw_select_table.verticalHeader().setVisible(False)
         self._g_manage_db.addWidget(self._tw_select_table, 0, 1, 1, 2)
+        # HORIZONTAL SPACE POUR EXCENTRER BOUTON EXPORTER
         self._hs_separator_manage_db_bottom = QSpacerItem(876, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._g_manage_db.addItem(self._hs_separator_manage_db_bottom, 1, 1, 1, 1)
         self._b_manage_db_export_table = QPushButton(self._p_manage_db)
+        # BOUTON EXPORTER
         self._b_manage_db_export_table.setObjectName(u"_b_manage_db_export_table")
         self._b_manage_db_export_table.setIcon(self.excel_icon)
         self._b_manage_db_export_table.setEnabled(False)
         self._g_manage_db.addWidget(self._b_manage_db_export_table, 1, 2, 1, 1)
+        # AJOUT PAGE A STACKED WIDGET
         self._sw_main_dialog.addWidget(self._p_manage_db)
         self._g_centralwidget.addWidget(self._sw_main_dialog, 1, 2, 4, 1)
         self.__retranslateUi()

@@ -10,42 +10,68 @@ class clientsPage:
         self.firstOpenClient = True
 
     def initUi_clientForm(self):
+        # PAGE CLIENT
         self._p_clients = QWidget()
         self._p_clients.setObjectName(u"_p_clients")
+        # HORIZONTAL LAYOUT PAGE CLIENT
         self._h_clients = QHBoxLayout(self._p_clients)
         self._h_clients.setSpacing(5)
         self._h_clients.setObjectName(u"_h_clients")
         self._h_clients.setContentsMargins(8, 5, 8, 10)
+        # FORMULAIRE A GAUCHE DE LA PAGE
+        self.__ClientTableFform()
+        # FORMULAIRE DU EDIT BOX
+        self.__ClientEditBoxform()
+
+        self._sw_main_dialog.addWidget(self._p_clients)
+
+        self.__retranslateUi()
+        self._f_clients_info_box.setVisible(False)
+        self._b_clients_add_client.clicked.connect(self.ShowClientInfoBox)
+        self._b_clients_hide_info.clicked.connect(self.ShowClientInfoBox)
+        self._b_clients_show_info.clicked.connect(self.ShowClientInfoBox)
+        self.EnabledShowInfoClient()
+        self._tw_clients_table_info.currentItemChanged.connect(self.EnabledShowInfoClient)
+
+    def __ClientTableFform(self):
         self._f_clients_table = QFrame(self._p_clients)
         self._f_clients_table.setObjectName(u"_f_clients_table")
         self._f_clients_table.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_clients_table.setFrameShadow(QFrame.Shadow.Raised)
+        # VERTICAL LAYOUT
         self._v_clients_table = QVBoxLayout(self._f_clients_table)
         self._v_clients_table.setObjectName(u"_v_clients_table")
         self._v_clients_table.setContentsMargins(0, 5, 0, 0)
+        # HORIZONTAL LAYOUT POUR LES ENTETES
         self._h_clients_table_top = QHBoxLayout()
         self._h_clients_table_top.setObjectName(u"_h_clients_table_top")
         self._h_clients_table_top.setContentsMargins(5, -1, 5, -1)
+        # LINEEDIT DE RECHERCHES DES CLIENTS
         self._le_clients_filter = QLineEdit(self._f_clients_table)
         self._le_clients_filter.setObjectName(u"_le_clients_filter")
         self._le_clients_filter.setMinimumSize(QSize(0, 30))
         self._le_clients_filter.setMaximumSize(QSize(16777215, 28))
-        self._le_clients_filter.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self._le_clients_filter.setAlignment(Qt.AlignmentFlag.AlignLeading | Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
         self._h_clients_table_top.addWidget(self._le_clients_filter)
+        # HORIZONTAL SPACER
         self._hs_separator_clients_table_top = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._h_clients_table_top.addItem(self._hs_separator_clients_table_top)
+        # BOUTONS CREATION DE CLIENTS
         self._b_clients_add_client = QPushButton(self._f_clients_table)
         self._b_clients_add_client.setObjectName(u"_b_clients_add_client")
         self._b_clients_add_client.setMaximumSize(QSize(16777215, 28))
         self._b_clients_add_client.setIcon(self.ajouter_utilisateur_icon)
         self._b_clients_add_client.setFlat(True)
         self._h_clients_table_top.addWidget(self._b_clients_add_client)
+        #BOUTON AFFICHER CLIENT
         self._b_clients_show_info = QPushButton(self._f_clients_table)
         self._b_clients_show_info.setObjectName(u"_b_clients_show_info")
         self._b_clients_show_info.setMaximumSize(QSize(16777215, 28))
         self._b_clients_show_info.setFlat(True)
         self._h_clients_table_top.addWidget(self._b_clients_show_info)
+        # AJOUT DU HORIZONTAL A VERTICAL LAYOUT
         self._v_clients_table.addLayout(self._h_clients_table_top)
+        # TABLE DES CLIENTS
         self._tw_clients_table_info = QTableWidget(self._f_clients_table)
         self._tw_clients_table_info.setObjectName(u"_tw_clients_table_info")
         self._tw_clients_table_info.horizontalHeader().setCascadingSectionResizes(False)
@@ -67,8 +93,13 @@ class clientsPage:
         self._tw_clients_table_info.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self._tw_clients_table_info.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self._tw_clients_table_info.verticalHeader().setVisible(False)
+        # AJOUT DU TABLEAU A VERTICAL LAYOUT
         self._v_clients_table.addWidget(self._tw_clients_table_info)
+        # AJOUT DU FRAME A HORIZONTAL PAGE
         self._h_clients.addWidget(self._f_clients_table)
+
+    def __ClientEditBoxform(self):
+        # FRAME DU BOX
         self._f_clients_info_box = QFrame(self._p_clients)
         self._f_clients_info_box.setObjectName(u"_f_clients_info_box")
         self._f_clients_info_box.setMinimumSize(QSize(490, 0))
@@ -76,11 +107,14 @@ class clientsPage:
         self._f_clients_info_box.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_clients_info_box.setFrameShadow(QFrame.Shadow.Raised)
         self._f_clients_info_box.setGraphicsEffect(self.shadow)
+        # VERTICAL LAYOUT DU FRAME
         self._v_clients_info_box = QVBoxLayout(self._f_clients_info_box)
         self._v_clients_info_box.setObjectName(u"_v_clients_info_box")
         self._v_clients_info_box.setContentsMargins(5, 10, 5, 10)
+        # HORIZONTAL POUR NOM CLIENT
         self._h_clients_info_box_top = QHBoxLayout()
         self._h_clients_info_box_top.setObjectName(u"_h_clients_info_box_top")
+        # INFORMATIONS EDIT NOM CLIENT
         self._l_clients_profil_icon = QLabel(self._f_clients_info_box)
         self._l_clients_profil_icon.setObjectName(u"_l_clients_profil_icon")
         self._l_clients_profil_icon.setMinimumSize(QSize(40, 40))
@@ -92,17 +126,22 @@ class clientsPage:
         self._le_clients_profil_name.setObjectName(u"_le_clients_profil_name")
         self._le_clients_profil_name.setMinimumSize(QSize(0, 30))
         self._h_clients_info_box_top.addWidget(self._le_clients_profil_name)
+        # AJOUT DES INFORMATIONS EDIT NOM CLIENT DANS VERTICAL FRAME
         self._v_clients_info_box.addLayout(self._h_clients_info_box_top)
+        # LABEL CLIENT INFO
         self._l_clients_client_info = QLabel(self._f_clients_info_box)
         self._l_clients_client_info.setObjectName(u"_l_clients_client_info")
         self._v_clients_info_box.addWidget(self._l_clients_client_info)
+        # SEPARATEUR HORIZONTAL
         self._hl_separator_client_info = QFrame(self._f_clients_info_box)
         self._hl_separator_client_info.setObjectName(u"_hl_separator_client_info")
         self._hl_separator_client_info.setFrameShape(QFrame.Shape.HLine)
         self._hl_separator_client_info.setFrameShadow(QFrame.Shadow.Sunken)
         self._v_clients_info_box.addWidget(self._hl_separator_client_info)
+        # HORIZONTAL POUR MAIL CLIENT
         self._h_clients_info_mail = QHBoxLayout()
         self._h_clients_info_mail.setObjectName(u"_h_clients_info_mail")
+        # INFORMATIONS EDIT MAIL CLIENT
         self._l_clients_icon_mail = QLabel(self._f_clients_info_box)
         self._l_clients_icon_mail.setObjectName(u"_l_clients_icon_mail")
         self._l_clients_icon_mail.setMinimumSize(QSize(25, 25))
@@ -126,9 +165,12 @@ class clientsPage:
         self._b_clients_clipbord_mail.setIcon(self.copier_icon)
         self._b_clients_clipbord_mail.setFlat(True)
         self._h_clients_info_mail.addWidget(self._b_clients_clipbord_mail)
+        # AJOUT DES INFORMATIONS EDIT MAIL CLIENT DANS VERTICAL FRAME
         self._v_clients_info_box.addLayout(self._h_clients_info_mail)
+        # HORIZONTAL POUR NUMERO CLIENT
         self._h_clients_info_num = QHBoxLayout()
         self._h_clients_info_num.setObjectName(u"_h_clients_info_num")
+        # INFORMATIONS EDIT NUMERO CLIENT
         self._l_clients_icon_num = QLabel(self._f_clients_info_box)
         self._l_clients_icon_num.setObjectName(u"_l_clients_icon_num")
         self._l_clients_icon_num.setMinimumSize(QSize(25, 25))
@@ -152,17 +194,22 @@ class clientsPage:
         self._b_clients_clipbord_num.setIcon(self.copier_icon)
         self._b_clients_clipbord_num.setFlat(True)
         self._h_clients_info_num.addWidget(self._b_clients_clipbord_num)
+        # AJOUT DES INFORMATIONS EDIT NUMERO CLIENT DANS VERTICAL FRAME
         self._v_clients_info_box.addLayout(self._h_clients_info_num)
+        # LABEL FACTURES IMPAYEES
         self._l_clients_factures_impayees = QLabel(self._f_clients_info_box)
         self._l_clients_factures_impayees.setObjectName(u"_l_clients_factures_impayees")
         self._v_clients_info_box.addWidget(self._l_clients_factures_impayees)
+        # SEPARATEUR HORIZONTAL
         self._hl_separator_factures_impayees = QFrame(self._f_clients_info_box)
         self._hl_separator_factures_impayees.setObjectName(u"_hl_separator_factures_impayees")
         self._hl_separator_factures_impayees.setFrameShape(QFrame.Shape.HLine)
         self._hl_separator_factures_impayees.setFrameShadow(QFrame.Shadow.Sunken)
         self._v_clients_info_box.addWidget(self._hl_separator_factures_impayees)
+        # HORIZONTAL LAYOUT DETTE
         self._h_clients_dette = QHBoxLayout()
         self._h_clients_dette.setObjectName(u"_h_clients_dette")
+        # INFORMATIONS DETTE CLIENT
         self._l_client_dette = QLabel(self._f_clients_info_box)
         self._l_client_dette.setObjectName(u"_l_client_dette")
         self._h_clients_dette.addWidget(self._l_client_dette)
@@ -176,43 +223,42 @@ class clientsPage:
         self._ds_clients_dette.setMaximum(9999999999999999635896294965248.000000000000000)
         self._h_clients_dette.addWidget(self._ds_clients_dette)
         self._v_clients_info_box.addLayout(self._h_clients_dette)
+        # LISTES DES DETTES (FACTURES)
         self._lw_clients_dettes_factures = QListWidget(self._f_clients_info_box)
         self._lw_clients_dettes_factures.setObjectName(u"_lw_clients_dettes_factures")
         self._v_clients_info_box.addWidget(self._lw_clients_dettes_factures)
+        # HORIZONTAL LAYOUT BOUTONS
         self._h_clients_info_box_bottom = QHBoxLayout()
         self._h_clients_info_box_bottom.setObjectName(u"_h_clients_info_box_bottom")
+        # BOUTON FERMER
         self._b_clients_hide_info = QPushButton(self._f_clients_info_box)
         self._b_clients_hide_info.setObjectName(u"_b_clients_hide_info")
         self._b_clients_hide_info.setIcon(self.cacher_widget_icon)
         self._b_clients_hide_info.setFlat(True)
         self._h_clients_info_box_bottom.addWidget(self._b_clients_hide_info)
+        # HORIZONTAL SPACER
         self._hs_separator_clients_info_bottom = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._h_clients_info_box_bottom.addItem(self._hs_separator_clients_info_bottom)
+        # BOUTON SUPPRIMER
         self._b_clients_delete_client = QPushButton(self._f_clients_info_box)
         self._b_clients_delete_client.setObjectName(u"_b_clients_delete_client")
         self._b_clients_delete_client.setIcon(self.corbeil_icon)
         self._h_clients_info_box_bottom.addWidget(self._b_clients_delete_client)
+        # BOUTON ENREGISTRER
         self._b_clients_save_client = QPushButton(self._f_clients_info_box)
         self._b_clients_save_client.setObjectName(u"_b_clients_save_client")
         self._b_clients_save_client.setIcon(self.disquette_icon)
         self._h_clients_info_box_bottom.addWidget(self._b_clients_save_client)
+        # BOUTONS EXPORTER
         self._b_clients_info_export = QPushButton(self._f_clients_info_box)
         self._b_clients_info_export.setObjectName(u"_b_clients_info_export")
         self._b_clients_info_export.setMinimumSize(QSize(110, 0))
         self._b_clients_info_export.setIcon(self.excel_icon)
         self._b_clients_info_export.setFlat(True)
         self._h_clients_info_box_bottom.addWidget(self._b_clients_info_export)
+        # AJOUT DU HORIZONTAL BOUTONS A VERTICAL
         self._v_clients_info_box.addLayout(self._h_clients_info_box_bottom)
         self._h_clients.addWidget(self._f_clients_info_box)
-        self._sw_main_dialog.addWidget(self._p_clients)
-
-        self.__retranslateUi()
-        self._f_clients_info_box.setVisible(False)
-        self._b_clients_add_client.clicked.connect(self.ShowClientInfoBox)
-        self._b_clients_hide_info.clicked.connect(self.ShowClientInfoBox)
-        self._b_clients_show_info.clicked.connect(self.ShowClientInfoBox)
-        self.EnabledShowInfoClient()
-        self._tw_clients_table_info.currentItemChanged.connect(self.EnabledShowInfoClient)
 
     def __retranslateUi(self):
         HeaderName =  [u"Cr\u00e9er le", u"Nom", u"T\u00e9l\u00e9phone", u"Mail",
