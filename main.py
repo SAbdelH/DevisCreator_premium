@@ -12,6 +12,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
     def __init__(self):
         self.typeConnection = None
         self.cacheInfoCompany = None
+        self.InvoicePage = None
         self.agendaID = {}
         self.mkOutputFolder()
         self.systeme = platform.system()
@@ -39,6 +40,8 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
         self.maindialog._b_inventory_update.clicked.connect(lambda: self.setInventory(action="update"))
         self.maindialog._b_inventory_achat.clicked.connect(lambda : self.setInventory(action='purchase'))
         self.maindialog._b_inventory_delete.clicked.connect(lambda: self.setInventory(action='delete'))
+        self.maindialog._b_invoice_export.clicked.connect(self.ModelFacture)
+
 
     def mkOutputFolder(self):
         self.outputfolder = Path.home() / "Documents" / "Sorties DevisCreator"

@@ -36,6 +36,7 @@ class Update:
                         partial(self.onSearchTextChanged, liste, page=text)
                     )
                 else:
+                    self.InvoicePage = text
                     self.populateClientCombo(text)
                     self.maindialog._le_invoice_inventory_filter.textChanged.connect(
                         partial(self.onSearchTextChanged, liste, page=text)

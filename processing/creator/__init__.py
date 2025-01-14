@@ -1,10 +1,11 @@
 import copy
 import openpyxl
 from processing.creator.excel import Excel
+from processing.creator.plan import ExcelPlans
 from processing.creator.model_inventory import ModelImportInventory
 
 
-class Layout(Excel):
+class Layout(Excel, ExcelPlans):
     def init_Style(self):
         [
             setattr(self, k, openpyxl.styles.Side(border_style=v))
@@ -16,6 +17,10 @@ class Layout(Excel):
         self.alignerCentrerDroite = self.addStyleAttribute(
             "alignement",
             {"wrap_text": True, "vertical": "center", "horizontal": "right"},
+        )
+        self.alignerCentrerGauche = self.addStyleAttribute(
+            "alignement",
+            {"wrap_text": True, "vertical": "center", "horizontal": "left"},
         )
         self.alignerCentrerHaut = self.addStyleAttribute(
             "alignement", {"wrap_text": True, "vertical": "top", "horizontal": "center"}

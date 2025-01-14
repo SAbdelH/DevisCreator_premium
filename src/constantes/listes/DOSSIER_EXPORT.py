@@ -1,1 +1,1 @@
-["Devis", "Facture", "Sauvegarde"]
+["Devis", "Factures", "Sauvegarde"]
