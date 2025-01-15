@@ -119,6 +119,7 @@ class CartItem(QWidget):
         self._b_save_info.setFlat(True)
         self._b_save_info.clicked.connect(self.saveItem)
         self._b_save_info.setVisible(False)
+        self._b_save_info.setToolTip(QCoreApplication.translate("frame", u"Enregister", None))
         self.horizontalLayout.addWidget(self._b_save_info, 0, Qt.AlignmentFlag.AlignTop)
         # bouton edit item
         self._b_edit_item = QPushButton(self.frame)
@@ -130,6 +131,7 @@ class CartItem(QWidget):
         self._b_edit_item.setIcon(icon)
         self._b_edit_item.setCheckable(True)
         self._b_edit_item.setFlat(True)
+        self._b_edit_item.setToolTip(QCoreApplication.translate("Form", u"Modifier", None))
         self._b_edit_item.clicked.connect(self.editItem)
         self.horizontalLayout.addWidget(self._b_edit_item, 0, Qt.AlignmentFlag.AlignTop)
         # bouton supprimer l'item de la qlistwidget
@@ -138,10 +140,11 @@ class CartItem(QWidget):
         self._b_delete_item.setMinimumSize(QSize(30, 30))
         self._b_delete_item.setMaximumSize(QSize(30, 30))
         icon1 = QIcon()
-        icon1.addFile(str(folder_icon / "close.png"), QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(str(folder_icon / "effacer.png"), QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self._b_delete_item.setIcon(icon1)
         self._b_delete_item.setFlat(True)
         self._b_delete_item.clicked.connect(self.deleteItem)
+        self._b_delete_item.setToolTip(QCoreApplication.translate("Form", u"Supprimer", None))
         self.horizontalLayout.addWidget(self._b_delete_item, 0, Qt.AlignmentFlag.AlignTop)
         self.main_layout.addLayout(self.horizontalLayout, 0, 6, 1, 1)
         # Prix avec remise
@@ -162,6 +165,7 @@ class CartItem(QWidget):
         self._ds_currentPrice.setProperty(u"showGroupSeparator", True)
         self._ds_currentPrice.setMaximum(100000000000000000000.000000000000000)
         self._ds_currentPrice.setValue(info.get("price"))
+        self._ds_currentPrice.setToolTip(QCoreApplication.translate("Form", u"Prix calculé", None))
         self._ds_currentPrice.setSuffix(QCoreApplication.translate("Form", u" \u20ac", None))
         self.main_layout.addWidget(self._ds_currentPrice, 1, 1, 1, 1)
         # Prix sans remise
@@ -180,6 +184,7 @@ class CartItem(QWidget):
         self._ds_realPrice.setProperty(u"showGroupSeparator", True)
         self._ds_realPrice.setMaximum(999999999999999983222784.000000000000000)
         self._ds_realPrice.setValue(info.get("old_price" ))
+        self._ds_realPrice.setToolTip(QCoreApplication.translate("frame", u"Prix réel", None))
         self._ds_realPrice.setSuffix(QCoreApplication.translate("Form", u" \u20ac", None))
         self.main_layout.addWidget(self._ds_realPrice, 1, 3, 1, 1)
         # label Qté
@@ -197,6 +202,7 @@ class CartItem(QWidget):
         self._s_quantity.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._s_quantity.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
         self._s_quantity.setValue(info.get("quantity"))
+        self._s_quantity.setEnabled(False)
         self.main_layout.addWidget(self._s_quantity, 2, 6, 1, 1)
 
         self.formVLayout.addWidget(self.frame)
