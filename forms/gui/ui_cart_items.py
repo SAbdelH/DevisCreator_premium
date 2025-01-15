@@ -3,7 +3,7 @@ from pathlib import Path
 from PySide6.QtCore import QSize, QCoreApplication
 from PySide6.QtGui import QFont, QPixmap, QIcon, Qt
 from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QGridLayout, QDoubleSpinBox, QSizePolicy, QAbstractSpinBox,
-                               QLabel, QPushButton, QLineEdit, QSpinBox)
+                               QLabel, QPushButton, QLineEdit, QSpinBox, QListWidget)
 
 
 class CartItem(QWidget):
@@ -67,7 +67,7 @@ class CartItem(QWidget):
         self.formVLayout = QHBoxLayout(self)
         self.formVLayout.setObjectName(u"formHLayout")
         self.formVLayout.setSpacing(0)
-        self.formVLayout.setContentsMargins(5, 2, 5, 2)
+        self.formVLayout.setContentsMargins(8, 2, 8, 2)
         # Frame principal
         self.frame = QFrame(self)
         self.frame.setObjectName(u"frame")
@@ -213,7 +213,30 @@ class CartItem(QWidget):
         self._s_quantity.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.PlusMinus if self._b_edit_item.isChecked() else QAbstractSpinBox.ButtonSymbols.NoButtons)
 
     def deleteItem(self):
-        ...
+        """
+        Supprime l'item de la QListWidget et met à jour le total
+        """
+        # Récupérer le QListWidget parent
+        list_widget = self.parent().parent()
+        if not isinstance(list_widget, QListWidget):
+            return
+        dlg = self.info.get('dlg')
+        # Trouver l'item correspondant à ce widget
+        for i in range(list_widget.count()):
+            item = list_widget.item(i)
+            if list_widget.itemWidget(item) == self:
+                # Calculer le prix à soustraire du total
+                price = self.info.get("price", 0)
+
+                # Mettre à jour le total dans le spinbox
+                total_spinbox = dlg._ds_invoice_total
+                if total_spinbox:
+                    new_total = total_spinbox.value() - price
+                    total_spinbox.setValue(new_total)
+
+                # Supprimer l'item
+                list_widget.takeItem(i)
+                break
 
     def saveItem(self):
         self.info["titre"] = self._le_title.text()
@@ -224,5 +247,5 @@ class CartItem(QWidget):
         self.editItem()
 
     @property
-    def getItem(self):
+    def getItemInfo(self):
         return self.info

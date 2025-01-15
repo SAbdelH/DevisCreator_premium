@@ -15,7 +15,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
     pageEnCours = Signal(str)
     menuAction = Signal(str)
     fermeture_fenetre = Signal(QEvent)
-    deleteCart = Signal(list)
     EnterPress = Signal(bool)
 
     def __init__(self):
@@ -56,10 +55,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         # REGLAGES DES CLIPBOARD
         self._b_clients_clipbord_mail.clicked.connect(self.clipboard)
         self._b_clients_clipbord_num.clicked.connect(self.clipboard)
-        # ----- Les evenements ---------
-        self.keyPressFilter = KeyPressFilter(self._lw_list_cart)
-        self._lw_list_cart.installEventFilter(self.keyPressFilter)
-        self.keyPressFilter.itemsDeleted.connect(self.on_items_deleted)
         # Installer le filtre d'événements pour détecter les touches
         self._sw_main_dialog.installEventFilter(self)
 
@@ -210,14 +205,6 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
             filter=filtre
         )
         return file
-
-    @Slot(list)
-    def on_items_deleted(self, deleted_items):
-        """
-        Méthode appelée lorsque des éléments sont supprimés. Ici, on peut les traiter.
-        """
-        # Envoyer les éléments supprimés via le signal commandeSupprimees
-        self.deleteCart.emit(deleted_items)
 
     def eventFilter(self, source, event):
         if event.type() == QEvent.KeyPress:

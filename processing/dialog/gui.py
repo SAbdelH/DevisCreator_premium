@@ -146,6 +146,7 @@ class Update:
                     }
 
             infos = {
+                "dlg": self.maindialog,
                 "icon": ContentPath.get(nomArticle),
                 "titre": nomArticle,
                 "price": new_price,
@@ -165,7 +166,5 @@ class Update:
             item.setSizeHint(QSize(self.maindialog._lw_list_cart.width(), 103))
             self.maindialog._lw_list_cart.addItem(item)
             self.maindialog._lw_list_cart.setItemWidget(item, custom_widget)
-
-
         else:
             return
