@@ -3,20 +3,17 @@ from datetime import datetime, date
 from functools import partial
 from pathlib import Path
 
-from PySide6.QtCore import QSize, Qt, QDate
+from PySide6.QtCore import QSize, Qt, QDate, QCoreApplication
 from PySide6.QtGui import QBrush, QColor, QIcon, QPixmap
 from PySide6.QtWidgets import QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QListWidget, QApplication, \
     QAbstractItemView, QCompleter
 from sqlalchemy import func, inspect, and_, text, case
 
-from forms.gui.ui_agenda_items import AgendaItem
-from forms.gui.ui_inventory_items import InventoryItem
-from forms.gui.ui_client_statut import CustomDelegate
+from forms.gui import (AgendaItem, EmployeeCard, InventoryItem, CustomDelegate)
 from processing.database.model_private import Chemin
 from processing.database.model_public import (User, Entreprise, Agenda, Ui_Update, Inventaires, Activites, Clients)
 from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
-from forms.gui.ui_card_employe import EmployeeCard
 
 
 class PopulateWidget:
@@ -147,7 +144,6 @@ class PopulateWidget:
 
     def populateAgenda(self):
         dlg = self.maindialog
-        dlg._lw_agenda.clear()
         with (self.Session() as session):
             update = Ui_Update().verify_update(session, 'agenda',
                                             filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
@@ -155,6 +151,7 @@ class PopulateWidget:
             if first:  self.maindialog.agenda_last_update = datetime.now()
 
             if first or (update and update.crea_date > self.maindialog.agenda_last_update):
+                dlg._lw_agenda.clear()
                 session.execute(text("SET lc_time TO 'fr_FR.UTF-8';"))
                 agenda = (
                     session.query(
@@ -548,6 +545,7 @@ class PopulateWidget:
             self.maindialog._l_invoice_preview_marque.setText(inventory_row.get("marque"))
             self.maindialog._l_invoice_preview_quantity.setText(str(inventory_row.get("quantite")))
             self.maindialog._l_invoice_preview.setScaledContents(False)
+            self.maindialog._l_invoiceemptyInventorymess.setVisible(inventory_row.get("quantite") == 0)
             if icon_path := inventory_row.get('icon'):
                 pixmap = QPixmap(icon_path)
                 if not pixmap.isNull():
@@ -558,16 +556,24 @@ class PopulateWidget:
                         Qt.SmoothTransformation  # Transformation douce pour une meilleure qualité
                     )
                     self.maindialog._l_invoice_preview.setPixmap(scaled_pixmap)
+            texte = (QCoreApplication.translate("MainWindow",
+                                u"⚠ Le mat\u00e9riel n'est plus en stock dans le magasin (attente de retour ...)",None)
+                    if inventory_row.get("quantifiable") is True else
+                    QCoreApplication.translate("MainWindow",
+                                u"⚠ Le mat\u00e9riel n'est plus en stock dans le magasin (Coninué mais pensez à alimenter le magasin ...)",
+                                                None)
+                    )
+            self.maindialog._l_invoiceemptyInventorymess.setText(texte)
 
     def populateActivitiesTable(self):
-        self.maindialog._tw_activity.clearContents()
-        self.maindialog._tw_activity.setRowCount(0)
         with self.Session() as session:
             update = Ui_Update().verify_update(session)
             first = self.maindialog.firstOpenDashboard
             if first:  self.maindialog.tableActivity_last_update = datetime.now()
 
             if first or (update and update.crea_date > self.maindialog.tableActivity_last_update):
+                self.maindialog._tw_activity.clearContents()
+                self.maindialog._tw_activity.setRowCount(0)
                 session.execute(text("SET lc_time to 'fr_FR.UTF-8';"))
                 query = session.query(
                     func.to_char(Activites.crea_date, 'DD TMMon. YYYY à HH24:MI:SS').label("date"),
@@ -613,7 +619,6 @@ class PopulateWidget:
 
     def populateActivList(self):
         liste = self.maindialog._lw_activity
-        liste.clear()
         liste.setIconSize(QSize(25, 25))
         with self.Session() as session:
             update = Ui_Update().verify_update(session)
@@ -623,6 +628,7 @@ class PopulateWidget:
             if first or (update and update.crea_date > self.maindialog.listActivity_last_update):
                 Qr = self.execute_sql(session, self.SCRIPT.DETAILS)
                 if Qr.lines > 0:
+                    liste.clear()
                     for action in Qr.datas:
                         nom = f'{action[Qr.entete.index("action")]} {action[Qr.entete.index("activités")]}'
                         if action[Qr.entete.index("action")] in (

@@ -37,7 +37,7 @@ class AgendaItem(QWidget):
 
         self.formVLayout = QHBoxLayout(self)
         self.formVLayout.setSpacing(0)
-        self.formVLayout.setObjectName(u"formVLayout")
+        self.formVLayout.setObjectName(u"formHLayout")
         self.formVLayout.setContentsMargins(0, 0, 0, 0)
         # Frame principal
         self.frame = QFrame(self)

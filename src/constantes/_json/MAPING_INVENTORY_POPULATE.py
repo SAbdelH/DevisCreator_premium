@@ -15,7 +15,7 @@
         lambda val, liste_name: float(val) if val else 0,
     ),
     "quantite": (
-        lambda val, liste_name: "_s_inventory_quantity" if liste_name == "_lw_inventory_list_inventory" else "_s_invoice_quantity",
+        lambda val, liste_name: "_s_inventory_quantity",
         "setValue",
         lambda val, liste_name: int(val) if val else 0,
     ),
@@ -27,7 +27,7 @@
     "type_remise": (
         lambda val, liste_name: "_cbx_inventory_type_remise" if liste_name == "_lw_inventory_list_inventory" else "_cbx_invoice_type_remise",
         "setCurrentIndex",
-        lambda val, liste_name: (0 if val == "€" else 1 if val == "%" else -1)
+        lambda val, liste_name: (1 if val == "€" else 2 if val == "%" else 0)
     ),
     "date_fabric": (
         lambda val, liste_name: "_de_inventory_fabric",

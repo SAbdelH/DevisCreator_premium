@@ -3,8 +3,11 @@ import subprocess
 from functools import partial
 from pathlib import Path
 
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QFileDialog, QListWidget, QComboBox
+from PySide6.QtCore import Qt, QSize
+from PySide6.QtWidgets import QFileDialog, QListWidget, QComboBox, QListWidgetItem
+
+from processing.database.model_private import Chemin
+from forms.gui import CartItem
 
 
 class Update:
@@ -80,3 +83,89 @@ class Update:
         if index == -1:
             # Aucun élément correspondant trouvé, définir l'index courant sur -1
             comboBox.setCurrentIndex(-1)
+
+    def addToCart(self):
+        """
+        Ajout des commandes dans le panier en verifiant que c'est bien rempli
+        :return: None
+        """
+        nomArticle = self.maindialog._le_invoice_name.text()
+        unit_price = self.maindialog._ds_invoice_price.value()
+        quantity = self.maindialog._s_invoice_quantity.value()
+        remise = self.maindialog._ds_invoice_remise.value()
+        typRemise = self.maindialog._cbx_invoice_type_remise.currentText()
+        iremise = "€" if typRemise == "En devise" else "%" if typRemise == "En pourcentage" else None
+        quantifiable = self.maindialog._cb_invoice_quantifiable.isChecked()
+        louable = self.maindialog._cb_invoice_location.isChecked()
+        total = self.maindialog._ds_invoice_total.value()
+        marque = self.maindialog._le_invoice_marque.text()
+        new_remise = remise if iremise == "€" else 1.0 - (remise / 100) if iremise == "%" else 0
+        new_price1 = unit_price * quantity
+        new_price = (
+            new_price1 - new_remise
+            if iremise == "€"
+            else new_price1 * new_remise if new_price1 > 0 and iremise == "%" else new_price1
+        )
+        newTotal = total + new_price
+        erreur = False
+
+        for objet in {
+            self.maindialog._le_invoice_name,
+            self.maindialog._ds_invoice_price,
+            self.maindialog._s_invoice_quantity,
+            self.maindialog._ds_invoice_remise,
+        }:
+            value = (
+                objet.text().strip()
+                if objet.objectName() == "_le_invoice_name"
+                else objet.value()
+            )
+
+            if objet.objectName() == "_ds_invoice_remise":
+                if (iremise == "%" and value > 100.00) or value < 0.01:
+                    self.RaiseErreur(objet)
+                    erreur = True
+            elif objet.objectName() == "_s_invoice_quantity" and not str(value).isnumeric():
+                self.RaiseErreur(objet)
+                erreur = True
+            elif (
+                value == ""
+                or value is None
+                or (isinstance(value, (float, int)) and int(value) == 0)
+            ):
+                self.RaiseErreur(objet)
+                erreur = True
+        if not erreur:
+            self.maindialog._ds_invoice_total.setValue(newTotal)
+            ContentPath = {}
+            with self.privateSession() as privateSession:
+                inventory_path = privateSession.query(Chemin.path).filter(Chemin.name == 'inventaire').first()
+                if inventory_path:
+                    ContentPath = {
+                        file.stem: file.as_posix() for file in Path(inventory_path[0]).rglob("*")
+                    }
+
+            infos = {
+                "icon": ContentPath.get(nomArticle),
+                "titre": nomArticle,
+                "price": new_price,
+                "unit_price": unit_price,
+                "old_price": new_price1,
+                "quantity": quantity,
+                "marque": marque,
+                "type_remise" : iremise,
+                "quantifiable": quantifiable,
+                "louable": louable
+            }
+            item = QListWidgetItem(self.maindialog._lw_list_cart)
+            custom_widget = CartItem(infos)  # Crée un widget personnalisé pour l'élément
+
+            # Ajouter les données au QListWidgetItem
+            item.setData(Qt.UserRole, infos)  # Associer les données à l'item
+            item.setSizeHint(QSize(self.maindialog._lw_list_cart.width(), 103))
+            self.maindialog._lw_list_cart.addItem(item)
+            self.maindialog._lw_list_cart.setItemWidget(item, custom_widget)
+
+
+        else:
+            return

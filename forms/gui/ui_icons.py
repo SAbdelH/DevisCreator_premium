@@ -58,6 +58,14 @@ class Icons:
         return self.__QIcon("cadena")
 
     @property
+    def placeholder_icon(self) -> QIcon:
+        """
+        Un QIcon de l'icon cadena
+        :return: un QIcon
+        """
+        return self.__QIcon("small-letter")
+
+    @property
     def cle_icon(self) -> QIcon:
         """
         Un QIcon de l'icon cle

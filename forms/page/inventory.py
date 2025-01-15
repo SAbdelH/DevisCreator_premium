@@ -194,11 +194,12 @@ class InventoryPage:
         self._v_inventory_input.addWidget(self._l_inventory_type_remise)
         # COMBOBOX TYPE REMISE
         self._cbx_inventory_type_remise = QComboBox(self._f_inventory_box_edit)
+        self._cbx_inventory_type_remise.addItem(self.placeholder_icon, "")
         self._cbx_inventory_type_remise.addItem(self.euro_icon, "")
         self._cbx_inventory_type_remise.addItem(self.pourcentage_icon, "")
         self._cbx_inventory_type_remise.setObjectName(u"_cbx_inventory_type_remise")
         self._cbx_inventory_type_remise.setMinimumSize(QSize(0, 30))
-        self._cbx_inventory_type_remise.setCurrentIndex(-1)
+        self._cbx_inventory_type_remise.setCurrentIndex(0)
         self._cbx_inventory_type_remise.currentTextChanged.connect(self.__remise_prefix)
         self._v_inventory_input.addWidget(self._cbx_inventory_type_remise)
         # LABEL REMISE
@@ -407,10 +408,10 @@ class InventoryPage:
         self._cb_inventory_quantifiable.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment quantifiable", None))
         self._cb_inventory_location.setText(QCoreApplication.translate("MainWindow", u"\u00c9l\u00e9ment \u00e0 louer", None))
         self._l_inventory_type_remise.setText(QCoreApplication.translate("MainWindow", u"Type remise", None))
-        self._cbx_inventory_type_remise.setItemText(0, QCoreApplication.translate("MainWindow", u"En devise", None))
-        self._cbx_inventory_type_remise.setItemText(1, QCoreApplication.translate("MainWindow", u"En pourcentage", None))
+        self._cbx_inventory_type_remise.setItemText(0, QCoreApplication.translate("MainWindow", u"-- S\u00e9l\u00e9ctionnez un type seulement s'il y'a remise",None))
+        self._cbx_inventory_type_remise.setItemText(1, QCoreApplication.translate("MainWindow", u"En devise", None))
+        self._cbx_inventory_type_remise.setItemText(2, QCoreApplication.translate("MainWindow", u"En pourcentage", None))
 
-        self._cbx_inventory_type_remise.setPlaceholderText(QCoreApplication.translate("MainWindow", u"-- S\u00e9l\u00e9ctionnez un type seulement s'il y'a remise", None))
         self._l_invoice_remise.setText(QCoreApplication.translate("MainWindow", u"Remise", None))
         self._ds_inventory_remise.setPrefix("")
         self._l_inventory_date_fabric.setText(QCoreApplication.translate("MainWindow", u"Date de fabrication", None))

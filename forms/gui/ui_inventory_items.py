@@ -107,9 +107,10 @@ class InventoryItem(QWidget):
 
         if not (remise := info.get('remise')):
             remise = 0.0
-        self._l_remise_value = QLabel(f"{remise:.2f} %")
+        self._l_remise_value = QLabel(f"{remise:.2f} {info.get('type_remise')}")
         self._l_remise_value.setObjectName("_l_marque")
         self._l_remise_value.setMaximumSize(QSize(80, 16777215))
+        self._l_remise_value.setVisible(remise>0.0)
         self._v_remise.addWidget(self._l_remise_value)
 
         self._h_frame.addLayout(self._v_remise)
