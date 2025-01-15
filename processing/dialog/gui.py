@@ -122,7 +122,7 @@ class Update:
             )
 
             if objet.objectName() == "_ds_invoice_remise":
-                if (iremise == "%" and value > 100.00) or value < 0.01:
+                if (iremise == "%" and value > 100.00) or (self.maindialog._cbx_invoice_type_remise.currentIndex() > 0 and value < 0.01):
                     self.RaiseErreur(objet)
                     erreur = True
             elif objet.objectName() == "_s_invoice_quantity" and not str(value).isnumeric():
