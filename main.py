@@ -42,6 +42,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
         self.maindialog._b_inventory_delete.clicked.connect(lambda: self.setInventory(action='delete'))
         self.maindialog._b_invoice_export.clicked.connect(self.ModelFacture)
         self.maindialog._b_invoice_add_cart.clicked.connect(self.addToCart)
+        self.maindialog._cbx_invoice_type_document.currentIndexChanged.connect(self.populateInvoiceCreatedList)
 
     def mkOutputFolder(self):
         self.outputfolder = Path.home() / "Documents" / "Sorties DevisCreator"

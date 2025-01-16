@@ -54,9 +54,7 @@ class ExcelPlans:
 
 
         # INSERT TEXT
-        print("a", self.InvoicePage)
         TypeText = self.InvoicePage if self.InvoicePage == "devis" else "Facture"
-        print("b", TypeText)
         ws["G1"] = TypeText.upper()
         ws["E2"] = "N° de facture :"
         ws["E3"] = "Date de facturation :"
