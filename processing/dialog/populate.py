@@ -703,5 +703,5 @@ class PopulateWidget:
     def onTreeItemInvoiceDoubleClicked(self, item, column):
         # Récupérer le chemin du fichier stocké dans l'élément
         chemin_fichier = item.data(0, Qt.UserRole)
-        if Path(chemin_fichier).is_file():
+        if chemin_fichier and Path(chemin_fichier).is_file():
             self.OpenFile(chemin_fichier)
