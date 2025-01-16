@@ -124,7 +124,7 @@ class validFacturePage:
             __qtablewidgetitem.setFont(self.font3)
             self._tw_valid_facture_elements.setHorizontalHeaderItem(i, __qtablewidgetitem)
             if i == 0 or i == 3:
-                self._tw_valid_facture_elements.setColumnWidth(i, 16)
+                self._tw_valid_facture_elements.setColumnWidth(i, 30)
             else:
                 self._tw_valid_facture_elements.horizontalHeader().setSectionResizeMode(
                     i, QHeaderView.Stretch

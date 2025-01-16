@@ -5,14 +5,29 @@ from PySide6.QtWidgets import QGraphicsDropShadowEffect
 class theme:
     def light_theme(self):
         self.centralwidget.setStyleSheet(f"""
-        /* BACKGROUND PRINCIPAL */
+        /* === WIDGET DES FENETRES PRINCIPAL === */
         #centralwidget {{
             background-color: rgba(232, 234, 236, 1);
             color: rgba(0, 0, 0, 1);
         }}
-        
+        /* === Line Styles === */
+        QFrame[frameShape="4"] {{ /* 4 correspond à QFrame::HLine */
+            border: none;
+            background: rgba(192, 192, 192, 0.7);
+            line-height:1px;
+        }}
+        /* === QComboBox Styles === */
+        #centralwidget QComboBox {{
+            color: rgba(0, 0, 0, 1);
+            background-color: rgba(254, 249, 231, 0.6);
+            border: 1px solid rgba(224, 224, 224, 1);
+            border-radius: 10px;
+            margin: 5px;
+            padding: 5px;
+            height: 40px;
+        }}
         #centralwidget QComboBox::down-arrow {{
-            image: url({self.dropdownComboButton_icon});
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/dropdown.png');
             border: none;
             border-radius: 5px;
             background: none;
@@ -36,30 +51,249 @@ class theme:
             background-color: rgba(130, 224, 170, 1);
             color: rgba(0, 0, 0, 1)
         }}
-        #centralwidget QSpinBox::up-arrow, #centralwidget QDoubleSpinBox::up-arrow, #centralwidget QDateEdit::up-arrow,  
+        /* === QSpinBox, QDoubleSpinBox, QDateEdit, QTimeEdit (Préfixes _s_, _ds_, _de_, _te_) === */
+        #centralwidget QSpinBox, #centralwidget QDoubleSpinBox {{
+            background-color: rgba(255, 255, 255, 0.8);
+        }}
+        #centralwidget QSpinBox::up-arrow, 
+        #centralwidget QDoubleSpinBox::up-arrow, 
+        #centralwidget QDateEdit::up-arrow, 
         #centralwidget QTimeEdit::up-arrow {{
-            image: url({self.upChevron_icon});
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/up-chevron.png');
             width: 7px;
             height: 7px;
             border: none;
             border-radius: 5px;
             background: transparent;
         }}
-        #centralwidget QSpinBox::down-arrow, #centralwidget QDoubleSpinBox::down-arrow, #centralwidget QDateEdit::down-arrow,  
-        #centralwidget QTimeEdit::down-arrow  {{
-            image: url({self.downChevron_icon});
+        #centralwidget QSpinBox::down-arrow, 
+        #centralwidget QDoubleSpinBox::down-arrow, 
+        #centralwidget QDateEdit::down-arrow, 
+        #centralwidget QTimeEdit::down-arrow {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/down-chevron.png');
             width: 7px;
             height: 7px;
             border: none;
             border-radius: 5px;
             background: transparent;
         }}
-        
-        /* PAGE LOGIN */
-        #_w_login_dialog, #_sw_login_dialog {{
-            border-radius: 20px;
+        /* === QLineEdit, QTextEdit, QDateEdit, QListWidget, QTimeEdit, QTableWidget, QComboBox (Préfixes _le_, _te_, _de_, _lw_, _te_, _tw_, _cbx_) === */
+        #centralwidget QLineEdit, #centralwidget QTextEdit, 
+        #centralwidget QDateEdit, #centralwidget QListWidget, #centralwidget QTimeEdit, 
+        #centralwidget QTableWidget, #centralwidget QComboBox, #centralwidget QGraphicsView
+        {{
+            border-radius: 5px;
+            border: 1px solid rgba(214, 219, 223, 1);
             background-color: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            color: rgba(0, 0, 0, 1);
         }}
+        #centralwidget QListWidget::item {{ margin: 0px 5px;}}
+        #centralwidget QListWidget::item:selected, 
+        #centralwidget QListWidget::item:selected {{
+            border-top: 5px solid rgba(247, 220, 111, 1);
+            color: rgba(0, 0, 0, 1);
+            margin: 0px;
+            padding: 0px;
+        }}
+        #centralwidget QTableWidget QHeaderView::section:horizontal {{
+            background-color: rgba(0, 48, 73, 1);
+            border-radius: 4px;
+            color: rgba(255, 255, 255, 1);
+            border: 0.5px solid rgba(234, 237, 237, 1);
+            padding: 2px;
+        }}
+        /* === QPushButton (Préfixes _b_) === */
+        #_b_more_activity {{
+            font: italic 11pt "Arial";
+            color: rgba(72, 166, 255, 1);
+        }}
+        /* === QRadioButton (Préfixes _cb_) === */
+        #centralwidget QRadioButton::indicator
+        {{
+            width: 40px;
+            height: 40px;
+        }}
+        #centralwidget QRadioButton::indicator::unchecked
+        {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/uncheckedb.png');
+        }}
+        #centralwidget QRadioButton::indicator:unchecked:pressed
+        {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/uncheckedb.png');
+        }}
+        #centralwidget #centralwidget QRadioButton::indicator::checked 
+        {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/checkedb.png');
+        }}
+        #centralwidget QRadioButton::indicator:checked:pressed 
+        {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/checkedb.png');
+        }}
+        /* === QGroupBox (Préfixes _gb_) === */
+        #centralwidget QGroupBox {{
+            border-radius: 15px;
+            background-color: rgba(247, 249, 249, 1);
+            border: 1px dashed rgba(174, 182, 191, 1);
+        }}
+        #centralwidget QGroupBox:title {{
+            background-color: rgba(235, 237, 239, 1);
+            color: rgba(0, 0, 0, 1);
+        }}
+        /* === QTreeWidget (Préfixes _trw_) === */
+        #centralwidget QTreeWidget {{
+            background-color: rgba(255, 255, 255, 1);
+            color : rgba(0, 0, 0, 1);
+            border: none;
+            font-size: 14px;
+            padding: 4px;
+        }}
+        #centralwidget QHeaderView::section {{
+            background-color: rgba(213, 245, 227, 1);
+            color : rgba(0, 0, 0, 1);
+            border: none;
+            font-size: 14px;
+            padding: 4px;
+        }}
+        #centralwidget QTreeWidget::item {{
+            padding: 4px 8px;
+            border: none;
+        }}
+        #centralwidget QTreeWidget::item:hover {{
+            background-color: #e6f7ff;
+            color : rgba(0, 0, 0, 1);
+            border-radius: 4px;
+        }}
+        #centralwidget QTreeWidget::branch:open:has-children {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/openfolder.png');
+        }}
+        #centralwidget QTreeWidget::branch:closed:has-children {{
+            image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/icons/emptyfolder.png');
+        }}
+        #centralwidget QTreeWidget::item:selected {{
+            background-color: #d1eaff;
+            border-radius: 4px;
+        }}
+        /* === QCalendarWidget (Préfixes _cw_) === */
+        #centralwidget QCalendarWidget QWidget {{
+            alternate-background-color: rgba(255, 255, 255, 1); 
+            background-color: rgba(255, 255, 255, 1); 
+            border-radius: 20px;
+        }}
+        #centralwidget QCalendarWidget QToolButton {{
+            background-color: rgba(255, 255, 255, 1);
+            color: rgba(0, 0, 0, 1);
+        }}
+        #centralwidget QCalendarWidget QToolButton::hover {{
+            background-color: rgba(255, 255, 255, 1);
+        }}
+        #centralwidget QCalendarWidget QToolButton::pressed {{
+            background-color: rgba(255, 255, 255, 1);
+        }}
+        #centralwidget QCalendarWidget QMenu {{
+            background-color: rgba(255, 255, 255, 1);
+            width: 100px;
+            font-size: 15px;
+            color: rgba(0, 0, 0, 1);
+            border-radius: 0px;
+        }}
+        #centralwidget QCalendarWidget QMenu::item:selected {{
+            background-color: rgba(235, 245, 251, 1);
+            color: rgba(0, 0, 0, 1);
+        }}
+        #centralwidget QCalendarWidget QSpinBox {{
+            width: 75px;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 1);
+            background-color: rgba(255, 255, 255, 1);
+            selection-background-color: rgba(255, 255, 255, 1);
+            selection-color: rgba(0, 0, 0, 1);
+        }}
+        #centralwidget QCalendarWidget QSpinBox::editable {{
+            width: 75px;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 1);
+        }}
+        #centralwidget QCalendarWidget QSpinBox::up-button {{ 
+            subcontrol-origin: border;  
+            subcontrol-position: top right;  
+            width: 20px;
+        }}
+        #centralwidget QCalendarWidget QSpinBox::down-button {{
+            subcontrol-origin: border; 
+            subcontrol-position: bottom right;  
+            width: 20px;
+        }}
+        #centralwidget QCalendarWidget QSpinBox::up-arrow {{ 
+            width: 20px;  
+            height: 20px; 
+        }}
+        #centralwidget QCalendarWidget QSpinBox::down-arrow {{ 
+            width: 20px;  
+            height: 20px; 
+        }}
+        /* Background de la sélection des jours */
+        #centralwidget QCalendarWidget QAbstractItemView:enabled {{
+            selection-background-color: rgba(42, 157, 143, 1); 
+            color: rgba(0, 0, 0, 1);
+            border-radius: 10px;
+        }}
+        #centralwidget QCalendarWidget QAbstractItemView::item:selected {{
+            border-radius: 10px;
+            margin: 6px;
+            padding: 2px;
+        }}
+        /* === TOUTES LES PAGES === */
+        #_sw_main_dialog * {{
+            color: rgba(0, 0, 0, 1);
+        }}
+        #_sw_main_dialog QPushButton {{
+            border: 1px solid rgba(174, 182, 191, 1);
+            border-radius: 10px;
+        }}
+        #_sw_main_dialog QPushButton::hover {{
+            border: 1px solid rgba(191, 201, 202, 1);
+            border-radius: 10px;
+            background-color: rgba(235, 245, 251, 1);
+        }}
+        #_p_factures #_b_invoice_total_remise, #_p_user_management #_b_um_add_usr, 
+        #_p_user_management #_b_um_update_usr, #_p_user_management #_b_um_delete_usr,
+        #_p_user_management #_b_save_info_company, #_p_dashboard #_b_add_agenda,
+        #_p_dashboard #_b_update_agenda, #_p_dashboard #_b_delete_agenda, 
+        #_p_inventory #_b_inventory_add, #_p_inventory #_b_inventory_achat, #_p_inventory #_b_inventory_update,
+        #_p_inventory #_b_inventory_delete, #_p_clients #_b_clients_clipbord_mail, #_p_clients #_b_clients_clipbord_num {{
+            border: None;
+        }}
+        #_b_clients_info_export, #_b_clients_add_client, #_b_manage_db_export_table {{
+            color: rgba(62, 136, 46, 1);
+            border: 1px solid rgba(62, 136, 46, 1);
+            border-radius: 7px;
+            padding: 5px
+        }}
+        #_l_clients_mail, #_l_clients_num, #_l_invoice_nom, #_l_invoice_marque, 
+        #_l_invoice_price, #_l_invoice_qauntity,#_l_invoice_type_remise, #_l_invoice_remise, 
+        #_l_invoice_client, #_l_invoice_nomclient, #_l_invoice_numclient, #_le_invoice_mailclient, 
+        #_l_invoice_objet, #_p_restore QLabel, #_cb_invoice_quantifiable, #_cb_invoice_location {{
+            color: rgba(164, 164, 164, 1);
+        }}
+        #_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton{{
+            border: 1px solid rgba(164, 164, 164, 1);
+            border-radius: 7px;
+            background-color: rgba(255, 255, 255, 1);
+        }}     
+        /* === QFrame  === */
+        #_f_calendar, #_f_right_info_company, #_f_info_company, #_f_invoice_box_export_invoice,
+        #_f_invoice_input_cart, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview,
+        #_f_clients_info_box, #_f_clients_table, #_f_inventory_box_edit, #_f_invoice_input_card,
+        #_f_right_user_management, #_f_left_user_management {{
+            background-color: rgba(255, 255, 255, 1);
+            border-radius: 15px;
+            border: 1px solid rgba(234, 237, 237, 1);
+        }}
+        #_f_graphic_finances {{
+            border: none;
+        }}
+        /* === QSpinBox, QStackedWidget (Préfixes _s_, _sw__) === */
         #_sw_login_dialog QLineEdit, 
         #_sw_login_dialog QSpinBox {{
             color: rgba(0, 0, 0, 1);
@@ -67,8 +301,8 @@ class theme:
             border: 1px solid rgba(84, 153, 199, 1);
             background-color: rgba(255, 255, 255, 0.7);
         }}
-        /* BOUTONS LOGIN */
-        #_b_config_db, #_b_signin, #_b_save_config_db {{
+        /* === QPushButton === */
+        #_sw_login_dialog QPushButton {{
             border-radius: 5px;
             color: rgba(0, 0, 0, 1);
             background-color: rgba(255, 255, 255, 1);
@@ -85,17 +319,20 @@ class theme:
             color: rgba(0, 0, 0, 1);
             background-color: rgba(255, 255, 255, 1);
         }}
-        /* MENU DES BOUTONS ENTETE */
+        /* === LES ENTETES === */
         #_f_header{{
             border: None;
+        }}
+        #_f_header * {{
+            color: rgba(0, 0, 0, 1);
+        }}
+        #_f_profil {{
+            border:none;
         }}
         #_g_profil {{
             border-radius: 20px;
             text-align: center;
             border:none;
-        }}
-        #_f_header * {{
-            color: rgba(0, 0, 0, 1);
         }}
         #_f_btn_header {{
             border: 1px dashed rgba(174, 182, 191, 1);
@@ -127,19 +364,14 @@ class theme:
             background-color: rgba(121, 119, 125, 0.3);
             text-align: center;
         }}
-        #_f_profil {{
-            border:none;
-        }}
-        
-        /* ICONE ENTREPRISE */
+        /* === ICONES ENTREPRISE === */
         #_l_icon_company, #_l_icon_company_info_company {{
             background-color: rgba(255, 255, 255, 1);
             padding: 5px;
             border-radius: 15px;
             border: 1px solid rgba(255, 73, 76, 1);
         }}
-        
-        /* MENU SIDEBAR TOP */
+        /* === LE MENU A GAUCHE === */
         #_f_side_menu {{
             border: 0.5px solid rgba(128, 128, 128, 1);
             border-radius: 20px;
@@ -159,198 +391,91 @@ class theme:
             border: 1px solid qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(133, 193, 233, 1), stop:1 rgba(187, 143, 206, 1));
             border-radius: 10px;
         }}
-        /* TOOLTIP */
         #_f_side_menu QToolTip {{ 
             background-color: rgba(119, 178, 201, 1); 
             color: rgba(0, 0, 0, 1); 
             border: solid 1px rgba(0, 0, 0, 1);
             font: 900 12pt "Arial Black";
         }}
-        
-        /* CALENDAR FRAME */
-        #_sw_main_dialog * {{
-            color: rgba(0, 0, 0, 1);
-        }}
-        #_f_calendar, #_f_right_info_company, #_f_info_company, #_f_invoice_box_export_invoice,
-        #_f_invoice_input_cart, #_f_invoice_inventory, #_f_valid_facture_list, #_f_valid_facture_preview,
-        #_f_clients_info_box, #_f_clients_table, #_f_inventory_box_edit {{
-            background-color: rgba(255, 255, 255, 1);
-            border-radius: 15px;
-            border: 1px solid rgba(234, 237, 237, 1);
-        }}
-        #_f_calendar QLineEdit, #_f_calendar QTextEdit, #_f_calendar QListWidget,
-        #_f_calendar QDateEdit, #_f_calendar QTimeEdit, #_f_left_user_management  QListWidget,
-        #_f_valid_facture_list QListWidget, #_p_clients QTableWidget, #_p_factures QComboBox,
-        #_p_inventory QDateEdit
-        {{
-            border-radius: 5px;
-            border: 1px solid rgba(214, 219, 223, 1);
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 5px;
-        }}
-        #_p_factures QComboBox{{
-            background-color: rgba(254, 249, 231, 0.6);
-            border: 1px solid rgba(224, 224, 224, 1);
-            border-radius: 10px;
-            margin: 5px;
-            padding: 5px;
-            height: 40px;
-        }}
-        #_f_calendar QListWidget::item {{ margin: 0px 5px;}}
-        #_f_calendar QListWidget::item:selected, #_p_inventory QListWidget::item:selected {{
-            border-top: 5px solid rgba(247, 220, 111, 1);
-            color: rgba(0, 0, 0, 1);
-            margin: 0px;
-            padding: 0px;
-        }}
-        /* FINANCES FRAME */
-        #_f_graphic_finances {{
-            border: none;
-        }}
-        #_b_more_activity {{
-            font: italic 11pt "Arial";
-            color: rgba(72, 166, 255, 1);
-        }}
-        #_f_graphic_finances QTableWidget, #_f_graphic_finances QListWidget, #_f_graphic_finances QGraphicsView, #_tw_select_table,
-        #_p_valid_factures * QTableWidget{{
-            border-radius: 15px;
-            background-color: rgba(255, 255, 255, 1);
-            color: rgba(0, 0, 0, 1);
-            border: 1px solid rgba(234, 237, 237, 1);
-        }}
-        #_f_graphic_finances QTableWidget QHeaderView::section:horizontal, #_tw_select_table QHeaderView::section:horizontal {{
-            background-color: rgba(0, 48, 73, 1);
-            border-radius: 4px;
-            color: rgba(255, 255, 255, 1);
-            border: 0.5px solid rgba(234, 237, 237, 1);
-            padding: 2px;
-        }}
+        /* === LES ARRIERES PLANS === */
         #_gv_histogram {{
-            background-image: url({self.histogram_bg});
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/histogram.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
         }}
         #_tw_activity, #_tw_select_table {{
-            background-image: url({self.table_bg});
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/table.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
         }}
         #_lw_activity {{
-            background-image: url({self.activites_bg});
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/listActivity.png');
             background-repeat: no-repeat;
                 background-position: center center;
             background-origin: content;
         }}
         #_gv_camembert {{
-            background-image: url({self.camembert_bg});
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/camembert.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
         }}
         #_gv_evolution  {{
-            background-image: url({self.evolution_bg});
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/evolution.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
         }}
         #_gv_production {{
-            background-image: url({self.analyse_bg});
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/analyse.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
         }}
-        QRadioButton::indicator
-        {{
-            width: 40px;
-            height: 40px;
+        #_tw_clients_table_info {{
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/clients.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-origin: content;
         }}
-        
-        QRadioButton::indicator::unchecked
-        {{
-           image: url({self.uncheckbox_icon});
+        #_lw_inventory_list_inventory {{
+            background-color: transparent;
+            background: transparent;
+            background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/inventory.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-origin: content;
         }}
-        
-        QRadioButton::indicator:unchecked:pressed
-        {{
-            image: url({self.uncheckbox_icon});
-        }}
-        
-        QRadioButton::indicator::checked 
-        {{
-            image: url({self.checkbox_icon});
-        }}
-        
-        QRadioButton::indicator:checked:pressed 
-        {{
-            image: url({self.checkbox_icon});
-        }}
-        
-        /* INFO COMPANY GROUP */
-        #_f_info_company QGroupBox {{
-            border-radius: 15px;
-            background-color: rgba(247, 249, 249, 1);
-            border: 1px dashed rgba(174, 182, 191, 1);
-        }}
-        
-        #_f_info_company QGroupBox QLineEdit, #_f_right_user_management QLineEdit, 
-        #_f_right_user_management QComboBox, #_p_factures * QLineEdit, #_p_factures * QDoubleSpinBox,
-        #_p_factures * QSpinBox, #_p_factures QTreeWidget, #_p_factures * QComboBox,
-        #_p_clients * QListWidget, #_p_restore QLineEdit, #_p_restore QComboBox, 
-        #_p_clients * QDoubleSpinBox, #_p_clients * QLineEdit, #_p_manage_db QTreeWidget,
-        #_p_inventory QLineEdit, #_p_inventory QComboBox, #_p_inventory QSpinBox, #_p_inventory QDoubleSpinBox,
-        #_p_valid_factures * QComboBox, #_p_factures * QListWidget
-        {{
-            color: rgba(0, 0, 0, 1);
-            border-radius: 5px;
-            border: 1px solid rgba(174, 182, 191, 1);
+        /* === SPÉCIFICITÉS À CHAQUE PAGE === */
+        /* === PAGE DE LOGIN === */
+        #_w_login_dialog, #_sw_login_dialog {{
+            border-radius: 20px;
             background-color: rgba(255, 255, 255, 0.7);
         }}
-        
-        #_f_info_company QGroupBox:title {{
-            background-color: rgba(235, 237, 239, 1);
-            color: rgba(0, 0, 0, 1);
-        }}
-        
-        #_f_dirigeant_label, #_f_contact_label, #_f_informations_legales_label, #_f_informations_bancaires_label, 
-        #_f_title_inputGeneral, #_f_title_inputConnexion, #_f_invoice_informations_article_label, #_f_inventory_informations_label {{
-            /*border: 1px solid rgba(171, 178, 185, 1);*/
+        /* === PAGE DE COMPANY === */
+        #_f_dirigeant_label, #_f_contact_label, #_f_informations_legales_label, 
+        #_f_informations_bancaires_label, #_f_title_inputGeneral, #_f_title_inputConnexion, 
+        #_f_invoice_informations_article_label, #_f_inventory_informations_label {{
             border-radius: 5px;
             background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(129, 155, 208, 1), stop:1 rgba(255, 255, 255, 1));
             color: rgba(0, 0, 0, 1);
-        
         }}
-        #_f_dirigeant_label:disabled, #_f_contact_label:disabled, #_f_informations_legales_label:disabled, 
+        #_f_dirigeant_label:disabled, #_f_contact_label:disabled, 
+        #_f_informations_legales_label:disabled, 
         #_f_informations_bancaires_label:disabled {{
             background-color: qlineargradient(spread:repeat, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(178, 186, 187, 1), stop:1 rgba(255, 255, 255, 1));
         }}
-        #_f_dirigeant_lineedit, #_f_contact_lineedit, #_f_informations_legales_lineedit, #_f_informations_bancaires_lineedit {{
+        #_f_dirigeant_lineedit, #_f_contact_lineedit, #_f_informations_legales_lineedit, 
+        #_f_informations_bancaires_lineedit {{
             border: none;
         }}
-        
-        #_f_info_company QPushButton {{
-            border: 1px solid rgba(174, 182, 191, 1);
-            border-radius: 10px;
-        }}
-        #_f_info_company QPushButton::hover {{
-            border-radius: 10px;
-        }}
-        
-        /*USER MANAGEMENT*/
-        #_f_right_user_management, #_f_left_user_management {{
-            background-color: rgba(255, 255, 255, 1);
-            border-radius: 15px;
-            border: 1px solid rgba(234, 237, 237, 1);
-        }}
-        /*FACTURE CREATION*/
+        /* === PAGE DE FACTURE === */
+        /* === QPushButton (Préfixes _b_) === */
         #_b_invoice_export, #_b_invoice_add_cart {{
             background-color : rgba(82, 121, 111, 1);
             color: rgba(255, 255, 255, 1);
-            border-radius: 10px;
-        }}
-        #_b_invoice_cancel_cart {{
-            border: 1px solid rgba(174, 182, 191, 1);
             border-radius: 10px;
         }}
         #_sw_main_dialog #_b_invoice_export::hover, #_sw_main_dialog #_b_invoice_add_cart::hover {{
@@ -358,25 +483,20 @@ class theme:
             color: rgba(0, 0, 0, 1) !important;
             border-radius: 10px !important;
         }}
+        #_b_invoice_cancel_cart {{
+            border: 1px solid rgba(174, 182, 191, 1);
+            border-radius: 10px;
+        }}
         #_b_invoice_total_remise {{
             color: rgba(0, 58, 207, 1);
         }}
+        /* === QDoubleSpinBox (Préfixes _ds_) === */
         #_ds_invoice_total{{
             color: rgba(212, 0, 91, 1);
-            border: none;
         }}
+        /* === QFrame (Préfixes _f_) === */
         #_f_invoice_preview_inventory {{
             border: none;
-        }}
-        #_f_invoice_preview_inventory QLabel {{
-            color: rgba(0, 0, 0, 1);
-            margin-left: 10px;
-            margin-right: 10px;
-        }}
-        #_f_invoice_preview_card {{
-            background-color: rgba(194, 182, 162, 1);
-            border-radius: 20px;
-            border: 1px solid rgba(217, 217, 217, 1);
         }}
         #_f_invoice_preview_inventory #_l_invoice_preview {{
             background-color: qlineargradient(spread:reflect, 
@@ -389,6 +509,17 @@ class theme:
             border-top-right-radius: 20px;
             margin: 0px;
             margin-bottom : 20px;
+            border: none;
+        }}
+        #_f_invoice_preview_inventory QLabel {{
+            color: rgba(0, 0, 0, 1);
+            margin-left: 10px;
+            margin-right: 10px;
+        }}
+        #_f_invoice_preview_card {{
+            background-color: rgba(194, 182, 162, 1);
+            border-radius: 20px;
+            border: 1px solid rgba(217, 217, 217, 1);
         }}
         #_f_invoice_warning_client {{
             background-color: rgba(255, 249, 241, 1);
@@ -398,11 +529,7 @@ class theme:
         #_l_invoice_warning_message {{
             color: rgba(134, 134, 132, 1);
         }}
-        #_f_invoice_box_export_invoice #_ds_invoice_total {{
-            color: rgba(223, 79, 144, 1);
-        }}
-        #_l_invoiceemptyInventorymess, #_l_licence_missing {{color: rgba(188, 71, 73, 1)}}
-        /*VALIDATION FACTURE*/
+        /* === PAGE DE VALID FACTURE === */
         #_l_valid_facture_fait_le, #_l_valid_facture_objet, #_l_valid_facture_to {{
             color: rgba(136, 142, 158, 1);
         }}
@@ -426,40 +553,22 @@ class theme:
             padding-left: 10px;
             padding-right: 5px;
         }}
-        #_tw_valid_facture_elements {{
-            border:none;
-        }}
         #_tw_valid_facture_elements QHeaderView::section:horizontal {{
             background-color: rgb(247, 248, 250);
             color: rgba(136, 142, 158, 1);
             border:none;
         }}
-        /*CLIENT MANAGEMENT*/
-        #_l_clients_mail, #_l_clients_num, #_l_invoice_nom, #_l_invoice_marque, #_l_invoice_price, #_l_invoice_qauntity,#_l_invoice_type_remise, #_l_invoice_remise, #_l_invoice_client, #_l_invoice_nomclient, #_l_invoice_numclient, #_le_invoice_mailclient, #_l_invoice_objet,
-        #_p_restore QLabel, #_cb_invoice_quantifiable, #_cb_invoice_location {{
-            color: rgba(164, 164, 164, 1);
-        }}
+        /* === PAGE DES CLIENTS === */
+        /* === QPushButton (Préfixes _b_) === */
         #_b_clients_show_info {{
             color: rgba(80, 172, 175, 1);
             border: 1px solid rgba(80, 172, 175, 1);
             border-radius: 7px;
             padding: 5px
         }}
-        #_tw_clients_table_info {{
-            background-image: url({self.clients_bg});
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-origin: content;
-        }}
         #_b_clients_hide_info {{
             color: rgba(144, 219, 249, 1);
             border: 1px solid rgba(144, 219, 249, 1);
-            border-radius: 7px;
-            padding: 5px
-        }}
-        #_b_clients_info_export, #_b_clients_add_client, #_b_manage_db_export_table {{
-            color: rgba(62, 136, 46, 1);
-            border: 1px solid rgba(62, 136, 46, 1);
             border-radius: 7px;
             padding: 5px
         }}
@@ -475,7 +584,7 @@ class theme:
             border-radius: 7px;
             padding: 5px
         }}
-        
+        /* === QTableWidget (Préfixes _tw_) === */
         #_tw_clients_table_info, #_tw_clients_table_info QHeaderView, #_tw_clients_table_info QHeaderView::section, #_tw_clients_table_info QTableCornerButton::section {{
             background-color: rgba(255, 255, 255, 1);
             color: rgba(164, 164, 164, 1);
@@ -487,42 +596,27 @@ class theme:
             border: none;
             border-bottom : 1px solid rgba(164, 164, 164, 1);
         }}
-        /*RESTORE MANAGEMENT*/
-        #_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton{{
-            border: 1px solid rgba(164, 164, 164, 1);
-            border-radius: 7px;
-            background-color: rgba(255, 255, 255, 1);
+        /* === PAGE DES INVENTAIRES === */
+        /* === QFrame (Préfixes _f_) === */
+        #_f_inventory_low_sale QLabel {{
+            color: rgba(255, 255, 255, 1);
         }}
-        /*INVENTORY WIDGET*/
         #_f_inventory_sum_product {{
             border: 1px solid rgba(164, 164, 164, 1);
             border-radius: 5px;
             padding: 5px;
         }}
+        /* === QPushButton (Préfixes _b_) === */
         #_b_inventory_add_product {{
             color: rgba(0, 174, 161, 1);
             border: 1px solid rgba(0, 174, 161, 1);
             border-radius: 7px;
             padding: 5px
         }}
-        #_lw_inventory_list_inventory {{
-            background-color: transparent;
-            background: transparent;
-            background-image: url({self.inventory_bg});
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-origin: content;
-        }}
-        #_f_inventory_low_sale, #_f_inventory_most_sale, #_f_inventory_sum_sold {{
-            border-radius: 10px;
-        }}
+        /* === QLabel (Préfixes _l_) === */
         #_l_inventory_icon_low_sale, #_l_inventory_icon_most_sale, #_l_inventory_icon_sum_sold {{
             border-radius: 20px;
             padding: 5px;
-        }}
-        #_f_inventory_low_sale QLabel {{
-            color: rgba(255, 255, 255, 1);
-            
         }}
         #_l_inventory_icon_low_sale {{
             background-color: rgba(65, 149, 255, 1);
@@ -532,120 +626,6 @@ class theme:
         }}
         #_l_inventory_icon_sum_sold {{
             background-color: rgba(0, 230, 138, 1);
-        }}
-        
-        /*TREE WIDGET*/
-        QTreeWidget {{
-            background-color: rgba(255, 255, 255, 1);
-            color : rgba(0, 0, 0, 1);
-            border: none;
-            font-size: 14px;
-            padding: 4px;
-        }}
-        QHeaderView::section {{
-            background-color: rgba(213, 245, 227, 1);
-            color : rgba(0, 0, 0, 1);
-            border: none;
-            font-size: 14px;
-            padding: 4px;
-        }}
-        QTreeWidget::item {{
-            padding: 4px 8px;
-            border: none;
-        }}
-        QTreeWidget::item:hover {{
-            background-color: #e6f7ff;
-            color : rgba(0, 0, 0, 1);
-            border-radius: 4px;
-        }}
-        QTreeWidget::branch:open:has-children {{
-            image: url({self.opentoolbox_icon});
-        }}
-        QTreeWidget::branch:closed:has-children {{
-            image: url({self.closetoolbox_icon});
-        }}
-        QTreeWidget::item:selected {{
-            background-color: #d1eaff;
-            border-radius: 4px;
-        }}
-        
-        /* CALENDAR WIDGET */
-        QCalendarWidget QWidget {{
-            alternate-background-color: rgba(255, 255, 255, 1); 
-            background-color: rgba(255, 255, 255, 1); 
-            border-radius: 20px;
-        }}
-        
-        QCalendarWidget QToolButton {{
-            background-color: rgba(255, 255, 255, 1);
-            color: rgba(0, 0, 0, 1);
-        }}
-        QCalendarWidget QToolButton::hover {{
-            background-color: rgba(255, 255, 255, 1);
-        }}
-        QCalendarWidget QToolButton::pressed {{
-            background-color: rgba(255, 255, 255, 1);
-        }}
-        
-        QCalendarWidget QMenu {{
-            background-color: rgba(255, 255, 255, 1);
-            width: 100px;
-            font-size: 15px;
-            color: rgba(0, 0, 0, 1);
-            border-radius: 0px;
-        }}
-        QCalendarWidget QMenu::item:selected {{
-            background-color: rgba(235, 245, 251, 1);
-            color: rgba(0, 0, 0, 1);
-        }}
-        
-        QCalendarWidget QSpinBox {{
-            width: 75px;
-            font-size: 13px;
-            color: rgba(0, 0, 0, 1);
-            background-color: rgba(255, 255, 255, 1);
-            selection-background-color: rgba(255, 255, 255, 1);
-            selection-color: rgba(0, 0, 0, 1);
-        }}
-        QCalendarWidget QSpinBox::editable {{
-            width: 75px;
-            font-size: 13px;
-            color: rgba(0, 0, 0, 1);
-        }}
-        QCalendarWidget QSpinBox::up-button {{ 
-            subcontrol-origin: border;  
-            subcontrol-position: top right;  
-            width: 20px;
-        }}
-        QCalendarWidget QSpinBox::down-button {{
-            subcontrol-origin: border; 
-            subcontrol-position: bottom right;  
-            width: 20px;
-        }}
-        QCalendarWidget QSpinBox::up-arrow {{ 
-            width: 20px;  
-            height: 20px; 
-        }}
-        QCalendarWidget QSpinBox::down-arrow {{ 
-            width: 20px;  
-            height: 20px; 
-        }}
-        /* Background de la sélection des jours */
-        QCalendarWidget QAbstractItemView:enabled {{
-            selection-background-color: rgba(42, 157, 143, 1); 
-            color: rgba(0, 0, 0, 1);
-            border-radius: 10px;
-        }}
-        QCalendarWidget QAbstractItemView::item:selected {{
-            border-radius: 10px;
-            margin: 6px;
-            padding: 2px;
-        }}
-        /* BOUTONS HOVER */
-        #_sw_main_dialog QPushButton::hover {{
-            border: 1px solid rgba(191, 201, 202, 1);
-            border-radius: 10px;
-            background-color: rgba(235, 245, 251, 1);
         }}
                 """)
 
