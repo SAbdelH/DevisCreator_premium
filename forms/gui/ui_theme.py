@@ -104,9 +104,10 @@ class theme:
             padding: 2px;
         }}
         /* === QPushButton (Préfixes _b_) === */
-        #_b_more_activity {{
+        #_p_dashboard #_b_more_activity {{
             font: italic 11pt "Arial";
             color: rgba(72, 166, 255, 1);
+            border: None;
         }}
         /* === QRadioButton (Préfixes _cb_) === */
         #centralwidget QRadioButton::indicator
