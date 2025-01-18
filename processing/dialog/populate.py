@@ -484,7 +484,29 @@ class PopulateWidget:
                             ContentPath = {
                                 file.stem: file.as_posix() for file in Path(inventory_path[0]).rglob("*")
                             }
+                            if _LIST_NAME == "_lw_inventory_list_inventory":
+                                self.maindialog._lw_inventory_list_inventory.setStyleSheet(f"""
+                                #_lw_inventory_list_inventory {{
+                                    background-color: transparent;
+                                    background: transparent;
+                                    background-image: url('');
+                                    background-repeat: no-repeat;
+                                    background-position: center center;
+                                    background-origin: content;
+                                }}
+                                """)
                     self.all_Inventory_list_populate(inventaires, ContentPath, _LIST_NAME, filter_text!="")
+                else:
+                    self.maindialog._lw_inventory_list_inventory.setStyleSheet(f"""
+                                                    #_lw_inventory_list_inventory {{
+                                                        background-color: transparent;
+                                                        background: transparent;
+                                                        background-image: url({self.inventory_bg});
+                                                        background-repeat: no-repeat;
+                                                        background-position: center center;
+                                                        background-origin: content;
+                                                    }}
+                                                    """)
                 if page == "_p_inventory": self.maindialog.firstOpenInventory = False
                 elif page == "factures" : self.maindialog.firstOpenFacture = False
                 else: self.maindialog.firstOpenDevis = False

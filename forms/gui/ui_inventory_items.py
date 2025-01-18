@@ -9,7 +9,7 @@ class InventoryItem(QWidget):
         super().__init__(parent)
         self.setStyleSheet("""
                     QFrame #inventory_frame {
-                        background-color: rgba(240, 240, 240, 0.65);
+                        background-color: rgba(40, 57, 67, 1);
                         border-radius: 10px;
                     }
                     #_l_icon {
