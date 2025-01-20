@@ -33,7 +33,6 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
         self.maindialog._b_delete_agenda.clicked.connect(lambda: self.setPlanning('delete'))
         self.maindialog._b_clients_save_client.clicked.connect(lambda: self.setClient('add'))
         self.maindialog._b_clients_delete_client.clicked.connect(lambda: self.setClient('delete'))
-        self.maindialog._tw_clients_table_info.itemSelectionChanged.connect(self.onClientItemSelected)
         self.maindialog._b_manage_db_export_table.clicked.connect(lambda : dbTableToExcel(self))
         self.maindialog._b_export_inv_model.clicked.connect(lambda : ModelImportInventory(self))
         self.maindialog._b_inventory_add.clicked.connect(lambda: self.setInventory(action="add"))
@@ -42,7 +41,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
         self.maindialog._b_inventory_delete.clicked.connect(lambda: self.setInventory(action='delete'))
         self.maindialog._b_invoice_export.clicked.connect(self.ModelFacture)
         self.maindialog._b_invoice_add_cart.clicked.connect(self.addToCart)
-        self.maindialog._cbx_invoice_type_document.currentIndexChanged.connect(self.populateInvoiceCreatedList)
+
 
     def mkOutputFolder(self):
         self.outputfolder = Path.home() / "Documents" / "Sorties DevisCreator"

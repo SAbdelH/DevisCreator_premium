@@ -6,7 +6,9 @@ from pathlib import Path
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtWidgets import QFileDialog, QListWidget, QComboBox, QListWidgetItem
 
-from forms.page import populateUserList
+from forms.page import (populateUserList, populateInfoCompany, populateAgenda, populateClientTable, populateClientCombo,
+                        populateDatabaseExplorer, populateListInventory, populateInvoiceCreatedList,
+                        populateActivitiesTable, populateActivList)
 from processing.database.model_private import Chemin
 from forms.gui import CartItem
 
@@ -18,33 +20,33 @@ class Update:
         elif text == '_p_user_management':
             populateUserList(self)
         elif text == '_p_info_company':
-            if self.WorkspaceExist(): self.populateInfoCompany()
+            if self.WorkspaceExist(): populateInfoCompany(self)
         elif text == '_p_dashboard':
             if self.WorkspaceExist():
-                self.populateAgenda()
-                self.populateActivitiesTable()
-                self.populateActivList()
+                populateAgenda(self)
+                populateActivitiesTable(self)
+                populateActivList(self)
                 if self.maindialog.firstOpenDashboard:
                     self.maindialog.firstOpenDashboard = False
         elif text == "_p_clients":
-            self.populateClientTable()
+            populateClientTable(self)
         elif text == "_p_manage_db":
-            self.populateDatabaseExplorer()
+            populateDatabaseExplorer(self)
         elif text in ("devis", "factures", "_p_inventory"):
             if self.WorkspaceExist():
                 liste = self.maindialog._lw_inventory_list_inventory if text == "_p_inventory" \
                     else self.maindialog._lw_invoice_list_inventory
-                self.populateListInventory(liste, "", text)
+                populateListInventory(self, liste, "", text)
                 if text == "_p_inventory":
                     self.maindialog._le_inventory_search_product.textChanged.connect(
                         partial(self.onSearchTextChanged, liste, page=text)
                     )
                 else:
                     self.InvoicePage = text
-                    self.populateClientCombo(text)
-                    self.populateInvoiceCreatedList()
+                    populateClientCombo(self, text)
+                    populateInvoiceCreatedList(self)
                     self.maindialog._le_invoice_inventory_filter.textChanged.connect(
-                        partial(self.onSearchTextChanged, liste, page=text)
+                        partial(self.onSearchTextChanged, self=self, liste=liste, page=text)
                 )
 
     def on_menu_clicked(self, text):
@@ -74,7 +76,7 @@ class Update:
             )
 
     def onSearchTextChanged(self, liste: QListWidget, text:str, page:str):
-        self.populateListInventory(liste, filter_text=text.strip(), page=page)
+        populateListInventory(self, liste, filter_text=text.strip(), page=page)
 
     def handleEditingFinishedCombo(self, comboBox: QComboBox):
         # Récupérer le texte saisi par l'utilisateur

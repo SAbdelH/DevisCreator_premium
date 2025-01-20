@@ -20,27 +20,6 @@ class Refresh:
         # Installer le filtre d'événements pour détecter les touches
         self._sw_main_dialog.installEventFilter(self)
 
-    def closeEvent(self, event):
-        if self._sw_main_dialog.currentIndex() == self.indexPage.get("_p_login"):
-            event.accept()
-        else:
-            # Créer une QMessageBox personnalisée
-            message_box = QMessageBox(self)
-            message_box.setWindowTitle("Avertissement")
-            message_box.setText("Êtes-vous sûr de quitter ?")
-
-            # Définir les boutons Oui et Non
-            message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-            icone_personnalisee = self.reflexion_pixmap
-            message_box.setIconPixmap(icone_personnalisee)
-            reply = message_box.exec_()
-
-            # Vérifier la réponse de l'utilisateur
-            if reply == QMessageBox.Yes:
-                self.fermeture_fenetre.emit(event)
-            else:
-                event.ignore()
-
     def clipboard(self):
         sender = self.sender().objectName()
         if sender == "_b_clients_clipbord_mail":
