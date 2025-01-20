@@ -1,11 +1,6 @@
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QFont, QPixmap)
-from PySide6.QtWidgets import (QApplication, QDialog, QDoubleSpinBox, QGridLayout,
-    QLabel, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
-
+from PySide6.QtCore import (QCoreApplication, QMetaObject, QSize, Qt)
+from PySide6.QtGui import QFont
+from PySide6.QtWidgets import (QDialog, QDoubleSpinBox, QGridLayout, QLabel, QPushButton, QVBoxLayout)
 from forms.gui.ui_icons import Icons
 
 

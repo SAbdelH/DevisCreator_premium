@@ -409,16 +409,10 @@ class theme:
             background-position: center center;
             background-origin: content;
         }}
-        #_tw_activity, #_tw_select_table {{
+        #_tw_select_table {{
             background-image: url({self.table_bg});
             background-repeat: no-repeat;
             background-position: center center;
-            background-origin: content;
-        }}
-        #_lw_activity {{
-            background-image: url({self.activites_bg});
-            background-repeat: no-repeat;
-                background-position: center center;
             background-origin: content;
         }}
         #_gv_camembert {{
@@ -435,12 +429,6 @@ class theme:
         }}
         #_gv_production {{
             background-image: url({self.analyse_bg});
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-origin: content;
-        }}
-        #_tw_clients_table_info {{
-            background-image: url({self.clients_bg});
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
@@ -631,8 +619,7 @@ class theme:
         }}
         #_l_inventory_icon_sum_sold {{
             background-color: rgba(0, 230, 138, 1);
-        }}
-                """)
+        }}""")
 
     def dark_theme(self):
         self.centralwidget.setStyleSheet(f"""
@@ -1057,16 +1044,10 @@ class theme:
             background-position: center center;
             background-origin: content;
         }}
-        #_tw_activity, #_tw_select_table {{
+        #_tw_select_table {{
             background-image: url({self.table_bg});
             background-repeat: no-repeat;
             background-position: center center;
-            background-origin: content;
-        }}
-        #_lw_activity {{
-            background-image: url({self.activites_bg});
-            background-repeat: no-repeat;
-                background-position: center center;
             background-origin: content;
         }}
         #_gv_camembert {{
@@ -1075,7 +1056,7 @@ class theme:
             background-position: center center;
             background-origin: content;
         }}
-        #_gv_evolution  {{
+        #_gv_evolution {{
             background-image: url({self.evolution_bg});
             background-repeat: no-repeat;
             background-position: center center;
@@ -1083,12 +1064,6 @@ class theme:
         }}
         #_gv_production {{
             background-image: url({self.analyse_bg});
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-origin: content;
-        }}
-        #_tw_clients_table_info {{
-            background-image: url({self.clients_bg});
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;

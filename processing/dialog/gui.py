@@ -6,6 +6,7 @@ from pathlib import Path
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtWidgets import QFileDialog, QListWidget, QComboBox, QListWidgetItem
 
+from forms.page import populateUserList
 from processing.database.model_private import Chemin
 from forms.gui import CartItem
 
@@ -15,7 +16,7 @@ class Update:
         if text == '_p_login':
             self.maindialog.switchPageConnexion(0, self.checkLicence)
         elif text == '_p_user_management':
-            self.populateUserList()
+            populateUserList(self)
         elif text == '_p_info_company':
             if self.WorkspaceExist(): self.populateInfoCompany()
         elif text == '_p_dashboard':

@@ -19,84 +19,6 @@ from processing.enumerations import LevelCritic as LVL
 
 class PopulateWidget:
 
-    def populateUserList(self):
-        with self.Session() as session:
-            update = Ui_Update().verify_update(session, 'user')
-            first = self.maindialog.firstOpenUser
-            if first:  self.maindialog.ump_last_update = datetime.now().date()
-
-            if first or (update and update.crea_date > self.maindialog.ump_last_update):
-                user = session.query(
-                    User.identifiant.label("_le_um_id"),
-                    User.nom.label("_le_um_nom"),
-                    User.prenom.label("_le_um_prenom"),
-                    User.poste.label("_le_um_poste"),
-                    User.sexe.label("_cbx_um_sexe"),
-                    User.role.label("_cbx_um_role"),
-                    User.email.label("_le_um_mail"),
-                    User.expire.label("_cw_um_expire_account")
-                    ).order_by(User.nom)
-                if user:
-                    self.maindialog._lw_um_usrList.clear()
-                    self.maindialog._lw_um_usrList.setStyleSheet("""
-                            #_p_user_management #_lw_um_usrList {
-                                background-image: none !important;
-                            }
-                            #_lw_um_usrList::item {
-                                background-color: qlineargradient(spread:repeat, x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #DDDEFF, stop: 1 #FFFFFF);
-                                border: 1px solid rgba(214, 219, 223, 1);
-                                border-radius: 8px;
-                                margin: 5px;
-                            }
-                            #_lw_um_usrList::item:hover {
-                                border-color: rgba(129, 178, 154, 1);
-                            }
-                            #_lw_um_usrList::item:selected {
-                                border-color: rgba(224, 122, 95, 1);
-                            }
-                        """)
-                    for employe in user:
-                        card = EmployeeCard(employe)
-                        item = QListWidgetItem(self.maindialog._lw_um_usrList)
-                        item.setSizeHint(QSize(110, 120))
-                        self.maindialog._lw_um_usrList.setItemWidget(item, card)
-
-                        # Store employee info in item data
-                        item.setData(Qt.UserRole, employe)
-                        # Connect item clicked signal
-                        self.maindialog._lw_um_usrList.itemClicked.connect(lambda item: self.populateInputUserList(item.data(Qt.UserRole)))
-                else:
-                    self.maindialog._lw_um_usrList.setStyleSheet(f"""
-                            # _p_user_management #_lw_um_usrList {{
-                            background - image: url({self.maindialog.user_bg});
-                            background - repeat: no - repeat;
-                            background - position: center center;
-                            background - origin: content;
-                        }}"""
-                        )
-                self.maindialog.ump_last_update = datetime.now()
-                self.maindialog.firstOpenUser = False
-
-    def populateInputUserList(self, info):
-        current_date = QDate.currentDate()
-        self.maindialog._cw_um_expire_account.setSelectedDate(current_date)
-        for alias, value in info._asdict().items():
-            widget = getattr(self.maindialog, alias, None)
-            if widget:
-                if hasattr(widget, 'setText'):  # Pour QLineEdit
-                    widget.setText(str(value))
-                elif hasattr(widget, 'setCurrentText'):  # Pour QComboBox
-                    widget.setCurrentText(str(value).replace("Employe", "Employé"))
-                else:
-                    if value and hasattr(widget, 'setSelectedDate'):
-                        datetime_obj = datetime.strptime(str(value), "%Y-%m-%d")
-                        date_part = datetime_obj.date()
-                        widget.setSelectedDate(
-                            QDate(date_part.year, date_part.month, date_part.day)
-                        )
-
-        self.maindialog._b_um_delete_usr.setEnabled(not (self.USER == info._le_um_id))
-        self.maindialog._b_um_update_usr.setEnabled(True)
 
     def populateInfoCompany(self):
         l = 0
@@ -145,6 +67,12 @@ class PopulateWidget:
 
     def populateAgenda(self):
         dlg = self.maindialog
+        dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
+                                    background-image: url({dlg.ToDo_bg});
+                                    background-repeat: no-repeat;
+                                    background-position: center center;
+                                    background-origin: content;
+                                }}""")
         with (self.Session() as session):
             update = Ui_Update().verify_update(session, 'agenda',
                                             filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
@@ -217,13 +145,6 @@ class PopulateWidget:
                             padding: 0px;  /* Supprime le padding des items */
                             margin: 2px 0px;  /* Ajoute une petite marge verticale entre les items */
                         }""")
-                else:
-                    dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
-                            background-image: url({dlg.a_faire_bg});
-                            background-repeat: no-repeat;
-                            background-position: center center;
-                            background-origin: content;
-                        }}""")
 
                 self.maindialog.agenda_last_update = datetime.now().date()
 
@@ -251,13 +172,20 @@ class PopulateWidget:
     def populateClientTable(self):
         # Ajouter des lignes avec des données
         with self.Session() as session:
+            table_widget = self.maindialog._tw_clients_table_info
+            table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
+                                    background-image: url({self.maindialog.clients_bg});
+                                    background-repeat: no-repeat;
+                                    background-position: center center;
+                                    background-origin: content;
+                                }}""")
+
             update = Ui_Update().verify_update(session, Ui_Update.nom in ('client', 'devis', 'facture'))
             first = self.maindialog.firstOpenClient
             if first:  self.maindialog.cp_last_update = datetime.now()
 
             if first or (update and update.crea_date > self.maindialog.cp_last_update):
                 Qr = self.execute_sql(session, 'SELECT * FROM "informations"."dette_client"')
-                table_widget = self.maindialog._tw_clients_table_info
                 table_widget.clearContents()
                 if Qr.success and Qr.lines > 0:
                     for row_index, row_data in enumerate(Qr.datas):
@@ -287,13 +215,6 @@ class PopulateWidget:
                         background-origin: content;
                     }}""")
                     self.maindialog.firstOpenClient = False
-                else:
-                    table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
-                        background-image: url({self.maindialog.clients_bg});
-                        background-repeat: no-repeat;
-                        background-position: center center;
-                        background-origin: content;
-                    }}""")
 
     def onClientItemSelected(self):
         table_widget = self.maindialog._tw_clients_table_info
@@ -428,12 +349,10 @@ class PopulateWidget:
                         }}""")
                     else:
                         self.maindialog._tw_select_table.setStyleSheet(f"""
-                        # _tw_select_table {{
-                        background - image: url({self.maindialog.table_bg});
-                        background - repeat: no - repeat;
-                        background - position: center
-                        center;
-                        background - origin: content;}}""")
+                        background-image: url({self.maindialog.table_bg});
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-origin: content;""")
             except Exception as err:
                 self.maindialog.show_notification(str(err), LVL.warning)
 
@@ -441,6 +360,17 @@ class PopulateWidget:
         _LIST_NAME = liste.objectName()
 
         with self.Session() as session:
+            self.maindialog._lw_inventory_list_inventory.setStyleSheet(f"""
+                                                                #_lw_inventory_list_inventory {{
+                                                                    background-color: transparent;
+                                                                    background: transparent;
+                                                                    background-image: url({self.maindialog.inventory_bg});
+                                                                    background-repeat: no-repeat;
+                                                                    background-position: center center;
+                                                                    background-origin: content;
+                                                                }}
+                                                                """)
+
             update = Ui_Update(
             ).verify_update(session,
                             'inventory',
@@ -496,17 +426,8 @@ class PopulateWidget:
                                 }}
                                 """)
                     self.all_Inventory_list_populate(inventaires, ContentPath, _LIST_NAME, filter_text!="")
-                else:
-                    self.maindialog._lw_inventory_list_inventory.setStyleSheet(f"""
-                                                    #_lw_inventory_list_inventory {{
-                                                        background-color: transparent;
-                                                        background: transparent;
-                                                        background-image: url({self.inventory_bg});
-                                                        background-repeat: no-repeat;
-                                                        background-position: center center;
-                                                        background-origin: content;
-                                                    }}
-                                                    """)
+
+
                 if page == "_p_inventory": self.maindialog.firstOpenInventory = False
                 elif page == "factures" : self.maindialog.firstOpenFacture = False
                 else: self.maindialog.firstOpenDevis = False
@@ -589,6 +510,14 @@ class PopulateWidget:
             self.maindialog._l_invoiceemptyInventorymess.setText(texte)
 
     def populateActivitiesTable(self):
+        self.maindialog._tw_activity.setStyleSheet(f"""
+                                            #_tw_activity, #_tw_select_table {{
+                                            background-image: url({self.maindialog.table_bg});
+                                            background-repeat: no-repeat;
+                                            background-position: center center;
+                                            background-origin: content;
+                                        }}""")
+
         with self.Session() as session:
             update = Ui_Update().verify_update(session)
             first = self.maindialog.firstOpenDashboard
@@ -629,20 +558,20 @@ class PopulateWidget:
                         background-position: center center;
                         background-origin: content;
                     }}""")
-                else:
-                    self.maindialog._tw_activity.setStyleSheet(f"""
-                                    #_tw_activity, #_tw_select_table {{
-                                    background-image: url({self.maindialog.table_bg});
-                                    background-repeat: no-repeat;
-                                    background-position: center center;
-                                    background-origin: content;
-                                }}""")
 
                 self.maindialog._tw_activity.scrollToBottom()
 
     def populateActivList(self):
         liste = self.maindialog._lw_activity
         liste.setIconSize(QSize(25, 25))
+        liste.setStyleSheet(f"""
+                            #_lw_activity {{
+                                background-image: url({self.maindialog.listActivity_bg});
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                                background-origin: content;
+                            }}""")
+
         with self.Session() as session:
             update = Ui_Update().verify_update(session)
             first = self.maindialog.firstOpenDashboard
@@ -673,14 +602,6 @@ class PopulateWidget:
                     liste.setStyleSheet(f"""
                     #_lw_activity {{
                         background-image: url("");
-                        background-repeat: no-repeat;
-                            background-position: center center;
-                        background-origin: content;
-                    }}""")
-                else:
-                    liste.setStyleSheet(f"""
-                    #_lw_activity {{
-                        background-image: url({self.activites_bg});
                         background-repeat: no-repeat;
                             background-position: center center;
                         background-origin: content;

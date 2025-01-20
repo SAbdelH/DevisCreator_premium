@@ -19,36 +19,57 @@ class validFacturePage:
         self._h_valid_factures = QHBoxLayout(self._p_valid_factures)
         self._h_valid_factures.setObjectName(u"_h_valid_factures")
         self._h_valid_factures.setContentsMargins(8, 5, 8, 10)
+        # Liste des factures
+        self.__invoiceListForm()
+        # Mise en page des facture dans l'UI
+        self.__modelInvoiceUI()
+
+        self._sw_main_dialog.addWidget(self._p_valid_factures)
+
+        self.__retranslateUi()
+
+    def __invoiceListForm(self):
+        # Frame des listes de factures
         self._f_valid_facture_list = QFrame(self._p_valid_factures)
         self._f_valid_facture_list.setObjectName(u"_f_valid_facture_list")
         self._f_valid_facture_list.setMaximumSize(QSize(700, 16777215))
         self._f_valid_facture_list.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_valid_facture_list.setFrameShadow(QFrame.Shadow.Raised)
+        # vertical Layout pour le frame
         self._v_valid_facture_list = QVBoxLayout(self._f_valid_facture_list)
         self._v_valid_facture_list.setObjectName(u"_v_valid_facture_list")
+        # label liste des factures
         self._l_valid_facture_list = QLabel(self._f_valid_facture_list)
         self._l_valid_facture_list.setObjectName(u"_l_valid_facture_list")
         self._l_valid_facture_list.setFont(self.font9)
         self._v_valid_facture_list.addWidget(self._l_valid_facture_list)
+        # liste des factures
         self._lw_valid_facture_list = QListWidget(self._f_valid_facture_list)
         self._lw_valid_facture_list.setObjectName(u"_lw_valid_facture_list")
         self._v_valid_facture_list.addWidget(self._lw_valid_facture_list)
         self._h_valid_factures.addWidget(self._f_valid_facture_list)
+
+    def __modelInvoiceUI(self):
+        # Frame Facture UI
         self._f_valid_facture_preview = QFrame(self._p_valid_factures)
         self._f_valid_facture_preview.setObjectName(u"_f_valid_facture_preview")
         self._f_valid_facture_preview.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_valid_facture_preview.setFrameShadow(QFrame.Shadow.Raised)
+        self._f_valid_facture_preview.setGraphicsEffect(self.shadow)
+        # vertical Layout pour le Frame
         self._v_valid_facture_preview = QVBoxLayout(self._f_valid_facture_preview)
         self._v_valid_facture_preview.setObjectName(u"_v_valid_facture_preview")
-        self._f_valid_facture_preview.setGraphicsEffect(self.shadow)
+        # Horizontal Layout pour l'entête
         self._h_valid_facture_preview_one = QHBoxLayout()
         self._h_valid_facture_preview_one.setObjectName(u"_h_valid_facture_preview_one")
+        # Label Numero de facture
         self._l_preview_index_invoice = QLabel(self._f_valid_facture_preview)
         self._l_preview_index_invoice.setObjectName(u"_l_preview_index_invoice")
         self._l_preview_index_invoice.setMinimumSize(QSize(0, 25))
         self._l_preview_index_invoice.setMaximumSize(QSize(16777215, 25))
         self._l_preview_index_invoice.setFont(self.font9)
         self._h_valid_facture_preview_one.addWidget(self._l_preview_index_invoice)
+        # etiquette état de la facture
         self._f_preview_state_invoice = QFrame(self._f_valid_facture_preview)
         self._f_preview_state_invoice.setObjectName(u"_f_preview_state_invoice")
         self._f_preview_state_invoice.setMinimumSize(QSize(90, 25))
@@ -64,6 +85,7 @@ class validFacturePage:
         self._h_preview_state_invoice.addWidget(self._l_preview_state_invoice)
         self._h_valid_facture_preview_one.addWidget(self._f_preview_state_invoice)
         self._v_valid_facture_preview.addLayout(self._h_valid_facture_preview_one)
+        # message de la validation de la facture
         self._f_state_invoice_bar = QFrame(self._f_valid_facture_preview)
         self._f_state_invoice_bar.setObjectName(u"_f_state_invoice_bar")
         self._f_state_invoice_bar.setFrameShape(QFrame.Shape.StyledPanel)
@@ -74,38 +96,50 @@ class validFacturePage:
         self._l_state_invoice_message.setObjectName(u"_l_state_invoice_message")
         self._v_state_invoice_bar.addWidget(self._l_state_invoice_message)
         self._v_valid_facture_preview.addWidget(self._f_state_invoice_bar)
+        # Grid pour les info de la validation du facture ligne 1
         self._g_valid_facture_preview_one = QGridLayout()
         self._g_valid_facture_preview_one.setObjectName(u"_g_valid_facture_preview_one")
-        self._l_valid_facture_objet = QLabel(self._f_valid_facture_preview)
-        self._l_valid_facture_objet.setObjectName(u"_l_valid_facture_objet")
-        self._g_valid_facture_preview_one.addWidget(self._l_valid_facture_objet, 0, 1, 1, 1)
+        # Label fait le de facture
         self._l_valid_facture_fait_le = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_fait_le.setObjectName(u"_l_valid_facture_fait_le")
         self._g_valid_facture_preview_one.addWidget(self._l_valid_facture_fait_le, 0, 0, 1, 1)
+        # Label Objet de facture
+        self._l_valid_facture_objet = QLabel(self._f_valid_facture_preview)
+        self._l_valid_facture_objet.setObjectName(u"_l_valid_facture_objet")
+        self._g_valid_facture_preview_one.addWidget(self._l_valid_facture_objet, 0, 1, 1, 1)
+        # Label pour date fait le
         self._l_valid_facture_fait_le_value = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_fait_le_value.setObjectName(u"_l_valid_facture_fait_le_value")
         self._g_valid_facture_preview_one.addWidget(self._l_valid_facture_fait_le_value, 1, 0, 1, 1)
+        # Label pour texte objet
         self._l_valid_facture_objet_value = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_objet_value.setObjectName(u"_l_valid_facture_objet_value")
         self._g_valid_facture_preview_one.addWidget(self._l_valid_facture_objet_value, 1, 1, 1, 1)
         self._v_valid_facture_preview.addLayout(self._g_valid_facture_preview_one)
+        # Horizontal pour les info de la validation du facture ligne 2
         self._h_valid_facture_preview_two = QHBoxLayout()
         self._h_valid_facture_preview_two.setObjectName(u"_h_valid_facture_preview_two")
+        # vertical pour la ligne destinataire
         self._v_valid_facture_to = QVBoxLayout()
         self._v_valid_facture_to.setObjectName(u"_v_valid_facture_to")
+        # Label destinataire
         self._l_valid_facture_to = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_to.setObjectName(u"_l_valid_facture_to")
         self._v_valid_facture_to.addWidget(self._l_valid_facture_to)
+        # Label nom du destinataire
         self._l_valid_facture_toName_value = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_toName_value.setObjectName(u"_l_valid_facture_toName_value")
         self._v_valid_facture_to.addWidget(self._l_valid_facture_toName_value)
+        # Label mail du destinataire
         self._l_valid_facture_toMail_value = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_toMail_value.setObjectName(u"_l_valid_facture_toMail_value")
         self._v_valid_facture_to.addWidget(self._l_valid_facture_toMail_value)
+        # Label numéro du destinataire
         self._l_valid_facture_toNum_value = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_toNum_value.setObjectName(u"_l_valid_facture_toNum_value")
         self._v_valid_facture_to.addWidget(self._l_valid_facture_toNum_value)
         self._h_valid_facture_preview_two.addLayout(self._v_valid_facture_to)
+        #Tableau des commandes de la facture
         self._v_valid_facture_spacer = QVBoxLayout()
         self._v_valid_facture_spacer.setObjectName(u"_v_valid_facture_spacer")
         self._h_valid_facture_preview_two.addLayout(self._v_valid_facture_spacer)
@@ -130,6 +164,7 @@ class validFacturePage:
                     i, QHeaderView.Stretch
                 )
         self._v_valid_facture_preview.addWidget(self._tw_valid_facture_elements)
+        # Ligne horizontal de séparation
         self._hl_separator_valid_facture_one = QFrame(self._f_valid_facture_preview)
         self._hl_separator_valid_facture_one.setObjectName(u"_hl_separator_valid_facture_one")
         self._hl_separator_valid_facture_one.setFrameShape(QFrame.Shape.HLine)
@@ -137,32 +172,39 @@ class validFacturePage:
         self._v_valid_facture_preview.addWidget(self._hl_separator_valid_facture_one)
         self._g_valid_facture_preview_two = QGridLayout()
         self._g_valid_facture_preview_two.setObjectName(u"_g_valid_facture_preview_two")
-        self._l_valid_facture_montant_ttc_value = QLabel(self._f_valid_facture_preview)
-        self._l_valid_facture_montant_ttc_value.setObjectName(u"_l_valid_facture_montant_ttc_value")
-        self._l_valid_facture_montant_ttc_value.setMinimumSize(QSize(100, 0))
-        self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ttc_value, 1, 2, 1, 1)
-        self._l_valid_facture_montant_ht_value = QLabel(self._f_valid_facture_preview)
-        self._l_valid_facture_montant_ht_value.setObjectName(u"_l_valid_facture_montant_ht_value")
-        self._l_valid_facture_montant_ht_value.setMinimumSize(QSize(100, 0))
-        self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ht_value, 0, 2, 1, 1)
+        # horizontal spacer pour excentrer les montant
+        self._hs_montant = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self._g_valid_facture_preview_two.addItem(self._hs_montant, 0, 0, 1, 1)
+        # Label Montant HT
         self._l_valid_facture_montant_ht = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_montant_ht.setObjectName(u"_l_valid_facture_montant_ht")
         self._l_valid_facture_montant_ht.setMinimumSize(QSize(90, 50))
         self._l_valid_facture_montant_ht.setFont(self.font3)
         self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ht, 0, 1, 1, 1)
+        # Label valeur Montant HT
+        self._l_valid_facture_montant_ht_value = QLabel(self._f_valid_facture_preview)
+        self._l_valid_facture_montant_ht_value.setObjectName(u"_l_valid_facture_montant_ht_value")
+        self._l_valid_facture_montant_ht_value.setMinimumSize(QSize(100, 0))
+        self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ht_value, 0, 2, 1, 1)
+        # Label Montant TTC
         self._l_valid_facture_montant_ttc = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_montant_ttc.setObjectName(u"_l_valid_facture_montant_ttc")
         self._l_valid_facture_montant_ttc.setMinimumSize(QSize(90, 50))
         self._l_valid_facture_montant_ttc.setFont(self.font3)
         self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ttc, 1, 1, 1, 1)
-        self._hs_montant = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-        self._g_valid_facture_preview_two.addItem(self._hs_montant, 0, 0, 1, 1)
+        # Label valeur Montant TTC
+        self._l_valid_facture_montant_ttc_value = QLabel(self._f_valid_facture_preview)
+        self._l_valid_facture_montant_ttc_value.setObjectName(u"_l_valid_facture_montant_ttc_value")
+        self._l_valid_facture_montant_ttc_value.setMinimumSize(QSize(100, 0))
+        self._g_valid_facture_preview_two.addWidget(self._l_valid_facture_montant_ttc_value, 1, 2, 1, 1)
         self._v_valid_facture_preview.addLayout(self._g_valid_facture_preview_two)
+        # Ligne horizontal de séparation
         self._hl_separator_valid_facture_two = QFrame(self._f_valid_facture_preview)
         self._hl_separator_valid_facture_two.setObjectName(u"_hl_separator_valid_facture_two")
         self._hl_separator_valid_facture_two.setFrameShape(QFrame.Shape.HLine)
         self._hl_separator_valid_facture_two.setFrameShadow(QFrame.Shadow.Sunken)
         self._v_valid_facture_preview.addWidget(self._hl_separator_valid_facture_two)
+        # combo type d'export de la facture
         self._cbx_valid_facture_type_export = QComboBox(self._f_valid_facture_preview)
         self._cbx_valid_facture_type_export.addItem(self.combo_facture_icon, "")
         self._cbx_valid_facture_type_export.addItem(self.combo_bon_livraison_icon, "")
@@ -171,17 +213,22 @@ class validFacturePage:
         self._cbx_valid_facture_type_export.setIconSize(QSize(20, 20))
         self._cbx_valid_facture_type_export.currentIndexChanged.connect(lambda: self.button_exports_text())
         self._v_valid_facture_preview.addWidget(self._cbx_valid_facture_type_export)
+        # Grid export document
         self._g_valid_facture_preview_three = QGridLayout()
         self._g_valid_facture_preview_three.setObjectName(u"_g_valid_facture_preview_three")
+        # Label pièce jointe pdf
         self._l_valid_facture_attachment_pdf = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_attachment_pdf.setObjectName(u"_l_valid_facture_attachment_pdf")
         self._g_valid_facture_preview_three.addWidget(self._l_valid_facture_attachment_pdf, 0, 0, 1, 2)
+        # Label pièce jointe excel
         self._l_valid_facture_attachment_excel = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_attachment_excel.setObjectName(u"_l_valid_facture_attachment_excel")
         self._g_valid_facture_preview_three.addWidget(self._l_valid_facture_attachment_excel, 0, 3, 1, 2)
+        # horizontal layout pour export pdf
         self._h_valid_facture_attachment_pdf = QHBoxLayout()
         self._h_valid_facture_attachment_pdf.setSpacing(3)
         self._h_valid_facture_attachment_pdf.setObjectName(u"_h_valid_facture_attachment_pdf")
+        # Icon pdf
         self._l_valid_facture_pdf_icon = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_pdf_icon.setObjectName(u"_l_valid_facture_pdf_icon")
         self._l_valid_facture_pdf_icon.setMaximumSize(QSize(25, 25))
@@ -189,6 +236,7 @@ class validFacturePage:
         self._l_valid_facture_pdf_icon.setScaledContents(True)
         self._l_valid_facture_pdf_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._h_valid_facture_attachment_pdf.addWidget(self._l_valid_facture_pdf_icon)
+        # Bouton export pdf
         self._b_valid_facture_attachment_pdf = QPushButton(self._f_valid_facture_preview)
         self._b_valid_facture_attachment_pdf.setObjectName(u"_b_valid_facture_attachment_pdf")
         self._b_valid_facture_attachment_pdf.setMinimumSize(QSize(0, 45))
@@ -201,9 +249,11 @@ class validFacturePage:
         self._b_valid_facture_attachment_pdf.setEnabled(False)
         self._h_valid_facture_attachment_pdf.addWidget(self._b_valid_facture_attachment_pdf)
         self._g_valid_facture_preview_three.addLayout(self._h_valid_facture_attachment_pdf, 1, 0, 1, 2)
+        # horizontal layout pour export excel
         self._h_valid_facture_attachment_excel = QHBoxLayout()
         self._h_valid_facture_attachment_excel.setSpacing(3)
         self._h_valid_facture_attachment_excel.setObjectName(u"_h_valid_facture_attachment_excel")
+        # Icon export excel
         self._l_valid_facture_excel_icon = QLabel(self._f_valid_facture_preview)
         self._l_valid_facture_excel_icon.setObjectName(u"_l_valid_facture_excel_icon")
         self._l_valid_facture_excel_icon.setMaximumSize(QSize(25, 25))
@@ -211,6 +261,7 @@ class validFacturePage:
         self._l_valid_facture_excel_icon.setScaledContents(True)
         self._l_valid_facture_excel_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._h_valid_facture_attachment_excel.addWidget(self._l_valid_facture_excel_icon)
+        # Bouton export excel
         self._b_valid_facture_attachment_excel = QPushButton(self._f_valid_facture_preview)
         self._b_valid_facture_attachment_excel.setObjectName(u"_b_valid_facture_attachment_excel")
         self._b_valid_facture_attachment_excel.setMinimumSize(QSize(0, 45))
@@ -223,10 +274,13 @@ class validFacturePage:
         self._h_valid_facture_attachment_excel.addWidget(self._b_valid_facture_attachment_excel)
         self._g_valid_facture_preview_three.addLayout(self._h_valid_facture_attachment_excel, 1, 3, 1, 2)
         self._v_valid_facture_preview.addLayout(self._g_valid_facture_preview_three)
+        # horizontal layout bottom
         self._h_valid_facture_preview_three = QHBoxLayout()
         self._h_valid_facture_preview_three.setObjectName(u"_h_valid_facture_preview_three")
+        # horizontal spacer pour excentrer les boutons
         self._hs_valid_facture_bottom_btn = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._h_valid_facture_preview_three.addItem(self._hs_valid_facture_bottom_btn)
+        # Bouton marqué comme non payé
         self._b_valid_facture_unpaid = QPushButton(self._f_valid_facture_preview)
         self._b_valid_facture_unpaid.setObjectName(u"_b_valid_facture_unpaid")
         self._b_valid_facture_unpaid.setMinimumSize(QSize(190, 40))
@@ -234,6 +288,7 @@ class validFacturePage:
         self._b_valid_facture_unpaid.setFont(self.font3)
         self._b_valid_facture_unpaid.setFlat(True)
         self._h_valid_facture_preview_three.addWidget(self._b_valid_facture_unpaid)
+        # Bouton marqué comme payé
         self._b_valid_facture_paid = QPushButton(self._f_valid_facture_preview)
         self._b_valid_facture_paid.setObjectName(u"_b_valid_facture_paid")
         self._b_valid_facture_paid.setMinimumSize(QSize(170, 40))
@@ -243,9 +298,6 @@ class validFacturePage:
         self._h_valid_facture_preview_three.addWidget(self._b_valid_facture_paid)
         self._v_valid_facture_preview.addLayout(self._h_valid_facture_preview_three)
         self._h_valid_factures.addWidget(self._f_valid_facture_preview)
-        self._sw_main_dialog.addWidget(self._p_valid_factures)
-
-        self.__retranslateUi()
 
     def button_exports_text(self, numero: str = ""):
         exportText = self._cbx_valid_facture_type_export.currentText()
