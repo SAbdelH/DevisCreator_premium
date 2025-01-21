@@ -155,7 +155,7 @@ class DashboardPage:
         self._tw_activity.horizontalHeader().setCascadingSectionResizes(True)
         self._tw_activity.horizontalHeader().setDefaultSectionSize(120)
         self._tw_activity.horizontalHeader().setStretchLastSection(True)
-        info_columns = {self.calendrier_icon, self.activites_icon, self.action_icon, self.budget_icon}
+        info_columns = [self.calendrier_icon, self.activites_icon, self.action_icon, self.budget_icon]
         for col, picture in enumerate(info_columns):
             __qtablewidgetitem = QTableWidgetItem()
             __qtablewidgetitem.setFont(self.font3)

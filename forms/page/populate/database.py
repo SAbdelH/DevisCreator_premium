@@ -33,7 +33,7 @@ def populateDatabaseExplorer(self):
                 items.append(item)
 
         self.maindialog._trw_db_structure.insertTopLevelItems(0, items)
-        self.maindialog._trw_db_structure.itemDoubleClicked.connect(lambda item: onTreeItemDoubleClicked(self, item))
+        self.maindialog._trw_db_structure.itemDoubleClicked.connect(lambda item, column: onTreeItemDoubleClicked(self, item, column))
         self.maindialog.firstOpenDbManager = False
 
 def onTreeItemDoubleClicked(self, item, column):

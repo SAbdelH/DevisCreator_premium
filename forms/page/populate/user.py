@@ -53,6 +53,7 @@ def populateUserList(self):
                     """)
                 for employe in user:
                     card = EmployeeCard(employe)
+                    card.setTheme(self.maindialog.apparence)
                     item = QListWidgetItem(self.maindialog._lw_um_usrList)
                     item.setSizeHint(QSize(110, 120))
                     self.maindialog._lw_um_usrList.setItemWidget(item, card)

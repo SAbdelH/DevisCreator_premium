@@ -106,7 +106,6 @@ class clientsPage:
         self._f_clients_info_box.setMaximumSize(QSize(490, 16777215))
         self._f_clients_info_box.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_clients_info_box.setFrameShadow(QFrame.Shadow.Raised)
-        self._f_clients_info_box.setGraphicsEffect(self.shadow)
         # VERTICAL LAYOUT DU FRAME
         self._v_clients_info_box = QVBoxLayout(self._f_clients_info_box)
         self._v_clients_info_box.setObjectName(u"_v_clients_info_box")

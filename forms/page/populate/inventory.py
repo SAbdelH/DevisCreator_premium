@@ -116,7 +116,7 @@ def all_Inventory_list_populate(self, inventaires, ContentPath, _LIST_NAME, filt
 
         dlg.mp_last_update = datetime.now().date()
 
-        liste.itemClicked.connect(partial(onInventoryItemSelected, self=self, liste_name=_LIST_NAME))
+        liste.itemClicked.connect(lambda item: onInventoryItemSelected(self, item,_LIST_NAME))
 
 def onInventoryItemSelected(self, item: QListWidgetItem, liste_name: str):
     dlg = self.maindialog

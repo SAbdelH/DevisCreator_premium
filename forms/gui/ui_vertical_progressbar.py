@@ -37,6 +37,16 @@ class VerticalProgressBar(QWidget):
         self.current_step = min(step, self.steps - 1)
         self.update()
 
+    def setTheme(self, apparence: str):
+        """Change le thème en fonction de l'apparence spécifiée."""
+        if apparence.lower() == "dark":
+            self.active_text_color = QColor(255, 255, 255)  # Texte actif en blanc pour mode sombre
+        elif apparence.lower() == "white":
+            self.active_text_color = QColor(0, 0, 0)  # Texte actif en noir pour mode clair
+        else:
+            raise ValueError("Apparence invalide : choisir 'sombre' ou 'clair'.")
+        self.update()
+
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)

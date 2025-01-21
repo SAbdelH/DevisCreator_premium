@@ -55,7 +55,7 @@ class validFacturePage:
         self._f_valid_facture_preview.setObjectName(u"_f_valid_facture_preview")
         self._f_valid_facture_preview.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_valid_facture_preview.setFrameShadow(QFrame.Shadow.Raised)
-        self._f_valid_facture_preview.setGraphicsEffect(self.shadow)
+
         # vertical Layout pour le Frame
         self._v_valid_facture_preview = QVBoxLayout(self._f_valid_facture_preview)
         self._v_valid_facture_preview.setObjectName(u"_v_valid_facture_preview")

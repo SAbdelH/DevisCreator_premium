@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSizePolicy)
-from PySide6.QtGui import QPixmap, QFont, QCursor
+from PySide6.QtGui import QPixmap, QFont, QCursor, QPalette
 from PySide6.QtCore import Qt
 from collections import namedtuple
 from forms.gui.ui_icons import Icons
@@ -33,30 +33,33 @@ class EmployeeCard(QWidget):
         v_layout.setSpacing(2)
         v_layout.setAlignment(Qt.AlignCenter)
 
-        name_label = QLabel(f"{info._le_um_nom.upper()} {info._le_um_prenom.capitalize()}")
-        name_label.setFont(QFont("Arial", 10, QFont.Bold))
-        name_label.setAlignment(Qt.AlignCenter)
-        name_label.setWordWrap(True)
-        name_label.setMinimumWidth(90)
+        self.name_label = QLabel(f"{info._le_um_nom.upper()} {info._le_um_prenom.capitalize()}")
+        self.name_label.setObjectName("name_label")
+        self.name_label.setFont(QFont("Arial", 10, QFont.Bold))
+        self.name_label.setAlignment(Qt.AlignCenter)
+        self.name_label.setWordWrap(True)
+        self.name_label.setMinimumWidth(90)
 
-        idenfiant_label = QLabel(f"@{info._le_um_id}")
+        self.idenfiant_label = QLabel(f"@{info._le_um_id}")
+        self.idenfiant_label.setObjectName("identifiant_label")
         font = QFont("Arial", 8)
         font.setBold(True)
         font.setItalic(True)
-        idenfiant_label.setFont(font)
-        idenfiant_label.setAlignment(Qt.AlignCenter)
-        idenfiant_label.setWordWrap(True)
-        idenfiant_label.setMinimumWidth(90)
+        self.idenfiant_label.setFont(font)
+        self.idenfiant_label.setAlignment(Qt.AlignCenter)
+        self.idenfiant_label.setWordWrap(True)
+        self.idenfiant_label.setMinimumWidth(90)
 
-        role_label = QLabel(info._cbx_um_role)
-        role_label.setFont(QFont("Arial", 8))
-        role_label.setAlignment(Qt.AlignCenter)
-        role_label.setWordWrap(True)
-        role_label.setMinimumWidth(90)
+        self.role_label = QLabel(info._cbx_um_role)
+        self.role_label.setObjectName("role_label")
+        self.role_label.setFont(QFont("Arial", 8))
+        self.role_label.setAlignment(Qt.AlignCenter)
+        self.role_label.setWordWrap(True)
+        self.role_label.setMinimumWidth(90)
 
-        v_layout.addWidget(name_label)
-        v_layout.addWidget(idenfiant_label)
-        v_layout.addWidget(role_label)
+        v_layout.addWidget(self.name_label)
+        v_layout.addWidget(self.idenfiant_label)
+        v_layout.addWidget(self.role_label)
 
         # Add elements to main layout
         layout.addLayout(h_layout)
@@ -67,3 +70,11 @@ class EmployeeCard(QWidget):
         # Set size policy to allow the widget to grow and shrink
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.setCursor(QCursor(Qt.PointingHandCursor))
+
+    def setTheme(self, apparence: str):
+        self.setStyleSheet(
+            """#name_label {color: rgba(0, 0, 0, 1)}
+                #identifiant_label {color: rgba(0, 0, 0, 1)}
+                #role_label {color: rgba(0, 0, 0, 1)}
+                """
+        )

@@ -204,7 +204,6 @@ class Menu:
         self._f_side_menu.setMaximumSize(QSize(40, 16777215))
         self._f_side_menu.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_side_menu.setFrameShadow(QFrame.Shadow.Raised)
-        self._f_side_menu.setGraphicsEffect(self.shadow)
         # CONFIGURATION D'UN VERTICAL LAYOUT DU FRAME SIDE MENU
         self._v_side_menu = QVBoxLayout(self._f_side_menu)
         self._v_side_menu.setSpacing(0)
@@ -223,7 +222,6 @@ class Menu:
         self._b_mcreate_ws.setIcon(self.create_ws_icon)
         self._b_mcreate_ws.setIconSize(QSize(25, 25))
         self._b_mcreate_ws.setFlat(True)
-        self._b_mcreate_ws.setGraphicsEffect(self.shadow)
         self._v_side_menu_two.addWidget(self._b_mcreate_ws)
         # AJOUT DU BOUTON INFORMATION ENTREPRISE
         self._b_minfo_company = QPushButton(self._f_side_menu)
@@ -234,7 +232,6 @@ class Menu:
         self._b_minfo_company.setIconSize(QSize(25, 25))
         self._b_minfo_company.setCheckable(True)
         self._b_minfo_company.setFlat(True)
-        self._b_minfo_company.setGraphicsEffect(self.shadow)
         self._b_minfo_company.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_minfo_company, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON CREATION UTILISATEUR
@@ -248,7 +245,6 @@ class Menu:
         self._b_mcreate_user.setIconSize(QSize(25, 25))
         self._b_mcreate_user.setCheckable(True)
         self._b_mcreate_user.setFlat(True)
-        self._b_mcreate_user.setGraphicsEffect(self.shadow)
         self._b_mcreate_user.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_mcreate_user, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION DEVIS
@@ -260,7 +256,7 @@ class Menu:
         self._b_mcreate_devis.setIconSize(QSize(25, 25))
         self._b_mcreate_devis.setCheckable(True)
         self._b_mcreate_devis.setFlat(True)
-        self._b_mcreate_devis.setGraphicsEffect(self.shadow)
+
         self._b_mcreate_devis.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_mcreate_devis)
         # AJOUT BOUTON CREATION FACTURE
@@ -272,7 +268,6 @@ class Menu:
         self._b_mcreate_facture.setIconSize(QSize(25, 25))
         self._b_mcreate_facture.setCheckable(True)
         self._b_mcreate_facture.setFlat(True)
-        self._b_mcreate_facture.setGraphicsEffect(self.shadow)
         self._b_mcreate_facture.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_mcreate_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON VALIDE FACTURE
@@ -284,7 +279,6 @@ class Menu:
         self._b_mvalid_facture.setIconSize(QSize(25, 25))
         self._b_mvalid_facture.setCheckable(True)
         self._b_mvalid_facture.setFlat(True)
-        self._b_mvalid_facture.setGraphicsEffect(self.shadow)
         self._b_mvalid_facture.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_mvalid_facture, 0, Qt.AlignVCenter)
         # AJOUT BOUTON CREATION CLIENT
@@ -298,7 +292,6 @@ class Menu:
         self._b_mclient.toggled.connect(self.resetToggleSideMenu)
         self._b_mclient.setCheckable(True)
         self._b_mclient.setFlat(True)
-        self._b_mclient.setGraphicsEffect(self.shadow)
         self._v_side_menu_two.addWidget(self._b_mclient)
         # AJOUT BOUTON CREATION SAUVEGARDE
         self._b_mcreate_backup = QPushButton(self._f_side_menu)
@@ -309,7 +302,6 @@ class Menu:
         self._b_mcreate_backup.setIconSize(QSize(25, 25))
         self._b_mcreate_backup.setCheckable(True)
         self._b_mcreate_backup.setFlat(True)
-        self._b_mcreate_backup.setGraphicsEffect(self.shadow)
         self._b_mcreate_backup.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_mcreate_backup, 0, Qt.AlignVCenter)
         # AJOUT BOUTON MANAGE DB
@@ -321,7 +313,6 @@ class Menu:
         self._b_mmanage_db.setIconSize(QSize(25, 25))
         self._b_mmanage_db.setCheckable(True)
         self._b_mmanage_db.setFlat(True)
-        self._b_mmanage_db.setGraphicsEffect(self.shadow)
         self._b_mmanage_db.clicked.connect(self.toggleButton)
         self._v_side_menu_two.addWidget(self._b_mmanage_db, 0, Qt.AlignVCenter)
         # AJOUT DU BOUTON VERTICAL LAYOUT DANS SIDE MENU
@@ -545,12 +536,8 @@ class Menu:
                     def click_handler(event):
                         if signal_name == 'darkmode':
                             # Inverser le thème
-                            if self.apparence == 'white':
-                                self.dark_theme()
-                                self.apparence = 'dark'
-                            else:
-                                self.light_theme()
-                                self.apparence = 'white'
+                            self.apparence = 'dark' if self.apparence == 'white' else 'white'
+                            self.switchTheme()
 
                             # Mettre à jour l'icône et le texte
                             new_theme = "Sombre" if self.apparence == "white" else "Claire"

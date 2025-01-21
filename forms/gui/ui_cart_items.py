@@ -50,7 +50,7 @@ class CartItem(QWidget):
         #_le_title {
             background-color:  transparent;
             border-radius: 5px;
-            border: 1px solid rgb(229, 233, 233);
+            border: 1px solid rgb(70, 70, 70);
         }
         #_b_edit_item QPushButton:checked{
             background-color: rgb(239, 255, 246);

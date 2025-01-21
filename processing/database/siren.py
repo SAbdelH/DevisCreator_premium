@@ -38,7 +38,7 @@ def getInfoEtablissement(objet,  siret: str):
     NT_Entreprise = namedtuple("InformationEntreprise", fields)
 
     if token:
-        # URL de l'API (comme dans votre code précédent)
+        # URL de l'API
         url = f"https://api.insee.fr/api-sirene/3.11/siret/{siret}"
 
         # En-têtes dynamiques

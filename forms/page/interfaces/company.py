@@ -81,6 +81,7 @@ class firmPage:
         icons = [self.icompany_pixmap, self.idirigeant_pixmap, self.iadresse_pixmap,
                     self.icontact_pixmap, self.isiren_pixmap, self.ibank_pixmap]
         self._cpb_step_bar = VerticalProgressBar(steps=len(self.orderGroup), labels=labels, icons=icons)
+        self._cpb_step_bar.setTheme(self.apparence)
         self._v_right_info_company.addWidget(self._cpb_step_bar)
         # BOUTON ENREGISTRER
         self._b_save_info_company = QPushButton(self._f_right_info_company)

@@ -33,12 +33,12 @@ class AgendaItem(QWidget):
             background-color: rgba(248, 249, 250, 0.4);
             }
         """)
-        self.setMaximumSize(QSize(16777215, 80))
+        self.setMaximumSize(QSize(400, 80))
 
         self.formVLayout = QHBoxLayout(self)
         self.formVLayout.setSpacing(0)
         self.formVLayout.setObjectName(u"formHLayout")
-        self.formVLayout.setContentsMargins(0, 0, 0, 0)
+        self.formVLayout.setContentsMargins(0, 2, 0, 2)
         # Frame principal
         self.frame = QFrame(self)
         self.frame.setObjectName(u"agenda_frame")

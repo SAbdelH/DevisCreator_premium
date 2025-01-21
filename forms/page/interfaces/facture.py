@@ -174,7 +174,6 @@ class InvoicePage:
         self._f_invoice_box_export_invoice.setMaximumSize(QSize(400, 16777215))
         self._f_invoice_box_export_invoice.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_invoice_box_export_invoice.setFrameShadow(QFrame.Shadow.Raised)
-        self._f_invoice_box_export_invoice.setGraphicsEffect(self.shadow)
         self._g_box_export_invoice = QGridLayout(self._f_invoice_box_export_invoice)
         self._g_box_export_invoice.setObjectName(u"_g_box_export_invoice")
         self._g_box_export_invoice.setContentsMargins(5, 10, 5, 10)

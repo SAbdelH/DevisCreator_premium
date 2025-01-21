@@ -12,12 +12,6 @@ from processing.database.session import WorkSession
 
 def populateAgenda(self):
     dlg = self.maindialog
-    dlg._lw_agenda.setStyleSheet(f"""#_lw_agenda {{
-                                background-image: url({dlg.ToDo_bg});
-                                background-repeat: no-repeat;
-                                background-position: center center;
-                                background-origin: content;
-                            }}""")
     with (self.Session() as session):
         update = Ui_Update().verify_update(session, 'agenda',
                                         filtre=Ui_Update.crea_user == WorkSession.get_current_user().identifiant)
@@ -78,18 +72,6 @@ def populateAgenda(self):
                     item.setSizeHint(QSize(custom_widget.width(), 80))  # Ajuste la taille de l'item selon le widget
                     dlg._lw_agenda.addItem(item)
                     dlg._lw_agenda.setItemWidget(item, custom_widget)
-                    dlg._lw_agenda.setStyleSheet("""
-                    #_lw_agenda {
-                        border-radius: 5px;
-                        border: 1px solid rgba(214, 219, 223, 1);
-                        background-color: rgba(255, 255, 255, 0.7);
-                        padding: 2px;
-                        spacing: 0px;
-                    }
-                    QListWidget::item {
-                        padding: 0px;  /* Supprime le padding des items */
-                        margin: 2px 0px;  /* Ajoute une petite marge verticale entre les items */
-                    }""")
 
             self.maindialog.agenda_last_update = datetime.now().date()
 

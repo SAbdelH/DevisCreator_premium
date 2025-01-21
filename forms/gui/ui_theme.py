@@ -1,8 +1,35 @@
 from PySide6.QtGui import QColor
-from PySide6.QtWidgets import QGraphicsDropShadowEffect
+from PySide6.QtWidgets import QGraphicsDropShadowEffect, QListWidget
+
 
 
 class theme:
+    def switchTheme(self):
+        self._f_valid_facture_preview.setGraphicsEffect(self.shadow)
+        self._f_inventory_box_edit.setGraphicsEffect(self.shadow)
+        self._f_clients_info_box.setGraphicsEffect(self.shadow)
+        self._f_invoice_box_export_invoice.setGraphicsEffect(self.shadow)
+        self._f_side_menu.setGraphicsEffect(self.shadow)
+        self._b_mcreate_ws.setGraphicsEffect(self.shadow)
+        self._b_minfo_company.setGraphicsEffect(self.shadow)
+        self._b_mcreate_devis.setGraphicsEffect(self.shadow)
+        self._b_mvalid_facture.setGraphicsEffect(self.shadow)
+        self._b_mclient.setGraphicsEffect(self.shadow)
+        self._b_mcreate_backup.setGraphicsEffect(self.shadow)
+        self._b_mmanage_db.setGraphicsEffect(self.shadow)
+        self._b_mcreate_facture.setGraphicsEffect(self.shadow)
+        self._b_mcreate_user.setGraphicsEffect(self.shadow)
+        self._ccw_inventory_most_sale.setGraphicsEffect(self.shadow)
+        self._ccw_inventory_low_sale.setGraphicsEffect(self.shadow)
+        self._ccw_inventory_sum_sold.setGraphicsEffect(self.shadow)
+        self._cpb_step_bar.setTheme(self.apparence)
+
+        self.light_theme() if self.apparence == 'white' else self.dark_theme()
+
+        concernedList = [self._lw_um_usrList]
+        for liste in concernedList:
+            self.ApplyTheme(liste)
+
     def light_theme(self):
         self.centralwidget.setStyleSheet(f"""
         /* === WIDGET DES FENETRES PRINCIPAL === */
@@ -714,7 +741,7 @@ class theme:
         #centralwidget QListWidget::item:selected,
         #centralwidget QListWidget::item:selected {{
             border-top: 5px solid rgba(247, 220, 111, 1);
-            color: rgba(0, 0, 0, 1);
+            color: rgba(255, 255, 255, 1);
             margin: 0px;
             padding: 0px;
         }}
@@ -1261,6 +1288,20 @@ class theme:
     def shadow(self):
         shadow = QGraphicsDropShadowEffect(self)
         shadow.setBlurRadius(8)
-        shadow.setOffset(-0.4, 2)
-        #shadow.setColor(QColor(0, 0, 0, 100))
+        shadow.setOffset(-0.4, 0)
+        back = QColor(0, 0, 0, 100) if self.apparence == 'white' else QColor(255, 255, 255, 100)
+        shadow.setColor(back)
         return shadow
+
+    def ApplyTheme(self, Liste: QListWidget):
+        # Parcourir tous les éléments de la QListWidget
+        for i in range(Liste.count()):
+            # Récupérer l'élément de la liste
+            item = Liste.item(i)
+            # Récupérer le widget associé à cet item
+            custom_widget = Liste.itemWidget(item)
+
+            # Vérifier que le widget est bien de type CartItem
+            if hasattr(custom_widget, "setTheme"):
+                # Utiliser la propriété setTheme
+                custom_widget.setTheme(self.apparence)

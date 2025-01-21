@@ -7,17 +7,18 @@ import imagesize
 class InventoryItem(QWidget):
     def __init__(self, info, parent=None):
         super().__init__(parent)
+        self.info = info
         self.setStyleSheet("""
-                    QFrame #inventory_frame {
-                        background-color: rgba(40, 57, 67, 1);
-                        border-radius: 10px;
-                    }
-                    #_l_icon {
-                        border: None;
-                        border-radius: 10px;
-                        background-color: rgba(255, 255, 255, 1);
-                    }
-                """)
+                            QFrame #inventory_frame {
+                                background-color: rgba(40, 57, 67, 1);
+                                border-radius: 10px;
+                            }
+                            #_l_icon {
+                                border: None;
+                                border-radius: 10px;
+                                background-color: rgba(255, 255, 255, 1);
+                            }
+                        """)
         # Frame principal
         self.frame = QFrame(self)
         self.frame.setObjectName("inventory_frame")

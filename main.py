@@ -1,7 +1,6 @@
 import platform
 from pathlib import Path
 from PySide6 import QtWidgets
-
 from processing import *
 
 

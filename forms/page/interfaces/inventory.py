@@ -92,7 +92,7 @@ class InventoryPage:
         self._f_inventory_box_edit.setMaximumSize(QSize(450, 16777215))
         self._f_inventory_box_edit.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_inventory_box_edit.setFrameShadow(QFrame.Shadow.Raised)
-        self._f_inventory_box_edit.setGraphicsEffect(self.shadow)
+
         self._f_inventory_box_edit.setVisible(False)
         # VERTICAL FRAME EDIT BOX
         self._v_inventory_box_edit = QVBoxLayout(self._f_inventory_box_edit)
@@ -315,7 +315,6 @@ class InventoryPage:
         self._ccw_inventory_most_sale.setObjectName(u"_ccw_inventory_most_sale")
         self._ccw_inventory_most_sale.setMinimumSize(QSize(0, 70))
         self._ccw_inventory_most_sale.setMaximumSize(QSize(16777215, 70))
-        self._ccw_inventory_most_sale.setGraphicsEffect(self.shadow)
         # GRID BOX LE PLUS VENDU
         self._g_inventory_most_sale = QGridLayout(self._ccw_inventory_most_sale)
         self._g_inventory_most_sale.setObjectName(u"_g_inventory_most_sale")
@@ -342,7 +341,6 @@ class InventoryPage:
         self._ccw_inventory_low_sale.setObjectName(u"_ccw_inventory_low_sale")
         self._ccw_inventory_low_sale.setMinimumSize(QSize(0, 70))
         self._ccw_inventory_low_sale.setMaximumSize(QSize(16777215, 70))
-        self._ccw_inventory_low_sale.setGraphicsEffect(self.shadow)
         # GRID BOX LE moins VENDU
         self._g_inventory_low_sale = QGridLayout(self._ccw_inventory_low_sale)
         self._g_inventory_low_sale.setObjectName(u"_g_inventory_low_sale")
@@ -369,7 +367,6 @@ class InventoryPage:
         self._ccw_inventory_sum_sold.setObjectName(u"_ccw_inventory_sum_sold")
         self._ccw_inventory_sum_sold.setMinimumSize(QSize(0, 70))
         self._ccw_inventory_sum_sold.setMaximumSize(QSize(16777215, 70))
-        self._ccw_inventory_sum_sold.setGraphicsEffect(self.shadow)
         # GRID BOX VENTES INVENTAIRE
         self._g_inventory_sum_sold = QGridLayout(self._ccw_inventory_sum_sold)
         self._g_inventory_sum_sold.setObjectName(u"_g_inventory_sum_sold")
@@ -497,3 +494,16 @@ class InventoryPage:
         self._cb_inventory_quantifiable.setEnabled(condition)
         self._cbx_inventory_type_remise.setEnabled(condition)
         self._tb_inventory_illustration_path.setEnabled(condition)
+
+    def themeListInventory(self):
+        link = self.inventory_bg if self._lw_inventory_list_inventory.count() > 0 else ""
+        self._lw_inventory_list_inventory.setStyleSheet(f"""
+                            #_lw_inventory_list_inventory {{
+                                background-color: transparent;
+                                background: transparent;
+                                background-image: url({link});
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                                background-origin: content;
+                            }}
+                            """)
