@@ -26,7 +26,7 @@ class theme:
 
         self.light_theme() if self.apparence == 'white' else self.dark_theme()
 
-        concernedList = [self._lw_um_usrList]
+        concernedList = [self._lw_um_usrList, self._lw_list_cart]
         for liste in concernedList:
             self.ApplyTheme(liste)
 
@@ -293,7 +293,8 @@ class theme:
         #_p_user_management #_b_save_info_company, #_p_dashboard #_b_add_agenda,
         #_p_dashboard #_b_update_agenda, #_p_dashboard #_b_delete_agenda, 
         #_p_inventory #_b_inventory_add, #_p_inventory #_b_inventory_achat, #_p_inventory #_b_inventory_update,
-        #_p_inventory #_b_inventory_delete, #_p_clients #_b_clients_clipbord_mail, #_p_clients #_b_clients_clipbord_num {{
+        #_p_inventory #_b_inventory_delete, #_p_inventory #_b_export_inv_model, 
+        #_p_clients #_b_clients_clipbord_mail, #_p_clients #_b_clients_clipbord_num {{
             border: None;
         }}
         #_p_clients #_b_clients_info_export, #_p_clients #_b_clients_add_client, #_p_manage_db #_b_manage_db_export_table {{
@@ -505,6 +506,12 @@ class theme:
         }}
         #_p_factures #_b_invoice_cancel_cart {{
             border: 1px solid rgba(174, 182, 191, 1);
+            background-color: rgba(245, 183, 177, 0.4) !important;
+            border-radius: 10px;
+        }}
+        #_p_factures #_b_invoice_cancel_cart:hover {{
+            border: 1px solid rgba(174, 182, 191, 1);
+            background-color: rgba(245, 183, 177, 1) !important;
             border-radius: 10px;
         }}
         #_b_invoice_total_remise {{
@@ -924,7 +931,8 @@ class theme:
         #_p_user_management #_b_save_info_company, #_p_dashboard #_b_add_agenda,
         #_p_dashboard #_b_update_agenda, #_p_dashboard #_b_delete_agenda,
         #_p_inventory #_b_inventory_add, #_p_inventory #_b_inventory_achat, #_p_inventory #_b_inventory_update,
-        #_p_inventory #_b_inventory_delete, #_p_clients #_b_clients_clipbord_mail, #_p_clients #_b_clients_clipbord_num {{
+        #_p_inventory #_b_inventory_delete, #_p_inventory #_b_export_inv_model,
+        #_p_clients #_b_clients_clipbord_mail, #_p_clients #_b_clients_clipbord_num {{
             border: None;
         }}
         #_p_clients #_b_clients_info_export, #_p_clients #_b_clients_add_client, #_p_manage_db #_b_manage_db_export_table {{
@@ -1139,8 +1147,13 @@ class theme:
             border-radius: 10px !important;
         }}
         #_p_factures #_b_invoice_cancel_cart {{
-            color: rgba(240, 53 77, 1);
             border: 1px solid rgba(174, 182, 191, 1);
+            background-color: rgba(245, 183, 177, 0.4) !important;
+            border-radius: 10px;
+        }}
+        #_p_factures #_b_invoice_cancel_cart:hover {{
+            border: 1px solid rgba(174, 182, 191, 1);
+            background-color: rgba(245, 183, 177, 1) !important;
             border-radius: 10px;
         }}
         #_b_invoice_total_remise {{
@@ -1300,7 +1313,6 @@ class theme:
             item = Liste.item(i)
             # Récupérer le widget associé à cet item
             custom_widget = Liste.itemWidget(item)
-
             # Vérifier que le widget est bien de type CartItem
             if hasattr(custom_widget, "setTheme"):
                 # Utiliser la propriété setTheme

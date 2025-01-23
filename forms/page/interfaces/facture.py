@@ -254,6 +254,7 @@ class InvoicePage:
         self._ds_invoice_total_remise.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
         self._ds_invoice_total_remise.setMaximum(100000000000000004764729344.000000000000000)
         self._ds_invoice_total_remise.setSingleStep(0.500000000000000)
+        self._ds_invoice_total_remise.setVisible(False)
         self._g_box_export_invoice.addWidget(self._ds_invoice_total_remise, 5, 1, 1, 1)
         self._hs_bottom_box_export_invoice = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         self._g_box_export_invoice.addItem(self._hs_bottom_box_export_invoice, 9, 0, 1, 1)
@@ -435,7 +436,7 @@ class InvoicePage:
         self._l_invoice_nom.setText(QCoreApplication.translate("MainWindow", u"Nom", None))
         self._l_invoice_qauntity.setText(QCoreApplication.translate("MainWindow", u"Quantit\u00e9", None))
 
-        self._b_invoice_cancel_cart.setText(QCoreApplication.translate("MainWindow", u"Annuler", None))
+        self._b_invoice_cancel_cart.setText(QCoreApplication.translate("MainWindow", u"Supprimer tous", None))
         self._b_invoice_add_cart.setText(QCoreApplication.translate("MainWindow", u"Ajouter \u00e0 la commande", None))
         self._l_invoice_price.setText(QCoreApplication.translate("MainWindow", u"Prix", None))
         self._l_invoice_marque.setText(QCoreApplication.translate("MainWindow", u"Marque", None))
@@ -493,6 +494,17 @@ class InvoicePage:
             self.CurrentInvoicePage = "factures"
 
         self.resetToggleSideMenu(sender)
+
+    def UpdateRemiseTotal(self):
+        visible = self._ds_invoice_total_remise.isVisible()
+        if visible:
+            self._b_invoice_total_remise.setIcon(self.ajouter_icon)
+            self._b_invoice_total_remise.setText(QCoreApplication.translate("MainWindow", u"Ajouter une remise", None))
+        else:
+            self._b_invoice_total_remise.setIcon(self.supprimerG_icon)
+            self._b_invoice_total_remise.setText(QCoreApplication.translate("MainWindow", u"Supprimer la remise", None))
+
+        self._ds_invoice_total_remise.setVisible(not visible)
 
     def __remise_prefix(self, text):
         if text == "En devise":

@@ -19,6 +19,7 @@ class Refresh:
         self.dateSelected()
         # Installer le filtre d'événements pour détecter les touches
         self._sw_main_dialog.installEventFilter(self)
+        self._b_invoice_total_remise.clicked.connect(self.UpdateRemiseTotal)
 
     def clipboard(self):
         sender = self.sender().objectName()

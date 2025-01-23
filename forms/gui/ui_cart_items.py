@@ -61,13 +61,13 @@ class CartItem(QWidget):
             background-color: rgba(241, 148, 138, 1);
         }
         """)
-        self.setMinimumSize(407, 103)
+        self.setMinimumSize(0, 103)
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
 
         self.formVLayout = QHBoxLayout(self)
         self.formVLayout.setObjectName(u"formHLayout")
         self.formVLayout.setSpacing(0)
-        self.formVLayout.setContentsMargins(8, 2, 8, 2)
+        self.formVLayout.setContentsMargins(8, 1, 8, 1)
         # Frame principal
         self.frame = QFrame(self)
         self.frame.setObjectName(u"frame")
@@ -255,3 +255,59 @@ class CartItem(QWidget):
     @property
     def getItemInfo(self):
         return self.info
+
+    def setTheme(self, apparence: str):
+        if apparence.lower() == "dark":
+            border = "129, 155, 208"
+            realPrice = "208, 208, 208"
+        else:
+            border = "229, 233, 233"
+            realPrice = "149, 152, 152"
+
+        self.setStyleSheet(f"""
+                #frame {{
+                    background-color: rgba(216, 226, 220, 0.45);
+                    border-radius: 10px;
+                }}
+                #_l_icon {{
+                    background-color: rgb(255, 255, 255);
+                    border-radius: 20px;
+                    border: 1px solid rgb({border});
+                }}
+                #_ds_currentPrice {{
+                    background-color:  transparent;
+                    border: None;
+                }}
+                #_ds_realPrice {{
+                    background-color:  transparent;
+                    border: None;
+                    color: rgb({realPrice});
+                }}
+                #_le_title {{
+                    background-color:  transparent;
+                    border-radius: 5px;
+                    border: 1px solid rgb({border});
+                }}
+                QPushButton {{
+                    border: None;
+                }}
+                QPushButton:hover {{
+                    background-color: rgb(239, 255, 246);
+                    border-radius: 5px;
+                    border: 1px solid rgb({border});
+                }}
+                
+                QPushButton:checked {{
+                    background-color: rgb(239, 255, 246);
+                    border-radius: 5px;
+                    border: 1px solid rgb({border});
+                }}
+                #frame #_b_delete_item QPushButton:hover {{
+                    background-color: rgba(241, 148, 138, 1);
+                    border: 1px solid rgb({border});
+                    border-radius: 20px;
+                }}
+                QToolTip {{
+                    color: rgb(0, O, O);
+                }}
+                """)

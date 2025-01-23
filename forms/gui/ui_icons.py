@@ -286,6 +286,14 @@ class Icons:
         return self.__QIcon("ajouter")
 
     @property
+    def supprimerG_icon(self) -> QIcon:
+        """
+        Un QIcon de l'icon ajouter
+        :return: un QIcon
+        """
+        return self.__QIcon("signe-moins")
+
+    @property
     def mise_a_jour_icon(self) -> QIcon:
         """
         Un QIcon de l'icon mise a jour

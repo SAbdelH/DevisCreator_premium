@@ -164,6 +164,7 @@ class Update:
             }
             item = QListWidgetItem(self.maindialog._lw_list_cart)
             custom_widget = CartItem(infos)  # Crée un widget personnalisé pour l'élément
+            custom_widget.setTheme(self.maindialog.apparence)
 
             # Ajouter les données au QListWidgetItem
             item.setData(Qt.UserRole, infos)  # Associer les données à l'item
@@ -172,3 +173,11 @@ class Update:
             self.maindialog._lw_list_cart.setItemWidget(item, custom_widget)
         else:
             return
+
+    def resetCart(self):
+        dlg = self.maindialog
+        Liste = dlg._lw_list_cart
+        Liste.clear()
+        dlg._ds_invoice_total.setValue(0)
+        dlg._ds_invoice_total_remise.setValue(0)
+        dlg.UpdateRemiseTotal()
