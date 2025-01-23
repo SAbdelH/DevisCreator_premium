@@ -19,7 +19,7 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         self.setupUi(self)
         self.RandomBackground()
         self.home_bg()
-        self.switchTheme()
+        self.switchTheme(self.load_theme)
         self.indexPage = {
             self._sw_main_dialog.widget(index).objectName(): index
             for index in range(self._sw_main_dialog.count())

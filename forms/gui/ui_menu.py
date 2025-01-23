@@ -536,9 +536,7 @@ class Menu:
                     def click_handler(event):
                         if signal_name == 'darkmode':
                             # Inverser le thème
-                            self.apparence = 'dark' if self.apparence == 'white' else 'white'
                             self.switchTheme()
-
                             # Mettre à jour l'icône et le texte
                             new_theme = "Sombre" if self.apparence == "white" else "Claire"
                             text_label.setText(f"Apparence {new_theme}")

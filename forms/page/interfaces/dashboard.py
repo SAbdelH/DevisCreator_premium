@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QSpacerItem, QRadio
                                QListWidget, QHeaderView,
                                QCalendarWidget, QLabel, QLineEdit,  QDateEdit, QTimeEdit)
 
-from forms.gui import CBW
+from forms.gui import CBW, CLW
 
 
 class DashboardPage:
@@ -171,7 +171,7 @@ class DashboardPage:
         self._v_activityList.setSpacing(1)
         self._v_activityList.setObjectName(u"_v_activityList")
         # LIST DES ACTIVITES
-        self._lw_activity = QListWidget(self._f_graphic_finances)
+        self._lw_activity = CLW(self._f_graphic_finances) #QListWidget(self._f_graphic_finances)
         self._lw_activity.setObjectName(u"_lw_activity")
         self._lw_activity.setMaximumSize(QSize(400, 16777215))
         self._lw_activity.setIconSize(QSize(35, 35))
@@ -333,7 +333,7 @@ class DashboardPage:
         self._hl_separator_agenda_two.setFrameShadow(QFrame.Shadow.Sunken)
         self._v_calendar.addWidget(self._hl_separator_agenda_two)
         # LIST WIGET DES AGENDAS
-        self._lw_agenda = QListWidget(self._f_calendar)
+        self._lw_agenda = CLW(self._f_calendar) #QListWidget(self._f_calendar)
         self._lw_agenda.setObjectName(u"_lw_agenda")
         self._lw_agenda.setSpacing(0)
         self._v_calendar.addWidget(self._lw_agenda)

@@ -1,10 +1,47 @@
+import json
+from enum import Enum
+from pathlib import Path
+
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QGraphicsDropShadowEffect, QListWidget
 
+CONFIG_FILE_NAME = "theme_config.json"
 
+class THEMECOLOR(Enum):
+    WHITE = "white"
+    DARK = "dark"
+
+    @staticmethod
+    def from_string(value: str):
+        """Convertir une chaine de caractère en un objet THEMECOLOR"""
+        for item in THEMECOLOR:
+            if item.value == value:
+                return item
+        return THEMECOLOR.WHITE
 
 class theme:
-    def switchTheme(self):
+    PATH: Path = Path(__file__).parent / CONFIG_FILE_NAME
+
+    def save_theme(self, Theme: THEMECOLOR):
+        with open(self.PATH, "w") as fichier:
+            json.dump({"theme": Theme.value}, fichier)
+
+    @property
+    def load_theme(self):
+        try:
+            with open(self.PATH, "r") as fichier:
+                config = json.load(fichier)
+                return THEMECOLOR.from_string(config.get("theme", "white"))
+        except FileNotFoundError:
+            return THEMECOLOR.WHITE
+
+    def __reverse_theme(self) -> THEMECOLOR:
+        return THEMECOLOR.DARK if self.load_theme == THEMECOLOR.WHITE else THEMECOLOR.WHITE
+
+    def switchTheme(self, mode: THEMECOLOR | None = None):
+        THEME = mode if mode else self.__reverse_theme()
+        self.apparence = THEME.value
+        self.save_theme(THEME)
         self._f_valid_facture_preview.setGraphicsEffect(self.shadow)
         self._f_inventory_box_edit.setGraphicsEffect(self.shadow)
         self._f_clients_info_box.setGraphicsEffect(self.shadow)
@@ -26,7 +63,7 @@ class theme:
 
         self.light_theme() if self.apparence == 'white' else self.dark_theme()
 
-        concernedList = [self._lw_um_usrList, self._lw_list_cart]
+        concernedList = [self._lw_um_usrList, self._lw_list_cart, self._lw_inventory_list_inventory]
         for liste in concernedList:
             self.ApplyTheme(liste)
 
@@ -120,7 +157,7 @@ class theme:
             color: rgba(0, 0, 0, 1);
         }}
         #centralwidget QListWidget::item {{ margin: 0px 5px;}}
-        #centralwidget QListWidget::item:selected, 
+        
         #centralwidget QListWidget::item:selected {{
             border-top: 5px solid rgba(247, 220, 111, 1);
             color: rgba(0, 0, 0, 1);
@@ -745,7 +782,7 @@ class theme:
             color: rgba(255, 255, 255, 1);
         }}
         #centralwidget QListWidget::item {{ margin: 0px 5px;}}
-        #centralwidget QListWidget::item:selected,
+        
         #centralwidget QListWidget::item:selected {{
             border-top: 5px solid rgba(247, 220, 111, 1);
             color: rgba(255, 255, 255, 1);

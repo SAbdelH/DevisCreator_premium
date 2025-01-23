@@ -8,17 +8,8 @@ class InventoryItem(QWidget):
     def __init__(self, info, parent=None):
         super().__init__(parent)
         self.info = info
-        self.setStyleSheet("""
-                            QFrame #inventory_frame {
-                                background-color: rgba(40, 57, 67, 1);
-                                border-radius: 10px;
-                            }
-                            #_l_icon {
-                                border: None;
-                                border-radius: 10px;
-                                background-color: rgba(255, 255, 255, 1);
-                            }
-                        """)
+        self.setMinimumSize(0, 93)
+        self.setContentsMargins(0, 1.5, 0, 1.5)
         # Frame principal
         self.frame = QFrame(self)
         self.frame.setObjectName("inventory_frame")
@@ -33,7 +24,6 @@ class InventoryItem(QWidget):
         self._l_icon.setObjectName("_l_icon")
         self._l_icon.setMinimumSize(QSize(70, 70))
         self._l_icon.setMaximumSize(QSize(70, 70))
-        self._l_icon.setScaledContents(False)
         if icon_path := info.get('icon'):
             pixmap = QPixmap(icon_path)
             if not pixmap.isNull():
@@ -44,6 +34,7 @@ class InventoryItem(QWidget):
                     Qt.SmoothTransformation  # Transformation douce pour une meilleure qualité
                 )
                 self._l_icon.setPixmap(scaled_pixmap)
+        self._l_icon.setScaledContents(True)
         self._h_frame.addWidget(self._l_icon)
         # Info section
         self._v_info = QVBoxLayout()
@@ -122,11 +113,16 @@ class InventoryItem(QWidget):
         outer_layout.setSpacing(0)
         outer_layout.addWidget(self.frame)
 
-    def get_image_orientation(self, image_path):
-        width, height = imagesize.get(image_path)
-
-        if width > height:
-            return "landscape"
-        elif height > width:
-            return "portrait"
-        return "square"
+    def setTheme(self, apparence: str):
+        bg = "248, 249, 250" if apparence.lower() == "dark" else "232, 232, 228"
+        self.setStyleSheet(f"""
+            QFrame #inventory_frame {{
+                background-color: rgba({bg}, 0.55);
+                border-radius: 10px;
+            }}
+            #_l_icon {{
+                border: None;
+                border-radius: 10px;
+                background-color: rgba(255, 255, 255, 1);
+            }}
+        """)

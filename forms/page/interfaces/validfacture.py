@@ -2,7 +2,7 @@ from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLabel, QListWidget, QGridLayout,
                                QTableWidget, QTableWidgetItem, QHeaderView, QSpacerItem, QSizePolicy, QComboBox, QPushButton)
-
+from forms.gui import CLW
 
 class validFacturePage:
     def __init__(self):
@@ -44,7 +44,7 @@ class validFacturePage:
         self._l_valid_facture_list.setFont(self.font9)
         self._v_valid_facture_list.addWidget(self._l_valid_facture_list)
         # liste des factures
-        self._lw_valid_facture_list = QListWidget(self._f_valid_facture_list)
+        self._lw_valid_facture_list = CLW(self._f_valid_facture_list) #QListWidget(self._f_valid_facture_list)
         self._lw_valid_facture_list.setObjectName(u"_lw_valid_facture_list")
         self._v_valid_facture_list.addWidget(self._lw_valid_facture_list)
         self._h_valid_factures.addWidget(self._f_valid_facture_list)

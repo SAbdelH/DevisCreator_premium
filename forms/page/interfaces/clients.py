@@ -2,7 +2,7 @@ from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtWidgets import (QWidget, QHBoxLayout, QFrame, QVBoxLayout, QLineEdit, QSizePolicy, QSpacerItem,
                                QPushButton, QTableWidget, QTableWidgetItem, QHeaderView, QLabel, QDoubleSpinBox,
                                QAbstractSpinBox, QListWidget, QAbstractItemView)
-
+from forms.gui import CLW
 
 class clientsPage:
     def __init__(self):
@@ -223,7 +223,7 @@ class clientsPage:
         self._h_clients_dette.addWidget(self._ds_clients_dette)
         self._v_clients_info_box.addLayout(self._h_clients_dette)
         # LISTES DES DETTES (FACTURES)
-        self._lw_clients_dettes_factures = QListWidget(self._f_clients_info_box)
+        self._lw_clients_dettes_factures = CLW(self._f_clients_info_box) #QListWidget(self._f_clients_info_box)
         self._lw_clients_dettes_factures.setObjectName(u"_lw_clients_dettes_factures")
         self._v_clients_info_box.addWidget(self._lw_clients_dettes_factures)
         # HORIZONTAL LAYOUT BOUTONS

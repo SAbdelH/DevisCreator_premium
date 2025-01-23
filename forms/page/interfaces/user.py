@@ -3,6 +3,7 @@ from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QListWidget, QListView, QHBoxLayout, QLabel,
     QLineEdit, QComboBox, QCalendarWidget, QPushButton)
 
+from forms.gui import CLW
 
 class UserManagementPage:
     def __init__(self):
@@ -37,7 +38,7 @@ class UserManagementPage:
         self._v_left_user_management = QVBoxLayout(self._f_left_user_management)
         self._v_left_user_management.setObjectName(u"_v_left_user_management")
         # LISTE DES UTILISATEURS
-        self._lw_um_usrList = QListWidget(self._f_left_user_management)
+        self._lw_um_usrList = CLW(self._f_left_user_management) #QListWidget(self._f_left_user_management)
         self._lw_um_usrList.setObjectName(u"_lw_um_usrList")
         self._lw_um_usrList.setViewMode(QListView.ViewMode.IconMode)
         self._lw_um_usrList.setWordWrap(True)

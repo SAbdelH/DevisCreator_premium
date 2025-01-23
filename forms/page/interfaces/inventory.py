@@ -5,7 +5,7 @@ from PySide6.QtGui import QImageReader, QAction
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QLabel, QHBoxLayout, QLineEdit, QPushButton, QListWidget,
     QVBoxLayout, QLayout, QDoubleSpinBox, QSpinBox, QCheckBox, QComboBox, QDateEdit, QToolButton)
 
-from forms.gui import CustomCardWidget
+from forms.gui import CustomCardWidget, CLW
 
 
 class InventoryPage:
@@ -23,7 +23,7 @@ class InventoryPage:
         # FORM EN HAUT DE PAGE
         self.__topForm()
         # AJOUT DE LA LISTE WIDGET DES INVENTAIRES
-        self._lw_inventory_list_inventory = QListWidget(self._p_inventory)
+        self._lw_inventory_list_inventory = CLW(self._p_inventory) #QListWidget(self._p_inventory)
         self._lw_inventory_list_inventory.setObjectName(u"_lw_inventory_list_inventory")
         self._lw_inventory_list_inventory.setSpacing(6)
         self._g_inventory.addWidget(self._lw_inventory_list_inventory, 1, 0, 1, 3)

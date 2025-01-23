@@ -17,17 +17,6 @@ def populateListInventory(self, liste: QListWidget, filter_text: str = "", page:
     _LIST_NAME = liste.objectName()
 
     with self.Session() as session:
-        self.maindialog._lw_inventory_list_inventory.setStyleSheet(f"""
-                                                            #_lw_inventory_list_inventory {{
-                                                                background-color: transparent;
-                                                                background: transparent;
-                                                                background-image: url({self.maindialog.inventory_bg});
-                                                                background-repeat: no-repeat;
-                                                                background-position: center center;
-                                                                background-origin: content;
-                                                            }}
-                                                            """)
-
         update = Ui_Update(
         ).verify_update(session,
                         'inventory',
@@ -91,6 +80,18 @@ def populateListInventory(self, liste: QListWidget, filter_text: str = "", page:
             else:
                 self.maindialog.firstOpenDevis = False
 
+    if _LIST_NAME == "_lw_inventory_list_inventory" and liste.count() < 1:
+        self.maindialog._lw_inventory_list_inventory.setStyleSheet(f"""
+                                                                    #_lw_inventory_list_inventory {{
+                                                                        background-color: transparent;
+                                                                        background: transparent;
+                                                                        background-image: url({self.maindialog.inventory_bg});
+                                                                        background-repeat: no-repeat;
+                                                                        background-position: center center;
+                                                                        background-origin: content;
+                                                                    }}
+                                                                    """)
+
 def all_Inventory_list_populate(self, inventaires, ContentPath, _LIST_NAME, filter: bool = False):
     dlg = self.maindialog
     __allList = [dlg._lw_inventory_list_inventory, dlg._lw_invoice_list_inventory]
@@ -103,6 +104,7 @@ def all_Inventory_list_populate(self, inventaires, ContentPath, _LIST_NAME, filt
             if liste.objectName() == "_lw_inventory_list_inventory":
                 item = QListWidgetItem(liste)
                 custom_widget = InventoryItem(info)
+                custom_widget.setTheme(dlg.apparence)
                 item.setSizeHint(custom_widget.sizeHint())
             else:
                 icon = QIcon(ContentPath.get(inventaire.nom))

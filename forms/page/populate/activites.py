@@ -11,14 +11,6 @@ from processing.database.model_public import Activites, Ui_Update
 
 
 def populateActivitiesTable(self):
-    self.maindialog._tw_activity.setStyleSheet(f"""
-                                        #_tw_activity, #_tw_select_table {{
-                                        background-image: url({self.maindialog.table_bg});
-                                        background-repeat: no-repeat;
-                                        background-position: center center;
-                                        background-origin: content;
-                                    }}""")
-
     with self.Session() as session:
         update = Ui_Update().verify_update(session)
         first = self.maindialog.firstOpenDashboard
@@ -62,16 +54,19 @@ def populateActivitiesTable(self):
 
             self.maindialog._tw_activity.scrollToBottom()
 
+    if self.maindialog._tw_activity.rowCount() < 1:
+        self.maindialog._tw_activity.setStyleSheet(f"""
+                                                #_tw_activity, #_tw_select_table {{
+                                                background-image: url({self.maindialog.table_bg});
+                                                background-repeat: no-repeat;
+                                                background-position: center center;
+                                                background-origin: content;
+                                            }}""")
+
+
 def populateActivList(self):
     liste = self.maindialog._lw_activity
     liste.setIconSize(QSize(25, 25))
-    liste.setStyleSheet(f"""
-                        #_lw_activity {{
-                            background-image: url({self.maindialog.listActivity_bg});
-                            background-repeat: no-repeat;
-                            background-position: center center;
-                            background-origin: content;
-                        }}""")
 
     with self.Session() as session:
         update = Ui_Update().verify_update(session)
@@ -113,3 +108,11 @@ def populateActivList(self):
             liste.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
             liste.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
 
+    if liste.count() < 1:
+        liste.setStyleSheet(f"""
+                            #_lw_activity {{
+                                background-image: url({self.maindialog.listActivity_bg});
+                                background-repeat: no-repeat;
+                                background-position: center center;
+                                background-origin: content;
+                            }}""")

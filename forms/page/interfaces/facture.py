@@ -4,6 +4,7 @@ from PySide6.QtWidgets import (QWidget, QGridLayout, QHBoxLayout, QLabel, QCombo
     QDoubleSpinBox, QPushButton, QSpacerItem, QSizePolicy, QLineEdit, QCheckBox, QListWidget, QGroupBox,
     QAbstractSpinBox, QTreeWidget, QTreeWidgetItem)
 
+from forms.gui import CLW
 
 class InvoicePage:
     def __init__(self):
@@ -165,7 +166,7 @@ class InvoicePage:
         self._l_invoiceemptyInventorymess.setVisible(False)
         self._g_invoice_input_cart.addWidget(self._l_invoiceemptyInventorymess, 9, 0, 1, 1)
         self._v_input_cart.addLayout(self._g_invoice_input_cart)
-        self._lw_list_cart = QListWidget(self._f_invoice_input_cart)
+        self._lw_list_cart = CLW(self._f_invoice_input_cart) #QListWidget(self._f_invoice_input_cart)
         self._lw_list_cart.setObjectName(u"_lw_list_cart")
         self._v_input_cart.addWidget(self._lw_list_cart)
         self._g_factures.addWidget(self._f_invoice_input_cart, 1, 1, 2, 1)
@@ -350,7 +351,7 @@ class InvoicePage:
         self._le_invoice_inventory_filter.setClearButtonEnabled(True)
         self._le_invoice_inventory_filter.findChildren(QAction)[0].setIcon(self.backspace_icon)
         self._v_invoice_inventory.addWidget(self._le_invoice_inventory_filter)
-        self._lw_invoice_list_inventory = QListWidget(self._f_invoice_inventory)
+        self._lw_invoice_list_inventory = CLW(self._f_invoice_inventory) #QListWidget(self._f_invoice_inventory)
         self._lw_invoice_list_inventory.setObjectName(u"_lw_invoice_list_inventory")
         self._lw_invoice_list_inventory.setIconSize(QSize(35, 35))
         self._lw_invoice_list_inventory.setProperty("isWrapping", True)

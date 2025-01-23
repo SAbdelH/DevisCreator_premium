@@ -12,5 +12,6 @@ from forms.gui.ui_inventory_items import InventoryItem
 from forms.gui.ui_client_statut import CustomDelegate
 from forms.gui.ui_card_employe import EmployeeCard
 from forms.gui.ui_cart_items import CartItem
+from forms.gui.ui_listwidget import CustomListWidget as CLW
 
-__all__ = ["Menu", "Icns", "BImg", "thm", "rf", "CBW"]
+__all__ = ["Menu", "Icns", "BImg", "thm", "rf", "CBW", "CLW"]
