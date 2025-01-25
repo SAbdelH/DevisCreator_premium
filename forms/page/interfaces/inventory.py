@@ -26,6 +26,10 @@ class InventoryPage:
         self._lw_inventory_list_inventory = CLW(self._p_inventory) #QListWidget(self._p_inventory)
         self._lw_inventory_list_inventory.setObjectName(u"_lw_inventory_list_inventory")
         self._lw_inventory_list_inventory.setSpacing(6)
+
+        # Forcer une mise à jour initiale des éléments
+        self._lw_inventory_list_inventory.refresh_items()
+
         self._g_inventory.addWidget(self._lw_inventory_list_inventory, 1, 0, 1, 3)
         # AJOUT DES BOX EN BAS DE PAGE
         self.__bottomBox()

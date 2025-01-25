@@ -5,7 +5,7 @@ from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QSpacerItem, QRadioButton, QSizePolicy, QHBoxLayout,
                                QCheckBox, QPushButton, QGraphicsView, QTableWidget, QTableWidgetItem, QVBoxLayout,
                                QListWidget, QHeaderView,
-                               QCalendarWidget, QLabel, QLineEdit,  QDateEdit, QTimeEdit)
+                               QCalendarWidget, QLabel, QLineEdit, QDateEdit, QTimeEdit, QListView)
 
 from forms.gui import CBW, CLW
 
@@ -175,8 +175,11 @@ class DashboardPage:
         self._lw_activity.setObjectName(u"_lw_activity")
         self._lw_activity.setMaximumSize(QSize(400, 16777215))
         self._lw_activity.setIconSize(QSize(35, 35))
+        self._lw_activity.setUniformItemSizes(True)
         self._lw_activity.setProperty("isWrapping", True)
         self._lw_activity.setWordWrap(True)
+        self._lw_activity.setResizeMode(QListView.ResizeMode.Adjust)
+        self._lw_activity.setSelectionRectVisible(True)
         self._v_activityList.addWidget(self._lw_activity)
         # BOUTON AFFICHER PLUS
         self._b_more_activity = QPushButton(self._f_graphic_finances)

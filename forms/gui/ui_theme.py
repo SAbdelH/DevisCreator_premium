@@ -159,7 +159,8 @@ class theme:
         #centralwidget QListWidget::item {{ margin: 0px 5px;}}
         
         #centralwidget QListWidget::item:selected {{
-            border-top: 5px solid rgba(247, 220, 111, 1);
+            border: 3px solid rgba(52, 152, 219, 1);
+            border-radius: 10px;
             color: rgba(0, 0, 0, 1);
             margin: 0px;
             padding: 0px;
@@ -784,7 +785,8 @@ class theme:
         #centralwidget QListWidget::item {{ margin: 0px 5px;}}
         
         #centralwidget QListWidget::item:selected {{
-            border-top: 5px solid rgba(247, 220, 111, 1);
+            border: 3px solid rgba(52, 152, 219, 1);
+            border-radius: 10px;
             color: rgba(255, 255, 255, 1);
             margin: 0px;
             padding: 0px;

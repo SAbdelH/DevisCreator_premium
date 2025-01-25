@@ -1,8 +1,9 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont, QAction
 from PySide6.QtWidgets import (QWidget, QGridLayout, QHBoxLayout, QLabel, QComboBox, QFrame, QVBoxLayout, QSpinBox,
-    QDoubleSpinBox, QPushButton, QSpacerItem, QSizePolicy, QLineEdit, QCheckBox, QListWidget, QGroupBox,
-    QAbstractSpinBox, QTreeWidget, QTreeWidgetItem)
+                               QDoubleSpinBox, QPushButton, QSpacerItem, QSizePolicy, QLineEdit, QCheckBox, QListWidget,
+                               QGroupBox,
+                               QAbstractSpinBox, QTreeWidget, QTreeWidgetItem, QListView)
 
 from forms.gui import CLW
 
@@ -354,8 +355,12 @@ class InvoicePage:
         self._lw_invoice_list_inventory = CLW(self._f_invoice_inventory) #QListWidget(self._f_invoice_inventory)
         self._lw_invoice_list_inventory.setObjectName(u"_lw_invoice_list_inventory")
         self._lw_invoice_list_inventory.setIconSize(QSize(35, 35))
+        self._lw_invoice_list_inventory.setUniformItemSizes(True)
         self._lw_invoice_list_inventory.setProperty("isWrapping", True)
         self._lw_invoice_list_inventory.setWordWrap(True)
+        self._lw_invoice_list_inventory.setFixedWidth(370)
+        self._lw_invoice_list_inventory.setResizeMode(QListView.ResizeMode.Adjust)
+        self._lw_invoice_list_inventory.setSelectionRectVisible(True)
         self._v_invoice_inventory.addWidget(self._lw_invoice_list_inventory)
         self._f_invoice_preview_card = QFrame(self._f_invoice_inventory)
         self._f_invoice_preview_card.setObjectName(u"_f_invoice_preview_card")
@@ -367,7 +372,8 @@ class InvoicePage:
         self._g_invoice_preview_card.setContentsMargins(0, 0, 0, 5)
         self._f_invoice_preview_inventory = QFrame(self._f_invoice_preview_card)
         self._f_invoice_preview_inventory.setObjectName(u"_f_invoice_preview_inventory")
-        self._f_invoice_preview_inventory.setMaximumSize(QSize(16777215, 330))
+        self._f_invoice_preview_inventory.setMaximumSize(QSize(16777215, 375))
+        self._f_invoice_preview_inventory.setMaximumSize(QSize(16777215, 380))
         self._f_invoice_preview_inventory.setFrameShape(QFrame.Shape.StyledPanel)
         self._f_invoice_preview_inventory.setFrameShadow(QFrame.Shadow.Raised)
         self._g_invoice_preview_inventory = QGridLayout(self._f_invoice_preview_inventory)

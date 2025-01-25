@@ -8,12 +8,13 @@ class InventoryItem(QWidget):
     def __init__(self, info, parent=None):
         super().__init__(parent)
         self.info = info
-        self.setMinimumSize(0, 93)
-        self.setContentsMargins(0, 1.5, 0, 1.5)
+        #self.setMinimumSize(0, 0)
+        self.setContentsMargins(0, 1, 0, 1)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         # Frame principal
         self.frame = QFrame(self)
         self.frame.setObjectName("inventory_frame")
-        self.frame.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        #self.frame.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
         # Horizonatal du frame
