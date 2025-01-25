@@ -5,4 +5,4 @@ from processing.activities import *
 from processing.decrypt import _JSON, _LIST, _SCRIPTS
 
 __all__ = ["PostgreSQLDatabase", "Formulaire", "Layout", "ModelImportInventory", "dbTableToExcel","ActivityInsert",
-            "_JSON", "_LIST", "_SCRIPTS"]
+            "ActivityExport","_JSON", "_LIST", "_SCRIPTS"]

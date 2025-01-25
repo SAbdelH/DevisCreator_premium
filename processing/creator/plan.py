@@ -12,7 +12,6 @@ class ExcelPlans:
     def ModelFacture(self, wb: Workbook= None, ws: Worksheet = None, sauvegarde: Path = None):
         wb = openpyxl.Workbook() if not wb else wb
         ws = wb.active if not ws else ws
-        sauvegarde = Path(self.outputfolder) / self.InvoicePage.capitalize() / 'test.xlsx' if not sauvegarde else sauvegarde
 
         COULEUR = {"vert80": "D6F1E8", "bleu-vert-foncéClaire10": "007E8C", "bleu-vert-foncé": "005964"}
         # Largeurs de colonnes
@@ -47,7 +46,7 @@ class ExcelPlans:
         ws["G1"].alignment = self.alignerCentrer
 
         # fusion des cellules
-        column_merge = ["B1:D1", "B2:D2", "B3:D3", "B4:D4", "B5:D5", "E2:F2", "E3:F3", "E4:F4", "F7:G7", "F8:G8",
+        column_merge = ["B1:D1", "B2:D2", "B3:D3", "B4:D4", "E2:F2", "E3:F3", "E4:F4", "F7:G7", "F8:G8",
                         "F8:G9","B11:G11", "F7:G9"]
         for plage in column_merge:
             self.CentrerMultipleCols(wb, ws, plage, sauvegarde)
@@ -70,13 +69,18 @@ class ExcelPlans:
             else :
                 ws[cellule].alignment = self.alignerCentrer
         # Information entreprise
+        bold = InlineFont(b=True)
+        b = TextBlock
         with self.Session() as session:
             entreprise = session.query(Entreprise).first()
             ws["B1"] = entreprise.nom
             ws["B2"] = entreprise.adresse
             ws["B3"] = f"{str(entreprise.code_postal)}, {entreprise.commune.capitalize()} ({entreprise.departement.capitalize()})"
-            ws["B4"] = CellRichText(TextBlock(InlineFont(b=True), 'mail : '), entreprise.mail)
-            ws["B5"] = CellRichText(TextBlock(InlineFont(b=True), 'Tél : '), str(entreprise.mail))
+            ws["B4"] = CellRichText(b(bold, 'mail ✉️ : '), entreprise.mail)
+            ws["B5"] = CellRichText(b(bold, 'Téléphone 📞 : '), str(entreprise.telephone))
+            ws["C5"] = CellRichText(b(bold, ' /Portable 📱 : '), str(entreprise.portable))
+            ws["B5"].alignment = self.alignerCentrerDroite
+            ws["C5"].alignment = self.alignerCentrerGauche
 
         # insertion des images
         img = openpyxl.drawing.image.Image(self.maindialog.images.get("company"))

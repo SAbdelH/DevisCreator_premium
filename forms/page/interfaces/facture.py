@@ -16,6 +16,7 @@ class InvoicePage:
         self.ip_last_update = None
         self.firstOpenFacture = True
         self.firstOpenDevis = True
+        self.old_TotalRemiseValue = 0.0
 
         self.CurrentInvoicePage: str|None = None
 
@@ -507,11 +508,33 @@ class InvoicePage:
         if visible:
             self._b_invoice_total_remise.setIcon(self.ajouter_icon)
             self._b_invoice_total_remise.setText(QCoreApplication.translate("MainWindow", u"Ajouter une remise", None))
+            self.resetRemiseValue()
         else:
             self._b_invoice_total_remise.setIcon(self.supprimerG_icon)
             self._b_invoice_total_remise.setText(QCoreApplication.translate("MainWindow", u"Supprimer la remise", None))
 
         self._ds_invoice_total_remise.setVisible(not visible)
+        self._ds_invoice_total_remise.valueChanged.connect(self.__addRemiseValue)
+
+    def __addRemiseValue(self, new_value):
+        oldTotal = self._ds_invoice_total.value()
+        oldRemise = self.old_TotalRemiseValue
+        if oldRemise > new_value:
+            ecart = oldRemise - new_value
+            new_total = oldTotal - ecart
+        else:
+            new_total = (oldTotal - oldRemise) + new_value
+
+        self._ds_invoice_total.setValue(new_total)
+        self.old_TotalRemiseValue = new_value
+
+    def resetRemiseValue(self):
+        oldTotal = self._ds_invoice_total.value()
+        oldRemise = self._ds_invoice_total_remise.value()
+        new_total = oldTotal - oldRemise
+        self._ds_invoice_total.setValue(new_total)
+        self.old_TotalRemiseValue = 0.0
+        self._ds_invoice_total_remise.setValue(0.0)
 
     def __remise_prefix(self, text):
         if text == "En devise":

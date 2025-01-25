@@ -2,9 +2,10 @@ import platform
 from pathlib import Path
 from PySide6 import QtWidgets
 from processing import *
+from processing import ActivityExport
 
 
-class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
+class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert, ActivityExport   ):
     JSON = _JSON
     LIST = _LIST
     SCRIPT = _SCRIPTS
@@ -38,7 +39,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert):
         self.maindialog._b_inventory_update.clicked.connect(lambda: self.setInventory(action="update"))
         self.maindialog._b_inventory_achat.clicked.connect(lambda : self.setInventory(action='purchase'))
         self.maindialog._b_inventory_delete.clicked.connect(lambda: self.setInventory(action='delete'))
-        self.maindialog._b_invoice_export.clicked.connect(self.ModelFacture)
+        self.maindialog._b_invoice_export.clicked.connect(self.exportInvoice)
         self.maindialog._b_invoice_add_cart.clicked.connect(self.addToCart)
         self.maindialog._b_invoice_cancel_cart.clicked.connect(self.resetCart)
 
