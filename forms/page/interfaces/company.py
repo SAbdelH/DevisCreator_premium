@@ -666,6 +666,7 @@ class firmPage:
         self._l_icon_company_info_company.setText("")
         self._l_logo.setText(QCoreApplication.translate("MainWindow", u"Logo :", None))
         self._le_logo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Importer un logo si mise-\u00e0-jour", None))
+        self._tb_logo.setText(QCoreApplication.translate("MainWindow", u"...", None))
         self._b_save_info_company.setText(QCoreApplication.translate("MainWindow", u"Enregistrer", None))
         self._gb_info_entreprise.setTitle(QCoreApplication.translate("MainWindow", u"Entreprise", None))
         self._b_valid_nom_entreprise.setText("")

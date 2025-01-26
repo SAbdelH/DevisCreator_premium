@@ -55,9 +55,9 @@ class ActivityExport:
         ws["G4"] = str(info.get("expire", ""))
         ws["F7"] = str(info.get("client", ""))
         self.CentrerMultipleCols(wb, ws, "F7:G7", sauvegarde)
-        ws["F8"] = str(info.get("mail", ""))
+        ws["F8"] = f"""✉️ {str(info.get("mail", ""))}"""
         self.CentrerMultipleCols(wb, ws, "F8:G8", sauvegarde)
-        ws["F9"] = str(info.get("tel", ""))
+        ws["F9"] = f"""📞 {str(info.get("tel", ""))}"""
         self.CentrerMultipleCols(wb, ws, "F9:G9", sauvegarde)
         ws["B11"] = str(info.get("objet", ""))
         ws["B11"].alignment = self.alignerCentrerGauche
