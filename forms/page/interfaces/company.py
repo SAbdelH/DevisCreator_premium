@@ -1,7 +1,7 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
-from PySide6.QtGui import QFont
-from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QLabel,QPushButton, QGroupBox,
-                                QSpacerItem, QSizePolicy, QLineEdit, QHBoxLayout)
+from PySide6.QtGui import QFont, QImageReader
+from PySide6.QtWidgets import (QWidget, QGridLayout, QFrame, QVBoxLayout, QLabel, QPushButton, QGroupBox,
+                               QSpacerItem, QSizePolicy, QLineEdit, QHBoxLayout, QToolButton, QLayout)
 from forms.gui import VerticalProgressBar
 import phonenumbers
 from validate_email_address import validate_email
@@ -42,6 +42,7 @@ class firmPage:
         self.current_step = 0
         self._cpb_step_bar.setCurrentStep(self.current_step)
         self.reset_step()
+        self._tb_logo.clicked.connect(self.__setImportPath)
 
     def __info_companyForm(self):
         # FRAME A GAUCHE
@@ -57,24 +58,59 @@ class firmPage:
         self._v_right_info_company.setObjectName(u"_v_right_info_company")
         self._v_right_info_company.setContentsMargins(5, 5, 5, 5)
         # ICON DE L'ENTREPRISE
+        self._v_icon = QVBoxLayout()
+        self._v_icon.setSpacing(4)
+        self._v_icon.setContentsMargins(2, 0, 2, 0)  # Supprime les marges
+        self._v_icon.setObjectName(u"_v_icon")
+        self._v_icon.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
+
+        # ICON LABEL
         self._l_icon_company_info_company = QLabel(self._f_right_info_company)
         self._l_icon_company_info_company.setObjectName(u"_l_icon_company_info_company")
         self._l_icon_company_info_company.setMinimumSize(QSize(380, 250))
-        self._l_icon_company_info_company.setMaximumSize(QSize(16777215, 200))
-        #self._l_icon_company_info_company.setPixmap(self.entreprise_pixmap_icon)
+        self._l_icon_company_info_company.setMaximumSize(QSize(16777215, 250))
         self._l_icon_company_info_company.setScaledContents(False)
+
         pixmap = self.entreprise_pixmap_icon
         if not pixmap.isNull():
             # Mise à l'échelle proportionnelle
             scaled_pixmap = pixmap.scaled(
-                self._l_icon_company_info_company.size(),  # Taille du QLabel
-                Qt.KeepAspectRatio,  # Conserver le ratio
-                Qt.SmoothTransformation  # Transformation douce pour une meilleure qualité
+                self._l_icon_company_info_company.size(),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation
             )
             self._l_icon_company_info_company.setPixmap(scaled_pixmap)
 
+        self._v_icon.addWidget(self._l_icon_company_info_company)
 
-        self._v_right_info_company.addWidget(self._l_icon_company_info_company, 0,Qt.AlignTop)
+        # HORIZONTAL POUR IMPORTER ICON
+        self._h_import_logo = QHBoxLayout()
+        self._h_import_logo.setSpacing(4)
+        self._h_import_logo.setContentsMargins(0, 0, 0, 0)  # Supprime les marges
+        self._h_import_logo.setObjectName(u"_h_import_logo")
+
+        # LABEL LOGO
+        self._l_logo = QLabel(self._f_right_info_company)
+        self._l_logo.setObjectName(u"_l_logo")
+        self._l_logo.setMinimumSize(QSize(34, 0))
+        self._l_logo.setMaximumSize(QSize(35, 16777215))
+        self._h_import_logo.addWidget(self._l_logo)
+
+        # LINEEDIT CHEMIN LOGO
+        self._le_logo = QLineEdit(self._f_right_info_company)
+        self._le_logo.setObjectName(u"_le_logo")
+        self._h_import_logo.addWidget(self._le_logo)
+
+        # TOOL BOX POUR AFFICHER EXPLORER
+        self._tb_logo = QToolButton(self._f_right_info_company)
+        self._tb_logo.setObjectName(u"_tb_logo")
+        self._tb_logo.setMinimumSize(QSize(0, 30))
+        self._h_import_logo.addWidget(self._tb_logo)
+
+        # Ajouter le layout horizontal dans le vertical
+        self._v_icon.addLayout(self._h_import_logo)
+
+        self._v_right_info_company.addLayout(self._v_icon)
         # PROGRESS BAR DES ETAPES DE CREATION
         labels = ["Entreprise", "Informations du dirigeant", "Adresse de l'entreprise", "Informations de contact",
                     "Informations légales (SIREN)", "Informations bancaires"]
@@ -628,6 +664,8 @@ class firmPage:
 
     def __retranslateUi(self):
         self._l_icon_company_info_company.setText("")
+        self._l_logo.setText(QCoreApplication.translate("MainWindow", u"Logo :", None))
+        self._le_logo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Importer un logo si mise-\u00e0-jour", None))
         self._b_save_info_company.setText(QCoreApplication.translate("MainWindow", u"Enregistrer", None))
         self._gb_info_entreprise.setTitle(QCoreApplication.translate("MainWindow", u"Entreprise", None))
         self._b_valid_nom_entreprise.setText("")
@@ -739,3 +777,18 @@ class firmPage:
         iban = (self._le_iban.text()).strip() != ""
         bic = (self._le_bic.text()).strip() != ""
         self._b_valid_informations_bancaires.setEnabled(iban and bic)
+
+    def __setImportPath(self):
+        a = {
+            "object": "_le_logo",
+            "title": "Selectionner un logo pour l'entrepise",
+            "extensionName": "Images",
+            "extension": [ext.data().decode() for ext in QImageReader.supportedImageFormats()]
+            }
+        object = a.get("object")
+        title = a.get("title")
+        extensionName = a.get("extensionName")
+        extension = a.get("extension")
+        path = self.GetOpenDialogFilePath(title, extensionName, extension)
+
+        getattr(self, object).setText(path)

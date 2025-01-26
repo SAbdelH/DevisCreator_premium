@@ -336,7 +336,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
 #_l_invoice_objet, #_p_restore QLabel, #_cb_invoice_quantifiable, #_cb_invoice_location {
     color: rgba(164, 164, 164, 1);
 }
-#_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton{
+#_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton, #_p_info_company QToolButton {
     border: 1px solid rgba(114, 113, 113, 1);
     border-radius: 7px;
     background-color: rgba(80, 80, 80, 1);
@@ -362,7 +362,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
     background-color: rgba(45, 45, 45, 0.7);
 }
 /* === QPushButton === */
-#_sw_login_dialog QPushButton {
+#_sw_login_dialog QPushButton, #_sw_login_dialog QToolButton{
     border-radius: 5px;
     color: rgba(255, 255, 255, 1);
     background-color: rgba(80, 80, 80, 1);
@@ -1187,7 +1187,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -2314,9 +2314,6 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            <enum>QFrame::Shadow::Raised</enum>
           </property>
           <layout class="QVBoxLayout" name="_v_right_info_company">
-           <property name="spacing">
-            <number>-1</number>
-           </property>
            <property name="leftMargin">
             <number>5</number>
            </property>
@@ -2329,30 +2326,86 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            <property name="bottomMargin">
             <number>5</number>
            </property>
-           <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
-            <widget class="QLabel" name="_l_icon_company_info_company">
-             <property name="minimumSize">
-              <size>
-               <width>380</width>
-               <height>250</height>
-              </size>
+           <item>
+            <layout class="QVBoxLayout" name="_v_icon" stretch="0,0">
+             <property name="spacing">
+              <number>4</number>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>200</height>
-              </size>
+             <property name="sizeConstraint">
+              <enum>QLayout::SizeConstraint::SetFixedSize</enum>
              </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="pixmap">
-              <pixmap>:/icon/icons/MsCles.png</pixmap>
-             </property>
-             <property name="scaledContents">
-              <bool>true</bool>
-             </property>
-            </widget>
+             <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
+              <widget class="QLabel" name="_l_icon_company_info_company">
+               <property name="minimumSize">
+                <size>
+                 <width>380</width>
+                 <height>250</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>200</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+               <property name="pixmap">
+                <pixmap>:/icon/icons/MsCles.png</pixmap>
+               </property>
+               <property name="scaledContents">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="_h_import_logo">
+               <property name="spacing">
+                <number>4</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="_l_logo">
+                 <property name="minimumSize">
+                  <size>
+                   <width>34</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>35</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Logo :</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="_le_logo">
+                 <property name="placeholderText">
+                  <string>Importer un logo si mise-à-jour</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QToolButton" name="_tb_logo">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>30</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>...</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="QProgressBar" name="_cpb_step_bar">

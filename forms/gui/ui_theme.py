@@ -347,7 +347,7 @@ class theme:
         #_l_invoice_objet, #_p_restore QLabel, #_cb_invoice_quantifiable, #_cb_invoice_location {{
             color: rgba(164, 164, 164, 1);
         }}
-        #_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton{{
+        #_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton, #_p_info_company QToolButton{{
             border: 1px solid rgba(164, 164, 164, 1);
             border-radius: 7px;
             background-color: rgba(255, 255, 255, 1);
@@ -986,7 +986,7 @@ class theme:
         #_l_invoice_objet, #_p_restore QLabel, #_cb_invoice_quantifiable, #_cb_invoice_location {{
             color: rgba(164, 164, 164, 1);
         }}
-        #_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton{{
+        #_p_restore QPushButton, #_p_restore QToolButton, #_p_inventory  QToolButton, #_p_info_company QToolButton{{
             border: 1px solid rgba(114, 113, 113, 1);
             border-radius: 7px;
             background-color: rgba(80, 80, 80, 1);
