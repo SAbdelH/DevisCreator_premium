@@ -43,7 +43,7 @@ class Update:
                     )
                 else:
                     self.InvoicePage = text
-                    populateClientCombo(self, text)
+                    populateClientCombo(self, text, True)
                     populateInvoiceCreatedList(self)
                     self.maindialog._le_invoice_inventory_filter.textChanged.connect(
                         partial(self.onSearchTextChanged, self=self, liste=liste, page=text)

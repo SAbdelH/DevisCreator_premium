@@ -4,6 +4,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QInputDialog, QMessageBox
 from sqlalchemy import or_, func
 
+from forms.page import populateClientTable, populateClientCombo
 from processing.database.base import Base
 from processing.database.model_public import User, Entreprise, Agenda, Clients, Inventaires, Ui_Update
 from processing.database.siren import getInfoEtablissement
@@ -214,11 +215,11 @@ class Informations:
         # Repeupler l'agenda après l'ajout/mise à jour
         self.populateAgenda()
 
-    def setClient(self, action: str = 'add'):
+    def setClient(self, action: str = 'add', page : str = '_p_client'):
         dlg = self.maindialog
-        nom = dlg._le_clients_profil_name.text()
-        mail = dlg._le_clients_mail_value.text()
-        num = dlg._le_clients_num_value.text()
+        nom = dlg._le_clients_profil_name.text() if page == '_p_client' else dlg._le_invoice_nomclient.text()
+        mail = dlg._le_clients_mail_value.text() if page == '_p_client' else dlg._le_invoice_mailclient.text()
+        num = dlg._le_clients_num_value.text() if page == '_p_client' else dlg._le_invoice_numclient.text()
         try:
             with self.Session() as session:
                 conditions = or_(Clients.nom == nom, Clients.telephone == num, Clients.email == mail)
@@ -236,10 +237,11 @@ class Informations:
                 updt = Ui_Update(nom='client', crea_date=func.now(), crea_user=func.current_user())
                 session.add(updt)
                 session.commit()
-                self.populateClientTable()
-                self.populateClientCombo()
+                populateClientTable(self)
+                populateClientCombo(self)
 
         except Exception as err:
+            print(str(err))
             self.maindialog.show_notification(str(err), LVL.warning)
 
     def setInventory(self, **value):

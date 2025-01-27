@@ -1,6 +1,7 @@
 from collections import namedtuple
 from datetime import datetime
 
+from PIL.ImageQt import qRgba
 from PySide6.QtCore import QSize
 from PySide6.QtGui import QBrush, QColor, Qt, QIcon
 from PySide6.QtWidgets import QTableWidgetItem, QCompleter
@@ -67,19 +68,19 @@ def onClientItemSelected(self):
         dette = table_widget.item(selected_row, 5).text().replace(' €', '')
         self.maindialog._ds_clients_dette.setValue(float(dette) if dette else 0)
 
-def populateClientCombo(self, page: str = "factures"):
+def populateClientCombo(self, page: str = "factures", exception: bool = False):
     # Ajouter des lignes avec des données
     with self.Session() as session:
         update = Ui_Update().verify_update(session, Ui_Update.nom in ('client', 'devis', 'facture'))
         first = self.maindialog.firstOpenFacture if page == "factures" else self.maindialog.firstOpenDevis
         if first:  self.maindialog.ip_last_update = datetime.now()
 
-        if first or (update and update.crea_date > self.maindialog.ip_last_update):
+        if first or (update and update.crea_date > self.maindialog.ip_last_update) or exception:
             Qr = self.execute_sql(session, 'SELECT * FROM "informations"."dette_client"')
             # Remplir le QComboBox
-            self.maindialog._cbx_invoice_client.clear()
             complete = []
             if Qr.success and Qr.lines > 0:
+                self.maindialog._cbx_invoice_client.clear()
                 for row_index, row_data in enumerate(Qr.datas):
                     nt = namedtuple('client', Qr.entete)(*row_data)
                     client_name = nt.nom
@@ -99,9 +100,9 @@ def populateClientCombo(self, page: str = "factures"):
                     lambda: self.handleEditingFinishedCombo(self.maindialog._cbx_invoice_client))
                 self.maindialog._cbx_invoice_client.setCurrentIndex(-1)
                 # Connecter un signal pour mettre à jour les autres widgets
-                self.maindialog._cbx_invoice_client.currentIndexChanged.connect(self.onClientIndexChanged)
-                self.maindialog.firstOpenFacture = False
-                self.maindialog.firstOpenDevis = False
+                self.maindialog._cbx_invoice_client.currentIndexChanged.connect(lambda: onClientIndexChanged(self))
+                if page == "factures" : self.maindialog.firstOpenFacture = False
+                else: self.maindialog.firstOpenDevis = False
 
 def onClientIndexChanged(self):
     # Récupérer l'élément sélectionné dans le QComboBox

@@ -1,0 +1,1 @@
+"""{company} - Individuel au capital de {capital} €\nN°Siret : {siret} -  R.C.S. Mamoudzou {siren} - Code APE : {ape}"""

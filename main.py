@@ -9,6 +9,7 @@ class DevisCreator(PostgreSQLDatabase, Formulaire, Layout, ActivityInsert, Activ
     JSON = _JSON
     LIST = _LIST
     SCRIPT = _SCRIPTS
+    TEXT = _TEXT
     def __init__(self):
         self.typeConnection = None
         self.cacheInfoCompany = None

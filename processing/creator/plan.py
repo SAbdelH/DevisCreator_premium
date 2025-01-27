@@ -58,8 +58,10 @@ class ExcelPlans:
         ws["E2"] = "N° de facture :"
         ws["E3"] = "Date de facturation :"
         ws["E4"] = "Échéance :"
-        ws["E7"] = "EXPÉDIER À :"
+        ws["E7"] = "Client :"
+        ws["E7"].alignment = self.alignerCentrerDroite
         ws["A11"] = "Objet :"
+        ws["A11"].alignment = self.alignerCentrerDroite
         # Titres de la facture
         for i, (texte, plage) in enumerate(self.JSON.ENTETE_FACTURE.items()):
             cellule = plage.split(":")[0]
