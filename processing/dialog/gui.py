@@ -152,15 +152,16 @@ class Update:
             infos = {
                 "dlg": self.maindialog,
                 "icon": ContentPath.get(nomArticle),
-                "titre": nomArticle,
-                "price": new_price,
-                "unit_price": unit_price,
+                "produit": nomArticle,
+                "prix": new_price,
+                "prix_unite": unit_price,
                 "old_price": new_price1,
-                "quantity": quantity,
+                "quantite": quantity,
                 "marque": marque,
                 "type_remise" : iremise,
                 "quantifiable": quantifiable,
-                "louable": louable
+                "louable": louable,
+                "remise": remise
             }
             item = QListWidgetItem(self.maindialog._lw_list_cart)
             custom_widget = CartItem(infos)  # Crée un widget personnalisé pour l'élément

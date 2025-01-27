@@ -102,7 +102,7 @@ class CartItem(QWidget):
         self._le_title.setFont(font2)
         self._le_title.setMaxLength(1000000000)
         self._le_title.setReadOnly(True)
-        self._le_title.setText(info.get("titre"))
+        self._le_title.setText(info.get("produit"))
         self.main_layout.addWidget(self._le_title, 0, 1, 1, 5)
         # LAYOUT POUR LES BOUTONS EDIT ET SUPPRIMER L'ITEM
         self.horizontalLayout = QHBoxLayout()
@@ -164,7 +164,7 @@ class CartItem(QWidget):
         self._ds_currentPrice.setAccelerated(True)
         self._ds_currentPrice.setProperty(u"showGroupSeparator", True)
         self._ds_currentPrice.setMaximum(100000000000000000000.000000000000000)
-        self._ds_currentPrice.setValue(info.get("price"))
+        self._ds_currentPrice.setValue(info.get("prix"))
         self._ds_currentPrice.setToolTip(QCoreApplication.translate("Form", u"Prix calculé", None))
         self._ds_currentPrice.setSuffix(QCoreApplication.translate("Form", u" \u20ac", None))
         self.main_layout.addWidget(self._ds_currentPrice, 1, 1, 1, 1)
@@ -201,7 +201,7 @@ class CartItem(QWidget):
         self._s_quantity.setFont(font1)
         self._s_quantity.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._s_quantity.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
-        self._s_quantity.setValue(info.get("quantity"))
+        self._s_quantity.setValue(info.get("quantite"))
         self._s_quantity.setEnabled(False)
         self.main_layout.addWidget(self._s_quantity, 2, 6, 1, 1)
 
@@ -232,7 +232,7 @@ class CartItem(QWidget):
             item = list_widget.item(i)
             if list_widget.itemWidget(item) == self:
                 # Calculer le prix à soustraire du total
-                price = self.info.get("price", 0)
+                price = self.info.get("prix", 0)
 
                 # Mettre à jour le total dans le spinbox
                 total_spinbox = dlg._ds_invoice_total
@@ -245,10 +245,10 @@ class CartItem(QWidget):
                 break
 
     def saveItem(self):
-        self.info["titre"] = self._le_title.text()
-        self.info["price"] = self._ds_currentPrice.value()
+        self.info["produit"] = self._le_title.text()
+        self.info["prix"] = self._ds_currentPrice.value()
         self.info["old_price"] = self._ds_realPrice.text()
-        self.info["quantity"] = self._s_quantity.value()
+        self.info["quantite"] = self._s_quantity.value()
         self._b_edit_item.setChecked(False)
         self.editItem()
 

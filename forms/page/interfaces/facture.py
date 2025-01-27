@@ -1,11 +1,10 @@
 from PySide6.QtCore import QSize, Qt, QCoreApplication
 from PySide6.QtGui import QFont, QAction
 from PySide6.QtWidgets import (QWidget, QGridLayout, QHBoxLayout, QLabel, QComboBox, QFrame, QVBoxLayout, QSpinBox,
-                               QDoubleSpinBox, QPushButton, QSpacerItem, QSizePolicy, QLineEdit, QCheckBox, QListWidget,
-                               QGroupBox,
+                               QDoubleSpinBox, QPushButton, QSpacerItem, QSizePolicy, QLineEdit, QCheckBox, QGroupBox,
                                QAbstractSpinBox, QTreeWidget, QTreeWidgetItem, QListView)
 
-from forms.gui import CLW
+from forms.gui import CLW #Mon QListWidget Personnalisé
 
 class InvoicePage:
     def __init__(self):
