@@ -1,77 +1,59 @@
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QPainter, QPen
-from PySide6.QtWidgets import (
-    QApplication,
-    QListWidget,
-    QListWidgetItem,
-    QStyledItemDelegate,
-    QVBoxLayout,
-    QWidget,
-    QStyle,
-)
+import sys
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QTreeWidget, QTreeWidgetItem
 
-
-class CustomItemDelegate(QStyledItemDelegate):
-    """Dessin personnalisé pour le border-top centré"""
-    def paint(self, painter, option, index):
-        # Dessiner l'élément de base
-        super().paint(painter, option, index)
-
-        # Vérifier si l'élément est sélectionné
-        if option.state & QStyle.State_Selected:
-            painter.save()
-
-            # Configurer le pinceau pour le border-top partiel
-            pen = QPen()
-            pen.setColor(Qt.yellow)  # Couleur de la bordure
-            pen.setWidth(3)
-            painter.setPen(pen)
-
-            # Calculer les dimensions pour centrer la bordure
-            item_width = option.rect.width()
-            border_width = item_width // 2  # Largeur de la bordure (par exemple, moitié de l'item)
-            start_x = option.rect.x() + (item_width - border_width) // 2  # Centrer la bordure
-            start_y = option.rect.y()  # Ligne en haut de l'item
-
-            # Dessiner la bordure en haut au centre
-            painter.drawLine(start_x, start_y, start_x + border_width, start_y)
-
-            painter.restore()
-
-
-class MainWindow(QWidget):
+class TaskWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("QListWidget avec barre jaune centrée et gestion de désélection")
-        self.resize(400, 300)
+        self.initUI()
 
-        # Créer un QListWidget
-        self.list_widget = QListWidget()
-        self.list_widget.setItemDelegate(CustomItemDelegate())
-        self.list_widget.setSelectionMode(QListWidget.SingleSelection)
+    def initUI(self):
+        self.setWindowTitle('Task #547 - Contracts')
 
-        # Ajouter des éléments
-        for i in range(4):
-            item = QListWidgetItem(f"Élément {i + 1}")
-            self.list_widget.addItem(item)
+        main_layout = QVBoxLayout()
 
-        # Connecter le signal pour rafraîchir les éléments
-        self.list_widget.itemSelectionChanged.connect(self.refresh_items)
+        # Création du QTreeWidget
+        tree = QTreeWidget()
+        tree.setHeaderLabels(['Type', 'Details'])
 
-        # Configuration du layout
-        layout = QVBoxLayout(self)
-        layout.addWidget(self.list_widget)
+        # Section Task
+        task_item = QTreeWidgetItem(['Task #547', ''])
+        task_item.addChild(QTreeWidgetItem(['Contracts', '4']))
+        task_item.addChild(QTreeWidgetItem(['Invention Patent', '#2615324']))
+        task_item.addChild(QTreeWidgetItem(['Requests', '3']))
+        task_item.addChild(QTreeWidgetItem(['Main info', '']))
+        tree.addTopLevelItem(task_item)
 
-    def refresh_items(self):
-        """Forcer la mise à jour de tous les items pour gérer la désélection"""
-        for i in range(self.list_widget.count()):
-            item = self.list_widget.item(i)
-            rect = self.list_widget.visualItemRect(item)  # Obtenir la zone visible de l'item
-            self.list_widget.viewport().update(rect)  # Forcer le rafraîchissement
+        # Section Attributes
+        attributes_item = QTreeWidgetItem(['Attributes', '4'])
+        address_item = QTreeWidgetItem(['Address', ''])
+        address_item.addChild(QTreeWidgetItem(['CEO', '']))
+        address_item.addChild(QTreeWidgetItem(['Files', '0']))
+        address_item.addChild(QTreeWidgetItem(['DB', '2']))
+        address_item.addChild(QTreeWidgetItem(['fb', '12']))
+        address_item.addChild(QTreeWidgetItem(['a&n', '48']))
+        attributes_item.addChild(address_item)
+        attributes_item.addChild(QTreeWidgetItem(['Customers', '3']))
+        attributes_item.addChild(QTreeWidgetItem(['Orders', '5']))
+        tree.addTopLevelItem(attributes_item)
 
+        # Section Recognition Certificate
+        recognition_item = QTreeWidgetItem(['Recognition Certificate for Contal...', ''])
+        recognition_item.addChild(QTreeWidgetItem(['Act of depot conformity, Bureau...', '']))
+        recognition_item.addChild(QTreeWidgetItem(['Chamber of Commerce and India...', '']))
+        tree.addTopLevelItem(recognition_item)
 
-if __name__ == "__main__":
-    app = QApplication([])
-    window = MainWindow()
+        # Section Table (Type)
+        type_item = QTreeWidgetItem(['Type', ''])
+        type_item.addChild(QTreeWidgetItem(['CEO', '28.09.2023, 15:08:00']))
+        type_item.addChild(QTreeWidgetItem(['CEO', '28.09.2023, 15:08:00']))
+        type_item.addChild(QTreeWidgetItem(['Address', '28.09.2023, 15:08:00']))
+        tree.addTopLevelItem(type_item)
+
+        main_layout.addWidget(tree)
+        self.setLayout(main_layout)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = TaskWindow()
     window.show()
-    app.exec()
+    sys.exit(app.exec())

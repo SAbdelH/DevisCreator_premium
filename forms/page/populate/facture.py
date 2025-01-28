@@ -20,6 +20,7 @@ def populateInvoiceCreatedList(self):
     current_year = datetime.now().year
     for groupe in [i for i in dateList if str(current_year) in i]:
         item = QTreeWidgetItem([groupe])
+        self.maindialog._trw_invoice_export.addTopLevelItem(item)
         for name, chemin in ListFile.items():
             creat_month = datetime.fromtimestamp(chemin.stat().st_mtime).strftime("%B %Y").capitalize()
             ext = chemin.suffix

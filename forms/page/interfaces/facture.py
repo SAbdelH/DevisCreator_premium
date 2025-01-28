@@ -520,9 +520,9 @@ class InvoicePage:
         oldRemise = self.old_TotalRemiseValue
         if oldRemise > new_value:
             ecart = oldRemise - new_value
-            new_total = oldTotal - ecart
+            new_total = oldTotal + ecart
         else:
-            new_total = (oldTotal - oldRemise) + new_value
+            new_total = (oldTotal + oldRemise) - new_value
 
         self._ds_invoice_total.setValue(new_total)
         self.old_TotalRemiseValue = new_value
@@ -530,7 +530,7 @@ class InvoicePage:
     def resetRemiseValue(self):
         oldTotal = self._ds_invoice_total.value()
         oldRemise = self._ds_invoice_total_remise.value()
-        new_total = oldTotal - oldRemise
+        new_total = oldTotal + oldRemise
         self._ds_invoice_total.setValue(new_total)
         self.old_TotalRemiseValue = 0.0
         self._ds_invoice_total_remise.setValue(0.0)

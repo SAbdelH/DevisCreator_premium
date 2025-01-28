@@ -115,7 +115,7 @@ class InventoryItem(QWidget):
         outer_layout.addWidget(self.frame)
 
     def setTheme(self, apparence: str):
-        bg = "248, 249, 250" if apparence.lower() == "dark" else "232, 232, 228"
+        bg = "255, 255, 255" if apparence.lower() == "dark" else "233, 233, 204"
         self.setStyleSheet(f"""
             QFrame #inventory_frame {{
                 background-color: rgba({bg}, 0.55);
@@ -123,7 +123,7 @@ class InventoryItem(QWidget):
             }}
             #_l_icon {{
                 border: None;
-                border-radius: 10px;
-                background-color: rgba(255, 255, 255, 1);
+                border-radius: 15px;
+                background-color: rgba(255, 255, 255, 0.7);
             }}
         """)

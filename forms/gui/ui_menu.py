@@ -460,27 +460,21 @@ class Menu:
         Crée un menu déroulant personnalisé pour le bouton logout.
 
         Args:
-            abonnement (str, optional): Type d'abonnement. Defaults to 'premium'.
+            abonnement (str): Type d'abonnement ('premium', 'standard', etc.).
         """
         self._m_logout_menu = QMenu()
         self._m_logout_menu.setObjectName("_m_logout_menu")
-        self._m_logout_menu.setStyleSheet("""#_m_logout_menu{
-                                                background-color: rgba(255, 255, 255, 1);
-                                                color: rgba(0, 0, 0, 1);
-                                                border-radius: 10px;
-                                            }""")
-
         self._b_logout.setStyleSheet("""
-            QPushButton::after {
-                content: '▼';
-                position: absolute;
-                right: 5px;
-                top: 50%;
-                transform: translateY(-50%);
-                font-size: 8px;
-                color: #666;
-            }
-        """)
+               QPushButton::after {
+                   content: '▼';
+                   position: absolute;
+                   right: 5px;
+                   top: 50%;
+                   transform: translateY(-50%);
+                   font-size: 8px;
+                   color: #666;
+               }
+           """)
 
         theme, icn = ("Sombre", "dark") if self.apparence == "white" else ("Claire", "white")
 
@@ -497,7 +491,7 @@ class Menu:
             {"text": "Se déconnecter", "icon": self.logout_icon, "signal": 'logout'}
         ]
 
-        for i, action_config in enumerate(action_list):
+        for action_config in action_list:
             if action_config['text'] == "separator":
                 self._m_logout_menu.addSeparator()
                 continue
@@ -506,6 +500,7 @@ class Menu:
             layout = QHBoxLayout(widget)
             layout.setContentsMargins(5, 5, 5, 5)
             layout.setSpacing(10)
+            widget.setObjectName(action_config['text'].replace(' ', '_'))
 
             icon_label = None
             if action_config['icon']:
@@ -522,16 +517,6 @@ class Menu:
             widget_action.setDefaultWidget(widget)
 
             if action_config['signal']:
-                widget.setStyleSheet("""
-                    QWidget:hover {
-                        background-color: rgba(91, 142, 125, 0.7);
-                        border-radius: 5px;
-                    }
-                    QLabel {
-                        color: rgba(0, 0, 0, 1); 
-                    }
-                """)
-
                 def create_click_handler(signal_name, icon_label=icon_label, text_label=text_label):
                     def click_handler(event):
                         if signal_name == 'darkmode':
@@ -552,29 +537,33 @@ class Menu:
 
                 widget.mousePressEvent = create_click_handler(action_config['signal'])
             else:
-                widget.setStyleSheet("""
-                    QWidget:disabled {
-                        padding: 1px;
-                        background-color: rgba(255, 255, 255, 1);
-                        color: rgba(244, 162, 97, 1);
-                    }
-                    QLabel {
-                        color: rgba(174, 182, 191, 1);
-                    }
-                """)
                 widget_action.setEnabled(False)
 
             self._m_logout_menu.addAction(widget_action)
 
         # Méthode pour afficher le menu avec un décalage
         def show_menu_with_offset():
+            self.bg = "rgba(255, 255, 255, 0.95)" if self.apparence == "white" else "rgba(17, 17, 17, 0.95)"
+            self.fontcolor = "rgba(0, 0, 0, 1)" if self.apparence == "white" else "rgba(255, 255, 255, 1)"
+            self._m_logout_menu.setStyleSheet(f"""#_m_logout_menu{{
+                                                   background-color: {self.bg};
+                                                   color: {self.fontcolor};
+                                                   border-radius: 10px;
+                                                   }}
+                                                   QWidget:hover {{
+                                                       background-color: rgba(91, 142, 125, 0.7);
+                                                       border-radius: 5px;
+                                                   }}
+                                                   QLabel {{
+                                                       color: {self.fontcolor}; 
+                                                   }}
+                                                   """)
             global_point = self._b_logout.mapToGlobal(
                 QPoint(
                     -self._m_logout_menu.sizeHint().width() + self._b_logout.width() + 10,
                     self._b_logout.height() + 5
                 )
             )
-
             self._m_logout_menu.exec_(global_point)
 
         # Connecter le bouton au menu personnalisé

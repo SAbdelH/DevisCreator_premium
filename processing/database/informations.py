@@ -230,11 +230,11 @@ class Informations:
                         client.telephone = num
                         client.email = mail
                     else:
-                        __Client = Clients(nom=nom, telephone=num, email=mail, commerce=0, crea_date=func.current_date())
+                        __Client = Clients(nom=nom, telephone=num, email=mail, commerce=0, crea_date=func.now())
                         session.add(__Client)
                 else:
                     session.query(Clients).filter(conditions).delete()
-                updt = Ui_Update(nom='client', crea_date=func.now(), crea_user=func.current_user())
+                updt = Ui_Update(nom='client', crea_date=func.current_timestamp(), crea_user=func.current_user())
                 session.add(updt)
                 session.commit()
                 populateClientTable(self)

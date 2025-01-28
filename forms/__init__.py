@@ -116,15 +116,57 @@ class Ui_MainWindow(QMainWindow, thm, rf, Icns, BImg, Menu, LP, DP, FP, UMP, IP,
         if self._sw_main_dialog.currentIndex() == self.indexPage.get("_p_login"):
             event.accept()
         else:
+            # Déterminer les couleurs en fonction du thème
+            bg = "rgba(255, 255, 255, 0.75)" if self.apparence == "white" else "rgba(17, 17, 17, 0.75)"
+            fontcolor = "rgba(0, 0, 0, 1)" if self.apparence == "white" else "rgba(255, 255, 255, 1)"
+            button_bg = "rgba(91, 142, 125, 0.8)" if self.apparence == "white" else "rgba(91, 142, 125, 0.7)"
+            button_hover = "rgba(91, 142, 125, 1)" if self.apparence == "white" else "rgba(91, 142, 125, 1)"
+
             # Créer une QMessageBox personnalisée
             message_box = QMessageBox(self)
             message_box.setWindowTitle("Avertissement")
             message_box.setText("Êtes-vous sûr de quitter ?")
 
-            # Définir les boutons Oui et Non
+            # Traduire les boutons Oui et Non
+            yes_text = QCoreApplication.translate("MessageBox", "Oui")
+            no_text = QCoreApplication.translate("MessageBox", "Non")
+
+            # Définir les boutons Oui et Non avec les traductions
             message_box.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-            icone_personnalisee = self.reflexion_pixmap
-            message_box.setIconPixmap(icone_personnalisee)
+            message_box.button(QMessageBox.Yes).setText(yes_text)
+            message_box.button(QMessageBox.No).setText(no_text)
+            message_box.setDefaultButton(QMessageBox.No)
+
+            # Redimensionner et définir une icône personnalisée
+            if self.reflexion_pixmap:
+                resized_icon = self.reflexion_pixmap.scaled(120, 120, Qt.KeepAspectRatio)
+                message_box.setIconPixmap(resized_icon)
+
+            # Appliquer une feuille de style dynamique
+            message_box.setStyleSheet(f"""
+                QMessageBox {{
+                    background-color: {bg};
+                    color: {fontcolor};
+                    border-radius: 10px;
+                }}
+                QMessageBox QLabel {{
+                    color: {fontcolor};
+                }}
+                QMessageBox QPushButton {{
+                    background-color: {button_bg};
+                    color: {fontcolor};
+                    padding: 5px 15px;
+                    border-radius: 5px;
+                }}
+                QMessageBox QPushButton:hover {{
+                    background-color: {button_hover};
+                }}
+                QMessageBox QPushButton:pressed {{
+                    background-color: {button_hover};
+                }}
+            """)
+
+            # Exécuter la boîte de dialogue
             reply = message_box.exec_()
 
             # Vérifier la réponse de l'utilisateur

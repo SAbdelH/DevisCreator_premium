@@ -24,8 +24,8 @@ status as (
     FROM activites.factures
     GROUP BY client
 )
-SELECT crea_date, nom, telephone, email, CONCAT(commerce::TEXT, ' €') commerce, CONCAT(dette::TEXT, ' €') dette, UPPER(COALESCE(statut_paiement, 'reglé')) statut,
-COALESCE(last_date::TEXT, '') last_date
+SELECT crea_date, nom, telephone, email, CONCAT(commerce::TEXT, ' €') commerce, CONCAT(COALESCE(dette::TEXT, '-'), ' €') dette,
+UPPER(COALESCE(statut_paiement, 'reglé')) statut, COALESCE(last_date::TEXT, '') last_date
 FROM informations.clients
 LEFT JOIN dettes d ON d.client = nom
 LEFT JOIN last l ON d.client = nom

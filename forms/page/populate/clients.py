@@ -14,13 +14,6 @@ def populateClientTable(self):
     # Ajouter des lignes avec des données
     with self.Session() as session:
         table_widget = self.maindialog._tw_clients_table_info
-        table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
-                                background-image: url({self.maindialog.clients_bg});
-                                background-repeat: no-repeat;
-                                background-position: center center;
-                                background-origin: content;
-                            }}""")
-
         update = Ui_Update().verify_update(session, Ui_Update.nom in ('client', 'devis', 'facture'))
         first = self.maindialog.firstOpenClient
         if first:  self.maindialog.cp_last_update = datetime.now()
@@ -42,13 +35,19 @@ def populateClientTable(self):
                                 item.setForeground(QBrush(QColor("#D7A271")))  # Texte en orange
                             elif value == "ENDETTÉ":
                                 item.setForeground(QBrush(QColor("#CB7072")))  # Texte en rouge
+
                         # Centrer les éléments
                         item.setTextAlignment(Qt.AlignCenter)
+                        # Rendre le fond transparent
+                        item.setBackground(QBrush(Qt.transparent))
                         table_widget.setItem(row_index, col_index, item)
 
                 # Appliquer le délégué personnalisé
                 delegate = CustomDelegate()
+                delegate.setTheme(self.maindialog.apparence)
                 table_widget.setItemDelegate(delegate)
+                # Rafraîchir la table pour appliquer les changements
+                table_widget.viewport().update()
                 table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
                     background-image: url("");
                     background-repeat: no-repeat;
@@ -58,6 +57,14 @@ def populateClientTable(self):
                 self.maindialog.firstOpenClient = False
             table_widget.itemSelectionChanged.connect(lambda: onClientItemSelected(self))
 
+    if table_widget.rowCount() < 1:
+        table_widget.setStyleSheet(f"""#_tw_clients_table_info {{
+                                        background-image: url({self.maindialog.clients_bg});
+                                        background-repeat: no-repeat;
+                                        background-position: center center;
+                                        background-origin: content;
+                                    }}""")
+
 def onClientItemSelected(self):
     table_widget = self.maindialog._tw_clients_table_info
     selected_row = table_widget.currentRow()
@@ -66,7 +73,7 @@ def onClientItemSelected(self):
         self.maindialog._le_clients_num_value.setText(table_widget.item(selected_row, 2).text())
         self.maindialog._le_clients_mail_value.setText(table_widget.item(selected_row, 3).text())
         dette = table_widget.item(selected_row, 5).text().replace(' €', '')
-        self.maindialog._ds_clients_dette.setValue(float(dette) if dette else 0)
+        self.maindialog._ds_clients_dette.setValue(float(dette) if dette and dette != '-' else 0)
 
 def populateClientCombo(self, page: str = "factures", exception: bool = False):
     # Ajouter des lignes avec des données

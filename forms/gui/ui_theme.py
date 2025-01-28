@@ -5,6 +5,8 @@ from pathlib import Path
 from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QGraphicsDropShadowEffect, QListWidget
 
+from forms.gui.ui_client_statut import CustomDelegate
+
 CONFIG_FILE_NAME = "theme_config.json"
 
 class THEMECOLOR(Enum):
@@ -62,6 +64,13 @@ class theme:
         self._cpb_step_bar.setTheme(self.apparence)
 
         self.light_theme() if self.apparence == 'white' else self.dark_theme()
+
+        # Appliquer le délégué personnalisé
+        delegate = CustomDelegate()
+        delegate.setTheme(self.apparence)
+        self._tw_clients_table_info.setItemDelegate(delegate)
+        # Rafraîchir la table pour appliquer les changements
+        self._tw_clients_table_info.viewport().update()
 
         concernedList = [self._lw_um_usrList, self._lw_list_cart, self._lw_inventory_list_inventory]
         for liste in concernedList:
@@ -650,16 +659,9 @@ class theme:
             padding: 5px
         }}
         /* === QTableWidget (Préfixes _tw_) === */
-        #_tw_clients_table_info, #_tw_clients_table_info QHeaderView, #_tw_clients_table_info QHeaderView::section, #_tw_clients_table_info QTableCornerButton::section {{
-            background-color: rgba(255, 255, 255, 1);
-            color: rgba(164, 164, 164, 1);
-            border: none;
-            border-bottom : 1px solid rgba(164, 164, 164, 1);
-            height: 40px;
-        }}
         #_tw_clients_table_info::item {{
             border: none;
-            border-bottom : 1px solid rgba(164, 164, 164, 1);
+            border-bottom : 0.2px solid rgba(216, 216, 216, 0.7);
         }}
         /* === PAGE DES INVENTAIRES === */
         /* === QFrame (Préfixes _f_) === */
@@ -774,7 +776,7 @@ class theme:
         /* === QLineEdit, QTextEdit, QDateEdit, QListWidget, QTimeEdit, QTableWidget, QComboBox (Préfixes _le_, _te_, _de_, _lw_, _te_, _tw_, _cbx_) === */
         #centralwidget QLineEdit, #centralwidget QTextEdit,
         #centralwidget QDateEdit, #centralwidget QListWidget, #centralwidget QTimeEdit,
-        #centralwidget QTableWidget, #centralwidget QComboBox, #centralwidget QGraphicsView
+        #centralwidget * QTableWidget, #centralwidget QComboBox, #centralwidget QGraphicsView
         {{
             border-radius: 5px;
             border: 1px solid rgba(114, 113, 113, 1);
@@ -800,7 +802,7 @@ class theme:
             padding: 2px;
         }}
         #centralwidget QTableWidget::item {{
-            border: rgb(214, 214, 214);
+            border: rgba(60, 60, 60, 0.7);
         }}
         #centralwidget QTableCornerButton::section, #centralwidget QTableWidget QHeaderView{{
             background-color: rgba(60, 60, 60, 0.7);
@@ -868,7 +870,7 @@ class theme:
             padding: 4px 8px;
             border: none;
         }}
-        #centralwidget QTreeWidget::item:hover {{
+        #centralwidget QTreeWidget::item:hover, #centralwidget QTreeWidget::item:selected {{
             background-color: #e6f7ff;
             color : rgba(0, 0, 0, 1);
             border-radius: 4px;
@@ -1293,16 +1295,10 @@ class theme:
             padding: 5px
         }}
         /* === QTableWidget (Préfixes _tw_) === */
-        #_tw_clients_table_info, #_tw_clients_table_info QHeaderView, #_tw_clients_table_info QHeaderView::section, #_tw_clients_table_info QTableCornerButton::section {{
-            background-color: rgba(255, 255, 255, 1);
-            color: rgba(164, 164, 164, 1);
-            border: none;
-            border-bottom : 1px solid rgba(164, 164, 164, 1);
-            height: 40px;
-        }}
         #_tw_clients_table_info::item {{
             border: none;
-            border-bottom : 1px solid rgba(164, 164, 164, 1);
+            border-bottom : 0.2px solid rgba(216, 216, 216, 0.7);
+            background-color: rgba(45, 45, 45, 1);
         }}
         /* === PAGE DES INVENTAIRES === */
         /* === QFrame (Préfixes _f_) === */
