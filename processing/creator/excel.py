@@ -61,6 +61,7 @@ class Excel:
                     script_file.write(APPLESCRIPT_content.strip())
 
                 subprocess.run(["osascript", str(script_path)], check=True)
+                script_path.unlink(missing_ok=True)
             except subprocess.CalledProcessError as e:
                 self.forceSuppression(script_path)
                 pdfPath = None

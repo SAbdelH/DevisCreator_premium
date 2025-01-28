@@ -11,7 +11,8 @@ from sqlalchemy import distinct, func
 from forms.page import populateInvoiceCreatedList
 from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
-from processing.database.model_public import Devis, Factures, Entreprise
+from processing.database.model_public import Devis, Factures, Entreprise, Activites
+from processing.enumerations import TaillePapier as T
 
 
 class ActivityExport:
@@ -35,6 +36,8 @@ class ActivityExport:
         self.insertInfo(workbook, worksheet, sauvegarde, info_facture)
         self.insertCommand(workbook, worksheet, sauvegarde, info_facture)
         self.finDevis(workbook, worksheet, sauvegarde, info_facture)
+        self.decoration(workbook, worksheet, sauvegarde)
+        self.convertXlsxToPDF(sauvegarde, worksheet.title)
         self.maindialog.show_notification(
             f"{sauvegarde.stem} est exporté{'e' if self.InvoicePage == 'Factures' else ''}",
             LVL.success,
@@ -134,9 +137,18 @@ class ActivityExport:
                     #print(__params)
                     #CT = ORMTable(**__params)
                     #session.add(CT)
+
+            # activite = Activites(
+            #     crea_date=func.now(),
+            #     activites=func.concat(f'{ORMTable.__tablename__}_', func.substr(str(self.nextID), 1, 10)),
+            #     action=f'Creation {ORMTable.__tablename__}',
+            #     budget=somme
+            # )
+            # session.add(activite)
+            # session.commit()
         wb.save(sauvegarde)
 
-    def finDevis(self, workbook, worksheet, sauvegarde, info: dict):
+    def finDevis(self, workbook: Workbook, worksheet: Worksheet, sauvegarde: str, info: dict):
         maxRow = worksheet.max_row
         VALIDAY_FACTUREText = self.TEXT.VALIDAY_FACTURE.format(**{"nbjours": str(info.get("validDays"))})
         valable = datetime.today() + timedelta(days=info.get("validDays"))
@@ -264,3 +276,33 @@ class ActivityExport:
         worksheet.merge_cells(f"A{maxRow + 5}:C{maxRow + 5}")
 
         workbook.save(filename=sauvegarde)
+
+    def decoration(self, wb: Workbook, ws: Worksheet, sauvegarde: str ):
+        with self.Session() as session:
+            entreprise = session.query(Entreprise).first()
+
+            _i = {"company": entreprise.nom, "capital": entreprise.capital, "siret": entreprise.siren,
+                  "siren": entreprise.siren, "ape": entreprise.code_ape}
+            parameters = {
+                "wb": wb,
+                "ws": ws,
+                "sauvegarde": sauvegarde,
+                "centre": self.TEXT.FOOTER_FACTURE.format(**_i)
+            }
+            self.pied_page(**parameters)
+            (min_col, min_row, max_col, max_row) = openpyxl.utils.cell.range_boundaries(
+                ws.dimensions
+            )
+            area = f"{openpyxl.utils.cell.get_column_letter(min_col)}{min_row}:{openpyxl.utils.cell.get_column_letter(max_col + 1)}{max_row + 1}"
+            parameters = {
+                "wb": wb,
+                "ws": ws,
+                "sauvegarde": sauvegarde,
+                "PAPERSIZE": T.A4,
+                "area": area,
+                "grillage": False,
+                "apercu": "pageBreakPreview",
+                "hautPage": "auto",
+                "margin": self.JSON.MARGINF,
+            }
+            self.mise_en_page(**parameters)

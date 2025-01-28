@@ -38,8 +38,7 @@ def populateInvoiceCreatedList(self):
     self.maindialog._trw_invoice_export.insertTopLevelItems(0, items)
     # Connecter le signal pour ouvrir le fichier
     self.maindialog._trw_invoice_export.itemDoubleClicked.connect(lambda item, column: onTreeItemInvoiceDoubleClicked(self, item, column))
-    self.maindialog._cbx_invoice_type_document.currentIndexChanged.connect(
-        lambda item, column: populateInvoiceCreatedList(self, item, column))
+    self.maindialog._cbx_invoice_type_document.currentIndexChanged.connect(lambda: populateInvoiceCreatedList(self))
 
 def onTreeItemInvoiceDoubleClicked(self, item, column):
     # Récupérer le chemin du fichier stocké dans l'élément
