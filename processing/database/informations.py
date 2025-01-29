@@ -220,22 +220,27 @@ class Informations:
         nom = dlg._le_clients_profil_name.text() if page == '_p_client' else dlg._le_invoice_nomclient.text()
         mail = dlg._le_clients_mail_value.text() if page == '_p_client' else dlg._le_invoice_mailclient.text()
         num = dlg._le_clients_num_value.text() if page == '_p_client' else dlg._le_invoice_numclient.text()
+        update = False
         try:
             with self.Session() as session:
                 conditions = or_(Clients.nom == nom, Clients.telephone == num, Clients.email == mail)
                 if action == 'add':
                     client = session.query(Clients).filter(conditions).first()
-                    if client:
+                    if client and (client.nom != nom and client.telephone != num and client.email != mail):
                         client.nom = nom
                         client.telephone = num
                         client.email = mail
-                    else:
+                        update = True
+                    elif not client:
                         __Client = Clients(nom=nom, telephone=num, email=mail, commerce=0, crea_date=func.now())
                         session.add(__Client)
+                        update = True
                 else:
                     session.query(Clients).filter(conditions).delete()
-                updt = Ui_Update(nom='client', crea_date=func.current_timestamp(), crea_user=func.current_user())
-                session.add(updt)
+                    update = True
+                if update:
+                    updt = Ui_Update(nom='client', crea_date=func.current_timestamp(), crea_user=func.current_user())
+                    session.add(updt)
                 session.commit()
                 populateClientTable(self)
                 populateClientCombo(self)

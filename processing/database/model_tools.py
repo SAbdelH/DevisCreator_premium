@@ -1,6 +1,5 @@
 import sqlalchemy
-from sqlalchemy import Column, CheckConstraint, text, Index
-
+from sqlalchemy import Column, CheckConstraint, text, Index, func
 
 from collections import namedtuple
 from sqlalchemy.inspection import inspect
@@ -121,12 +120,20 @@ def create_dynamic_model(Base, name, schema, columns, constraints=None, addition
         # Si `default` ou `onupdate` sont des chaînes, essayez de les évaluer comme des expressions Python
         if isinstance(default, str):
             try:
-                default = eval(default)  # Convertir une chaîne en fonction ou valeur
+                if 'func' in default:
+                    _, method = default.replace('()', '').split('.')
+                    default = getattr(func, method)()
+                else:
+                    default = eval(default)  # Convertir une chaîne en fonction ou valeur
             except Exception:
                 pass  # Garder la valeur telle quelle si ce n'est pas une expression valide
         if isinstance(onupdate, str):
             try:
-                onupdate = eval(onupdate)  # Convertir une chaîne en fonction ou valeur
+                if 'func' in onupdate:
+                    _, method = onupdate.replace('()', '').split('.')
+                    onupdate = getattr(func, method)()
+                else:
+                    onupdate = eval(onupdate)  # Convertir une chaîne en fonction ou valeur
             except Exception:
                 pass  # Garder la valeur telle quelle si ce n'est pas une expression valide
 

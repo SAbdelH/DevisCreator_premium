@@ -14,7 +14,7 @@ def populateClientTable(self):
     # Ajouter des lignes avec des données
     with self.Session() as session:
         table_widget = self.maindialog._tw_clients_table_info
-        update = Ui_Update().verify_update(session, Ui_Update.nom in ('client', 'devis', 'facture'))
+        update = Ui_Update().verify_update(session, Ui_Update.nom =='client')
         first = self.maindialog.firstOpenClient
         if first:  self.maindialog.cp_last_update = datetime.now()
 

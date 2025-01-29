@@ -30,7 +30,7 @@ class InvoicePage:
         self._h_invoice_search_invoice.setObjectName(u"_h_invoice_search_invoice")
         self._l_invoice_search_invoice = QLabel(self._p_factures)
         self._l_invoice_search_invoice.setObjectName(u"_l_invoice_search_invoice")
-        self._l_invoice_search_invoice.setMaximumSize(QSize(130, 16777215))
+        self._l_invoice_search_invoice.setMaximumSize(QSize(150, 16777215))
         self._h_invoice_search_invoice.addWidget(self._l_invoice_search_invoice)
         self._cbx_invoice_search_invoice = QComboBox(self._p_factures)
         self._cbx_invoice_search_invoice.setObjectName(u"_cbx_invoice_search_invoice")
@@ -493,10 +493,12 @@ class InvoicePage:
         self.hideOuterGroup('invoice')
         if sender == '_b_mcreate_devis':
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er le Devis", None))
+            self._l_invoice_search_invoice.setText(QCoreApplication.translate("MainWindow", u"Rechercher un devis", None))
             self.pageEnCours.emit("devis")
             self.CurrentInvoicePage = "devis"
         else:
             self._b_invoice_export.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er la Facture", None))
+            self._l_invoice_search_invoice.setText(QCoreApplication.translate("MainWindow", u"Rechercher une facture", None))
             self.pageEnCours.emit("factures")
             self.CurrentInvoicePage = "factures"
 

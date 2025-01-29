@@ -3,8 +3,63 @@ from datetime import datetime
 from pathlib import Path
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QTreeWidgetItem
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QTreeWidgetItem, QCompleter
+from sqlalchemy import func
 
+from processing.database.model_public import Devis, Factures, Ui_Update
+
+
+def populateInvoiceCreatedCombo(self, sender: str, exception:bool = False):
+    combo = self.maindialog._cbx_invoice_search_invoice
+    # Bloquer les signaux pendant les modifications
+    combo.blockSignals(True)
+    combo.setMaxVisibleItems(6)
+    combo.view().setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+    # Choisir le modèle en fonction de `sender`
+    table_model = Devis if sender.lower() == 'devis' else Factures
+    columnId = "numero_devis" if sender.lower() == 'devis' else "numero_facture"
+
+    with self.Session() as session:
+        update = Ui_Update().verify_update(session, sender.lower() if sender.lower() == 'devis' else 'facture')
+        first = self.maindialog.firstOpenDevis if sender.lower() == 'devis' else self.maindialog.firstOpenFacture
+        if first:  self.maindialog.ip_last_update = datetime.now()
+
+        if first or (update and update.crea_date > self.maindialog.ip_last_update) or exception:
+            combo.clear()
+            invoices = session.query(
+                func.concat(table_model.__tablename__, '_', func.substr(getattr(table_model, columnId), 1, 10)).label("id")
+            ).distinct()
+            if sender.lower() == 'factures':
+                devis_query = session.query(
+                    func.concat(Devis.__tablename__, '_', func.substr(Devis.numero_devis, 1, 10)).label("id")
+                ).distinct()
+                # Unifier les résultats des deux requêtes
+                query = invoices.union(devis_query)
+            result = query.all()
+            # Vérifier que la liste contient des éléments
+            if result:
+                li = [row.id for row in result]
+                # Ajouter la liste au combo
+                combo.addItems(li)
+                for i in range(combo.count()):
+                    combo.setItemIcon(i, self.maindialog.combo_facture_icon)
+                combo.setEditable(True)
+                line_edit = combo.lineEdit()
+                line_edit.setAlignment(Qt.AlignCenter)
+                # Créer un QCompleter avec la liste des noms
+                keys_completer = QCompleter(li)
+                keys_completer.setFilterMode(Qt.MatchContains)
+                # Configurer le completer pour le combo
+                combo.setCompleter(keys_completer)
+                combo.completer().setCompletionMode(QCompleter.PopupCompletion)
+                combo.completer().setCaseSensitivity(Qt.CaseInsensitive)
+
+            # Assurez-vous que le combo est vide par défaut (si nécessaire)
+            combo.setCurrentIndex(-1)
+
+            # Réactiver les signaux après avoir rempli le combo
+            combo.blockSignals(False)
 
 def populateInvoiceCreatedList(self):
     self.maindialog._trw_invoice_export.clear()

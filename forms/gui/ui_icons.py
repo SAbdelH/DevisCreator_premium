@@ -462,6 +462,10 @@ class Icons:
         return self.__QIcon("facture")
 
     @property
+    def combo_facture_icon(self) -> QIcon:
+        return self.__QIcon("factures")
+
+    @property
     def create_client_icon(self) -> QIcon:
         return self.__QIcon("client")
 

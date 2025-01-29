@@ -1,6 +1,5 @@
 from collections import ChainMap
-from copy import deepcopy
-from datetime import datetime, timedelta, date
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import openpyxl
@@ -8,10 +7,10 @@ from openpyxl.workbook import Workbook
 from openpyxl.worksheet.worksheet import Worksheet
 from sqlalchemy import distinct, func
 
-from forms.page import populateInvoiceCreatedList
+from forms.page import populateInvoiceCreatedList, populateInvoiceCreatedCombo
 from processing.database.session import WorkSession
 from processing.enumerations import LevelCritic as LVL
-from processing.database.model_public import Devis, Factures, Entreprise, Activites
+from processing.database.model_public import Devis, Factures, Entreprise, Activites, Ui_Update, Clients
 from processing.enumerations import TaillePapier as T
 
 
@@ -38,6 +37,7 @@ class ActivityExport:
         self.finDevis(workbook, worksheet, sauvegarde, info_facture)
         self.decoration(workbook, worksheet, sauvegarde)
         self.convertXlsxToPDF(sauvegarde, worksheet.title)
+        populateInvoiceCreatedCombo(self, self.InvoicePage)
         self.maindialog.show_notification(
             f"{sauvegarde.stem} est exporté{'e' if self.InvoicePage == 'Factures' else ''}",
             LVL.success,
@@ -77,9 +77,12 @@ class ActivityExport:
 
     def insertCommand(self, wb: Workbook, ws: Worksheet, sauvegarde: str, info: dict):
         Liste = self.maindialog._lw_list_cart
+        total_remise = self.maindialog._ds_invoice_total_remise.value()
         somme = 0
         ORMTable = Devis if self.InvoicePage.lower() == "devis" else Factures
         user = WorkSession.get_current_user()
+        columnId = "numero_devis" if self.InvoicePage.lower() == "devis" else "numero_facture"
+        contrainte_nom = "devis" if self.InvoicePage.lower() == "devis" else "facture"
         with self.Session() as session:
             for i in range(Liste.count()):
                 item = Liste.item(i)
@@ -128,24 +131,31 @@ class ActivityExport:
 
                     somme += float(value.get('prix'))
                     __params = dict(ChainMap(value, info))
-                    __params["crea_date"] = date.today()
+                    __params["crea_date"] = func.now()
                     __params["crea_user"] = user.identifiant
-                    __params["numero_devis" if self.InvoicePage.lower() == "devis" else "numero_facture"] = f"{__params.get('id')}_{str(i).zfill(2)}"
+                    __params[columnId] = f"{__params.get('id')}_{str(i+1).zfill(2)}"
+                    __params["validite"] = int(__params.get("validDays"))
+                    __params["total_remise"] = total_remise
                     [__params.pop(cle) for cle in ('dlg', 'icon', 'old_price', 'marque','quantifiable', 'louable',
                                                     'validDays', 'expire', 'today', 'id')
                     ]
-                    #print(__params)
-                    #CT = ORMTable(**__params)
-                    #session.add(CT)
+                    CT = ORMTable(**__params)
+                    session.add(CT)
 
-            # activite = Activites(
-            #     crea_date=func.now(),
-            #     activites=func.concat(f'{ORMTable.__tablename__}_', func.substr(str(self.nextID), 1, 10)),
-            #     action=f'Creation {ORMTable.__tablename__}',
-            #     budget=somme
-            # )
-            # session.add(activite)
-            # session.commit()
+            client = session.query(Clients).filter(Clients.nom == __params.get('client')).first()
+            if client:
+                client.commerce = (client.commerce or 0) +(somme - total_remise)
+
+            activite = Activites(
+                crea_date=func.now(),
+                activites=func.concat(f'{ORMTable.__tablename__}_', func.substr(str(__params[columnId]), 1, 10)),
+                action=f'Creation {ORMTable.__tablename__}',
+                budget=somme
+            )
+            updt = Ui_Update(nom=contrainte_nom, crea_date=func.now(), crea_user=func.current_user())
+            session.add(activite)
+            session.add(updt)
+            session.commit()
         wb.save(sauvegarde)
 
     def finDevis(self, workbook: Workbook, worksheet: Worksheet, sauvegarde: str, info: dict):

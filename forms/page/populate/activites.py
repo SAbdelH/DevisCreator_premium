@@ -41,7 +41,8 @@ def populateActivitiesTable(self):
                         column_name = column_desc['name']
                         value = getattr(rowData, column_name, "")
                         table_item = QTableWidgetItem(str(value) if value is not None else "")
-                        table_item.setTextAlignment(Qt.AlignCenter)
+                        table_item.setTextAlignment(Qt.AlignLeft | Qt.AlignTop)
+                        table_item.setFlags(table_item.flags() | Qt.ItemIsEditable)
                         self.maindialog._tw_activity.setItem(row, column_index, table_item)
 
                 self.maindialog._tw_activity.setStyleSheet(f"""

@@ -62,7 +62,10 @@
             'precision': 10,
             'scale': 3
         }
-    }
+    },
+    'validite': {
+            'type': 'Integer'
+        }
 },
 'constraints': [
     # Index unique sur identifiant

@@ -65,7 +65,10 @@
     },
     "paye": {
         "type" : "Boolean"
-    }
+    },
+    'validite': {
+            'type': 'Integer'
+        }
 },
 'constraints': [
     # Index unique sur identifiant

@@ -8,10 +8,18 @@ WITH last as (
     GROUP BY 1
 ),
 dettes as (
-    select client, SUM((quantite*prix_unite)) dette
+    select client, SUM(prix) dette
     from activites.factures
     WHERE paye IS NOT TRUE
     GROUP BY 1
+),
+sum_remise AS(
+    SELECT
+        SUBSTR(numero_facture, 1, 10) AS num_unique,
+        client,
+        SUM(DISTINCT total_remise) AS total_remise_unique
+    FROM activites.factures
+    GROUP BY num_unique, client
 ),
 status as (
     SELECT
@@ -24,10 +32,11 @@ status as (
     FROM activites.factures
     GROUP BY client
 )
-SELECT crea_date, nom, telephone, email, CONCAT(commerce::TEXT, ' €') commerce, CONCAT(COALESCE(dette::TEXT, '-'), ' €') dette,
+SELECT crea_date, nom, telephone, email, CONCAT(commerce::TEXT, ' €') commerce, CONCAT(COALESCE((dette - total_remise_unique)::TEXT, '-'), ' €') dette,
 UPPER(COALESCE(statut_paiement, 'reglé')) statut, COALESCE(last_date::TEXT, '') last_date
 FROM informations.clients
 LEFT JOIN dettes d ON d.client = nom
 LEFT JOIN last l ON d.client = nom
 LEFT JOIN status s ON s.client = nom
+LEFT JOIN sum_remise j ON j.client = nom
 ;

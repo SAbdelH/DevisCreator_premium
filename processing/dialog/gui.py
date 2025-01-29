@@ -9,6 +9,7 @@ from PySide6.QtWidgets import QFileDialog, QListWidget, QComboBox, QListWidgetIt
 from forms.page import (populateUserList, populateInfoCompany, populateAgenda, populateClientTable, populateClientCombo,
                         populateDatabaseExplorer, populateListInventory, populateInvoiceCreatedList,
                         populateActivitiesTable, populateActivList)
+from forms.page.populate.facture import populateInvoiceCreatedCombo
 from processing.database.model_private import Chemin
 from forms.gui import CartItem
 
@@ -44,6 +45,7 @@ class Update:
                 else:
                     self.InvoicePage = text
                     populateClientCombo(self, text, True)
+                    populateInvoiceCreatedCombo(self, text, True)
                     populateInvoiceCreatedList(self)
                     self.maindialog._le_invoice_inventory_filter.textChanged.connect(
                         partial(self.onSearchTextChanged, self=self, liste=liste, page=text)
