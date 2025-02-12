@@ -1,0 +1,15 @@
+[
+        "dropdown_path",
+        "up_chevron_path",
+        "down_chevron_path",
+        "uncheckedb_path",
+        "checkedb_path",
+        "openfolder_path",
+        "emptyfolder_path",
+        "histogram_bg",
+        "table_bg",
+        "camembert_bg",
+        "evolution_bg",
+        "analyse_bg",
+        "inventory_bg"
+]

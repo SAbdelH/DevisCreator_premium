@@ -59,4 +59,4 @@ def cryptSCPT(text, sortie):
 
 #cryptSCPT(applscript, sortieScript)
 cryptConstantes(entrerConstante, sortieScript, "SQL")
-#cryptScript(entrerScript, sortieScript, "public_models")
+#cryptScript(entrerScript, sortieScript, "PM")

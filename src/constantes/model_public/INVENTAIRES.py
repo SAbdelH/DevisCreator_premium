@@ -5,6 +5,7 @@
         'id': {'type': 'BigInteger', 'primary_key': True, 'autoincrement': True},
         'nom': {'type': 'String', 'unique': True},
         'prix': {'type': 'Numeric', 'type_params': {'precision': 10, 'scale': 3}},
+        'tva': {'type': 'Numeric', 'type_params': {'precision': 10, 'scale': 3}},
         'marque': {'type': 'String'},
         'quantite': {'type': 'Integer'},
         'remise': {'type': 'Numeric', 'type_params': {'precision': 10, 'scale': 3}},

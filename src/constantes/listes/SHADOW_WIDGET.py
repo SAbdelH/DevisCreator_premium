@@ -1,0 +1,19 @@
+{
+    "_f_valid_facture_preview",
+    "_f_inventory_box_edit",
+    "_f_clients_info_box",
+    "_f_side_menu",
+    "_f_invoice_box_export_invoice",
+    "_b_mcreate_ws",
+    "_b_minfo_company",
+    "_b_mcreate_devis",
+    "_b_mclient",
+    "_b_mvalid_facture",
+    "_b_mcreate_backup",
+    "_b_mmanage_db",
+    "_b_mcreate_facture",
+    "_b_mcreate_user",
+    "_ccw_inventory_most_sale",
+    "_ccw_inventory_low_sale",
+    "_ccw_inventory_sum_sold"
+}

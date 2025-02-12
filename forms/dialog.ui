@@ -4495,10 +4495,26 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </item>
            <item>
             <layout class="QGridLayout" name="_g_invoice_input_card">
-             <item row="2" column="0">
-              <widget class="QLabel" name="_l_invoice_marque">
-               <property name="text">
-                <string>Marque</string>
+             <item row="9" column="0">
+              <widget class="QSpinBox" name="_s_invoice_quantity">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -4518,6 +4534,16 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </property>
               </widget>
              </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="_l_invoice_marque">
+               <property name="text">
+                <string>Marque</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
              <item row="1" column="0">
               <widget class="QLineEdit" name="_le_invoice_name">
                <property name="minimumSize">
@@ -4531,78 +4557,10 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
-              <layout class="QHBoxLayout" name="_h_invoice_info_qty">
-               <item>
-                <widget class="QCheckBox" name="_cb_invoice_quantifiable">
-                 <property name="text">
-                  <string>Élément quantifiable</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="_cb_invoice_location">
-                 <property name="text">
-                  <string>Élément à louer</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="_l_invoice_qauntity">
-               <property name="text">
-                <string>Quantité</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="11" column="0">
-              <widget class="QComboBox" name="_cbx_invoice_type_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="editable">
-                <bool>false</bool>
-               </property>
-               <property name="currentIndex">
-                <number>-1</number>
-               </property>
-               <property name="placeholderText">
-                <string>-- Séléctionnez un type seulement s'il y'a remise</string>
-               </property>
-               <item>
-                <property name="text">
-                 <string>En devise</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/icon/icons/euro.png</normaloff>:/icon/icons/euro.png</iconset>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>En pourcentage</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
+              <widget class="QLabel" name="_l_invoiceemptyInventorymess">
+               <property name="text">
+                <string>le matériel n'est plus en stock dans le magasin (attente de retour ...)</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -4610,6 +4568,26 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
               </widget>
              </item>
              <item row="14" column="0">
+              <widget class="QLabel" name="_l_invoice_remise">
+               <property name="text">
+                <string>Remise</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QLabel" name="_l_invoice_tva">
+               <property name="text">
+                <string>TVA</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="16" column="0">
               <layout class="QHBoxLayout" name="_h_btn_invoice_input">
                <item>
                 <widget class="QPushButton" name="_b_invoice_cancel_cart">
@@ -4683,39 +4661,6 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </item>
               </layout>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="_l_invoice_price">
-               <property name="text">
-                <string>Prix</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="_l_invoice_remise">
-               <property name="text">
-                <string>Remise</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="7" column="0">
-              <widget class="QSpinBox" name="_s_invoice_quantity">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="_l_invoice_nom">
                <property name="text">
@@ -4739,7 +4684,17 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </property>
               </widget>
              </item>
-             <item row="10" column="0">
+             <item row="8" column="0">
+              <widget class="QLabel" name="_l_invoice_qauntity">
+               <property name="text">
+                <string>Quantité</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
               <widget class="QLabel" name="_l_invoice_type_remise">
                <property name="text">
                 <string>Type de remise</string>
@@ -4749,20 +4704,98 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </property>
               </widget>
              </item>
-             <item row="9" column="0">
-              <widget class="QLabel" name="_l_invoiceemptyInventorymess">
+             <item row="13" column="0">
+              <widget class="QComboBox" name="_cbx_invoice_type_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="editable">
+                <bool>false</bool>
+               </property>
+               <property name="currentIndex">
+                <number>-1</number>
+               </property>
+               <property name="placeholderText">
+                <string>-- Séléctionnez un type seulement s'il y'a remise</string>
+               </property>
+               <item>
+                <property name="text">
+                 <string>En devise</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icon/icons/euro.png</normaloff>:/icon/icons/euro.png</iconset>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>En pourcentage</string>
+                </property>
+                <property name="icon">
+                 <iconset resource="resources.qrc">
+                  <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="_l_invoice_price">
                <property name="text">
-                <string>le matériel n'est plus en stock dans le magasin (attente de retour ...)</string>
+                <string>Prix</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignmentFlag::AlignCenter</set>
                </property>
               </widget>
              </item>
+             <item row="10" column="0">
+              <layout class="QHBoxLayout" name="_h_invoice_info_qty">
+               <item>
+                <widget class="QCheckBox" name="_cb_invoice_quantifiable">
+                 <property name="text">
+                  <string>Élément quantifiable</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="_cb_invoice_location">
+                 <property name="text">
+                  <string>Élément à louer</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="7" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_tva">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="suffix">
+                <string> %</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
-            <widget class="QListWidget" name="_lw_list_card"/>
+            <widget class="QListWidget" name="_lw_list_card">
+             <property name="isWrapping" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="spacing">
+              <number>2</number>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -5835,29 +5868,21 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </item>
            <item>
             <layout class="QGridLayout" name="_g_valid_facture_preview_two">
-             <item row="1" column="2">
-              <widget class="QLabel" name="_l_valid_facture_montant_ttc_value">
+             <item row="2" column="1">
+              <widget class="QLabel" name="_l_valid_facture_montant_ttc">
                <property name="minimumSize">
                 <size>
-                 <width>100</width>
-                 <height>0</height>
+                 <width>90</width>
+                 <height>33</height>
                 </size>
                </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="_l_valid_facture_montant_ht_value">
-               <property name="minimumSize">
-                <size>
-                 <width>100</width>
-                 <height>0</height>
-                </size>
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
                </property>
                <property name="text">
-                <string/>
+                <string>Montant TTC</string>
                </property>
               </widget>
              </item>
@@ -5866,7 +5891,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                <property name="minimumSize">
                 <size>
                  <width>90</width>
-                 <height>50</height>
+                 <height>33</height>
                 </size>
                </property>
                <property name="font">
@@ -5879,21 +5904,16 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="_l_valid_facture_montant_ttc">
+             <item row="2" column="2">
+              <widget class="QLabel" name="_l_valid_facture_montant_ttc_value">
                <property name="minimumSize">
                 <size>
-                 <width>90</width>
-                 <height>50</height>
+                 <width>100</width>
+                 <height>0</height>
                 </size>
                </property>
-               <property name="font">
-                <font>
-                 <bold>true</bold>
-                </font>
-               </property>
                <property name="text">
-                <string>Montant TTC</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -5909,6 +5929,39 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="_l_valid_facture_montant_ht_value">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="_l_valid_facture_remise">
+               <property name="minimumSize">
+                <size>
+                 <width>90</width>
+                 <height>33</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Remise</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLabel" name="_l_valid_facture_remise_value">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -7176,6 +7229,32 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
               </widget>
              </item>
              <item>
+              <widget class="QLabel" name="_l_inventory_tva">
+               <property name="text">
+                <string>TVA</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QDoubleSpinBox" name="_ds_inventory_tva">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="maximum">
+                <double>9999999999999999583119736832.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QLabel" name="_l_inventory_quantity">
                <property name="text">
                 <string>Quantité</string>
@@ -7961,7 +8040,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
       </widget>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item row="2" column="1" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
      <widget class="QFrame" name="_f_side_menu">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -7989,7 +8068,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
       </property>
       <layout class="QVBoxLayout" name="_v_side_menu">
        <property name="spacing">
-        <number>0</number>
+        <number>5</number>
        </property>
        <property name="leftMargin">
         <number>0</number>
@@ -8006,15 +8085,15 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
        <item>
         <layout class="QVBoxLayout" name="_v_side_menu_two">
          <property name="spacing">
-          <number>20</number>
+          <number>-1</number>
          </property>
          <property name="topMargin">
-          <number>10</number>
+          <number>5</number>
          </property>
          <property name="bottomMargin">
-          <number>10</number>
+          <number>5</number>
          </property>
-         <item>
+         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mcreate_ws">
            <property name="minimumSize">
             <size>

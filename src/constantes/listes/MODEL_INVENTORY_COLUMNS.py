@@ -1,6 +1,7 @@
 (
     "nom",
     "prix",
+    "tva",
     "marque",
     "quantite",
     "remise",

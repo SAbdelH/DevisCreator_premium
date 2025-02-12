@@ -21,6 +21,13 @@
             'scale': 3
         }
     },
+    'tva': {
+        'type': 'Numeric', 
+        'type_params': {
+            'precision': 10, 
+            'scale': 3
+        }
+    },
     'quantite': {
         'type': 'Integer'
     },
@@ -34,7 +41,14 @@
     'type_remise': {
         'type': 'String'
     },
-    'prix': {
+    'prix_ttc': {
+        'type': 'Numeric',
+        'type_params': {
+            'precision': 10,
+            'scale': 3
+        }
+    },
+    'prix_ht': {
         'type': 'Numeric',
         'type_params': {
             'precision': 10,
@@ -88,7 +102,7 @@
     {
         'type': 'Index',
         'name': 'idx_facture_prix',
-        'columns': ['prix']
+        'columns': ['prix_ttc']
     },
     # Index sur client
     {
