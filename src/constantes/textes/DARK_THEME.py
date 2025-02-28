@@ -448,13 +448,14 @@
             background-position: center center;
             background-origin: content;
         }}
-        #_lw_inventory_list_inventory {{
+        #_p_inventory #_lw_inventory_list_inventory {{
             background-color: transparent;
             background: transparent;
             background-image: url({inventory_bg});
             background-repeat: no-repeat;
             background-position: center center;
             background-origin: content;
+            border: none;
         }}
         /* === SPÉCIFICITÉS À CHAQUE PAGE === */
         /* === PAGE DE LOGIN === */
@@ -622,6 +623,9 @@
             border-radius: 20px;
             padding: 5px;
         }}
+        #_l_inventory_sum_sold_value, #_l_inventory_most_sale_value, #_l_inventory_low_sale_value {{
+            color: rgba(255, 255, 255, 1) !important;
+        }}
         #_l_inventory_icon_low_sale {{
             background-color: rgba(65, 149, 255, 1);
         }}
@@ -634,5 +638,9 @@
         /* === PAGE DES VALID FACTURE === */
         #_p_valid_factures #_l_state_invoice_message {{
             color: rgba(0, 0, 0, 1);
+        }}
+        /* === PAGE DETAIL ACTIVITES === */
+        #_p_all_activities #_b_back_home {{
+            border: none;
         }}
         """

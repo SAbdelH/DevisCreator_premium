@@ -504,13 +504,14 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
     background-position: center center;
     background-origin: content;
 }
-#_lw_inventory_list_inventory {
+#_p_inventory #_lw_inventory_list_inventory {
     background-color: transparent;
     background: transparent;
     background-image: url('/Users/abdelhafidhousoufou/PycharmProjects/DevisCreator_premium/forms/background/inventory.png');
     background-repeat: no-repeat;
     background-position: center center;
     background-origin: content;
+	border: none;
 }
 /* === SPÉCIFICITÉS À CHAQUE PAGE === */
 /* === PAGE DE LOGIN === */
@@ -691,7 +692,11 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
 }
 #_l_inventory_icon_sum_sold {
     background-color: rgba(0, 230, 138, 1);
-}</string>
+}
+/* === PAGE DETAIL ACTIVITES === */
+#_p_all_activities #_b_back_home {
+	border: none;
+	}</string>
    </property>
    <layout class="QGridLayout" name="_g_centralwidget">
     <property name="leftMargin">
@@ -712,482 +717,39 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
     <property name="verticalSpacing">
      <number>8</number>
     </property>
-    <item row="0" column="0" colspan="3">
-     <widget class="QFrame" name="_f_header">
-      <property name="maximumSize">
+    <item row="3" column="1">
+     <spacer name="_vs_side_menu_two">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
        <size>
-        <width>16777215</width>
-        <height>60</height>
+        <width>20</width>
+        <height>40</height>
        </size>
       </property>
-      <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
+     </spacer>
+    </item>
+    <item row="1" column="1">
+     <spacer name="_vs_side_menu_one">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
       </property>
-      <layout class="QHBoxLayout" name="_h_header">
-       <property name="spacing">
-        <number>-1</number>
-       </property>
-       <property name="leftMargin">
-        <number>5</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>5</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="_l_icon_company">
-         <property name="minimumSize">
-          <size>
-           <width>65</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>65</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap>:/icon/icons/MsCles.png</pixmap>
-         </property>
-         <property name="scaledContents">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="_hs_header_one">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QFrame" name="_f_btn_header">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Shape::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Shadow::Raised</enum>
-         </property>
-         <layout class="QHBoxLayout" name="_h_btn_header">
-          <property name="spacing">
-           <number>-1</number>
-          </property>
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="_b_dashboard">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>130</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Tableau de bord</string>
-            </property>
-            <property name="icon">
-             <iconset resource="resources.qrc">
-              <normaloff>:/icon/icons/tableau-de-bord.png</normaloff>:/icon/icons/tableau-de-bord.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>20</width>
-              <height>20</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="_b_workspace">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>200</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Environnement de travail</string>
-            </property>
-            <property name="icon">
-             <iconset resource="resources.qrc">
-              <normaloff>:/icon/icons/les-conditions-de-travail.png</normaloff>:/icon/icons/les-conditions-de-travail.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="_b_factures">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>170</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Gestion des factures</string>
-            </property>
-            <property name="icon">
-             <iconset resource="resources.qrc">
-              <normaloff>:/icon/icons/facture-dachat.png</normaloff>:/icon/icons/facture-dachat.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="_b_inventory">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Gestion des Inventraires</string>
-            </property>
-            <property name="icon">
-             <iconset resource="resources.qrc">
-              <normaloff>:/icon/icons/inventaire.png</normaloff>:/icon/icons/inventaire.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="_b_manage_db">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>215</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>45</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Gestion de base de données</string>
-            </property>
-            <property name="icon">
-             <iconset resource="resources.qrc">
-              <normaloff>:/icon/icons/bases-de-donnees.png</normaloff>:/icon/icons/bases-de-donnees.png</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>25</width>
-              <height>25</height>
-             </size>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <spacer name="_hs_header_two">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="_h_profil">
-         <property name="spacing">
-          <number>2</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="_l_icon_profil">
-           <property name="maximumSize">
-            <size>
-             <width>40</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="pixmap">
-            <pixmap>:/icon/icons/patron.png</pixmap>
-           </property>
-           <property name="scaledContents">
-            <bool>true</bool>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignmentFlag::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QFrame" name="_f_profil">
-           <property name="frameShape">
-            <enum>QFrame::Shape::StyledPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Shadow::Raised</enum>
-           </property>
-           <layout class="QGridLayout" name="_g_profil">
-            <property name="leftMargin">
-             <number>2</number>
-            </property>
-            <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
-             <number>5</number>
-            </property>
-            <property name="bottomMargin">
-             <number>2</number>
-            </property>
-            <property name="horizontalSpacing">
-             <number>-1</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>0</number>
-            </property>
-            <item row="3" column="1">
-             <widget class="QLabel" name="_l_pposte">
-              <property name="text">
-               <string>Chef de Bureau</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QLabel" name="_l_name_profil">
-              <property name="text">
-               <string>SOUFOU Abdel Hafidhou</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="_l_id_profil">
-              <property name="font">
-               <font>
-                <italic>true</italic>
-               </font>
-              </property>
-              <property name="text">
-               <string>@abdelhafidhousoufou</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="_b_logout">
-           <property name="minimumSize">
-            <size>
-             <width>40</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>40</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="resources.qrc">
-             <normaloff>:/icon/icons/sortir.png</normaloff>:/icon/icons/sortir.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>25</width>
-             <height>25</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item row="1" column="2" rowspan="4">
      <widget class="QStackedWidget" name="_sw_main_dialog">
       <property name="currentIndex">
-       <number>4</number>
+       <number>10</number>
       </property>
       <widget class="QWidget" name="_p_login">
        <property name="styleSheet">
@@ -1208,7 +770,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
         <property name="bottomMargin">
          <number>0</number>
         </property>
-        <item row="0" column="0" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+        <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignVCenter">
          <widget class="QWidget" name="_w_login_dialog" native="true">
           <property name="minimumSize">
            <size>
@@ -1235,7 +797,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            <property name="bottomMargin">
             <number>10</number>
            </property>
-           <item row="0" column="0" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+           <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignVCenter">
             <widget class="QStackedWidget" name="_sw_login_dialog">
              <property name="minimumSize">
               <size>
@@ -1495,7 +1057,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </property>
                <item row="0" column="0" colspan="2">
                 <layout class="QGridLayout" name="_g_icon_signup">
-                 <item row="0" column="1" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
+                 <item row="0" column="1" alignment="Qt::AlignmentFlag::AlignTop">
                   <widget class="QLabel" name="_l_icon_config_db">
                    <property name="minimumSize">
                     <size>
@@ -2334,7 +1896,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
              <property name="sizeConstraint">
               <enum>QLayout::SizeConstraint::SetFixedSize</enum>
              </property>
-             <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
+             <item alignment="Qt::AlignmentFlag::AlignTop">
               <widget class="QLabel" name="_l_icon_company_info_company">
                <property name="minimumSize">
                 <size>
@@ -4415,391 +3977,6 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
           </item>
          </layout>
         </item>
-        <item row="1" column="1" rowspan="2">
-         <widget class="QFrame" name="_f_invoice_input_card">
-          <property name="minimumSize">
-           <size>
-            <width>450</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::Shape::StyledPanel</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Shadow::Raised</enum>
-          </property>
-          <layout class="QVBoxLayout" name="_v_input_card">
-           <property name="leftMargin">
-            <number>10</number>
-           </property>
-           <property name="topMargin">
-            <number>10</number>
-           </property>
-           <property name="rightMargin">
-            <number>10</number>
-           </property>
-           <property name="bottomMargin">
-            <number>10</number>
-           </property>
-           <item>
-            <widget class="QFrame" name="_f_invoice_informations_article_label">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Shape::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-             <layout class="QHBoxLayout" name="_h_invoice_informations_article_label">
-              <property name="leftMargin">
-               <number>5</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>5</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="_l_invoice_informations_article">
-                <property name="font">
-                 <font>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Informations de l'article</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <layout class="QGridLayout" name="_g_invoice_input_card">
-             <item row="9" column="0">
-              <widget class="QSpinBox" name="_s_invoice_quantity">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="15" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLineEdit" name="_le_invoice_marque">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="_l_invoice_marque">
-               <property name="text">
-                <string>Marque</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLineEdit" name="_le_invoice_name">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="0">
-              <widget class="QLabel" name="_l_invoiceemptyInventorymess">
-               <property name="text">
-                <string>le matériel n'est plus en stock dans le magasin (attente de retour ...)</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="14" column="0">
-              <widget class="QLabel" name="_l_invoice_remise">
-               <property name="text">
-                <string>Remise</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="6" column="0">
-              <widget class="QLabel" name="_l_invoice_tva">
-               <property name="text">
-                <string>TVA</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="16" column="0">
-              <layout class="QHBoxLayout" name="_h_btn_invoice_input">
-               <item>
-                <widget class="QPushButton" name="_b_invoice_cancel_cart">
-                 <property name="minimumSize">
-                  <size>
-                   <width>120</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Annuler</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="resources.qrc">
-                   <normaloff>:/icon/icons/annuler.png</normaloff>:/icon/icons/annuler.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="flat">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="_hs_btn_invoice_input">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="_b_invoice_add_cart">
-                 <property name="minimumSize">
-                  <size>
-                   <width>180</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Ajouter à la commande</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="resources.qrc">
-                   <normaloff>:/icon/icons/commande-en-ligne.png</normaloff>:/icon/icons/commande-en-ligne.png</iconset>
-                 </property>
-                 <property name="iconSize">
-                  <size>
-                   <width>25</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="flat">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="_l_invoice_nom">
-               <property name="text">
-                <string>Nom</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_price">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QLabel" name="_l_invoice_qauntity">
-               <property name="text">
-                <string>Quantité</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0">
-              <widget class="QLabel" name="_l_invoice_type_remise">
-               <property name="text">
-                <string>Type de remise</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="13" column="0">
-              <widget class="QComboBox" name="_cbx_invoice_type_remise">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="editable">
-                <bool>false</bool>
-               </property>
-               <property name="currentIndex">
-                <number>-1</number>
-               </property>
-               <property name="placeholderText">
-                <string>-- Séléctionnez un type seulement s'il y'a remise</string>
-               </property>
-               <item>
-                <property name="text">
-                 <string>En devise</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/icon/icons/euro.png</normaloff>:/icon/icons/euro.png</iconset>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>En pourcentage</string>
-                </property>
-                <property name="icon">
-                 <iconset resource="resources.qrc">
-                  <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="_l_invoice_price">
-               <property name="text">
-                <string>Prix</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="10" column="0">
-              <layout class="QHBoxLayout" name="_h_invoice_info_qty">
-               <item>
-                <widget class="QCheckBox" name="_cb_invoice_quantifiable">
-                 <property name="text">
-                  <string>Élément quantifiable</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="_cb_invoice_location">
-                 <property name="text">
-                  <string>Élément à louer</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="7" column="0">
-              <widget class="QDoubleSpinBox" name="_ds_invoice_tva">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-               <property name="suffix">
-                <string> %</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QListWidget" name="_lw_list_card">
-             <property name="isWrapping" stdset="0">
-              <bool>true</bool>
-             </property>
-             <property name="spacing">
-              <number>2</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
         <item row="1" column="2">
          <widget class="QFrame" name="_f_invoice_box_export_invoice">
           <property name="maximumSize">
@@ -5120,7 +4297,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
             </widget>
            </item>
            <item row="2" column="0" colspan="2">
-            <widget class="QGroupBox" name="_gb_invoice_title">
+            <widget class="QGroupBox" name="_gb_invoice_objet">
              <property name="font">
               <font>
                <bold>true</bold>
@@ -5528,6 +4705,437 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
                </widget>
               </item>
              </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="1" rowspan="2">
+         <widget class="QFrame" name="_f_invoice_input_cart">
+          <property name="minimumSize">
+           <size>
+            <width>450</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::Shape::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Shadow::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="_gf_invoice_input_cart">
+           <property name="leftMargin">
+            <number>5</number>
+           </property>
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>5</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QFrame" name="_f_invoice_informations_article_label">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Shape::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Shadow::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="_h_invoice_informations_article_label">
+              <property name="leftMargin">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>5</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="_l_invoice_informations_article">
+                <property name="font">
+                 <font>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Informations de l'article</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <layout class="QGridLayout" name="_gd_invoice_info_name">
+             <item row="1" column="0">
+              <widget class="QLineEdit" name="_le_invoice_name">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="_l_invoice_nom">
+               <property name="text">
+                <string>Nom</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="_l_invoice_marque">
+               <property name="text">
+                <string>Marque</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="_le_invoice_marque">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QGridLayout" name="_gd_invoice_info_price">
+             <item row="1" column="0">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_price">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="suffix">
+                <string> €</string>
+               </property>
+               <property name="maximum">
+                <double>1000000000000000013287555072.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="_l_invoice_price">
+               <property name="text">
+                <string>Prix</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="_ds_invoice_tva">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="suffix">
+                <string> %</string>
+               </property>
+               <property name="maximum">
+                <double>100.000000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="_l_invoice_tva">
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>TVA</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="_l_invoice_quantity">
+               <property name="maximumSize">
+                <size>
+                 <width>140</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Quantité</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QSpinBox" name="_s_invoice_quantity">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>140</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignmentFlag::AlignCenter</set>
+               </property>
+               <property name="maximum">
+                <number>999999999</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="_h_invoice_info_qty">
+             <item>
+              <widget class="QCheckBox" name="_cb_invoice_quantifiable">
+               <property name="layoutDirection">
+                <enum>Qt::LayoutDirection::RightToLeft</enum>
+               </property>
+               <property name="text">
+                <string>Élément quantifiable</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="_cb_invoice_location">
+               <property name="text">
+                <string>Élément à louer</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="_l_invoiceemptyInventorymess">
+             <property name="text">
+              <string>le matériel n'est plus en stock dans le magasin (attente de retour ...)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="_l_invoice_type_remise">
+             <property name="text">
+              <string>Type de remise</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QComboBox" name="_cbx_invoice_type_remise">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="editable">
+              <bool>false</bool>
+             </property>
+             <property name="currentIndex">
+              <number>-1</number>
+             </property>
+             <property name="placeholderText">
+              <string>-- Séléctionnez un type seulement s'il y'a remise</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>En devise</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/icon/icons/euro.png</normaloff>:/icon/icons/euro.png</iconset>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>En pourcentage</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/icon/icons/pour-cent.png</normaloff>:/icon/icons/pour-cent.png</iconset>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="_l_invoice_remise">
+             <property name="text">
+              <string>Remise</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QDoubleSpinBox" name="_ds_invoice_remise">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+             <property name="maximum">
+              <double>10000000000000000905969664.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0">
+            <layout class="QHBoxLayout" name="_h_btn_invoice_input">
+             <item>
+              <widget class="QPushButton" name="_b_invoice_cancel_cart">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Annuler</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/annuler.png</normaloff>:/icon/icons/annuler.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="_hs_btn_invoice_input">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="_b_invoice_add_cart">
+               <property name="minimumSize">
+                <size>
+                 <width>180</width>
+                 <height>40</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Ajouter à la commande</string>
+               </property>
+               <property name="icon">
+                <iconset resource="resources.qrc">
+                 <normaloff>:/icon/icons/commande-en-ligne.png</normaloff>:/icon/icons/commande-en-ligne.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="10" column="0">
+            <widget class="QListWidget" name="_lw_list_card">
+             <property name="isWrapping" stdset="0">
+              <bool>true</bool>
+             </property>
+             <property name="spacing">
+              <number>2</number>
+             </property>
             </widget>
            </item>
           </layout>
@@ -7070,7 +6678,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
           </item>
          </widget>
         </item>
-        <item row="1" column="3" rowspan="2" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+        <item row="1" column="3" rowspan="2" alignment="Qt::AlignmentFlag::AlignVCenter">
          <widget class="QFrame" name="_f_inventory_box_edit">
           <property name="maximumSize">
            <size>
@@ -8038,9 +7646,526 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="_p_all_activities">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="_h_backHomeheader">
+          <item alignment="Qt::AlignmentFlag::AlignLeft">
+           <widget class="QPushButton" name="_b_back_home">
+            <property name="font">
+             <font>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Retour</string>
+            </property>
+            <property name="icon">
+             <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="_tw_detail_activities"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
-    <item row="2" column="1" alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignTop">
+    <item row="2" column="0">
+     <spacer name="_hs_window_side_menu">
+      <property name="orientation">
+       <enum>Qt::Orientation::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>4</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QFrame" name="_f_header">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>60</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <layout class="QHBoxLayout" name="_h_header">
+       <property name="spacing">
+        <number>-1</number>
+       </property>
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="_l_icon_company">
+         <property name="minimumSize">
+          <size>
+           <width>65</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>65</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>:/icon/icons/MsCles.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="_hs_header_one">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QFrame" name="_f_btn_header">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::Shape::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Shadow::Raised</enum>
+         </property>
+         <layout class="QHBoxLayout" name="_h_btn_header">
+          <property name="spacing">
+           <number>-1</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="_b_dashboard">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>130</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Tableau de bord</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/tableau-de-bord.png</normaloff>:/icon/icons/tableau-de-bord.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_workspace">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Environnement de travail</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/les-conditions-de-travail.png</normaloff>:/icon/icons/les-conditions-de-travail.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_factures">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>170</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Gestion des factures</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/facture-dachat.png</normaloff>:/icon/icons/facture-dachat.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_inventory">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Gestion des Inventraires</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/inventaire.png</normaloff>:/icon/icons/inventaire.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="_b_manage_db">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>215</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>45</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Gestion de base de données</string>
+            </property>
+            <property name="icon">
+             <iconset resource="resources.qrc">
+              <normaloff>:/icon/icons/bases-de-donnees.png</normaloff>:/icon/icons/bases-de-donnees.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="_hs_header_two">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="_h_profil">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="_l_icon_profil">
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap>:/icon/icons/patron.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignmentFlag::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="_f_profil">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="_g_profil">
+            <property name="leftMargin">
+             <number>2</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <property name="horizontalSpacing">
+             <number>-1</number>
+            </property>
+            <property name="verticalSpacing">
+             <number>0</number>
+            </property>
+            <item row="3" column="1">
+             <widget class="QLabel" name="_l_pposte">
+              <property name="text">
+               <string>Chef de Bureau</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLabel" name="_l_name_profil">
+              <property name="text">
+               <string>SOUFOU Abdel Hafidhou</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="_l_id_profil">
+              <property name="font">
+               <font>
+                <italic>true</italic>
+               </font>
+              </property>
+              <property name="text">
+               <string>@abdelhafidhousoufou</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="_b_logout">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>40</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icon/icons/sortir.png</normaloff>:/icon/icons/sortir.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="1" alignment="Qt::AlignmentFlag::AlignTop">
      <widget class="QFrame" name="_f_side_menu">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
@@ -8093,7 +8218,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
          <property name="bottomMargin">
           <number>5</number>
          </property>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mcreate_ws">
            <property name="minimumSize">
             <size>
@@ -8131,7 +8256,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_minfo_company">
            <property name="minimumSize">
             <size>
@@ -8169,7 +8294,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mcreate_user">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -8251,7 +8376,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mcreate_facture">
            <property name="minimumSize">
             <size>
@@ -8289,7 +8414,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mvalid_facture">
            <property name="minimumSize">
             <size>
@@ -8365,7 +8490,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mcreate_backup">
            <property name="minimumSize">
             <size>
@@ -8403,7 +8528,7 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
            </property>
           </widget>
          </item>
-         <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+         <item alignment="Qt::AlignmentFlag::AlignVCenter">
           <widget class="QPushButton" name="_b_mmanage_db">
            <property name="minimumSize">
             <size>
@@ -8445,51 +8570,6 @@ QFrame[frameShape=&quot;4&quot;] { /* 4 correspond à QFrame::HLine */
        </item>
       </layout>
      </widget>
-    </item>
-    <item row="3" column="1">
-     <spacer name="_vs_side_menu_two">
-      <property name="orientation">
-       <enum>Qt::Orientation::Vertical</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="0">
-     <spacer name="_hs_window_side_menu">
-      <property name="orientation">
-       <enum>Qt::Orientation::Horizontal</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Policy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>4</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="1">
-     <spacer name="_vs_side_menu_one">
-      <property name="orientation">
-       <enum>Qt::Orientation::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Policy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>

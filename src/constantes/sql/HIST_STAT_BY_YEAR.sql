@@ -14,7 +14,7 @@ WITH mois_annuel AS (
           "12": "Déc"}}'::JSONB AS month_mapping
 ),
 stat AS (
-    SELECT TO_CHAR(crea_date, 'mm') AS nmonth, COUNT(DISTINCT SUBSTR(numero_devis,1,10)) AS effectif
+    SELECT TO_CHAR(crea_date, 'mm') AS nmonth, COUNT(DISTINCT SUBSTR({col_idx},1,10)) AS effectif
     FROM activites.{table}
     WHERE TO_CHAR(crea_date, 'yyyy') = TO_CHAR(CURRENT_DATE, 'yyyy')
     GROUP BY 1

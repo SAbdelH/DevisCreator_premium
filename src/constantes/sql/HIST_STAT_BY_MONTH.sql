@@ -7,7 +7,7 @@ WITH mois_jours AS (
     )::DATE AS jour
 ),
 stat AS (
-    SELECT crea_date::DATE AS jour, COUNT(DISTINCT SUBSTR(numero_devis, 1, 10)) AS effectif
+    SELECT crea_date::DATE AS jour, COUNT(DISTINCT SUBSTR({col_idx}, 1, 10)) AS effectif
     FROM activites.{table}
     WHERE date_part('month',crea_date) = date_part('month',CURRENT_DATE)
     GROUP BY 1

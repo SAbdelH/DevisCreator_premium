@@ -9,7 +9,7 @@ WITH jours_semaine AS (
           "0": "Dimanche"}}'::JSONB AS jour_mapping
 ),
 stat AS (
-    SELECT EXTRACT(DOW FROM crea_date)::TEXT AS nday, COUNT(DISTINCT SUBSTR(numero_devis,1,10)) AS effectif
+    SELECT EXTRACT(DOW FROM crea_date)::TEXT AS nday, COUNT(DISTINCT SUBSTR({col_idx},1,10)) AS effectif
     FROM activites.{table}
     WHERE date_part('week',crea_date) = date_part('week',CURRENT_DATE)
     GROUP BY 1
