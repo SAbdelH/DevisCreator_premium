@@ -1,5 +1,6 @@
 {
-    "Description": "A13:C13",
+    "Référence": "A13:A13",
+    "Description": "B13:C13",
     "Prix unitaire": "D13:D13",
     "Quantité": "E13:E13",
     "TVA": "F13:F13",

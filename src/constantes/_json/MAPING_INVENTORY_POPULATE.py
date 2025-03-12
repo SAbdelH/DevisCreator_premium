@@ -1,4 +1,9 @@
-{
+{   
+    "reference": (
+        lambda val, liste_name: "_le_inventory_ref" if liste_name == "_lw_inventory_list_inventory" else "_le_invoice_ref",
+        "setText",
+        lambda val, liste_name: val,
+    ),
     "nom": (
         lambda val, liste_name: "_le_inventory_name" if liste_name == "_lw_inventory_list_inventory" else "_le_invoice_name",
         "setText",

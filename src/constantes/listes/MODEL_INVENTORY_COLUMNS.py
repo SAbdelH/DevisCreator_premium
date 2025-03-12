@@ -1,5 +1,6 @@
 (
     "nom",
+    "reference",
     "prix",
     "tva",
     "marque",

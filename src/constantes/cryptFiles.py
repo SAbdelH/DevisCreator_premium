@@ -5,7 +5,7 @@ import json
 
 entrerScript = Path(__file__).parent / "model_public"
 sortieScript = Path(__file__).parents[2] / 'core'
-entrerConstante = Path(__file__).parent / "sql"
+entrerConstante = Path(__file__).parent / "textes"
 applscript = """tell application "Microsoft Excel"
             set visible to false -- Garde Excel caché
             set display alerts to false -- Désactive les alertes
@@ -58,5 +58,5 @@ def cryptSCPT(text, sortie):
         f.write(encrypted_text)
 
 #cryptSCPT(applscript, sortieScript)
-cryptConstantes(entrerConstante, sortieScript, "SQL")
+cryptConstantes(entrerConstante, sortieScript, "TEXT")
 #cryptScript(entrerScript, sortieScript, "PM")

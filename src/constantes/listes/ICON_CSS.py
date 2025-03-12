@@ -11,5 +11,9 @@
         "camembert_bg",
         "evolution_bg",
         "analyse_bg",
-        "inventory_bg"
+        "inventory_bg",
+        "checked_cb_path",
+        "unchecked_cb_path",
+        "ToDo_bg",
+        "listActivity_bg"
 ]

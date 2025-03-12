@@ -3,6 +3,7 @@
     'schema': 'inventaires',
     'columns': {
         'id': {'type': 'BigInteger', 'primary_key': True, 'autoincrement': True},
+        'reference': {'type': 'String', 'unique': True},
         'nom': {'type': 'String', 'unique': True},
         'ventes': {'type': 'Integer'}
     },

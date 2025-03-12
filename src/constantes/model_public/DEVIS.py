@@ -14,6 +14,9 @@
     'produit': {
         'type': 'String'
     },
+    'reference': {
+        'type': 'String'
+    },
     'prix_unite': {
         'type': 'Numeric',
         'type_params': {

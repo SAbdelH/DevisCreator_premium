@@ -1,6 +1,21 @@
 <RCC>
   <qresource prefix="icon">
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nuser.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nvalid.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nworkspace.svg</file>
     <file>icons/achat.png</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nbackup.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nclient.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ncompany.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ndash.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ndatabase.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ndevis.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nfacture.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ninvent.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ninvoice.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nlog.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/nmanage.svg</file>
+    <file>../../devis-creator-premium-2.0/forms/assets/icons/ntable.svg</file>
     <file>icons/bon-de-livraison.png</file>
     <file>icons/facturen.png</file>
     <file>icons/emptyfolder.png</file>
