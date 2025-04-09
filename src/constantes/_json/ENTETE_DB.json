@@ -1,0 +1,18 @@
+{
+    "numero_devis" : "numero de devis",
+    "numero_facture": "numero de facture",
+    "prix_unite": "prix unitaire",
+    "type_remise": "type de remise",
+    "prix_ttc": "prix TTC",
+    "prix_ht": "prix HT",
+    "mail_client": "mail client",
+    "tel_client": "telephone client",
+    "crea_date": "date de creation",
+    "total_remise": "remise sur le total",
+    "validite": "jours de validite",
+    "id": "identifiant",
+    "crea_user": "createur",
+    "paye": "payer",
+    "commerce": "total de ventes",
+    "date_fabric": "date de fabrication"
+}

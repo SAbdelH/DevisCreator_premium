@@ -1,5 +1,43 @@
 <RCC>
   <qresource prefix="icon">
+    <file>background/inventory.png</file>
+    <file>background/analyse.png</file>
+    <file>background/camembert.png</file>
+    <file>background/clients.png</file>
+    <file>background/evolution.png</file>
+    <file>background/histogram.png</file>
+    <file>background/home_bckgnd.png</file>
+    <file>background/listActivity.png</file>
+    <file>background/sada_mont_choungui.png</file>
+    <file>background/table.png</file>
+    <file>background/teams.png</file>
+    <file>background/ToDo.png</file>
+    <file>background/undraw_analytics_6mru.svg</file>
+    <file>background/undraw_articles_visl.svg</file>
+    <file>background/undraw_bookshelves_vhu6.svg</file>
+    <file>background/undraw_bull-market_4a8e.svg</file>
+    <file>background/undraw_business-plan_wv9q.svg</file>
+    <file>background/undraw_calendar_8r6s.svg</file>
+    <file>background/undraw_close-tab_jr11.svg</file>
+    <file>background/undraw_data_0ml2.svg</file>
+    <file>background/undraw_data-processing_z2q6.svg</file>
+    <file>background/undraw_date-picker_qe47.svg</file>
+    <file>background/undraw_developer-activity_dn7p.svg</file>
+    <file>background/undraw_finance_m6vw.svg</file>
+    <file>background/undraw_going-upwards_0y3z.svg</file>
+    <file>background/undraw_growing_am8t.svg</file>
+    <file>background/undraw_logistics_xpdj.svg</file>
+    <file>background/undraw_monthly-users_m84v.svg</file>
+    <file>background/undraw_newspaper_cqtq.svg</file>
+    <file>background/undraw_online-payments_p97e.svg</file>
+    <file>background/undraw_order-delivered_puaw.svg</file>
+    <file>background/undraw_personal-goals_f9bb.svg</file>
+    <file>background/undraw_pie-chart_eo9h.svg</file>
+    <file>background/undraw_pie-graph_8m6b.svg</file>
+    <file>background/undraw_remote-design-team_qfqr.svg</file>
+    <file>background/undraw_resume-folder_hf4p.svg</file>
+    <file>background/undraw_shopping-app_b80f.svg</file>
+    <file>background/undraw_team_85hs.svg</file>
     <file>../../devis-creator-premium-2.0/forms/assets/icons/nuser.svg</file>
     <file>../../devis-creator-premium-2.0/forms/assets/icons/nvalid.svg</file>
     <file>../../devis-creator-premium-2.0/forms/assets/icons/nworkspace.svg</file>
